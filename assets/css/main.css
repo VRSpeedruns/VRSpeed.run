@@ -1,0 +1,263 @@
+:root {
+	--primary-color: #FF862C;/*#ddd;*/
+	--primary-color-hover: #ffa058;/*#fff;*/
+	--text-color: #eee;
+	--text-color-dark: #111;
+	--background-color: #2E3136;
+	--background-accent-color: #26282C;
+	--button-background-color: #393C42;
+	--button-background-hover-color: #41434b;
+}
+
+html {
+	background-color: var(--background-color);
+	color: var(--text-color);
+}
+body {
+	background-color: var(--background-accent-color);
+}
+a {
+	color: var(--primary-color);
+	
+	-webkit-transition:color .35s ease-out;
+	-moz-transition: color .35s ease-out;
+	-o-transition: color .35s ease-out;
+	transition: color .35s ease-out;
+}
+
+.select select:focus {
+	border: none;
+	box-shadow: none;
+}
+
+.button.is-dark {
+	background-color: var(--button-background-color);
+}
+.button.is-dark.is-selected {
+	background-color: var(--primary-color);
+	color: var(--text-color-dark);
+}
+.button.is-dark.is-selected:hover, .button.is-dark.is-selected:focus {
+	background-color: var(--primary-color-hover);
+}
+.button.is-dark:hover, .button.is-dark:focus {
+	background-color: var(--button-background-hover-color);
+	text-decoration: none;
+}
+
+#variables {
+	display: flex;
+}
+#variables > .buttons, .is-variable, #variables > .buttons:not(:last-child) {
+	margin-bottom: 0;
+}
+#variables > .buttons:not(:last-child) {
+	margin-right: 1.25rem;
+}
+.is-variable.is-active, .is-variable.is-active:focus {
+	background-color: var(--primary-color) !important;
+	color: var(--text-color-dark) !important;
+}
+.is-variable.is-active:hover {
+	background-color: var(--primary-color-hover) !important;
+}
+
+.box, .tabs a, .tabs li:hover {
+	color: #eee;
+}
+
+a:hover {
+	color: var(--primary-color);
+	text-decoration: underline;
+}
+
+#tabs {
+	margin-bottom: 1.25rem;
+	border-bottom: 2px solid var(--primary-color) !important;
+}
+.tabs {
+	color: var(--text-color);
+	text-decoration: none;
+}
+.tabs.is-boxed a, .tabs.is-boxed a:hover, .tabs.is-boxed a:focus {
+	border-left: 0px !important;
+	border-right: 0px !important;
+	border-top: 0px !important;
+	border-bottom-color: var(--primary-color);
+}
+.tabs li a {
+	text-decoration: none;
+
+	background-color: var(--button-background-color) !important;
+
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+.tabs li a:hover, .tabs li a:focus {
+	color: var(--text-color);
+	background-color: var(--button-background-hover-color) !important;
+}
+
+.tabs li.is-active a {
+	color: var(--text-color-dark);
+	background-color: var(--primary-color) !important;
+}
+.tabs li.is-active a:hover, .tabs li.is-active a:focus {
+	background-color: var(--primary-color-hover) !important;
+}
+
+.box {
+	background-color: var(--background-color);
+}
+
+
+.title {
+	color: #eee;
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
+.section.is-footer {
+	background-color: var(--background-color);
+	width: 100%;
+	text-align: center;
+	color: #eee;
+}
+.is-heart {
+	color: #f14668;
+}
+.icons a {
+	color: #eee;
+	font-size: 1.5rem;
+	margin-right: 0.25rem;
+	
+	-webkit-transition: color .2s ease-out;
+	-moz-transition: color .2s ease-out;
+	-o-transition: color .2s ease-out;
+	transition: color .2s ease-out;
+}
+.icons a.end {
+	margin-right: 0;
+}
+.icons a:hover {
+	text-decoration: none;
+	color: var(--primary-color);
+}
+
+#level-select-cols, #level-select-cols > div > .select  {
+	margin-bottom: 0;
+}
+
+/* ----------------------------------------- */
+/* source: https://tobiasahlin.com/spinkit/  */
+
+#loadingDiv .spinner {
+	width: 40px;
+	height: 40px;
+	background-color: #777;
+  
+	margin: 100px auto;
+	-webkit-animation: sk-rotateplane 0.8s infinite ease-in-out;
+	animation: sk-rotateplane 0.8s infinite ease-in-out;
+  }
+  
+  @-webkit-keyframes sk-rotateplane {
+	0% { -webkit-transform: perspective(120px) }
+	50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+	100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+  }
+  
+  @keyframes sk-rotateplane {
+	0% { 
+	  transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+	  -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+	} 50% { 
+	  transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+	  -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+	} 100% { 
+	  transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+	  -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+  }
+
+
+/* added by me */
+#loadingDiv .belowspinner {
+	color: #777;
+	font-weight: bold;
+	font-size: 1.5rem;
+	text-align: center;
+	margin-top: -5rem;
+}
+
+#topLoadingDiv .spinner {
+	width: 40px;
+	height: 40px;
+	background-color: #777;
+  
+	margin: 65px auto;
+	margin-top: 0;
+	margin-bottom: 106px;
+	-webkit-animation: sk-rotateplane 0.8s infinite ease-in-out;
+	animation: sk-rotateplane 0.8s infinite ease-in-out;
+  }
+  
+  @-webkit-keyframes sk-rotateplane {
+	0% { -webkit-transform: perspective(120px) }
+	50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+	100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+  }
+  
+  @keyframes sk-rotateplane {
+	0% { 
+	  transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+	  -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+	} 50% { 
+	  transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+	  -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+	} 100% { 
+	  transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+	  -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+  }
+
+/* added by me */
+#topLoadingDiv .belowspinner {
+	color: #777;
+	font-weight: bold;
+	font-size: 1.5rem;
+	text-align: center;
+	margin-top: -5rem;
+}
+
+/* ----------------------------------------- */
+
+#loadingDiv {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+#topLoadingDiv {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+body {
+	font-family: 'Open Sans';
+	font-size: 0.95em;
+}
+
+
+.tabs:not(:last-child) {
+	margin-bottom: 0;
+}
+.table {
+	table-layout: fixed;
+}
+.select, .select > select {
+	margin-bottom: 1rem;
+	width: 100%;
+}
