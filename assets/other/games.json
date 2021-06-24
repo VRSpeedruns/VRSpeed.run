@@ -1,0 +1,230 @@
+[
+    {
+        "id": "accounting",
+        "name": "Accounting",
+        "hardware": "",
+        "color": "#8d16c7"
+    },
+    {
+        "id": "accountingplus",
+        "name": "Accounting+",
+        "hardware": "",
+        "color": "#8d16c7"
+    },
+    {
+        "id": "adventure_time_magic_mans_head_game",
+        "name": "Adventure Time MMHG",
+        "hardware": "",
+        "color": "#FDED52"
+    },
+    {
+        "id": "arizona_sunshine",
+        "name": "Arizona Sunshine",
+        "hardware": "",
+        "color": "#FBC539"
+    },
+    {
+        "id": "batman_arkham_vr",
+        "name": "Batman: Arkham VR",
+        "hardware": "",
+        "color": "#5E91B9"
+    },
+    {
+        "id": "boneworks",
+        "name": "BONEWORKS",
+        "hardware": "r8romd08",
+        "color": "#E6B400"
+    },
+    {
+        "id": "budget_cuts",
+        "name": "Budget Cuts",
+        "hardware": "",
+        "color": "#FF1F1F"
+    },
+    {
+        "id": "climbey",
+        "name": "Climbey",
+        "hardware": "",
+        "color": "#ED821A"
+    },
+    {
+        "id": "doctor_who_the_edge_of_time",
+        "name": "Doctor Who: The Edge Of Time",
+        "hardware": "",
+        "color": "#515bd0"
+    },
+    {
+        "id": "doom_vfr",
+        "name": "DooM VFR",
+        "hardware": "",
+        "color": "#CD001A"
+    },
+    {
+        "id": "duck_season",
+        "name": "Duck Season",
+        "hardware": "",
+        "color": "#F01B6A"
+    },
+    {
+        "id": "everybodysgolfvr",
+        "name": "Everybody's Golf VR",
+        "hardware": "",
+        "color": "#70BD6A"
+    },
+    {
+        "id": "hla",
+        "name": "Half-Life: Alyx",
+        "hardware": "",
+        "color": "#FF862C"
+    },
+    {
+        "id": "i_expect_you_to_die",
+        "name": "I Expect You To Die",
+        "hardware": "",
+        "color": "#E57842"
+    },
+    {
+        "id": "jet_island",
+        "name": "Jet Island",
+        "hardware": "",
+        "color": "#ad4c50"
+    },
+    {
+        "id": "job_simulator",
+        "name": "Job Simulator",
+        "hardware": "",
+        "color": "#009100"
+    },
+    {
+        "id": "lone_echo",
+        "name": "Lone Echo",
+        "hardware": "",
+        "color": "#278f96"
+    },
+    {
+        "id": "luckys_tale",
+        "name": "Lucky's Tale",
+        "hardware": "",
+        "color": "#009DEC"
+    },
+    {
+        "id": "moss",
+        "name": "Moss",
+        "hardware": "",
+        "color": "#FDCB1C"
+    },
+    {
+        "id": "paper_beast",
+        "name": "Paper Beast",
+        "hardware": "",
+        "color": "#E65F03"
+    },
+    {
+        "id": "prtlvr",
+        "name": "Portal Stories: VR",
+        "hardware": "",
+        "color": "#0088FF"
+    },
+    {
+        "id": "rick_and_morty_virtual_rick-ality",
+        "name": "Rick and Morty: VR",
+        "hardware": "",
+        "color": "#39C428"
+    },
+    {
+        "id": "robo_recall",
+        "name": "Robo Recall",
+        "hardware": "",
+        "color": "#92AAD5"
+    },
+    {
+        "id": "shvr",
+        "name": "SUPERHOT VR",
+        "hardware": "",
+        "color": "#E62205"
+    },
+    {
+        "id": "surgeon_simulator_experience_reality",
+        "name": "Surgeon Simulator: E.R.",
+        "hardware": "",
+        "color": "#C2252C"
+    },
+    {
+        "id": "the_climb",
+        "name": "The Climb",
+        "hardware": "",
+        "color": "#00B3FF"
+    },
+    {
+        "id": "the_climb_2",
+        "name": "The Climb 2",
+        "hardware": "",
+        "color": "#00E2FF"
+    },
+    {
+        "id": "the_lab",
+        "name": "The Lab",
+        "hardware": "",
+        "color": "#7DBDFD"
+    },
+    {
+        "id": "talos_principle_vr",
+        "name": "The Talos Principle VR",
+        "hardware": "kn0zqxz8",
+        "color": "#26BCC6"
+    },
+    {
+        "id": "the_walking_dead_saints_and_sinners",
+        "name": "The Walking Dead: S & S",
+        "hardware": "ylqk1v3l",
+        "color": "#FF1F1F"
+    },
+    {
+        "id": "tnn",
+        "name": "Time Travelling Navy Seal N.W.",
+        "hardware": "",
+        "color": "#00A40C"
+    },
+    {
+        "id": "to_the_top",
+        "name": "To The Top",
+        "hardware": "e8mmk2v8",
+        "color": "#FF1F1F"
+    },
+    {
+        "id": "trover",
+        "name": "Trover Saves the Universe",
+        "hardware": "",
+        "color": "#9400CF"
+    },
+    {
+        "id": "vs",
+        "name": "Vacation Simulator",
+        "hardware": "",
+        "color": "#FDEA8E"
+    },
+    {
+        "id": "vertigo_remastered",
+        "name": "Vertigo Remastered",
+        "hardware": "",
+        "color": "#7B63B8"
+    },
+    {
+        "id": "vader_immortal",
+        "name": "Vader Immortal",
+        "hardware": "",
+        "color": "#CD001A"
+    },
+    {
+        "id": "vvr",
+        "name": "Virtual Virtual Reality",
+        "hardware": "",
+        "color": "#8d16c7"
+    },
+    {
+        "id": "windlands",
+        "name": "Windlands",
+        "hardware": "",
+        "color": "#2A65FC"
+    }
+]

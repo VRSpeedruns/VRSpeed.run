@@ -32,37 +32,25 @@
 					<div class="column is-3">
 						<div class="box">
 							<div class="select">
-								<select id="dropdown-select" onchange="dropdownChange(this.value)">
+								<select id="games" onchange="onGameChange(this.value)">
 								</select>
 							</div>
 						</div>
 					</div>
 					<div class="column is-9">
 						<div class="box">
-							<div class="tabs is-boxed">
-								<ul id="tabs">
-									<li class="is-active"><a>Test</a></li>
-									<li><a>Test2</a></li>
-								</ul>
-							</div>
-							<div id="variables">
-								<div class="buttons has-addons">
-									<button class="button is-dark is-selected">No Spin</button>
-									<button class="button is-dark">Spin</button>
-								</div>
-								<div class="buttons has-addons">
-									<button class="button is-dark">FTP</button>
-									<button class="button is-dark">No FTP</button>
-								</div>
-							</div>
-							<div id="runs">
-							</div>
+							<div class="tabs is-boxed"><ul id="tabs"></ul></div>
+							<div id="variables"></div>
+							<div id="runs"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 		<section class="section is-footer">
+			<script type="text/javascript">
+				var gamesArray = <?= json_encode(json_decode(file_get_contents('assets/other/games.json'))) ?>
+			</script>
 			<script type="text/javascript" src="assets/js/main.js"></script>
 			<script type="text/javascript" src="assets/js/gamedata.js"></script>
 		</section>

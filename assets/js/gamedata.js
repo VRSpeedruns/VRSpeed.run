@@ -53,6 +53,7 @@ var categories;
 var progress;
 var catCount;
 
+var gamesContainer;
 var categoriesContainer;
 var variablesContainer;
 var runsContainer;
@@ -61,9 +62,25 @@ var categoryTabs;
 
 function onGameDataLoad()
 {
+	gamesContainer = document.getElementById("games");
 	categoriesContainer = document.getElementById("tabs")
 	variablesContainer = document.getElementById("variables");
 	runsContainer = document.getElementById("runs");
+
+	loadGames();
+}
+
+function loadGames()
+{
+	for (var i = 0; i < gamesArray.length; i++)
+	{
+		gamesContainer.innerHTML += '<option value="' + gamesArray[i].id + '">' + gamesArray[i].name + '</option>';
+	}
+}
+
+function onGameChange(id)
+{
+	loadGame(id);
 }
 
 function loadGame(id)
@@ -110,33 +127,47 @@ function loadVariables(uri)
 	get(uri)
 	.then((data) =>
 	{
-		var vars = (JSON.parse(data)).data;
+		var _vars = (JSON.parse(data)).data;
 
-		if (vars.length > 0)
+		if (_vars.length > 0)
 		{
-			var variables = [];
-		
-			for (var i = 0; i < vars.length; i++)
-			{
-				variables[i] = {
-					"id": vars[i].id,
-					"name": vars[i].name,
-					"values": []
-				};
-				
-				var tempIndex = 0;
-				for (var id in vars[i].values.values)
-				{
-					variables[i].values[tempIndex] = {
-						"id": id,
-						"name": vars[i].values.values[id].label
-					};
+			var vars = [];
 
-					tempIndex++;
+			for (var i = 0; i < _vars.length; i++)
+			{
+				if (_vars[i]["is-subcategory"] == true)
+				{
+					vars.push(_vars[i]);
 				}
 			}
 
-			categories[catIndex[vars[0].category]].variables = variables;
+			if (vars.length > 0)
+			{
+				var variables = [];
+				
+				var tempIndex = 0;
+				for (var i = 0; i < vars.length; i++)
+				{
+					variables[i] = {
+						"id": vars[i].id,
+						"name": vars[i].name,
+						"values": []
+					};
+					
+					var tempIndex = 0;
+					for (var id in vars[i].values.values)
+					{
+						variables[i].values[tempIndex] = {
+							"id": id,
+							"name": vars[i].values.values[id].label
+						};
+
+						tempIndex++;
+					}
+				}
+
+				categories[catIndex[vars[0].category]].variables = variables;
+			}
 		}
 		progress++;
 		

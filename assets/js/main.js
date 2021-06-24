@@ -1,5 +1,5 @@
 function onLoad()
 {
     onGameDataLoad();
-	loadGame('shvr');
+	loadGame('hla');
 }
