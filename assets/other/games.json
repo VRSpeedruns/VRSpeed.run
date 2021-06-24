@@ -3,228 +3,266 @@
         "id": "accounting",
         "name": "Accounting",
         "hardware": "",
-        "color": "#8d16c7"
+        "color": "#8d16c7",
+        "hoverColor": "#a12adb"
     },
     {
         "id": "accountingplus",
         "name": "Accounting+",
         "hardware": "",
-        "color": "#8d16c7"
+        "color": "#8d16c7",
+        "hoverColor": "#a12adb"
     },
     {
         "id": "adventure_time_magic_mans_head_game",
         "name": "Adventure Time MMHG",
         "hardware": "",
-        "color": "#FDED52"
+        "color": "#FDED52",
+        "hoverColor": "#fff382"
     },
     {
         "id": "arizona_sunshine",
         "name": "Arizona Sunshine",
         "hardware": "",
-        "color": "#FBC539"
+        "color": "#FBC539",
+        "hoverColor": "#ffd463"
     },
     {
         "id": "batman_arkham_vr",
         "name": "Batman: Arkham VR",
         "hardware": "",
-        "color": "#5E91B9"
+        "color": "#5E91B9",
+        "hoverColor": "#85bbe6"
     },
     {
         "id": "boneworks",
         "name": "BONEWORKS",
         "hardware": "r8romd08",
-        "color": "#E6B400"
+        "color": "#E6B400",
+        "hoverColor": "#facc28"
     },
     {
         "id": "budget_cuts",
         "name": "Budget Cuts",
         "hardware": "",
-        "color": "#FF1F1F"
+        "color": "#FF1F1F",
+        "hoverColor": "#fc4242"
     },
     {
         "id": "climbey",
         "name": "Climbey",
         "hardware": "",
-        "color": "#ED821A"
+        "color": "#ED821A",
+        "hoverColor": "#f29941"
     },
     {
         "id": "doctor_who_the_edge_of_time",
         "name": "Doctor Who: The Edge Of Time",
         "hardware": "",
-        "color": "#515bd0"
+        "color": "#515bd0",
+        "hoverColor": "#6f79ed"
     },
     {
         "id": "doom_vfr",
         "name": "DooM VFR",
         "hardware": "",
-        "color": "#CD001A"
+        "color": "#CD001A",
+        "hoverColor": "#e6273f"
     },
     {
         "id": "duck_season",
         "name": "Duck Season",
         "hardware": "",
-        "color": "#F01B6A"
+        "color": "#F01B6A",
+        "hoverColor": "#f74084"
     },
     {
         "id": "everybodysgolfvr",
         "name": "Everybody's Golf VR",
         "hardware": "",
-        "color": "#70BD6A"
+        "color": "#70BD6A",
+        "hoverColor": "#9be695"
     },
     {
         "id": "hla",
         "name": "Half-Life: Alyx",
         "hardware": "",
-        "color": "#FF862C"
+        "color": "#FF862C",
+        "hoverColor": "#ffa058"
     },
     {
         "id": "i_expect_you_to_die",
         "name": "I Expect You To Die",
         "hardware": "",
-        "color": "#E57842"
+        "color": "#E57842",
+        "hoverColor": "#f29363"
     },
     {
         "id": "jet_island",
         "name": "Jet Island",
         "hardware": "",
-        "color": "#ad4c50"
+        "color": "#ad4c50",
+        "hoverColor": "#d1696d"
     },
     {
         "id": "job_simulator",
         "name": "Job Simulator",
         "hardware": "",
-        "color": "#009100"
+        "color": "#009100",
+        "hoverColor": "#17bf17"
     },
     {
         "id": "lone_echo",
         "name": "Lone Echo",
         "hardware": "",
-        "color": "#278f96"
+        "color": "#278f96",
+        "hoverColor": "#40bac2"
     },
     {
         "id": "luckys_tale",
         "name": "Lucky's Tale",
         "hardware": "",
-        "color": "#009DEC"
+        "color": "#009DEC",
+        "hoverColor": "#2fb6fa"
     },
     {
         "id": "moss",
         "name": "Moss",
         "hardware": "",
-        "color": "#FDCB1C"
+        "color": "#FDCB1C",
+        "hoverColor": "#ffda57"
     },
     {
         "id": "paper_beast",
         "name": "Paper Beast",
         "hardware": "",
-        "color": "#E65F03"
+        "color": "#E65F03",
+        "hoverColor": "#ff8736"
     },
     {
         "id": "prtlvr",
         "name": "Portal Stories: VR",
         "hardware": "",
-        "color": "#0088FF"
+        "color": "#0088FF",
+        "hoverColor": "#38a2ff"
     },
     {
         "id": "rick_and_morty_virtual_rick-ality",
         "name": "Rick and Morty: VR",
         "hardware": "",
-        "color": "#39C428"
+        "color": "#39C428",
+        "hoverColor": "#5ef04d"
     },
     {
         "id": "robo_recall",
         "name": "Robo Recall",
         "hardware": "",
-        "color": "#92AAD5"
+        "color": "#92AAD5",
+        "hoverColor": "#b3caf5"
     },
     {
         "id": "shvr",
         "name": "SUPERHOT VR",
         "hardware": "",
-        "color": "#E62205"
+        "color": "#E62205",
+        "hoverColor": "#f54a31"
     },
     {
         "id": "surgeon_simulator_experience_reality",
         "name": "Surgeon Simulator: E.R.",
         "hardware": "",
-        "color": "#C2252C"
+        "color": "#C2252C",
+        "hoverColor": "#e6434a"
     },
     {
         "id": "the_climb",
         "name": "The Climb",
         "hardware": "",
-        "color": "#00B3FF"
+        "color": "#00B3FF",
+        "hoverColor": "#4fcbff"
     },
     {
         "id": "the_climb_2",
         "name": "The Climb 2",
         "hardware": "",
-        "color": "#00E2FF"
+        "color": "#00E2FF",
+        "hoverColor": "#4fcbff"
     },
     {
         "id": "the_lab",
         "name": "The Lab",
         "hardware": "",
-        "color": "#7DBDFD"
+        "color": "#7DBDFD",
+        "hoverColor": "#a3d1ff"
     },
     {
         "id": "talos_principle_vr",
         "name": "The Talos Principle VR",
         "hardware": "kn0zqxz8",
-        "color": "#26BCC6"
+        "color": "#26BCC6",
+        "hoverColor": "#4fe6f0"
     },
     {
         "id": "the_walking_dead_saints_and_sinners",
         "name": "The Walking Dead: S & S",
         "hardware": "ylqk1v3l",
-        "color": "#FF1F1F"
+        "color": "#FF1F1F",
+        "hoverColor": "#fc4242"
     },
     {
         "id": "tnn",
         "name": "Time Travelling Navy Seal N.W.",
         "hardware": "",
-        "color": "#00A40C"
+        "color": "#00A40C",
+        "hoverColor": "#1ed62b"
     },
     {
         "id": "to_the_top",
         "name": "To The Top",
         "hardware": "e8mmk2v8",
-        "color": "#FF1F1F"
+        "color": "#FF1F1F",
+        "hoverColor": "#fc4242"
     },
     {
         "id": "trover",
         "name": "Trover Saves the Universe",
         "hardware": "",
-        "color": "#9400CF"
+        "color": "#9400CF",
+        "hoverColor": "#b22ce8"
     },
     {
         "id": "vs",
         "name": "Vacation Simulator",
         "hardware": "",
-        "color": "#FDEA8E"
+        "color": "#FDEA8E",
+        "hoverColor": "#fff3b8"
     },
     {
         "id": "vertigo_remastered",
         "name": "Vertigo Remastered",
         "hardware": "",
-        "color": "#7B63B8"
+        "color": "#7B63B8",
+        "hoverColor": "#a18ade"
     },
     {
         "id": "vader_immortal",
         "name": "Vader Immortal",
         "hardware": "",
-        "color": "#CD001A"
+        "color": "#CD001A",
+        "hoverColor": "#e6273f"
     },
     {
         "id": "vvr",
         "name": "Virtual Virtual Reality",
         "hardware": "",
-        "color": "#8d16c7"
+        "color": "#8d16c7",
+        "hoverColor": "#a12adb"
     },
     {
         "id": "windlands",
         "name": "Windlands",
         "hardware": "",
-        "color": "#2A65FC"
+        "color": "#2A65FC",
+        "hoverColor": "#5c8aff"
     }
 ]

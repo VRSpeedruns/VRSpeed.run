@@ -47,6 +47,7 @@ var ready;
 var gameId;
 var currentCatIndex;
 var currentVariables;
+var currentGame;
 var cats;
 var catIndex;
 var categories;
@@ -60,6 +61,7 @@ var runsContainer;
 
 var runsTable;
 var runsLoading;
+var runsPlatformHardware;
 
 var categoryTabs;
 
@@ -79,6 +81,7 @@ function onGameDataLoad()
 	runsTable = document.getElementById("runs-table");
 	runsNone = document.getElementById("runs-none");
 	runsLoading = document.getElementById("runs-loading");
+	runsPlatformHardware = document.getElementById("runs-platform-hardware");
 
 	gameInfoImage = document.getElementById("game-image");
 	gameInfoYear = document.getElementById("game-year");
@@ -102,6 +105,10 @@ function onGameDataLoad()
 		loadGame(id);
 		gamesContainer.value = id;
 	}
+	else
+	{
+		loadGame('hla'); //default
+	}
 }
 
 function loadAllGames()
@@ -123,6 +130,18 @@ function loadGame(id)
 
 	gameId = id;
 	window.location.hash = "#" + id;
+
+	for (var i = 0; i < gamesArray.length; i++)
+	{
+		if (gamesArray[i].id == id)
+		{
+			currentGame = gamesArray[i];
+			break;
+		}
+	}
+
+	document.documentElement.style.setProperty('--primary-color', currentGame.color)
+	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
 
 	get("https://www.speedrun.com/api/v1/games/" + id)
 	.then((data) =>
@@ -345,7 +364,7 @@ function loadRuns(id, variables)
 		}
 	}
 
-	get("https://www.speedrun.com/api/v1/leaderboards/" + gameId + "/category/" + id + "?embed=players,platforms" + varString)
+	get("https://www.speedrun.com/api/v1/leaderboards/" + gameId + "/category/" + id + "?embed=players,platforms,variables" + varString)
 	.then((data) =>
 	{
 		var json = (JSON.parse(data)).data;
@@ -405,9 +424,43 @@ function loadRuns(id, variables)
 			
 			var platform = platforms[run.system.platform];
 
+			if (currentGame.hardware != "")
+			{
+				var val = run.values[currentGame.hardware];
+
+				var allVars = json.variables.data;
+				for (var k = 0; k < allVars.length; k++)
+				{
+					if (allVars[k].id == currentGame.hardware)
+					{
+						platform = allVars[k].values.values[val].label;
+						runsPlatformHardware.innerText = "Hardware";
+						break;
+					}
+				}
+			}
+			else
+			{
+				runsPlatformHardware.innerText = "Platform";
+			}
+
 			var date = timeAgo(new Date(run.submitted));
 			
-			runsContainer.innerHTML += '<tr><td>' + place + '</td><td style="font-weight: bold">' + player + '</td><td>' + time + '</td><td>' + platform + '</td><td>' + date + '</td></tr>';
+			runsContainer.innerHTML += '<tr data-target="' + run.weblink + '"><td>' + place + '</td><td style="font-weight: bold">' + player + '</td><td>' + time + '</td><td>' + platform + '</td><td>' + date + '</td></tr>';
+		}
+
+		var lines = document.getElementsByTagName('tr');
+		for (var i = 0; i < lines.length; i++)
+		{
+			if (lines[i].dataset.target)
+			{
+				lines[i].addEventListener('click', event => {
+					if (event.path[1].dataset.target)
+					{
+						window.open(event.path[1].dataset.target);
+					}
+				});
+			}					
 		}
 
 		runsLoading.style.display = 'none';

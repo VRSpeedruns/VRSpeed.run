@@ -1,7 +1,7 @@
 /* ---------- Main/Misc ---------- */
 :root {
-	--primary-color: #FF862C;/*#ddd;*/
-	--primary-color-hover: #ffa058;/*#fff;*/
+	--primary-color: #ddd;
+	--primary-color-hover: #fff;
 	--text-color: #eee;
 	--text-color-dark: #111;
 	--background-color: #2E3136;
@@ -145,6 +145,9 @@ a:hover {
 .table td {
 	border-bottom: 1px var(--background-accent-color);
 	text-align: center !important;
+}
+.table tbody tr {
+	cursor: pointer;
 }
 .table tbody tr:nth-child(odd) {
 	background-color: var(--background-mid-accent-color);
