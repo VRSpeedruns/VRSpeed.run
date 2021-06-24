@@ -1,9 +1,11 @@
+/* ---------- Main/Misc ---------- */
 :root {
 	--primary-color: #FF862C;/*#ddd;*/
 	--primary-color-hover: #ffa058;/*#fff;*/
 	--text-color: #eee;
 	--text-color-dark: #111;
 	--background-color: #2E3136;
+	--background-mid-accent-color: #282b30;
 	--background-accent-color: #26282C;
 	--button-background-color: #393C42;
 	--button-background-hover-color: #41434b;
@@ -15,6 +17,9 @@ html {
 }
 body {
 	background-color: var(--background-accent-color);
+	
+	font-family: 'Open Sans';
+	font-size: 0.95em;
 }
 a {
 	color: var(--primary-color);
@@ -25,13 +30,16 @@ a {
 	transition: color .35s ease-out;
 }
 
-.select select:focus {
-	border: none;
-	box-shadow: none;
+a:hover {
+	color: var(--primary-color);
+	text-decoration: underline;
 }
+
+/* ---------- Button ---------- */
 
 .button.is-dark {
 	background-color: var(--button-background-color);
+	border: 1px solid var(--button-background-color) !important;
 }
 .button.is-dark.is-selected {
 	background-color: var(--primary-color);
@@ -45,31 +53,7 @@ a {
 	text-decoration: none;
 }
 
-#variables {
-	display: flex;
-}
-#variables > .buttons, .is-variable, #variables > .buttons:not(:last-child) {
-	margin-bottom: 0;
-}
-#variables > .buttons:not(:last-child) {
-	margin-right: 1.25rem;
-}
-.is-variable.is-active, .is-variable.is-active:focus {
-	background-color: var(--primary-color) !important;
-	color: var(--text-color-dark) !important;
-}
-.is-variable.is-active:hover {
-	background-color: var(--primary-color-hover) !important;
-}
-
-.box, .tabs a, .tabs li:hover {
-	color: #eee;
-}
-
-a:hover {
-	color: var(--primary-color);
-	text-decoration: underline;
-}
+/* ---------- Tabs ---------- */
 
 #tabs {
 	margin-bottom: 1.25rem;
@@ -87,6 +71,7 @@ a:hover {
 }
 .tabs li a {
 	text-decoration: none;
+	font-weight: bold;
 
 	background-color: var(--button-background-color) !important;
 
@@ -108,10 +93,106 @@ a:hover {
 	background-color: var(--primary-color-hover) !important;
 }
 
-.box {
-	background-color: var(--background-color);
+.tabs:not(:last-child) {
+	margin-bottom: 0;
 }
 
+
+/* ---------- Variables ---------- */
+
+#variables {
+	display: flex;
+}
+#variables > .buttons, .is-variable, #variables > .buttons:not(:last-child) {
+	margin-bottom: 0;
+	font-weight: bold;
+}
+#variables > .buttons > .button:first-child {
+	border-radius: 4px 0 0 4px;
+}
+#variables > .buttons > .button:last-child {
+	border-radius: 0 4px 4px 0;
+}
+#variables > .buttons:not(:last-child) {
+	margin-right: 1.25rem;
+}
+.is-variable.is-active, .is-variable.is-active:focus {
+	background-color: var(--primary-color) !important;
+	color: var(--text-color-dark) !important;
+}
+.is-variable.is-active:hover {
+	background-color: var(--primary-color-hover) !important;
+}
+
+.box, .tabs a, .tabs li:hover {
+	color: #eee;
+}
+
+/* ---------- Table ---------- */
+
+.table {
+	/*table-layout: fixed;*/
+
+	color: var(--text-color);
+	background-color: var(--background-color);
+	font-size: 0.95em;
+}
+.table thead th {
+	color: var(--text-color);
+	border-bottom: none;
+	text-align: center !important;
+}
+.table td {
+	border-bottom: 1px var(--background-accent-color);
+	text-align: center !important;
+}
+.table tbody tr:nth-child(odd) {
+	background-color: var(--background-mid-accent-color);
+}
+.table tbody tr:hover {
+	background-color: var(--button-background-color);
+}
+
+/* ---------- Game Info ---------- */
+
+.game-info-container {
+	text-align: center;
+}
+.game-image-container {
+	height: 10rem;
+	min-height: 10rem;
+}
+#game-image {
+	max-height: 10rem;
+	min-height: 10rem;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
+	
+	border-radius: 6px;
+}
+
+/* ---------- Misc ---------- */
+
+.select, .select > select {
+	margin-bottom: 1rem;
+	width: 100%;
+	background-color: var(--background-mid-accent-color);
+	border-color: var(--primary-color);
+	color: var(--text-color);
+}
+.select:after {
+	border-color: var(--primary-color) !important;
+}
+.select select:hover, .select select:focus, .select:hover:after, .select:focus:after {
+	
+	border-color: var(--primary-color-hover) !important;
+	box-shadow: none;
+}
 
 .title {
 	color: #eee;
@@ -150,10 +231,18 @@ a:hover {
 	margin-bottom: 0;
 }
 
+.box {
+	background-color: var(--background-color);
+}
+
+#runs-none {
+	text-align: center;
+}
+
 /* ----------------------------------------- */
 /* source: https://tobiasahlin.com/spinkit/  */
 
-#loadingDiv .spinner {
+#runs-loading .spinner {
 	width: 40px;
 	height: 40px;
 	background-color: #777;
@@ -184,7 +273,7 @@ a:hover {
 
 
 /* added by me */
-#loadingDiv .belowspinner {
+#runs-loading .belowspinner {
 	color: #777;
 	font-weight: bold;
 	font-size: 1.5rem;
@@ -192,72 +281,10 @@ a:hover {
 	margin-top: -5rem;
 }
 
-#topLoadingDiv .spinner {
-	width: 40px;
-	height: 40px;
-	background-color: #777;
-  
-	margin: 65px auto;
-	margin-top: 0;
-	margin-bottom: 106px;
-	-webkit-animation: sk-rotateplane 0.8s infinite ease-in-out;
-	animation: sk-rotateplane 0.8s infinite ease-in-out;
-  }
-  
-  @-webkit-keyframes sk-rotateplane {
-	0% { -webkit-transform: perspective(120px) }
-	50% { -webkit-transform: perspective(120px) rotateY(180deg) }
-	100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
-  }
-  
-  @keyframes sk-rotateplane {
-	0% { 
-	  transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-	  -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
-	} 50% { 
-	  transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-	  -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
-	} 100% { 
-	  transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-	  -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-	}
-  }
-
-/* added by me */
-#topLoadingDiv .belowspinner {
-	color: #777;
-	font-weight: bold;
-	font-size: 1.5rem;
-	text-align: center;
-	margin-top: -5rem;
-}
-
-/* ----------------------------------------- */
-
-#loadingDiv {
-	display: flex;
-	align-items: center;
-	height: 100%;
-}
-#topLoadingDiv {
+#runs-loading {
 	display: flex;
 	align-items: center;
 	height: 100%;
 }
 
-body {
-	font-family: 'Open Sans';
-	font-size: 0.95em;
-}
-
-
-.tabs:not(:last-child) {
-	margin-bottom: 0;
-}
-.table {
-	table-layout: fixed;
-}
-.select, .select > select {
-	margin-bottom: 1rem;
-	width: 100%;
-}
+/* ---------- ---------- */

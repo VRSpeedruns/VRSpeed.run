@@ -32,8 +32,12 @@
 					<div class="column is-3">
 						<div class="box">
 							<div class="select">
-								<select id="games" onchange="onGameChange(this.value)">
-								</select>
+								<select id="games" onchange="onGameChange(this.value)"></select>
+							</div>
+							<div class="game-info-container">
+								<div class="game-image-container is-hidden-touch"><img id="game-image" src=""></div>
+								<div id="game-year" class="is-hidden-touch">...</div>
+								<div id="game-platforms" class="is-hidden-touch">...</div>
 							</div>
 						</div>
 					</div>
@@ -41,7 +45,27 @@
 						<div class="box">
 							<div class="tabs is-boxed"><ul id="tabs"></ul></div>
 							<div id="variables"></div>
-							<div id="runs"></div>
+							<div id="runs-loading" style="display: block;">
+								<div>
+									<div class="spinner"></div>
+									<div class="belowspinner">Loading...</div>
+								</div>
+							</div>
+							<div id="runs-none" style="display: none;">
+								<i>There are no runs in this category.</i>
+							</div>
+							<table id="runs-table" class="table is-narrow is-fullwidth">
+								<thead>
+									<tr>
+										<th>Rank</th>
+										<th>Player</th>
+										<th>Time</th>
+										<th id="runs-platform-hardware" class="is-hidden-touch">Platform</th>
+										<th class="is-hidden-touch">Date</th>
+									</tr>
+								</thead>
+								<tbody id="runs"></tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -51,6 +75,7 @@
 			<script type="text/javascript">
 				var gamesArray = <?= json_encode(json_decode(file_get_contents('assets/other/games.json'))) ?>
 			</script>
+			<script type="text/javascript" src="assets/js/colorinterpolation.js"></script>
 			<script type="text/javascript" src="assets/js/main.js"></script>
 			<script type="text/javascript" src="assets/js/gamedata.js"></script>
 		</section>
