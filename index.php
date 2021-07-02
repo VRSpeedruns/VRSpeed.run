@@ -38,11 +38,18 @@
 								<div class="game-image-container is-hidden-touch"><img id="game-image" src=""></div>
 								<div id="game-year" class="is-hidden-touch">...</div>
 								<div id="game-platforms" class="is-hidden-touch">...</div>
+								<div class="buttons is-centered">
+									<div class="button is-dark" id="game-links-leaderboard" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-trophy"></i></a></div>
+									<div class="button is-dark" id="game-links-guides" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-book"></i></a></div>
+									<div class="button is-dark" id="game-links-resources" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-link"></i></a></div>
+									<div class="button is-dark" id="game-links-forums" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-comments"></i></a></div>
+									<div class="button is-dark" id="game-links-statistics" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-chart-line"></i></a></div>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="column is-9">
-						<div class="box">
+						<div class="box" id="box-runs">
 							<div class="tabs is-boxed"><ul id="tabs"></ul></div>
 							<div id="variables"></div>
 							<div id="runs-loading" style="display: block;">
@@ -67,6 +74,58 @@
 								<tbody id="runs"></tbody>
 							</table>
 						</div>
+						<div class="box" id="box-single-run" style="display: none;">
+							<div class="back-button">
+								<a onclick="closeRun();"><i class="fas fa-arrow-left"></i> Back</a>
+							</div>
+							<div class="tabs is-boxed"><ul id="run-single-tabs">
+								<li id="run-single-infotab"><a onclick="openRunTab(0);">Info</a></li>
+								<li id="run-single-splitstab"><a onclick="openRunTab(1);">Splits</a></li>
+							</ul></div>
+							<div id="run-single-info">
+								<div class="columns">
+									<div class="column is-8">
+										<div class="run-modal-titles">
+											<h1>
+												<span id="run-single-game" style="font-weight: bold;"></span> -
+												<span id="run-single-category"></span>
+											</h1>
+											<h2>
+												<span id="run-single-time" style="font-weight: bold;"></span> by
+												<span id="run-single-runner"></span>
+											</h2>
+										</div>
+									</div>
+									<div class="column is-4">
+										<div>
+											<a id="run-single-src" class="button is-dark is-fullwidth" href="", target="_blank">
+												<span class="icon has-text"><i class="fas fa-trophy"></i></span>
+												View on Speedrun.com
+											</a>
+											<a id="run-single-yt" class="button is-dark is-fullwidth" href="", target="_blank">
+												<span class="icon has-text"><i class="fab fa-youtube"></i></span>
+												Watch run on YouTube
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="run-single-splits">
+								<div>
+									<table class="table is-narrow is-fullwidth">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Name</th>
+												<th>Duration</th>
+												<th>Finished At </th>
+											</tr>
+										</thead>
+										<tbody id="run-single-segments"></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -75,9 +134,12 @@
 			<script type="text/javascript">
 				var gamesArray = <?= json_encode(json_decode(file_get_contents('assets/other/games.json'))) ?>
 			</script>
+			<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+			<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script> 
 			<script type="text/javascript" src="assets/js/colorinterpolation.js"></script>
-			<script type="text/javascript" src="assets/js/main.js"></script>
 			<script type="text/javascript" src="assets/js/gamedata.js"></script>
+			<script type="text/javascript" src="assets/js/viewrun.js"></script>
+			<script type="text/javascript" src="assets/js/main.js"></script>
 		</section>
 	</body>
 </html>

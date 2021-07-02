@@ -12,7 +12,7 @@
 }
 
 html {
-	background-color: var(--background-color);
+	background-color: var(--background-mid-accent-color);
 	color: var(--text-color);
 }
 body {
@@ -52,11 +52,28 @@ a:hover {
 	background-color: var(--button-background-hover-color);
 	text-decoration: none;
 }
+.button.is-dark > .icon {
+	color: var(--primary-color);
+}
+.button.is-dark:hover > .icon {
+	color: var(--primary-color-hover);
+	text-decoration: none;
+}
+a.button {
+	padding: .5em;
+}
+a.button:not(:last-child) {
+	margin-bottom: 0.5em;
+}
+.button > .icon.has-text {
+	margin-left: 0!important;
+	margin-right: .25em!important;
+}
 
 /* ---------- Tabs ---------- */
 
-#tabs {
-	margin-bottom: 1.25rem;
+.tabs > ul {
+	margin-bottom: calc(1.25rem - 2px);
 	border-bottom: 2px solid var(--primary-color) !important;
 }
 .tabs {
@@ -79,6 +96,7 @@ a:hover {
 	-moz-transition: none;
 	-o-transition: none;
 	transition: none;
+	font-size: 0.91em;
 }
 .tabs li a:hover, .tabs li a:focus {
 	color: var(--text-color);
@@ -102,10 +120,12 @@ a:hover {
 
 #variables {
 	display: flex;
+	margin-bottom: 1.25rem;
 }
-#variables > .buttons, .is-variable, #variables > .buttons:not(:last-child) {
+#variables > .buttons, .is-variable {
 	margin-bottom: 0;
 	font-weight: bold;
+	margin-bottom: 0;
 }
 #variables > .buttons > .button:first-child {
 	border-radius: 4px 0 0 4px;
@@ -136,6 +156,9 @@ a:hover {
 	color: var(--text-color);
 	background-color: var(--background-color);
 	font-size: 0.95em;
+
+	width: calc(100% + 2.5rem) !important;
+	margin-left: -1.25rem;
 }
 .table thead th {
 	color: var(--text-color);
@@ -156,6 +179,14 @@ a:hover {
 	background-color: var(--button-background-color);
 }
 
+@media only screen and (max-width: 768px) {
+	.table {
+		font-size: 0.9em;
+		width: calc(100% + 1.5rem) !important;
+		margin-left: -0.75rem;
+	}
+}
+
 /* ---------- Game Info ---------- */
 
 .game-info-container {
@@ -164,6 +195,7 @@ a:hover {
 .game-image-container {
 	height: 10rem;
 	min-height: 10rem;
+	margin-bottom: 1.2rem;
 }
 #game-image {
 	max-height: 10rem;
@@ -178,13 +210,58 @@ a:hover {
 	
 	border-radius: 6px;
 }
+#game-platforms {
+	margin-bottom: 1.25rem;
+}
 
+.game-info-container > .buttons {
+	margin: 0 auto;
+}
+
+/* ---------- Tippy ---------- */
+
+.tippy-box[data-theme~='vrsr'] {
+	background-color: var(--button-background-color);
+	color: var(--text-color);
+}
+.tippy-box[data-theme~='vrsr'][data-placement^='top'] > .tippy-arrow::before {
+	border-top-color: transparent;
+}
+	.tippy-box[data-theme~='vrsr'][data-placement^='bottom'] > .tippy-arrow::before {
+	border-bottom-color: transparent;
+}
+	.tippy-box[data-theme~='vrsr'][data-placement^='left'] > .tippy-arrow::before {
+	border-left-color: transparent;
+}
+	.tippy-box[data-theme~='tomato'][data-placement^='right'] > .tippy-arrow::before {
+	border-right-color: transparent;
+}
+
+/* ---------- Run Modal Popout ---------- */
+
+.modal-background {
+	background-color: rgba(10, 10, 10, 0.5);
+}
+@media screen and (min-width: 769px) {
+	.modal-content {
+		margin: 0 auto;
+		max-height: calc(100vh - 40px);
+		width: 50%;
+	}
+}
+
+.run-modal-titles h1 {
+	font-size: 1.5em;
+}
+.run-modal-titles h2 {
+	font-size: 1.25em;
+}
 /* ---------- Misc ---------- */
 
 .select, .select > select {
-	margin-bottom: 1rem;
+	margin-bottom: 1.25rem;
 	width: 100%;
-	background-color: var(--background-mid-accent-color);
+	background-color: var(--background-color);
 	border-color: var(--primary-color);
 	color: var(--text-color);
 }
@@ -204,7 +281,7 @@ a:hover {
 }
 
 .section.is-footer {
-	background-color: var(--background-color);
+	background-color: var(--background-mid-accent-color);
 	width: 100%;
 	text-align: center;
 	color: #eee;
@@ -240,6 +317,43 @@ a:hover {
 
 #runs-none {
 	text-align: center;
+}
+.runs-flag {
+	margin-right: 0.25em;
+	height: 12px;
+	vertical-align: middle;
+	margin-bottom: 3px;
+	border-radius: 2px;
+}
+.player-link {
+	font-weight: bold;
+}
+.player-link:hover {
+	text-decoration: none;
+}
+.player-link:hover > span {
+	text-decoration: underline;
+}
+
+@media only screen and (max-width: 768px) {
+	.column {
+		padding: 0.75rem 0;
+	}
+    .section {
+		padding: 1.5rem 1rem;
+	}
+	.box {
+		padding: 0.75rem;
+	}
+}
+
+.back-button {
+	margin-bottom: 1.25rem;
+	font-weight: bold;
+}
+.back-button a:hover {
+	text-decoration: none;
+	color: var(--primary-color-hover);
 }
 
 /* ----------------------------------------- */

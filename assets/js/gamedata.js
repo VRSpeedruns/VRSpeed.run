@@ -30,18 +30,7 @@ Variable Object
 			...
 		}
 	]
-}
-
-*/
-
-/*Test Commands
-
-- HLA main category:
-> loadCategory("wkp1wojk", [{"id": "6nj4xqjn", "value": "21gr0emq"}, {"id": "38dpr118", "value": "0q5p9zml"}]);
-
-*/
-
-
+}*/
 
 var ready;
 var gameId;
@@ -68,8 +57,15 @@ var categoryTabs;
 var gameInfoImage;
 var gameInfoYear;
 var gameInfoPlatforms;
+var gameInfoLinkLeaderboard;
+var gameInfoLinkGuides;
+var gameInfoLinkResources;
+var gameInfoLinkForums;
+var gameInfoLinkStatistics;
 
 var platformsList;
+
+var defaultIndex;
 
 function onGameDataLoad()
 {
@@ -86,6 +82,11 @@ function onGameDataLoad()
 	gameInfoImage = document.getElementById("game-image");
 	gameInfoYear = document.getElementById("game-year");
 	gameInfoPlatforms = document.getElementById("game-platforms");
+	gameInfoLinkLeaderboard = document.getElementById("game-links-leaderboard").childNodes[0];
+	gameInfoLinkGuides = document.getElementById("game-links-guides").childNodes[0];
+	gameInfoLinkResources = document.getElementById("game-links-resources").childNodes[0];
+	gameInfoLinkForums = document.getElementById("game-links-forums").childNodes[0];
+	gameInfoLinkStatistics = document.getElementById("game-links-statistics").childNodes[0];
 
 	platformsList = [];
 	platformsList["w89rwwel"] = "Vive";
@@ -99,15 +100,58 @@ function onGameDataLoad()
 
 	loadAllGames();
 
+	defaultIndex = -1;
+	for (var i = 0; i < gamesArray.length; i++)
+	{
+		if (gamesArray[i].id == 'hla')
+		{
+			defaultIndex = i;
+			break;
+		}
+	}
+	
+	hashChange();
+
+	if ("onhashchange" in window)
+	{
+		window.onhashchange = function ()
+		{
+			hashChange();
+		}
+	}
+}
+
+function hashChange()
+{
 	if (window.location.hash.length > 1)
 	{
-		var id = window.location.hash.substring(1)
-		loadGame(id);
-		gamesContainer.value = id;
+		var id = window.location.hash.substring(1);
+
+		var gameIndex = -1;
+		for (var i = 0; i < gamesArray.length; i++)
+		{
+			if (gamesArray[i].abbreviation == id)
+			{
+				gameIndex = i;
+				break;
+			}
+		}
+
+		if (gameIndex > -1)
+		{
+			gamesContainer.selectedIndex = gameIndex;
+			loadGame(id);
+		}
+		else
+		{
+			gamesContainer.selectedIndex = defaultIndex;
+			loadGame('hla');
+		}
 	}
 	else
 	{
-		loadGame('hla'); //default
+		gamesContainer.selectedIndex = defaultIndex;
+		loadGame('hla');
 	}
 }
 
@@ -115,12 +159,13 @@ function loadAllGames()
 {
 	for (var i = 0; i < gamesArray.length; i++)
 	{
-		gamesContainer.innerHTML += '<option value="' + gamesArray[i].id + '">' + gamesArray[i].name + '</option>';
+		gamesContainer.innerHTML += '<option value="' + gamesArray[i].abbreviation + '">' + gamesArray[i].name + '</option>';
 	}
 }
 
 function onGameChange(id)
 {
+	closeRun();
 	loadGame(id);
 }
 
@@ -128,22 +173,30 @@ function loadGame(id)
 {
 	ready = false;
 
-	gameId = id;
 	window.location.hash = "#" + id;
 
 	for (var i = 0; i < gamesArray.length; i++)
 	{
-		if (gamesArray[i].id == id)
+		if (gamesArray[i].abbreviation == id)
 		{
 			currentGame = gamesArray[i];
+			gameId = currentGame.id;
 			break;
 		}
 	}
 
+	document.title = currentGame.name + " - VRSR";
+
 	document.documentElement.style.setProperty('--primary-color', currentGame.color)
 	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
 
-	get("https://www.speedrun.com/api/v1/games/" + id)
+	gameInfoLinkLeaderboard.href = "https://www.speedrun.com/" + gameId + "/full_game";
+	gameInfoLinkGuides.href = "https://www.speedrun.com/" + gameId + "/guides";
+	gameInfoLinkResources.href = "https://www.speedrun.com/" + gameId + "/resources";
+	gameInfoLinkForums.href = "https://www.speedrun.com/" + gameId + "/forum";
+	gameInfoLinkStatistics.href = "https://www.speedrun.com/" + gameId + "/gamestats";
+
+	get("https://www.speedrun.com/api/v1/games/" + gameId + "?embed=platforms")
 	.then((data) =>
 	{
 		var game = (JSON.parse(data)).data;
@@ -152,22 +205,22 @@ function loadGame(id)
 		gameInfoYear.innerText = game.released;
 
 		var tempPlatforms = [];
-		for (var i = 0; i < game.platforms.length; i++)
+		for (var i = 0; i < game.platforms.data.length; i++)
 		{			
-			if (game.platforms[i] in platformsList)
+			if (game.platforms.data[i].id in platformsList)
 			{
-				tempPlatforms.push(platformsList[game.platforms[i]]);
+				tempPlatforms.push(platformsList[game.platforms.data[i].id]);
 			}
 			else
 			{
-				tempPlatforms.push(plat.name);
+				tempPlatforms.push(game.platforms.data[i].name);
 			}
 		}
 
 		gameInfoPlatforms.innerText = tempPlatforms.join(", ");
 	});
 
-	get("https://www.speedrun.com/api/v1/games/" + id + "/categories")
+	get("https://www.speedrun.com/api/v1/games/" + gameId + "/categories")
 	.then((data) =>
 	{
 		cats = (JSON.parse(data)).data;
@@ -286,8 +339,6 @@ function displayCategory(index)
 	categoryTabs[index].classList.add("is-active");
 	
 	displayCategoryVariables(index);
-
-	//loadRuns()
 }
 
 function displayCategoryVariables(index)
@@ -297,7 +348,6 @@ function displayCategoryVariables(index)
 	currentVariables = [];
 
 	var vars = categories[index].variables;
-	//console.log(categories[index].name);
 	for (var i = 0; i < vars.length; i++)
 	{
 		var temp = '<div class="buttons has-addons">';
@@ -376,7 +426,18 @@ function loadRuns(id, variables)
 		{
 			var p = json.players.data[i];
 			if (p.rel == "guest") continue;
-			players[p.id] = {"name": p.names.international, "colorFrom": p["name-style"]["color-from"].dark, "colorTo": p["name-style"]["color-to"].dark};
+
+			var loc = "";
+			if (p.location !== null)
+				loc = p.location.country.code;
+
+			players[p.id] = {
+				"name": p.names.international,
+				"colorFrom": p["name-style"]["color-from"].dark,
+				"colorTo": p["name-style"]["color-to"].dark,
+				"region": loc,
+				"link": p.weblink
+			};
 		}
 
 		for (var i = 0; i < json.platforms.data.length; i++)
@@ -392,11 +453,28 @@ function loadRuns(id, variables)
 			var run = json.runs[i].run;
 
 			var place = nth(json.runs[i].place);
+			if (place == "1st")
+			{
+				place = '<b style="color: #FFD700">' + place + '</b>';
+			}
+			else if (place == "2nd")
+			{
+				place = '<b style="color: #C0C0C0">' + place + "</b>";
+			}
+			else if (place == "3rd")
+			{
+				place = '<b style="color: #CD7F32">' + place + "</b>";
+			}
 
 			var time = run.times.primary.replace('PT','').replace('H','h ').replace('M','m ');
 			if (time.includes('.'))
 			{
 				time = time.replace('.', 's ').replace('S', 'ms');
+				var ms = time.split('s ')[1].split('ms')[0];
+				ms = ms.replace(/^0+/, '');
+
+				time = time.split('s ')[0] + "s " + ms + "ms";
+				
 			}
 			else
 			{
@@ -408,14 +486,8 @@ function loadRuns(id, variables)
 			{
 				var start = players[run.players[0].id].colorFrom;
 				var end = players[run.players[0].id].colorTo;
-				var chars = players[run.players[0].id].name.split('');
-
-				var colors = interpolate(start, end, chars.length)
-
-				for (var k = 0; k < chars.length; k++)
-				{
-					player += '<span style="color: ' + colors[k] + '">' + chars[k] + '</span>';
-				}
+				
+				player = getGradientName(players[run.players[0].id].name, start, end);
 			}
 			else
 			{
@@ -445,22 +517,27 @@ function loadRuns(id, variables)
 			}
 
 			var date = timeAgo(new Date(run.submitted));
+
+			var flag = '';
+			if (run.players[0].id != undefined && players[run.players[0].id].region != '')
+			{
+				flag = '<img class="runs-flag" src="https://www.speedrun.com/images/flags/' + players[run.players[0].id].region + '.png">';
+			}
 			
-			runsContainer.innerHTML += '<tr data-target="' + run.weblink + '"><td>' + place + '</td><td style="font-weight: bold">' + player + '</td><td>' + time + '</td><td>' + platform + '</td><td>' + date + '</td></tr>';
+			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-touch">' + platform + '</td><td class="is-hidden-touch">' + date + '</td></tr>';
 		}
 
-		var lines = document.getElementsByTagName('tr');
-		for (var i = 0; i < lines.length; i++)
+		for (var i = 0; i <json.runs.length; i++)
 		{
-			if (lines[i].dataset.target)
-			{
-				lines[i].addEventListener('click', event => {
-					if (event.path[1].dataset.target)
-					{
-						window.open(event.path[1].dataset.target);
-					}
-				});
-			}					
+			tippy('#run-' + json.runs[i].run.id, {
+				theme: 'vrsr',
+				content: 'Click to view more about this run.',
+				placement: 'top',
+				followCursor: 'horizontal',
+				offset: [0,5],
+				delay: [225, 0],
+				duration: [150, 0]
+			});
 		}
 
 		runsLoading.style.display = 'none';
@@ -473,6 +550,22 @@ function loadRuns(id, variables)
 			runsNone.style.display = 'block';
 		}
 	});
+}
+
+function getGradientName(name, start, end)
+{
+	var player = "";
+
+	var chars = name.split('');
+
+	var colors = interpolate(start, end, chars.length)
+
+	for (var k = 0; k < chars.length; k++)
+	{
+		player += '<span style="color: ' + colors[k] + '">' + chars[k] + '</span>';
+	}
+
+	return player;
 }
 
 function get(url) {

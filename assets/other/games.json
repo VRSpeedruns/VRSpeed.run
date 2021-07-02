@@ -1,6 +1,7 @@
 [
     {
         "id": "accounting",
+        "abbreviation": "acc",
         "name": "Accounting",
         "hardware": "",
         "color": "#8d16c7",
@@ -8,6 +9,7 @@
     },
     {
         "id": "accountingplus",
+        "abbreviation": "accplus",
         "name": "Accounting+",
         "hardware": "",
         "color": "#8d16c7",
@@ -15,6 +17,7 @@
     },
     {
         "id": "adventure_time_magic_mans_head_game",
+        "abbreviation": "atmmhg",
         "name": "Adventure Time MMHG",
         "hardware": "",
         "color": "#FDED52",
@@ -22,6 +25,7 @@
     },
     {
         "id": "arizona_sunshine",
+        "abbreviation": "as",
         "name": "Arizona Sunshine",
         "hardware": "",
         "color": "#FBC539",
@@ -29,6 +33,7 @@
     },
     {
         "id": "batman_arkham_vr",
+        "abbreviation": "bavr",
         "name": "Batman: Arkham VR",
         "hardware": "",
         "color": "#5E91B9",
@@ -36,6 +41,7 @@
     },
     {
         "id": "boneworks",
+        "abbreviation": "bw",
         "name": "BONEWORKS",
         "hardware": "r8romd08",
         "color": "#E6B400",
@@ -43,6 +49,7 @@
     },
     {
         "id": "budget_cuts",
+        "abbreviation": "bc",
         "name": "Budget Cuts",
         "hardware": "",
         "color": "#FF1F1F",
@@ -50,6 +57,7 @@
     },
     {
         "id": "climbey",
+        "abbreviation": "cl",
         "name": "Climbey",
         "hardware": "",
         "color": "#ED821A",
@@ -57,6 +65,7 @@
     },
     {
         "id": "doctor_who_the_edge_of_time",
+        "abbreviation": "drwho",
         "name": "Doctor Who: The Edge Of Time",
         "hardware": "",
         "color": "#515bd0",
@@ -64,6 +73,7 @@
     },
     {
         "id": "doom_vfr",
+        "abbreviation": "doom",
         "name": "DooM VFR",
         "hardware": "",
         "color": "#CD001A",
@@ -71,6 +81,7 @@
     },
     {
         "id": "duck_season",
+        "abbreviation": "ds",
         "name": "Duck Season",
         "hardware": "",
         "color": "#F01B6A",
@@ -78,6 +89,7 @@
     },
     {
         "id": "everybodysgolfvr",
+        "abbreviation": "eg",
         "name": "Everybody's Golf VR",
         "hardware": "",
         "color": "#70BD6A",
@@ -85,6 +97,7 @@
     },
     {
         "id": "hla",
+        "abbreviation": "hla",
         "name": "Half-Life: Alyx",
         "hardware": "",
         "color": "#FF862C",
@@ -92,6 +105,7 @@
     },
     {
         "id": "i_expect_you_to_die",
+        "abbreviation": "ieytd",
         "name": "I Expect You To Die",
         "hardware": "",
         "color": "#E57842",
@@ -99,6 +113,7 @@
     },
     {
         "id": "jet_island",
+        "abbreviation": "ji",
         "name": "Jet Island",
         "hardware": "",
         "color": "#ad4c50",
@@ -106,6 +121,7 @@
     },
     {
         "id": "job_simulator",
+        "abbreviation": "js",
         "name": "Job Simulator",
         "hardware": "",
         "color": "#009100",
@@ -113,6 +129,7 @@
     },
     {
         "id": "lone_echo",
+        "abbreviation": "le",
         "name": "Lone Echo",
         "hardware": "",
         "color": "#278f96",
@@ -120,6 +137,7 @@
     },
     {
         "id": "luckys_tale",
+        "abbreviation": "lt",
         "name": "Lucky's Tale",
         "hardware": "",
         "color": "#009DEC",
@@ -127,6 +145,7 @@
     },
     {
         "id": "moss",
+        "abbreviation": "moss",
         "name": "Moss",
         "hardware": "",
         "color": "#FDCB1C",
@@ -134,6 +153,7 @@
     },
     {
         "id": "paper_beast",
+        "abbreviation": "pb",
         "name": "Paper Beast",
         "hardware": "",
         "color": "#E65F03",
@@ -141,6 +161,7 @@
     },
     {
         "id": "prtlvr",
+        "abbreviation": "ps",
         "name": "Portal Stories: VR",
         "hardware": "",
         "color": "#0088FF",
@@ -148,6 +169,7 @@
     },
     {
         "id": "rick_and_morty_virtual_rick-ality",
+        "abbreviation": "ramvr",
         "name": "Rick and Morty: VR",
         "hardware": "",
         "color": "#39C428",
@@ -155,13 +177,23 @@
     },
     {
         "id": "robo_recall",
+        "abbreviation": "rr",
         "name": "Robo Recall",
         "hardware": "",
         "color": "#92AAD5",
         "hoverColor": "#b3caf5"
     },
     {
+        "id": "star_wars_tales_from_the_galaxys_edge",
+        "abbreviation": "swtftge",
+        "name": "Star Wars: TFTGE",
+        "hardware": "",
+        "color": "#F79F41",
+        "hoverColor": "#ffb96e"
+    },
+    {
         "id": "shvr",
+        "abbreviation": "shvr",
         "name": "SUPERHOT VR",
         "hardware": "",
         "color": "#E62205",
@@ -169,6 +201,7 @@
     },
     {
         "id": "surgeon_simulator_experience_reality",
+        "abbreviation": "sser",
         "name": "Surgeon Simulator: E.R.",
         "hardware": "",
         "color": "#C2252C",
@@ -176,6 +209,7 @@
     },
     {
         "id": "the_climb",
+        "abbreviation": "tc",
         "name": "The Climb",
         "hardware": "",
         "color": "#00B3FF",
@@ -183,6 +217,7 @@
     },
     {
         "id": "the_climb_2",
+        "abbreviation": "tc2",
         "name": "The Climb 2",
         "hardware": "",
         "color": "#00E2FF",
@@ -190,6 +225,7 @@
     },
     {
         "id": "the_lab",
+        "abbreviation": "lab",
         "name": "The Lab",
         "hardware": "",
         "color": "#7DBDFD",
@@ -197,6 +233,7 @@
     },
     {
         "id": "talos_principle_vr",
+        "abbreviation": "tpvr",
         "name": "The Talos Principle VR",
         "hardware": "kn0zqxz8",
         "color": "#26BCC6",
@@ -204,6 +241,7 @@
     },
     {
         "id": "the_walking_dead_saints_and_sinners",
+        "abbreviation": "twdss",
         "name": "The Walking Dead: S & S",
         "hardware": "ylqk1v3l",
         "color": "#FF1F1F",
@@ -211,6 +249,7 @@
     },
     {
         "id": "tnn",
+        "abbreviation": "tnn",
         "name": "Time Travelling Navy Seal N.W.",
         "hardware": "",
         "color": "#00A40C",
@@ -218,6 +257,7 @@
     },
     {
         "id": "to_the_top",
+        "abbreviation": "ttt",
         "name": "To The Top",
         "hardware": "e8mmk2v8",
         "color": "#FF1F1F",
@@ -225,6 +265,7 @@
     },
     {
         "id": "trover",
+        "abbreviation": "trover",
         "name": "Trover Saves the Universe",
         "hardware": "",
         "color": "#9400CF",
@@ -232,6 +273,7 @@
     },
     {
         "id": "vs",
+        "abbreviation": "vs",
         "name": "Vacation Simulator",
         "hardware": "",
         "color": "#FDEA8E",
@@ -239,6 +281,7 @@
     },
     {
         "id": "vertigo_remastered",
+        "abbreviation": "vert",
         "name": "Vertigo Remastered",
         "hardware": "",
         "color": "#7B63B8",
@@ -246,6 +289,7 @@
     },
     {
         "id": "vader_immortal",
+        "abbreviation": "vi",
         "name": "Vader Immortal",
         "hardware": "",
         "color": "#CD001A",
@@ -253,6 +297,7 @@
     },
     {
         "id": "vvr",
+        "abbreviation": "vvr",
         "name": "Virtual Virtual Reality",
         "hardware": "",
         "color": "#8d16c7",
@@ -260,6 +305,7 @@
     },
     {
         "id": "windlands",
+        "abbreviation": "wl",
         "name": "Windlands",
         "hardware": "",
         "color": "#2A65FC",
