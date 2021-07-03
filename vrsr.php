@@ -1,3 +1,65 @@
+<?php
+	$games = json_decode(file_get_contents('vrsrassets/other/games.json'));
+	
+	$gameId = '';
+	$runId = '';
+	$substr = substr($_SERVER['REQUEST_URI'], 6);
+	if (strlen($substr) > 0)
+	{
+		$expl = explode('/', $substr);
+		$gameId = $expl[0];
+		if (count($expl) > 1)
+		{
+			$runId = $expl[1];
+		}
+	}
+
+	$title = 'VR Speedrunning Leaderboards';
+	$image = '/images/vrsricon.png';
+	$description = 'A central hub to view the leaderboards for the largest VR speedgames.';
+
+	foreach ($games as $game)
+	{
+		if ($game->abbreviation == $gameId)
+		{
+			$title = $game->name . ' - VRSR';
+			$image = 'https://www.speedrun.com/themes/' . $game->id . '/cover-256.png';
+		}
+	}
+	if ($runId != '')
+	{
+		$run = json_decode(file_get_contents('https://www.speedrun.com/api/v1/runs/'.$runId.'?embed=players,category,game'))->data;
+
+		if ($game->data->abbreviation == $gameId)
+		{
+			$time = str_replace('PT', '', $run->times->primary);
+			$time = str_replace('H', 'h ', $time);
+			$time = str_replace('M', 'm ', $time);
+			
+			$player = '';
+			if ($run->players->data[0]->rel == 'user')
+			{
+				$player = $run->players->data[0]->names->international;
+			}
+			else
+			{
+				$player = $run->players->data[0]->name;
+			}
+	
+			if (strpos($time, '.') !== false)
+			{
+				$time = str_replace('S', 'ms', str_replace('.', 's ', $time));
+				
+				$ms = explode('ms', explode('s ', $time)[1])[0];
+				$ms = preg_replace('/^0+/', '', $ms);
+	
+				$time = explode('s ', $time)[0] . 's ' . $ms . 'ms';
+			}
+	
+			$description = $run->category->data->name . ' completed in ' . $time . ' by ' . $player;
+		}
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +71,12 @@
 		<title>VRSR</title>
 		
 		<meta content="Bigft.io" property="og:site_name">
-		<meta content="VR Speedrunning Leaderboards" property="og:title">
-		<meta content="A central hub to view the leaderboards for the largest VR speedgames." property="og:description">
-		<meta content="/images/vrsricon.png" property="og:image">
+		<meta content="<?= $title; ?>" property="og:title">
+		<meta content="<?= $description; ?>" property="og:description">
+		<meta content="<?= $image; ?>" property="og:image">
 		<meta content="#0165fe" name="theme-color">
 		
-		<meta name="description" content="A central hub to view the leaderboards for the largest VR speedgames.">
+		<meta name="description" content="<?= $description; ?>">
 		<meta name="keywords" content="VR Speedrun,VR,Speedrun,Speedrunning,VR Speedrunning,VR Running,Super Hot VR,Super Hot Speedrun, Super Hot VR Speedrun,Half Life, Half-Life, Half-Life: Alyx, Half-Life Alyx, Alyx,, HLA, HL: Alyx, HL:A">
 		
 		<script src="https://kit.fontawesome.com/d16c543bf8.js" crossorigin="anonymous"></script>
@@ -109,9 +171,9 @@
 												<span class="icon has-text"><i class="fas fa-trophy"></i></span>
 												View on Speedrun.com
 											</a>
-											<a id="run-single-yt" class="button is-dark is-fullwidth" href="", target="_blank">
-												<span class="icon has-text"><i class="fab fa-youtube"></i></span>
-												Watch run on YouTube
+											<a id="run-single-vid" class="button is-dark is-fullwidth" href="", target="_blank">
+												<span class="icon has-text"><i id="run-single-vid-icon" class="fab"></i></span>
+												<span id="run-single-vid-text">Watch on </span>
 											</a>
 										</div>
 									</div>
@@ -144,7 +206,7 @@
 		<section class="section is-footer">
 			<div id="js-mobile-check" class="is-hidden-mobile"></div>
 			<script type="text/javascript">
-				var gamesArray = <?= json_encode(json_decode(file_get_contents('vrsrassets/other/games.json'))) ?>;
+				var gamesArray = <?= json_encode($games); ?>;
 				var isMobile = window.getComputedStyle(document.getElementById("js-mobile-check")).getPropertyValue("display") == "none";
 			</script>
 			<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>

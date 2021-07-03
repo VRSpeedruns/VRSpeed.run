@@ -9,7 +9,9 @@ var runSingleCategory;
 var runSingleTime;
 var runSingleRunner;
 var runSingleSrc;
-var runSingleYT;
+var runSingleVid;
+var runSingleVidText;
+var runSingleVidIcon;
 
 var runSingleSegments;
 var runSingleSplitsBar;
@@ -32,7 +34,9 @@ function onPopoutLoad()
     runSingleTime = document.getElementById("run-single-time");
     runSingleRunner = document.getElementById("run-single-runner");
     runSingleSrc = document.getElementById("run-single-src");
-    runSingleYT = document.getElementById("run-single-yt");
+    runSingleVid = document.getElementById("run-single-vid");
+    runSingleVidText = document.getElementById("run-single-vid-text");
+    runSingleVidIcon = document.getElementById("run-single-vid-icon");
 
     runSingleSegments = document.getElementById("run-single-segments");
     runSingleSplitsBar = document.getElementById("run-single-splits-bar");
@@ -126,14 +130,25 @@ function openRun(id, loadOrState = false)
         player = '<a class="player-link" href="' + run.players.data[0].weblink + '">' + player + '</a>';
 
         var srcLink = run.weblink;
-        var ytLink = run.videos.links[0].uri;
+        var vidLink = run.videos.links[0].uri;
 
         runSingleGame.innerText = game;
         runSingleCategory.innerText = category;
         runSingleTime.innerText = time;
         runSingleRunner.innerHTML = player;
         runSingleSrc.href = srcLink;
-        runSingleYT.href = ytLink;
+        runSingleVid.href = vidLink;
+
+        if (vidLink.includes("youtube.com") || vidLink.includes("youtu.be"))
+        {
+            runSingleVidText.innerText = 'Watch on YouTube';
+            runSingleVidIcon.classList.add('fa-youtube');
+        }
+        else if (vidLink.includes("twitch.tv"))
+        {
+            runSingleVidText.innerText = 'Watch on Twitch';
+            runSingleVidIcon.classList.add('fa-twitch');
+        }
         
         boxRuns.style.display = "none";
         boxSingleRun.style.display = "block";
