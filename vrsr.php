@@ -35,7 +35,7 @@
 								<select id="games" onchange="onGameChange(this.value)"></select>
 							</div>
 							<div class="game-info-container">
-								<div class="game-image-container is-hidden-touch"><img id="game-image" src=""></div>
+								<div class="game-image-container is-hidden-touch"><a id="game-image-link" href=""><img id="game-image" src=""></a></div>
 								<div id="game-year" class="is-hidden-touch">...</div>
 								<div id="game-platforms" class="is-hidden-touch">...</div>
 								<div class="buttons is-centered">
@@ -59,8 +59,8 @@
 						</div>
 					</div>
 					<div class="column is-9">
-						<div class="box" id="box-runs">
-							<div class="tabs is-boxed"><ul id="tabs"></ul></div>
+						<div class="box" id="box-runs" style="display: none;">
+                            <div class="tabs is-boxed"><ul id="tabs"></ul></div>
 							<div id="variables"></div>
 							<div id="runs-loading" style="display: block;">
 								<div>
@@ -85,9 +85,6 @@
 							</table>
 						</div>
 						<div class="box" id="box-single-run" style="display: none;">
-							<div class="back-button">
-								<a onclick="closeRun();"><i class="fas fa-arrow-left"></i> Back</a>
-							</div>
 							<div class="tabs is-boxed"><ul id="run-single-tabs">
 								<li id="run-single-infotab"><a onclick="openRunTab(0);">Info</a></li>
 								<li id="run-single-splitstab"><a onclick="openRunTab(1);">Splits</a></li>

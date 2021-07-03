@@ -7,6 +7,21 @@ function onLoad()
     infoTippy();
     onGameDataLoad();
     onPopoutLoad();
+
+    window.addEventListener('popstate', (e) =>
+    {
+		if (!getRun())
+		{
+            closeRun();
+		}
+
+        loadGame(getGame(), true);
+	});
+}
+
+function pushState(path)
+{
+    history.pushState(null, document.title, pathPrefix + path);
 }
 
 function getPath()

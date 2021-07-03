@@ -40,8 +40,12 @@ function onPopoutLoad()
     splitsBarColors = ['#007bff', '#6f42c1', '#28a745', '#ffc107', '#dc3545', '#fd7e14'];
 }
 
-function openRun(id)
+function openRun(id, loadOrState = false)
 {
+    if (!loadOrState)
+	{
+		pushState(getGame() + "/" + id);
+	}
 
     get("https://www.speedrun.com/api/v1/runs/" + id + "?embed=players,platform,game")
 	.then((data) =>
@@ -61,6 +65,8 @@ function openRun(id)
         var subcats = [];
         for (var i = 0; i < currentVariables.length; i++)
         {
+            setVariable(currentVariables[i].id, run.values[currentVariables[i].id], false);
+
             var _vars = categories[currentCatIndex].variables;
             for (var k = 0; k < _vars.length; k++)
             {
@@ -68,7 +74,6 @@ function openRun(id)
                 {
                     for (var m = 0; m < _vars[k].values.length; m++)
                     {
-                        //console.log(_vars[k].values[m].id);
                         if (_vars[k].values[m].id == currentVariables[i].value)
                         {
                             subcats.push(_vars[k].values[m].name);
@@ -207,7 +212,7 @@ function loadSplits(uri, timing = "realtime")
                 pbColor = ' class="new-pb"';
             }
 
-            var row = '<tr><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td' + pbColor + '>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
+            var row = '<tr' + pbColor + '><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
 
             var percent = (seg[timing + "_duration_ms"] / totalDuration) * 100;
             var color = splitsBarColors[i % splitsBarColors.length];
@@ -232,7 +237,7 @@ function loadSplits(uri, timing = "realtime")
             {
                 duration -= seg[timing + "_duration_ms"];
                 
-                runSingleSegments.innerHTML += '<tr><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
+                runSingleSegments.innerHTML += '<tr' + pbColor + '><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
             }
         }
         runSingleSegments.innerHTML += temp; //in case there's anything left over in temp for some reason
@@ -256,7 +261,7 @@ function loadSplits(uri, timing = "realtime")
                 timesave = '<span class="new-pb">New PB!</span>';
             }
             
-            var content = '<div class="has-text-' + dir + '"><p class="has-text-weight-bold">' + seg["display_name"] + '</p><p class="sp-time">Duration: ' + msToTime(seg[timing + "_duration_ms"]) + '</p><p class="sp-time">Finished at: ' + msToTime(seg[timing + "_end_ms"]) + '</p><p class="sp-timesave">' + timesave + '</p></div>';
+            var content = '<div class="has-text-' + dir + '"><p class="has-text-weight-bold"><span class="sp-name-num">' + (seg["segment_number"] + 1) + '.</span> ' + seg["display_name"] + '</p><p class="sp-time">Duration: ' + msToTime(seg[timing + "_duration_ms"]) + '</p><p class="sp-time">Finished at: ' + msToTime(seg[timing + "_end_ms"]) + '</p><p class="sp-timesave">' + timesave + '</p></div>';
 
             tippy('#bar-' + i, {
                 theme: 'vrsr-arrow',

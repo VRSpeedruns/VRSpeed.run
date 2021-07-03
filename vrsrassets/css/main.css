@@ -306,6 +306,10 @@ a.button:not(:last-child) {
 #run-single-splits-bar > div > div {
 	cursor: default;
 }
+.sp-name-num {
+	color: rgba(238, 238, 238, 0.8);
+	font-weight: normal;
+}
 .sp-time {
 	font-family: Inconsolata;
 	color: rgba(238, 238, 238, 0.6);

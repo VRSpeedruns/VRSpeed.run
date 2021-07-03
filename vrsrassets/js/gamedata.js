@@ -55,6 +55,7 @@ var runsPlatformHardware;
 var categoryTabs;
 
 var gameInfoImage;
+var gameInfoImageLink;
 var gameInfoYear;
 var gameInfoPlatforms;
 var gameInfoLinkLeaderboard;
@@ -80,6 +81,7 @@ function onGameDataLoad()
 	runsPlatformHardware = document.getElementById("runs-platform-hardware");
 
 	gameInfoImage = document.getElementById("game-image");
+	gameInfoImageLink = document.getElementById("game-image-link");
 	gameInfoYear = document.getElementById("game-year");
 	gameInfoPlatforms = document.getElementById("game-platforms");
 	gameInfoLinkLeaderboard = document.getElementById("game-links-leaderboard");
@@ -131,24 +133,19 @@ function onGameDataLoad()
 		if (gameIndex > -1)
 		{
 			gamesContainer.selectedIndex = gameIndex;
-			loadGame(id);
+			loadGame(id, true);
 		}
 		else
 		{
 			gamesContainer.selectedIndex = defaultIndex;
-			loadGame('hla');
+			loadGame('hla', true);
 		}
 	}
 	else
 	{
 		gamesContainer.selectedIndex = defaultIndex;
-		loadGame('hla');
+		loadGame('hla', true);
 	}
-
-	window.addEventListener('popstate', (event) => {
-		console.log(getGame());
-		loadGame(getGame(), false);
-	});
 }
 
 function loadAllGames()
@@ -165,15 +162,18 @@ function onGameChange(id)
 	loadGame(id);
 }
 
-function loadGame(id, doPushState = true)
+function loadGame(id, loadOrState = false)
 {
-	ready = false;
-
-	//window.location.hash = "#" + id;
-	if (doPushState)
+	if (getGame() !== id)
 	{
-		history.pushState(null, document.title, pathPrefix + id);
+		pushState(id);
 	}
+	else if (!loadOrState || (currentGame !== undefined && currentGame.abbreviation == id))
+	{
+		return;
+	}
+	
+	ready = false;
 
 	for (var i = 0; i < gamesArray.length; i++)
 	{
@@ -182,7 +182,7 @@ function loadGame(id, doPushState = true)
 			currentGame = gamesArray[i];
 			gameId = currentGame.id;
 
-			if (!doPushState)
+			if (gamesContainer.selectedIndex !== i)
 			{
 				gamesContainer.selectedIndex = i;
 			}
@@ -201,6 +201,8 @@ function loadGame(id, doPushState = true)
 	gameInfoLinkResources.href = "https://www.speedrun.com/" + gameId + "/resources";
 	gameInfoLinkForums.href = "https://www.speedrun.com/" + gameId + "/forum";
 	gameInfoLinkStatistics.href = "https://www.speedrun.com/" + gameId + "/gamestats";
+
+	gameInfoImageLink.href = "https://bigft.io" + pathPrefix + getGame();
 
 	get("https://www.speedrun.com/api/v1/games/" + gameId + "?embed=platforms")
 	.then((data) =>
@@ -250,7 +252,7 @@ function loadGame(id, doPushState = true)
 				{
 					if (cats[i].links[j].rel == "variables")
 					{
-						loadVariables(cats[i].links[j].uri, cats[i].id);
+						loadVariables(cats[i].links[j].uri, cats[i].id, loadOrState);
 
 						break;
 					}
@@ -260,7 +262,7 @@ function loadGame(id, doPushState = true)
 	});
 }
 
-function loadVariables(uri, category)
+function loadVariables(uri, category, loadOrState = false)
 {
 	get(uri)
 	.then((data) =>
@@ -312,12 +314,12 @@ function loadVariables(uri, category)
 		if (progress == catCount && !ready)
 		{
 			ready = true;
-			displayCategoryTabs();
+			displayCategoryTabs(loadOrState);
 		}
 	});
 }
 
-function displayCategoryTabs()
+function displayCategoryTabs(loadOrState = false)
 {
 	categoriesContainer.innerHTML = '';
 	categoryTabs = [];
@@ -331,10 +333,10 @@ function displayCategoryTabs()
 		categoryTabs.push(document.getElementById("category-" + i));
 	}
 
-	displayCategory(0);
+	displayCategory(0, loadOrState);
 }
 
-function displayCategory(index)
+function displayCategory(index, loadOrState = false)
 {
 	currentCatIndex = index;
 
@@ -344,10 +346,10 @@ function displayCategory(index)
 	}
 	categoryTabs[index].classList.add("is-active");
 	
-	displayCategoryVariables(index);
+	displayCategoryVariables(index, loadOrState);
 }
 
-function displayCategoryVariables(index)
+function displayCategoryVariables(index, loadOrState = false)
 {
 	variablesContainer.innerHTML = '';
 
@@ -368,7 +370,7 @@ function displayCategoryVariables(index)
 		setVariable(vars[i].id, vars[i].values[0].id, false)
 	}
 
-	loadRuns(categories[currentCatIndex].id, currentVariables);
+	loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState);
 }
 
 function setVariable(id, value, loadAfter = true)
@@ -398,7 +400,7 @@ function setVariable(id, value, loadAfter = true)
 	}
 }
 
-function loadRuns(id, variables)
+function loadRuns(id, variables, loadOrState = false)
 {
 	if (!ready){
 		console.error("Category tried to load before ready.")
@@ -549,6 +551,15 @@ function loadRuns(id, variables)
 		else
 		{
 			runsNone.style.display = 'block';
+		}
+
+		if (getRun())
+		{
+			openRun(getRun(), loadOrState);
+		}
+		else
+		{
+			boxRuns.style.display = "block";
 		}
 	});
 }
