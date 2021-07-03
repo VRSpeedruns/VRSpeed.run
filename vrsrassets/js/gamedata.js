@@ -162,13 +162,13 @@ function onGameChange(id)
 	loadGame(id);
 }
 
-function loadGame(id, loadOrState = false)
+function loadGame(id, loadOrState = false, force = false)
 {
 	if (getGame() !== id)
 	{
 		pushState(id);
 	}
-	else if (!loadOrState || (currentGame !== undefined && currentGame.abbreviation == id))
+	else if ((!loadOrState || (currentGame !== undefined && currentGame.abbreviation == id)) && !force)
 	{
 		return;
 	}

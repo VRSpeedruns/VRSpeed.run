@@ -52,14 +52,14 @@ function openRun(id, loadOrState = false)
 	{
 		var run = (JSON.parse(data)).data;
 		
-        var game = "";
-		for (var i = 0; i < gamesArray.length; i++)
+        if (currentGame.id !== run.game.data.abbreviation)
         {
-            if (gamesArray[i].id == run.game.data.abbreviation)
-            {
-                game = gamesArray[i].name;
-            }
+            history.replaceState(null, document.title, pathPrefix + getGame());
+            loadGame(currentGame.abbreviation, false, true);
+            return;
         }
+
+        var game = currentGame.name;
 
         var category = categories[currentCatIndex].name;
         var subcats = [];
