@@ -24,6 +24,7 @@
 
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=block" rel="stylesheet">
 	</head>
 	<body onload="onLoad();">
 		<section class="section">
@@ -39,11 +40,21 @@
 								<div id="game-year" class="is-hidden-touch">...</div>
 								<div id="game-platforms" class="is-hidden-touch">...</div>
 								<div class="buttons is-centered">
-									<div class="button is-dark" id="game-links-leaderboard" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-trophy"></i></a></div>
-									<div class="button is-dark" id="game-links-guides" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-book"></i></a></div>
-									<div class="button is-dark" id="game-links-resources" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-link"></i></a></div>
-									<div class="button is-dark" id="game-links-forums" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-comments"></i></a></div>
-									<div class="button is-dark" id="game-links-statistics" onclick="this.firstChild.click();"><a class="icon" target="_blank" href=""><i class="fas fa-chart-line"></i></a></div>
+									<a id="game-links-leaderboard" class="button-outer" href="" target="_blank">
+										<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
+									</a>
+									<a id="game-links-guides" class="button-outer" href="" target="_blank">
+										<div class="button is-dark"><span class="icon"><i class="fas fa-book"></i></span></div>
+									</a>
+									<a id="game-links-resources" class="button-outer" href="" target="_blank">
+										<div class="button is-dark"><span class="icon"><i class="fas fa-link"></i></span></div>
+									</a>
+									<a id="game-links-forums" class="button-outer" href="" target="_blank">
+										<div class="button is-dark"><span class="icon"><i class="fas fa-comments"></i></span></div>
+									</a>
+									<a id="game-links-statistics" class="button-outer" href="" target="_blank">
+										<div class="button is-dark"><span class="icon"><i class="fas fa-chart-line"></i></span></div>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -111,6 +122,10 @@
 								</div>
 							</div>
 							<div id="run-single-splits">
+								<div id="variables">
+									<a id="run-single-splits-url" class="button is-small is-dark is-variable" onclick="">View on Splits.io</a>
+								</div>
+								<div id="run-single-splits-bar"></div>
 								<div>
 									<table class="table is-narrow is-fullwidth">
 										<thead>
@@ -131,8 +146,11 @@
 			</div>
 		</section>
 		<section class="section is-footer">
+			<div id="js-mobile-check" class="is-hidden-mobile"></div>
 			<script type="text/javascript">
 				var gamesArray = <?= json_encode(json_decode(file_get_contents('assets/other/games.json'))) ?>
+				
+				var isMobile = window.getComputedStyle(document.getElementById("js-mobile-check")).getPropertyValue("display") == "none";
 			</script>
 			<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
 			<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script> 

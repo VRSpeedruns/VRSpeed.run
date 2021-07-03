@@ -12,6 +12,9 @@ var runSingleSrc;
 var runSingleYT;
 
 var runSingleSegments;
+var runSingleSplitsBar;
+
+var splitsBarColors;
 
 function onPopoutLoad()
 {
@@ -32,6 +35,9 @@ function onPopoutLoad()
     runSingleYT = document.getElementById("run-single-yt");
 
     runSingleSegments = document.getElementById("run-single-segments");
+    runSingleSplitsBar = document.getElementById("run-single-splits-bar");
+
+    splitsBarColors = ['#007bff', '#6f42c1', '#28a745', '#ffc107', '#dc3545', '#fd7e14'];
 }
 
 function openRun(id)
@@ -136,7 +142,15 @@ function openRun(id)
                 _data["name-style"]["color-to"].dark);
         });
 
-        loadSplits(run.splits.uri.replace("/v3/", "/v4/"));
+        if (run.splits !== null)
+        {
+            runSingleTabSplits.style.display = "block";
+            loadSplits(run.splits.uri.replace("/v3/", "/v4/"));
+        }
+        else
+        {
+            runSingleTabSplits.style.display = "none";
+        }
 
         openRunTab(0);
 	});
@@ -171,11 +185,14 @@ function openRunTab(index)
 function loadSplits(uri, timing = "realtime")
 {
     runSingleSegments.innerHTML = '';
+    runSingleSplitsBar.innerHTML = '';
 
     get(uri)
     .then((data) =>
     {
         var run = (JSON.parse(data)).run;
+
+        var totalDuration = run[timing + "_duration_ms"];
 
         var temp = '';
         var duration = 0;
@@ -183,8 +200,18 @@ function loadSplits(uri, timing = "realtime")
         {
             var seg = run.segments[i];
             duration += seg[timing + "_duration_ms"];
+            
+            var pbColor = '';
+            if (seg[timing + "_gold"])
+            {
+                pbColor = ' class="new-pb"';
+            }
 
-            var row = '<tr><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
+            var row = '<tr><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td' + pbColor + '>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
+
+            var percent = (seg[timing + "_duration_ms"] / totalDuration) * 100;
+            var color = splitsBarColors[i % splitsBarColors.length];
+            runSingleSplitsBar.innerHTML += '<div id="bar-' + i + '" style="width: ' + percent + '%; background-color: ' + color + '"><div>' + seg["display_name"] + '</div><div class="sp-time">' + msToTime(seg[timing + "_duration_ms"]) + '</div></div>';
             
             if (seg.name.substring(0, 1) == "-")
             {
@@ -195,9 +222,9 @@ function loadSplits(uri, timing = "realtime")
                 temp += row;
                 
                 var catName = seg.name.substring(1).split("}")[0];
-                temp = '<tr><td></td><td>' + catName + '</td><td>' + msToTime(duration) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>' + temp;
+                var head = '<tr class="sp-heading"><td></td><td>' + catName + '</td><td>' + msToTime(duration) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
 
-                runSingleSegments.innerHTML += temp;
+                runSingleSegments.innerHTML += head + temp;
                 temp = '';
                 duration = 0;
             }
@@ -207,6 +234,38 @@ function loadSplits(uri, timing = "realtime")
                 
                 runSingleSegments.innerHTML += '<tr><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
             }
+        }
+        runSingleSegments.innerHTML += temp; //in case there's anything left over in temp for some reason
+
+        for (var i = 0; i < run.segments.length; i++)
+        {
+            var seg = run.segments[i];
+
+            var dir = "left";
+            if (i >= run.segments.length / 2)
+                dir = "right";
+            
+            var timesave = '';
+            var _timesave = seg[timing + "_duration_ms"] - seg[timing + "_shortest_duration_ms"];
+            if (_timesave > 0)
+            {
+                timesave = msToTimeSingle(_timesave) + ' of possible timesave';
+            }
+            else
+            {
+                timesave = '<span class="new-pb">New PB!</span>';
+            }
+            
+            var content = '<div class="has-text-' + dir + '"><p class="has-text-weight-bold">' + seg["display_name"] + '</p><p class="sp-time">Duration: ' + msToTime(seg[timing + "_duration_ms"]) + '</p><p class="sp-time">Finished at: ' + msToTime(seg[timing + "_end_ms"]) + '</p><p class="sp-timesave">' + timesave + '</p></div>';
+
+            tippy('#bar-' + i, {
+                theme: 'vrsr-arrow',
+                content: content,
+                allowHTML: true,
+                placement: 'bottom',
+                offset: [0,7.5],
+                duration: [0, 0]
+            });
         }
     });
 }
@@ -222,4 +281,30 @@ function msToTime(duration) {
     seconds = (seconds < 10) ? "0" + seconds : seconds;
   
     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+}
+
+function msToTimeSingle(duration) {
+    var milliseconds = Math.floor((duration % 1000) / 10),
+        seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    
+    if (hours > 0)
+    {
+        return hours + "h ";
+    }
+    else if (minutes > 0)
+    {
+        return minutes + "m "
+    }
+    else if (seconds > 0)
+    {
+        return seconds + "s ";
+    }
+    else if (milliseconds > 0)
+    {
+        return milliseconds + "ms";
+    }
+    
+    return '';
 }

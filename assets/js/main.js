@@ -7,6 +7,8 @@ function onLoad()
 
 function infoTippy()
 {
+    if (isMobile) return;
+
     tippy('#game-links-leaderboard', {
         theme: 'vrsr',
         content: 'View Leaderboard',

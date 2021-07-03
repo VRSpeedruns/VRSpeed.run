@@ -82,11 +82,11 @@ function onGameDataLoad()
 	gameInfoImage = document.getElementById("game-image");
 	gameInfoYear = document.getElementById("game-year");
 	gameInfoPlatforms = document.getElementById("game-platforms");
-	gameInfoLinkLeaderboard = document.getElementById("game-links-leaderboard").childNodes[0];
-	gameInfoLinkGuides = document.getElementById("game-links-guides").childNodes[0];
-	gameInfoLinkResources = document.getElementById("game-links-resources").childNodes[0];
-	gameInfoLinkForums = document.getElementById("game-links-forums").childNodes[0];
-	gameInfoLinkStatistics = document.getElementById("game-links-statistics").childNodes[0];
+	gameInfoLinkLeaderboard = document.getElementById("game-links-leaderboard");
+	gameInfoLinkGuides = document.getElementById("game-links-guides");
+	gameInfoLinkResources = document.getElementById("game-links-resources");
+	gameInfoLinkForums = document.getElementById("game-links-forums");
+	gameInfoLinkStatistics = document.getElementById("game-links-statistics");
 
 	platformsList = [];
 	platformsList["w89rwwel"] = "Vive";
@@ -453,17 +453,9 @@ function loadRuns(id, variables)
 			var run = json.runs[i].run;
 
 			var place = nth(json.runs[i].place);
-			if (place == "1st")
+			if (place == "1st" || place == "2nd" || place == "3rd")
 			{
-				place = '<b style="color: #FFD700">' + place + '</b>';
-			}
-			else if (place == "2nd")
-			{
-				place = '<b style="color: #C0C0C0">' + place + "</b>";
-			}
-			else if (place == "3rd")
-			{
-				place = '<b style="color: #CD7F32">' + place + "</b>";
+				place = '<b class="place-' + place + '">' + place + '</b>';
 			}
 
 			var time = run.times.primary.replace('PT','').replace('H','h ').replace('M','m ');
@@ -526,18 +518,21 @@ function loadRuns(id, variables)
 			
 			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-touch">' + platform + '</td><td class="is-hidden-touch">' + date + '</td></tr>';
 		}
-
-		for (var i = 0; i <json.runs.length; i++)
+		
+		if (!isMobile)
 		{
-			tippy('#run-' + json.runs[i].run.id, {
-				theme: 'vrsr',
-				content: 'Click to view more about this run.',
-				placement: 'top',
-				followCursor: 'horizontal',
-				offset: [0,5],
-				delay: [225, 0],
-				duration: [150, 0]
-			});
+			for (var i = 0; i <json.runs.length; i++)
+			{
+				tippy('#run-' + json.runs[i].run.id, {
+					theme: 'vrsr',
+					content: 'Click to view more about this run.',
+					placement: 'top',
+					followCursor: 'horizontal',
+					offset: [0,5],
+					delay: [225, 0],
+					duration: [150, 0]
+				});
+			}
 		}
 
 		runsLoading.style.display = 'none';
