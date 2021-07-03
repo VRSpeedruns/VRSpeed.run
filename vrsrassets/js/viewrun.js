@@ -14,6 +14,7 @@ var runSingleVidText;
 var runSingleVidIcon;
 
 var runSingleSegments;
+var runSingleSplitsUrl;
 var runSingleSplitsBar;
 
 var splitsBarColors;
@@ -39,6 +40,7 @@ function onPopoutLoad()
     runSingleVidIcon = document.getElementById("run-single-vid-icon");
 
     runSingleSegments = document.getElementById("run-single-segments");
+    runSingleSplitsUrl = document.getElementById("run-single-splits-url");
     runSingleSplitsBar = document.getElementById("run-single-splits-bar");
 
     splitsBarColors = ['#007bff', '#6f42c1', '#28a745', '#ffc107', '#dc3545', '#fd7e14'];
@@ -165,7 +167,12 @@ function openRun(id, loadOrState = false)
         if (run.splits !== null)
         {
             runSingleTabSplits.style.display = "block";
-            loadSplits(run.splits.uri.replace("/v3/", "/v4/"));
+
+            var splitArr = run.splits.uri.split('/');
+            var splitsId = splitArr[splitArr.length - 1];
+
+            runSingleSplitsUrl.href = 'https://splits.io/' + splitsId;
+            loadSplits('https://splits.io/api/v4/runs/' + splitsId);
         }
         else
         {

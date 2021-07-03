@@ -14,24 +14,33 @@
 		}
 	}
 
+	$game = null;
 	$title = 'VR Speedrunning Leaderboards';
-	$image = '/images/vrsricon.png';
+	$image = '/vrsrassets/images/logo.png';
+	$color = '#0165fe';
 	$description = 'A central hub to view the leaderboards for the largest VR speedgames.';
 
-	foreach ($games as $game)
+	$categoryId = '';
+
+	foreach ($games as $_game)
 	{
+		$game = $_game;
 		if ($game->abbreviation == $gameId)
 		{
 			$title = $game->name . ' - VRSR';
 			$image = 'https://www.speedrun.com/themes/' . $game->id . '/cover-256.png';
+			$color = $game->color;
+			break;
 		}
 	}
-	if ($runId != '')
+	if ($title != 'VR Speedrunning Leaderboards' &&  $runId != '')
 	{
 		$run = json_decode(file_get_contents('https://www.speedrun.com/api/v1/runs/'.$runId.'?embed=players,category,game'))->data;
 
-		if ($game->data->abbreviation == $gameId)
+		if ($game->abbreviation == $gameId)
 		{
+			$categoryId = $run->category->data->id;
+
 			$time = str_replace('PT', '', $run->times->primary);
 			$time = str_replace('H', 'h ', $time);
 			$time = str_replace('M', 'm ', $time);
@@ -66,7 +75,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="icon" href="/images/vrsrfavicon.png">
+		<link rel="icon" href="/vrsrassets/images/fav.png">
 		
 		<title>VRSR</title>
 		
@@ -74,7 +83,7 @@
 		<meta content="<?= $title; ?>" property="og:title">
 		<meta content="<?= $description; ?>" property="og:description">
 		<meta content="<?= $image; ?>" property="og:image">
-		<meta content="#0165fe" name="theme-color">
+		<meta content="<?= $color; ?>" name="theme-color">
 		
 		<meta name="description" content="<?= $description; ?>">
 		<meta name="keywords" content="VR Speedrun,VR,Speedrun,Speedrunning,VR Speedrunning,VR Running,Super Hot VR,Super Hot Speedrun, Super Hot VR Speedrun,Half Life, Half-Life, Half-Life: Alyx, Half-Life Alyx, Alyx,, HLA, HL: Alyx, HL:A">
@@ -147,6 +156,9 @@
 							</table>
 						</div>
 						<div class="box" id="box-single-run" style="display: none;">
+							<div class="back-button">
+								<a onclick="closeRun(); backFixUrl(); loadGame(getGame(), true);"><i class="fas fa-arrow-left"></i> Back</a>
+							</div>
 							<div class="tabs is-boxed"><ul id="run-single-tabs">
 								<li id="run-single-infotab"><a onclick="openRunTab(0);">Info</a></li>
 								<li id="run-single-splitstab"><a onclick="openRunTab(1);">Splits</a></li>
@@ -208,6 +220,7 @@
 			<script type="text/javascript">
 				var gamesArray = <?= json_encode($games); ?>;
 				var isMobile = window.getComputedStyle(document.getElementById("js-mobile-check")).getPropertyValue("display") == "none";
+				var runLoadedCategory = "<?= $categoryId; ?>";
 			</script>
 			<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
 			<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script> 

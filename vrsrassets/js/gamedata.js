@@ -170,6 +170,11 @@ function loadGame(id, loadOrState = false, force = false)
 	}
 	else if ((!loadOrState || (currentGame !== undefined && currentGame.abbreviation == id)) && !force)
 	{
+		if (getRun())
+		{
+			openRun(getRun(), loadOrState);
+		}
+
 		return;
 	}
 	
@@ -333,7 +338,22 @@ function displayCategoryTabs(loadOrState = false)
 		categoryTabs.push(document.getElementById("category-" + i));
 	}
 
-	displayCategory(0, loadOrState);
+	if (runLoadedCategory != '')
+	{
+		for (var i = 0; i < categories.length; i++)
+		{
+			if (categories[i].id == runLoadedCategory)
+			{
+				displayCategory(i, loadOrState);
+				runLoadedCategory = '';
+				break;
+			}
+		}
+	}
+	else
+	{
+		displayCategory(0, loadOrState);
+	}
 }
 
 function displayCategory(index, loadOrState = false)

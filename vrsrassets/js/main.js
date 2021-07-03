@@ -51,6 +51,14 @@ function getRun()
     }
 }
 
+function backFixUrl()
+{
+    if (getRun())
+    {
+        pushState(getGame());
+    }
+}
+
 function infoTippy()
 {
     if (isMobile) return;
