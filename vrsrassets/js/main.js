@@ -1,8 +1,39 @@
+var pathPrefix;
+
 function onLoad()
 {
+    pathPrefix = window.location.pathname.substring(0, 5) + "/";
+
     infoTippy();
     onGameDataLoad();
     onPopoutLoad();
+}
+
+function getPath()
+{
+    return window.location.pathname.substring(6);
+}
+function getGame()
+{
+    if (getPath().length > 0)
+    {
+        return getPath().split('/')[0];
+    }
+    else
+    {
+        return null;
+    }
+}
+function getRun()
+{
+    if (getPath().includes('/'))
+    {
+        return getPath().split('/')[1].split('/')[0]; 
+    }
+    else
+    {
+        return null;
+    }
 }
 
 function infoTippy()

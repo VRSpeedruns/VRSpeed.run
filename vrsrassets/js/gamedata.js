@@ -109,23 +109,14 @@ function onGameDataLoad()
 			break;
 		}
 	}
-	
-	hashChange();
 
-	if ("onhashchange" in window)
+	if (getGame() != null || window.location.hash.length > 1)
 	{
-		window.onhashchange = function ()
+		var id = getGame();
+		if (id == null)
 		{
-			hashChange();
+			id = window.location.hash.substring(1)
 		}
-	}
-}
-
-function hashChange()
-{
-	if (window.location.hash.length > 1)
-	{
-		var id = window.location.hash.substring(1);
 
 		var gameIndex = -1;
 		for (var i = 0; i < gamesArray.length; i++)
@@ -153,6 +144,11 @@ function hashChange()
 		gamesContainer.selectedIndex = defaultIndex;
 		loadGame('hla');
 	}
+
+	window.addEventListener('popstate', (event) => {
+		console.log(getGame());
+		loadGame(getGame(), false);
+	});
 }
 
 function loadAllGames()
@@ -169,11 +165,15 @@ function onGameChange(id)
 	loadGame(id);
 }
 
-function loadGame(id)
+function loadGame(id, doPushState = true)
 {
 	ready = false;
 
-	window.location.hash = "#" + id;
+	//window.location.hash = "#" + id;
+	if (doPushState)
+	{
+		history.pushState(null, document.title, pathPrefix + id);
+	}
 
 	for (var i = 0; i < gamesArray.length; i++)
 	{
@@ -181,6 +181,12 @@ function loadGame(id)
 		{
 			currentGame = gamesArray[i];
 			gameId = currentGame.id;
+
+			if (!doPushState)
+			{
+				gamesContainer.selectedIndex = i;
+			}
+
 			break;
 		}
 	}

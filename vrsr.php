@@ -1,4 +1,3 @@
-<?php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,7 @@
 		<meta content="Bigft.io" property="og:site_name">
 		<meta content="VR Speedrunning Leaderboards" property="og:title">
 		<meta content="A central hub to view the leaderboards for the largest VR speedgames." property="og:description">
-		<meta content="https://bigft.io/images/vrsricon.png" property="og:image">
+		<meta content="/images/vrsricon.png" property="og:image">
 		<meta content="#0165fe" name="theme-color">
 		
 		<meta name="description" content="A central hub to view the leaderboards for the largest VR speedgames.">
@@ -20,7 +19,7 @@
 		
 		<script src="https://kit.fontawesome.com/d16c543bf8.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-		<link rel="stylesheet" href="assets/css/main.css">
+		<link rel="stylesheet" href="/vrsrassets/css/main.css">
 
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -148,16 +147,15 @@
 		<section class="section is-footer">
 			<div id="js-mobile-check" class="is-hidden-mobile"></div>
 			<script type="text/javascript">
-				var gamesArray = <?= json_encode(json_decode(file_get_contents('assets/other/games.json'))) ?>
-				
+				var gamesArray = <?= json_encode(json_decode(file_get_contents('vrsrassets/other/games.json'))) ?>;
 				var isMobile = window.getComputedStyle(document.getElementById("js-mobile-check")).getPropertyValue("display") == "none";
 			</script>
 			<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
 			<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script> 
-			<script type="text/javascript" src="assets/js/colorinterpolation.js"></script>
-			<script type="text/javascript" src="assets/js/gamedata.js"></script>
-			<script type="text/javascript" src="assets/js/viewrun.js"></script>
-			<script type="text/javascript" src="assets/js/main.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/colorinterpolation.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/gamedata.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/main.js"></script>
 		</section>
 	</body>
 </html>
