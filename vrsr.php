@@ -124,11 +124,11 @@
 							<div id="run-single-splits">
 								<div id="variables">
 									<div class="buttons has-addons">
-										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick="">Realtime</button>
-										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick="">Gametime</button>
+										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
+										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
 									</div>
 									<div class="buttons has-addons">
-										<a id="run-single-splits-url" class="button is-small is-dark is-variable">View on Splits.io</a>
+										<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank">View on Splits.io</a>
 									</div>
 								</div>
 								<div id="run-single-splits-bar"></div>

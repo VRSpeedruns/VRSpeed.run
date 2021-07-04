@@ -16,6 +16,8 @@ var runSingleVidIcon;
 var runSingleSegments;
 var runSingleSplitsUrl;
 var runSingleSplitsBar;
+var runSingleSplitsRT;
+var runSingleSplitsGT;
 
 var splitsBarColors;
 
@@ -42,6 +44,8 @@ function onPopoutLoad()
     runSingleSegments = document.getElementById("run-single-segments");
     runSingleSplitsUrl = document.getElementById("run-single-splits-url");
     runSingleSplitsBar = document.getElementById("run-single-splits-bar");
+    runSingleSplitsRT = document.getElementById("run-single-splits-rt");
+    runSingleSplitsGT = document.getElementById("run-single-splits-gt");
 
     splitsBarColors = ['#007bff', '#6f42c1', '#28a745', '#ffc107', '#dc3545', '#fd7e14'];
 }
@@ -171,8 +175,10 @@ function openRun(id, loadOrState = false)
             var splitArr = run.splits.uri.split('/');
             var splitsId = splitArr[splitArr.length - 1];
 
-            runSingleSplitsUrl.href = 'https://splits.io/' + splitsId;
-            loadSplits('https://splits.io/api/v4/runs/' + splitsId);
+            runSingleSplitsRT.setAttribute( 'onclick', 'loadSplits("' + splitsId + '", "real")' );
+            runSingleSplitsGT.setAttribute( 'onclick', 'loadSplits("' + splitsId + '", "game")' );
+
+            loadSplits(splitsId);
         }
         else
         {
@@ -209,17 +215,39 @@ function openRunTab(index)
     }
 }
 
-function loadSplits(uri, timing = "realtime")
+function loadSplits(id, timing = "default")
 {
-    runSingleSegments.innerHTML = '';
-    runSingleSplitsBar.innerHTML = '';
+    var uri = 'https://splits.io/api/v4/runs/' + id;
 
     get(uri)
     .then((data) =>
     {
         var run = (JSON.parse(data)).run;
 
+        if (timing == "default")
+        {
+            timing = run['default_timing'];
+        }
+
+        runSingleSplitsUrl.href = 'https://splits.io/' + id + '?timing=' + timing;
+        
+        timing += "time";
+
+        if (timing == "realtime")
+        {
+            runSingleSplitsRT.classList.add("is-active");
+            runSingleSplitsGT.classList.remove("is-active");
+        }
+        else if (timing == "gametime")
+        {
+            runSingleSplitsGT.classList.add("is-active");
+            runSingleSplitsRT.classList.remove("is-active");
+        }
+
         var totalDuration = run[timing + "_duration_ms"];
+
+        runSingleSegments.innerHTML = '';
+        runSingleSplitsBar.innerHTML = '';
 
         var temp = '';
         var duration = 0;
