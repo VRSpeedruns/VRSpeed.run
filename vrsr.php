@@ -128,7 +128,7 @@
 										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
 									</div>
 									<div class="buttons has-addons">
-										<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank">View on Splits.io</a>
+										<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> View on Splits.io</a>
 									</div>
 								</div>
 								<div id="run-single-splits-bar"></div>

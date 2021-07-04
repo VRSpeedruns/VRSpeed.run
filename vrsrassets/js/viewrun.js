@@ -259,7 +259,7 @@ function loadSplits(id, timing = "default")
             var pbColor = '';
             if (seg[timing + "_gold"])
             {
-                pbColor = ' class="new-pb"';
+                pbColor = ' class="new-pb has-text-weight-bold"';
             }
 
             var row = '<tr' + pbColor + '><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
@@ -308,7 +308,7 @@ function loadSplits(id, timing = "default")
             }
             else
             {
-                timesave = '<span class="new-pb">New PB!</span>';
+                timesave = '<span class="new-pb">New personal best!</span>';
             }
             
             var content = '<div class="has-text-' + dir + '"><p class="has-text-weight-bold"><span class="sp-name-num">' + (seg["segment_number"] + 1) + '.</span> ' + seg["display_name"] + '</p><p class="sp-time">Duration: ' + msToTime(seg[timing + "_duration_ms"]) + '</p><p class="sp-time">Finished at: ' + msToTime(seg[timing + "_end_ms"]) + '</p><p class="sp-timesave">' + timesave + '</p></div>';
