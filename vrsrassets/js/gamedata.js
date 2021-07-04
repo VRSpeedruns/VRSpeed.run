@@ -174,6 +174,10 @@ function loadGame(id, loadOrState = false, force = false)
 		{
 			openRun(getRun(), loadOrState);
 		}
+		else
+		{
+			loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState)
+		}
 
 		return;
 	}

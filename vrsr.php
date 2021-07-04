@@ -87,7 +87,7 @@
 						</div>
 						<div class="box" id="box-single-run" style="display: none;">
 							<div class="back-button">
-								<a onclick="closeRun(); backFixUrl(); loadGame(getGame(), true);"><i class="fas fa-arrow-left"></i> Back</a>
+								<a onclick="closeRun(); backFixUrl(); loadGame(getGame(), true);"><i class="fas fa-arrow-left"></i> Back to Game</a>
 							</div>
 							<div class="tabs is-boxed"><ul id="run-single-tabs">
 								<li id="run-single-infotab"><a onclick="openRunTab(0);">Info</a></li>
@@ -123,7 +123,13 @@
 							</div>
 							<div id="run-single-splits">
 								<div id="variables">
-									<a id="run-single-splits-url" class="button is-small is-dark is-variable" onclick="">View on Splits.io</a>
+									<div class="buttons has-addons">
+										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick="">Realtime</button>
+										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick="">Gametime</button>
+									</div>
+									<div class="buttons has-addons">
+										<a id="run-single-splits-url" class="button is-small is-dark is-variable">View on Splits.io</a>
+									</div>
 								</div>
 								<div id="run-single-splits-bar"></div>
 								<div>
