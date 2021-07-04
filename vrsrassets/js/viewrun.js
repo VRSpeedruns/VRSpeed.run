@@ -191,7 +191,7 @@ function openRun(id, loadOrState = false)
 
 function closeRun()
 {
-    boxRuns.style.display = "block";
+    //boxRuns.style.display = "block";
     boxSingleRun.style.display = "none";
 }
 

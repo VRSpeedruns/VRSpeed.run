@@ -175,11 +175,22 @@ function loadGame(id, loadOrState = false, force = false)
 			openRun(getRun(), loadOrState);
 		}
 		else
-		{
+		{	
 			loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState)
 		}
 
 		return;
+	}
+
+	if (getRun() && runLoadedCategory == '')
+	{
+		get("https://www.speedrun.com/api/v1/runs/" + getRun())
+		.then((data) =>
+		{
+			runLoadedCategory = (JSON.parse(data)).data.category;
+			loadGame(id, loadOrState, force);
+			return;
+		});
 	}
 	
 	ready = false;
