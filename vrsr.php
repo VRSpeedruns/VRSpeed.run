@@ -36,7 +36,7 @@
 								<select id="games" onchange="onGameChange(this.value)"></select>
 							</div>
 							<div class="game-info-container">
-								<div class="game-image-container is-hidden-touch"><a id="game-image-link" href=""><img id="game-image" src=""></a></div>
+								<div class="game-image-container is-hidden-touch"><img id="game-image" src=""></div>
 								<div id="game-year" class="is-hidden-touch">...</div>
 								<div id="game-platforms" class="is-hidden-touch">...</div>
 								<div class="buttons is-centered">
@@ -80,6 +80,7 @@
 										<th>Time</th>
 										<th id="runs-platform-hardware" class="is-hidden-touch">Platform</th>
 										<th class="is-hidden-touch">Date</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody id="runs"></tbody>

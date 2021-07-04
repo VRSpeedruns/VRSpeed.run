@@ -55,7 +55,6 @@ var runsPlatformHardware;
 var categoryTabs;
 
 var gameInfoImage;
-var gameInfoImageLink;
 var gameInfoYear;
 var gameInfoPlatforms;
 var gameInfoLinkLeaderboard;
@@ -83,7 +82,6 @@ function onGameDataLoad()
 	runsPlatformHardware = document.getElementById("runs-platform-hardware");
 
 	gameInfoImage = document.getElementById("game-image");
-	gameInfoImageLink = document.getElementById("game-image-link");
 	gameInfoYear = document.getElementById("game-year");
 	gameInfoPlatforms = document.getElementById("game-platforms");
 	gameInfoLinkLeaderboard = document.getElementById("game-links-leaderboard");
@@ -232,8 +230,6 @@ function loadGame(id, loadOrState = false, force = false)
 	gameInfoLinkResources.href = "https://www.speedrun.com/" + gameId + "/resources";
 	gameInfoLinkForums.href = "https://www.speedrun.com/" + gameId + "/forum";
 	gameInfoLinkStatistics.href = "https://www.speedrun.com/" + gameId + "/gamestats";
-
-	gameInfoImageLink.href = "https://bigft.io" + pathPrefix + getGame();
 
 	get("https://www.speedrun.com/api/v1/games/" + gameId + "?embed=platforms")
 	.then((data) =>
@@ -591,23 +587,31 @@ function loadRuns(id, variables, loadOrState = false)
 			{
 				flag = '<img class="runs-flag" src="https://www.speedrun.com/images/flags/' + players[run.players[0].id].region + '.png">';
 			}
+
+			var icons = '';
+			if (run.splits != null)
+			{
+				icons += '<i class="fas fa-stopwatch"></i>';
+			}
 			
-			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-touch">' + platform + '</td><td class="is-hidden-touch">' + date + '</td></tr>';
+			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-touch">' + platform + '</td><td class="is-hidden-touch">' + date + '</td><td id="run-' + run.id + '-splits" class="has-text-right">' + icons + '</td></tr>';
 		}
 		
 		if (!isMobile)
 		{
 			for (var i = 0; i <json.runs.length; i++)
 			{
-				tippy('#run-' + json.runs[i].run.id, {
-					theme: 'vrsr',
-					content: 'Click to view more about this run.',
-					placement: 'top',
-					followCursor: 'horizontal',
-					offset: [0,5],
-					delay: [225, 0],
-					duration: [150, 0]
-				});
+				if (json.runs[i].run.splits != null)
+				{
+					tippy('#run-' + json.runs[i].run.id + '-splits', {
+						theme: 'vrsr-arrow',
+						content: 'Splits are available for this run.',
+						placement: 'right',
+						offset: [0,5],
+						delay: [225, 0],
+						duration: [150, 0]
+					});
+				}
 			}
 		}
 

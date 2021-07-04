@@ -148,6 +148,9 @@ a.button:not(:last-child) {
 #variables > .buttons > .button:last-child {
 	border-radius: 0 4px 4px 0;
 }
+#variables > .buttons > .button:only-child {
+	border-radius: 4px;
+}
 #variables > .buttons:not(:last-child) {
 	margin-right: 1.25rem;
 }
@@ -240,7 +243,7 @@ a.button:not(:last-child) {
 /* ---------- Tippy ---------- */
 
 .tippy-box[data-theme~='vrsr'], .tippy-box[data-theme~='vrsr-arrow'] {
-	background-color: var(--button-background-color);
+	background-color: var(--button-background-hover-color);
 	color: var(--text-color);
 }
 .tippy-box[data-theme~='vrsr'][data-placement^='top'] > .tippy-arrow::before {
@@ -257,16 +260,16 @@ a.button:not(:last-child) {
 }
 
 .tippy-box[data-theme~='vrsr-arrow'][data-placement^='top'] > .tippy-arrow::before {
-	border-top-color: var(--button-background-color);
+	border-top-color: var(--button-background-hover-color);
 }
 	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='bottom'] > .tippy-arrow::before {
-	border-bottom-color: var(--button-background-color);
+	border-bottom-color: var(--button-background-hover-color);
 }
 	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='left'] > .tippy-arrow::before {
-	border-left-color: var(--button-background-color);
+	border-left-color: var(--button-background-hover-color);
 }
-	.tippy-box[data-theme~='arrow-arrow'][data-placement^='right'] > .tippy-arrow::before {
-	border-right-color: var(--button-background-color);
+	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='right'] > .tippy-arrow::before {
+	border-right-color: var(--button-background-hover-color);
 }
 
 /* ---------- Single Run Info ---------- */
