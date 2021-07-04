@@ -594,7 +594,7 @@ function loadRuns(id, variables, loadOrState = false)
 				icons += '<i class="fas fa-stopwatch"></i>';
 			}
 			
-			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-touch">' + platform + '</td><td class="is-hidden-touch">' + date + '</td><td id="run-' + run.id + '-splits" class="has-text-right">' + icons + '</td></tr>';
+			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-touch">' + platform + '</td><td class="is-hidden-touch">' + date + '</td><td id="run-' + run.id + '-splits" class="has-text-right is-hidden-touch">' + icons + '</td></tr>';
 		}
 		
 		if (!isMobile)

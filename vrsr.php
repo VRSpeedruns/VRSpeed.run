@@ -80,7 +80,7 @@
 										<th>Time</th>
 										<th id="runs-platform-hardware" class="is-hidden-touch">Platform</th>
 										<th class="is-hidden-touch">Date</th>
-										<th></th>
+										<th class="is-hidden-touch"></th>
 									</tr>
 								</thead>
 								<tbody id="runs"></tbody>

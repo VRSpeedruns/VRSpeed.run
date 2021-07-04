@@ -9,6 +9,7 @@
 	--background-accent-color: #26282C;
 	--button-background-color: #393C42;
 	--button-background-hover-color: #41434b;
+	--tippy-background-color: hsla(228, 8%, 12%, 0.975);
 
 	--place-gold: #f5b946;
 	--place-silver: #C0C0C0;
@@ -243,7 +244,7 @@ a.button:not(:last-child) {
 /* ---------- Tippy ---------- */
 
 .tippy-box[data-theme~='vrsr'], .tippy-box[data-theme~='vrsr-arrow'] {
-	background-color: var(--button-background-hover-color);
+	background-color: var(--tippy-background-color);
 	color: var(--text-color);
 }
 .tippy-box[data-theme~='vrsr'][data-placement^='top'] > .tippy-arrow::before {
@@ -260,16 +261,16 @@ a.button:not(:last-child) {
 }
 
 .tippy-box[data-theme~='vrsr-arrow'][data-placement^='top'] > .tippy-arrow::before {
-	border-top-color: var(--button-background-hover-color);
+	border-top-color: var(--tippy-background-color);
 }
 	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='bottom'] > .tippy-arrow::before {
-	border-bottom-color: var(--button-background-hover-color);
+	border-bottom-color: var(--tippy-background-color);
 }
 	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='left'] > .tippy-arrow::before {
-	border-left-color: var(--button-background-hover-color);
+	border-left-color: var(--tippy-background-color);
 }
 	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='right'] > .tippy-arrow::before {
-	border-right-color: var(--button-background-hover-color);
+	border-right-color: var(--tippy-background-color);
 }
 
 /* ---------- Single Run Info ---------- */
