@@ -68,6 +68,8 @@ var platformsList;
 
 var defaultIndex;
 
+var catNameRegex = /[^a-zA-Z0-9-_]+/ig;
+
 function onGameDataLoad()
 {
 	gamesContainer = document.getElementById("games");
@@ -100,6 +102,7 @@ function onGameDataLoad()
 	platformsList["wxeo2d6r"] = "PSN";
 	platformsList["nzeljv9q"] = "PS4 Pro";
 
+
 	loadAllGames();
 
 	defaultIndex = -1;
@@ -117,7 +120,8 @@ function onGameDataLoad()
 		var id = getGame();
 		if (id == null)
 		{
-			id = window.location.hash.substring(1)
+			id = window.location.hash.substring(1);
+			history.replaceState(null, document.title, pathPrefix + getPath());
 		}
 
 		var gameIndex = -1;
@@ -176,7 +180,8 @@ function loadGame(id, loadOrState = false, force = false)
 		}
 		else
 		{	
-			loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState)
+			history.replaceState(null, document.title, pathPrefix + getPath() + '#' + categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
+			loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState);
 		}
 
 		return;
@@ -213,9 +218,15 @@ function loadGame(id, loadOrState = false, force = false)
 
 	document.title = currentGame.name + " - VRSR";
 
+	if (boxRuns)
+	{
+		boxRuns.style.display = "none";
+	}
+	
 	document.documentElement.style.setProperty('--primary-color', currentGame.color)
 	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
 
+	gameInfoImage.src = '';
 	gameInfoLinkLeaderboard.href = "https://www.speedrun.com/" + gameId + "/full_game";
 	gameInfoLinkGuides.href = "https://www.speedrun.com/" + gameId + "/guides";
 	gameInfoLinkResources.href = "https://www.speedrun.com/" + gameId + "/resources";
@@ -365,6 +376,22 @@ function displayCategoryTabs(loadOrState = false)
 			}
 		}
 	}
+	else if (window.location.hash)
+	{
+		var hashName = window.location.hash.substring(1).replace(/ /g, '_').replace(catNameRegex, '');
+
+		for (var i = 0; i < categories.length; i++)
+		{
+			var catName = categories[i].name.replace(/ /g, '_').replace(catNameRegex, '');
+			
+			if (hashName == catName)
+			{
+				displayCategory(i, loadOrState);
+				return;
+			}
+		}
+		displayCategory(0, loadOrState);
+	}
 	else
 	{
 		displayCategory(0, loadOrState);
@@ -379,7 +406,9 @@ function displayCategory(index, loadOrState = false)
 	{
 		categoryTabs[i].classList.remove("is-active");
 	}
-	categoryTabs[index].classList.add("is-active");
+	categoryTabs[currentCatIndex].classList.add("is-active");
+
+	setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
 	
 	displayCategoryVariables(index, loadOrState);
 }
@@ -449,7 +478,7 @@ function loadRuns(id, variables, loadOrState = false)
 
 	var varString = "";
 
-	if (variables !== null)
+	if (variables !== null && variables !== undefined && variables.length > 0)
 	{
 		for (var i = 0; i < variables.length; i++)
 		{
@@ -499,6 +528,10 @@ function loadRuns(id, variables, loadOrState = false)
 			if (place == "1st" || place == "2nd" || place == "3rd")
 			{
 				place = '<b class="place-' + place + '">' + place + '</b>';
+			}
+			else if (place == "0th")
+			{
+				place = "—";
 			}
 
 			var time = run.times.primary.replace('PT','').replace('H','h ').replace('M','m ');
@@ -613,16 +646,6 @@ function getGradientName(name, start, end)
 	}
 
 	return player;
-}
-
-function get(url) {
-	return new Promise((resolve, reject) => {
-		const req = new XMLHttpRequest();
-		req.open('GET', url);
-		req.onload = () => req.status === 200 ? resolve(req.response) : reject(Error(req.statusText));
-		req.onerror = (e) => reject(Error(`Network Error: ${e}`));
-		req.send();
-	});
 }
 
 function nth(d) {

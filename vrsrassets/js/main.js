@@ -6,7 +6,7 @@ function onLoad()
 
     infoTippy();
     onGameDataLoad();
-    onPopoutLoad();
+    onSingleRunLoad();
 
     window.addEventListener('popstate', (e) =>
     {
@@ -23,7 +23,10 @@ function pushState(path)
 {
     history.pushState(null, document.title, pathPrefix + path);
 }
-
+function setHash(hash)
+{
+    history.replaceState(null, document.title, pathPrefix + getPath() + '#' + hash);
+}
 function getPath()
 {
     return window.location.pathname.substring(6);
@@ -98,4 +101,14 @@ function infoTippy()
         offset: [0,7.5],
         duration: [150, 100]
     });
+}
+
+function get(url) {
+	return new Promise((resolve, reject) => {
+		const req = new XMLHttpRequest();
+		req.open('GET', url);
+		req.onload = () => req.status === 200 ? resolve(req.response) : reject(Error(req.statusText));
+		req.onerror = (e) => reject(Error(`Network Error: ${e}`));
+		req.send();
+	});
 }

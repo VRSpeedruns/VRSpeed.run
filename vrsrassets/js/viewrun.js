@@ -21,7 +21,7 @@ var runSingleSplitsGT;
 
 var splitsBarColors;
 
-function onPopoutLoad()
+function onSingleRunLoad()
 {
     boxRuns = document.getElementById("box-runs");
     boxSingleRun = document.getElementById("box-single-run");
