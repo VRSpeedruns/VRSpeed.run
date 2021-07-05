@@ -26,18 +26,13 @@ body {
 	font-family: 'Open Sans';
 	font-size: 0.95em;
 }
-a {
+a:not(.player-link) {
 	color: var(--primary-color);
-	
-	-webkit-transition:color .35s ease-out;
-	-moz-transition: color .35s ease-out;
-	-o-transition: color .35s ease-out;
-	transition: color .35s ease-out;
 }
 
 a:hover {
-	color: var(--primary-color);
-	text-decoration: underline;
+	color: var(--primary-color-hover);
+	text-decoration: underline solid 2px;
 }
 
 /* ---------- Button ---------- */
@@ -414,24 +409,26 @@ a.button:not(:last-child) {
 	text-align: center;
 	color: #eee;
 }
+.is-footer > p {
+	margin-bottom: 1em;
+}
 .is-heart {
 	color: #f14668;
 }
-.icons a {
-	color: #eee;
-	font-size: 1.5rem;
-	margin-right: 0.25rem;
+
+.is-footer p {
+	color: #bbb;
+}
+.is-footer > div >  .links > a {
+	color: var(--text-color) !important;
+	font-size: 1.1em;
 	
 	-webkit-transition: color .2s ease-out;
 	-moz-transition: color .2s ease-out;
 	-o-transition: color .2s ease-out;
 	transition: color .2s ease-out;
 }
-.icons a.end {
-	margin-right: 0;
-}
-.icons a:hover {
-	text-decoration: none;
+.is-footer > div > .links > a:hover {
 	color: var(--primary-color);
 }
 
@@ -460,7 +457,7 @@ a.button:not(:last-child) {
 	text-decoration: none;
 }
 .player-link:hover > span {
-	text-decoration: underline;
+	text-decoration: underline solid 2px;
 }
 
 @media only screen and (max-width: 768px) {

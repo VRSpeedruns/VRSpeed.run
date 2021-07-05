@@ -150,6 +150,25 @@
 			</div>
 		</section>
 		<section class="section is-footer">
+			<div class="columns is-vcentered">
+				<div class="column is-4 has-text-right-desktop">
+					<p>Made with <i class="fas fa-heart is-heart" aria-hidden="true"></i> by <a href="https://github.com/bigfoott">Bigfoot</a></p>
+				</div> 
+				<div class="column is-4">
+					<p>Currently tracking <?= count($games); ?> games.</p>
+				</div>
+				<div class="column is-4 has-text-left-desktop">
+					<div class="links">
+						<div>
+							<a href="https://github.com/bigfoott/VRSR"><i class="fab fa-github" aria-hidden="true"></i> GitHub Repo</a>
+						</div>
+						<div>
+							<a href="https://twitter.com/VRSpeedruns"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter Bot</a>
+						</div>
+					</div> 
+				</div>
+			</div>
+
 			<div id="js-mobile-check" class="is-hidden-mobile"></div>
 			<script type="text/javascript">
 				var gamesArray = <?= json_encode($games); ?>;
