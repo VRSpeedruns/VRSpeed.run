@@ -76,35 +76,35 @@ function infoTippy()
     if (isMobile) return;
 
     tippy('#game-links-leaderboard', {
-        theme: 'vrsr',
+        theme: 'vrsr-arrow',
         content: 'View Leaderboard',
         placement: 'bottom',
         offset: [0,7.5],
         duration: [150, 100]
     });
     tippy('#game-links-guides', {
-        theme: 'vrsr',
+        theme: 'vrsr-arrow',
         content: 'View Guides',
         placement: 'bottom',
         offset: [0,7.5],
         duration: [150, 100]
     });
     tippy('#game-links-resources', {
-        theme: 'vrsr',
+        theme: 'vrsr-arrow',
         content: 'View Resources',
         placement: 'bottom',
         offset: [0,7.5],
         duration: [150, 100]
     });
     tippy('#game-links-forums', {
-        theme: 'vrsr',
+        theme: 'vrsr-arrow',
         content: 'View Forums',
         placement: 'bottom',
         offset: [0,7.5],
         duration: [150, 100]
     });
     tippy('#game-links-statistics', {
-        theme: 'vrsr',
+        theme: 'vrsr-arrow',
         content: 'View Statistics',
         placement: 'bottom',
         offset: [0,7.5],
