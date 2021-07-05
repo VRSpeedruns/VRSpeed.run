@@ -85,6 +85,9 @@ a.button:not(:last-child) {
 .button-outer:hover {
 	text-decoration: none;
 }
+.button.is-small.is-variable {
+	padding: .75em;
+}
 
 /* ---------- Tabs ---------- */
 
@@ -295,23 +298,42 @@ a.button:not(:last-child) {
 
 /* ---------- Splits ---------- */
 
-#run-single-splits-bar {
+#run-single-splits-bar-outer {
 	width: calc(100% + 2.5rem) !important;
 	margin-left: -1.25rem;
-	height: 4em;
-	background-color: var(--background-accent-color);
+
 	margin-bottom: 1.25rem;
+	background-color: var(--background-accent-color);
+	height: 4em;
+}
+@media only screen and (max-width: 768px) {
+	#run-single-splits-bar-outer {
+		width: calc(100% + 1.5rem) !important;
+		margin-left: -0.75rem !important;
+		
+		overflow-x: scroll !important;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+		white-space: nowrap;
+
+		margin-bottom: 1.25rem;
+		background-color: var(--background-accent-color);
+		height: 4em;
+	}
+	#run-single-splits-bar {
+		width: calc(300% + 1.5rem) !important;
+	}
 }
 #run-single-splits-bar > div {
 	overflow: hidden;
 	height: 100%;
 	display: inline-block;
-	padding: 0.5em;
-	padding-right: 0;
 	white-space: nowrap;
 }
 #run-single-splits-bar > div > div {
 	cursor: default;
+	padding: 0.5em;
+	padding-right: 0;
 }
 .sp-name-num {
 	color: rgba(238, 238, 238, 0.8);
@@ -326,15 +348,43 @@ a.button:not(:last-child) {
 	font-size: 0.9em;
 }
 
+.table tbody#run-single-segments td {
+	vertical-align: middle;
+}
+
 .table tbody#run-single-segments tr {
 	cursor: default;
+	font-size: 0.95em;
 }
 .sp-heading {
 	font-weight: bold;
-	font-size: 1.1rem;
+	font-size: 1.1rem !important;
+}
+@media only screen and (max-width: 768px) {
+	.sp-heading {
+		font-size: 0.925rem !important;
+	}
+	.table tbody#run-single-segments tr {
+		cursor: default;
+		font-size: 0.9em;
+	}
 }
 
 /* ---------- Misc ---------- */
+
+.box > .divider {
+	width: calc(100% + 2.5rem);
+	margin-left: -1.25rem;
+	padding-bottom: 2em;
+	margin-bottom: 2em;
+	border-bottom: 2px solid var(--primary-color);
+}
+@media only screen and (max-width: 768px) {
+	.box > .divider {
+		width: calc(100% + 1.5rem);
+		margin-left: -0.75rem;
+	}
+}
 
 .select, .select > select {
 	margin-bottom: 1.25rem;
@@ -416,6 +466,9 @@ a.button:not(:last-child) {
 @media only screen and (max-width: 768px) {
 	.column {
 		padding: 0.75rem 0;
+	}
+	.box > .container > .columns > .column {
+		padding: 0.75rem !important;
 	}
     .section {
 		padding: 1.5rem 1rem;

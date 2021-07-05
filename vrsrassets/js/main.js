@@ -23,9 +23,18 @@ function pushState(path)
 {
     history.pushState(null, document.title, pathPrefix + path);
 }
+function replaceState(path)
+{
+    history.replaceState(null, document.title, pathPrefix + path);
+}
 function setHash(hash)
 {
-    history.replaceState(null, document.title, pathPrefix + getPath() + '#' + hash);
+    if (hash != "")
+    {
+        hash = '#' + hash;
+    }
+
+    replaceState(getPath() + hash);
 }
 function getPath()
 {

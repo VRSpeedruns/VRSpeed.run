@@ -90,11 +90,7 @@
 							<div class="back-button">
 								<a onclick="closeRun(); backFixUrl(); loadGame(getGame(), true);"><i class="fas fa-arrow-left"></i> Back to Game</a>
 							</div>
-							<div class="tabs is-boxed"><ul id="run-single-tabs">
-								<li id="run-single-infotab"><a onclick="openRunTab(0);">Info</a></li>
-								<li id="run-single-splitstab"><a onclick="openRunTab(1);">Splits</a></li>
-							</ul></div>
-							<div id="run-single-info">
+							<div class="container">
 								<div class="columns">
 									<div class="column is-8">
 										<div class="run-modal-titles">
@@ -122,17 +118,18 @@
 									</div>
 								</div>
 							</div>
-							<div id="run-single-splits">
+							<div class="divider"></div>
+							<div class="container">
 								<div id="variables">
 									<div class="buttons has-addons">
 										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
 										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
 									</div>
 									<div class="buttons has-addons">
-										<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> View on Splits.io</a>
+										<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> Splits.io</a>
 									</div>
 								</div>
-								<div id="run-single-splits-bar"></div>
+								<div id="run-single-splits-bar-outer"><div id="run-single-splits-bar"></div></div>
 								<div>
 									<table class="table is-narrow is-fullwidth">
 										<thead>

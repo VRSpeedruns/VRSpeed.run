@@ -119,7 +119,7 @@ function onGameDataLoad()
 		if (id == null)
 		{
 			id = window.location.hash.substring(1);
-			history.replaceState(null, document.title, pathPrefix + getPath());
+			replaceState(getPath());
 		}
 
 		var gameIndex = -1;
@@ -178,7 +178,7 @@ function loadGame(id, loadOrState = false, force = false)
 		}
 		else
 		{	
-			history.replaceState(null, document.title, pathPrefix + getPath() + '#' + categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
+			setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
 			loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState);
 		}
 

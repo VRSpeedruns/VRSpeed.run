@@ -1,9 +1,6 @@
 var boxRuns;
 var boxSingleRun;
 
-var runSingleTabInfo;
-var runSingleTabSplits;
-
 var runSingleGame;
 var runSingleCategory;
 var runSingleTime;
@@ -25,12 +22,6 @@ function onSingleRunLoad()
 {
     boxRuns = document.getElementById("box-runs");
     boxSingleRun = document.getElementById("box-single-run");
-
-    runSingleInfo = document.getElementById("run-single-info");
-    runSingleSplits = document.getElementById("run-single-splits");
-
-    runSingleTabInfo = document.getElementById("run-single-infotab");
-    runSingleTabSplits = document.getElementById("run-single-splitstab");
 
     runSingleGame = document.getElementById("run-single-game");
     runSingleCategory = document.getElementById("run-single-category");
@@ -64,7 +55,7 @@ function openRun(id, loadOrState = false)
 		
         if (currentGame.id !== run.game.data.abbreviation)
         {
-            history.replaceState(null, document.title, pathPrefix + getGame());
+            replaceState(getGame());
             loadGame(currentGame.abbreviation, false, true);
             return;
         }
@@ -170,8 +161,6 @@ function openRun(id, loadOrState = false)
 
         if (run.splits !== null)
         {
-            runSingleTabSplits.style.display = "block";
-
             var splitArr = run.splits.uri.split('/');
             var splitsId = splitArr[splitArr.length - 1];
 
@@ -180,39 +169,17 @@ function openRun(id, loadOrState = false)
 
             loadSplits(splitsId);
         }
-        else
-        {
-            runSingleTabSplits.style.display = "none";
-        }
 
-        openRunTab(0);
+        if (window.location.hash != '')
+        {
+            setHash('');
+        }
 	});
 }
 
 function closeRun()
 {
-    //boxRuns.style.display = "block";
     boxSingleRun.style.display = "none";
-}
-
-function openRunTab(index)
-{
-    if (index == 0)
-    {
-        runSingleTabSplits.classList.remove("is-active");
-        runSingleTabInfo.classList.add("is-active");
-
-        runSingleInfo.style.display = "block";
-        runSingleSplits.style.display = "none";
-    }
-    else if (index == 1)
-    {
-        runSingleTabInfo.classList.remove("is-active");
-        runSingleTabSplits.classList.add("is-active");
-
-        runSingleSplits.style.display = "block";
-        runSingleInfo.style.display = "none";
-    }
 }
 
 function loadSplits(id, timing = "default")
@@ -266,7 +233,7 @@ function loadSplits(id, timing = "default")
 
             var percent = (seg[timing + "_duration_ms"] / totalDuration) * 100;
             var color = splitsBarColors[i % splitsBarColors.length];
-            runSingleSplitsBar.innerHTML += '<div id="bar-' + i + '" style="width: ' + percent + '%; background-color: ' + color + '"><div>' + seg["display_name"] + '</div><div class="sp-time">' + msToTime(seg[timing + "_duration_ms"]) + '</div></div>';
+            runSingleSplitsBar.innerHTML += '<div id="bar-' + i + '" style="width: ' + percent + '%; background-color: ' + color + '"><div><div>' + seg["display_name"] + '</div><div class="sp-time">' + msToTime(seg[timing + "_duration_ms"]) + '</div></div></div>';
             
             if (seg.name.substring(0, 1) == "-")
             {
@@ -346,20 +313,20 @@ function msToTimeSingle(duration) {
     
     if (hours > 0)
     {
-        return hours + "h ";
+        return hours + "h";
     }
     else if (minutes > 0)
     {
-        return minutes + "m "
+        return minutes + "m"
     }
     else if (seconds > 0)
     {
-        return seconds + "s ";
+        return seconds + "s";
     }
     else if (milliseconds > 0)
     {
         return milliseconds + "ms";
     }
     
-    return '';
+    return '1ms';
 }
