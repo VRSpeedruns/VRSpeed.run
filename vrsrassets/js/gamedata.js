@@ -231,7 +231,7 @@ function loadGame(id, loadOrState = false, force = false)
 	gameInfoLinkForums.href = "https://www.speedrun.com/" + gameId + "/forum";
 	gameInfoLinkStatistics.href = "https://www.speedrun.com/" + gameId + "/gamestats";
 
-	get("https://www.speedrun.com/api/v1/games/" + gameId + "?embed=platforms")
+	get("https://www.speedrun.com/api/v1/games/" + gameId + "?embed=platforms,categories,levels")
 	.then((data) =>
 	{
 		var game = (JSON.parse(data)).data;
@@ -251,14 +251,9 @@ function loadGame(id, loadOrState = false, force = false)
 				tempPlatforms.push(game.platforms.data[i].name);
 			}
 		}
-
 		gameInfoPlatforms.innerText = tempPlatforms.join(", ");
-	});
 
-	get("https://www.speedrun.com/api/v1/games/" + gameId + "/categories")
-	.then((data) =>
-	{
-		cats = (JSON.parse(data)).data;
+		cats = game.categories.data;
 		catIndex = [];
 		categories = [];
 		progress = 0;
