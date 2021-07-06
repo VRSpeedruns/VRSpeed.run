@@ -9,22 +9,19 @@
 		
 		<title>VRSR</title>
 		
-		<meta content="Bigft.io" property="og:site_name">
-		<meta content="<?= $title; ?>" property="og:title">
-		<meta content="<?= $description; ?>" property="og:description">
-		<meta content="<?= $image; ?>" property="og:image">
-		<meta content="<?= $color; ?>" name="theme-color">
-		
+		<meta property="og:site_name" content="Bigft.io">
+		<meta property="og:title" content="<?= $title; ?>">
+		<meta property="og:description" content="<?= $description; ?>">
 		<meta name="description" content="<?= $description; ?>">
+		<meta property="og:image" content="<?= $image; ?>">
+		<meta name="theme-color" content="<?= $color; ?>">
 		<meta name="keywords" content="VR Speedrun,VR,Speedrun,Speedrunning,VR Speedrunning,VR Running,Super Hot VR,Super Hot Speedrun, Super Hot VR Speedrun,Half Life, Half-Life, Half-Life: Alyx, Half-Life Alyx, Alyx,, HLA, HL: Alyx, HL:A">
 		
-		<script src="https://kit.fontawesome.com/d16c543bf8.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+		<link href="/assets/fa/css/all.css" rel="stylesheet">
+		<link rel="stylesheet" href="/assets/css/bulma.min.css">
 		<link rel="stylesheet" href="/vrsrassets/css/main.css">
 
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    	<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=block" rel="stylesheet">
+		<link rel="stylesheet" href="/assets/css/googlefonts.css">
 	</head>
 	<body onload="onLoad();">
 		<section class="section">
