@@ -10,6 +10,7 @@ var runSingleVid;
 var runSingleVidText;
 var runSingleVidIcon;
 
+var runSingleSplitsContainer;
 var runSingleSegments;
 var runSingleSplitsUrl;
 var runSingleSplitsBar;
@@ -32,6 +33,7 @@ function onSingleRunLoad()
     runSingleVidText = document.getElementById("run-single-vid-text");
     runSingleVidIcon = document.getElementById("run-single-vid-icon");
 
+    runSingleSplitsContainer = document.getElementById("run-single-splits-container")
     runSingleSegments = document.getElementById("run-single-segments");
     runSingleSplitsUrl = document.getElementById("run-single-splits-url");
     runSingleSplitsBar = document.getElementById("run-single-splits-bar");
@@ -45,12 +47,20 @@ function openRun(id, loadOrState = false)
 {
     if (!loadOrState)
 	{
-		pushState(getGame() + "/" + id);
+		pushState(getGame() + "/run/" + id);
 	}
+    
+    runSingleSplitsContainer.style.display = "none";
 
     get("https://www.speedrun.com/api/v1/runs/" + id + "?embed=players,platform,game")
 	.then((data) =>
 	{
+        if (currentCatIndex == undefined)
+        {
+            openRun(id, loadOrState);
+            return;
+        }
+
 		var run = (JSON.parse(data)).data;
 		
         if (currentGame.id !== run.game.data.abbreviation)
@@ -61,7 +71,7 @@ function openRun(id, loadOrState = false)
         }
 
         var game = currentGame.name;
-
+        
         var category = categories[currentCatIndex].name;
         var subcats = [];
         for (var i = 0; i < currentVariables.length; i++)
@@ -289,6 +299,8 @@ function loadSplits(id, timing = "default")
                 duration: [0, 0]
             });
         }
+
+        runSingleSplitsContainer.style.display = "block";
     });
 }
 

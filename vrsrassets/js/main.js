@@ -53,9 +53,9 @@ function getGame()
 }
 function getRun()
 {
-    if (getPath().includes('/'))
+    if (getPath().includes('/run/'))
     {
-        return getPath().split('/')[1].split('/')[0]; 
+        return getPath().split('/')[2].split('/')[0]; 
     }
     else
     {

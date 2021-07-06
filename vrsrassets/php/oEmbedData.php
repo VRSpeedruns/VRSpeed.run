@@ -8,9 +8,9 @@ if (strlen($substr) > 0)
 {
     $expl = explode('/', $substr);
     $gameId = $expl[0];
-    if (count($expl) > 1)
+    if (strpos($substr, '/run/') !== false)
     {
-        $runId = $expl[1];
+        $runId = $expl[2];
     }
 }
 

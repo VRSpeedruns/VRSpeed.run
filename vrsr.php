@@ -115,30 +115,32 @@
 									</div>
 								</div>
 							</div>
-							<div class="divider"></div>
-							<div class="container">
-								<div id="variables">
-									<div class="buttons has-addons">
-										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
-										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
+							<div id="run-single-splits-container">
+								<div class="divider"></div>
+								<div class="container">
+									<div id="variables">
+										<div class="buttons has-addons">
+											<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
+											<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
+										</div>
+										<div class="buttons has-addons">
+											<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> Splits.io</a>
+										</div>
 									</div>
-									<div class="buttons has-addons">
-										<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> Splits.io</a>
+									<div id="run-single-splits-bar-outer"><div id="run-single-splits-bar"></div></div>
+									<div>
+										<table class="table is-narrow is-fullwidth">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Name</th>
+													<th>Duration</th>
+													<th>Finished At </th>
+												</tr>
+											</thead>
+											<tbody id="run-single-segments"></tbody>
+										</table>
 									</div>
-								</div>
-								<div id="run-single-splits-bar-outer"><div id="run-single-splits-bar"></div></div>
-								<div>
-									<table class="table is-narrow is-fullwidth">
-										<thead>
-											<tr>
-												<th>#</th>
-												<th>Name</th>
-												<th>Duration</th>
-												<th>Finished At </th>
-											</tr>
-										</thead>
-										<tbody id="run-single-segments"></tbody>
-									</table>
 								</div>
 							</div>
 						</div>

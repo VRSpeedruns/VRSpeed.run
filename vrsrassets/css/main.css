@@ -367,7 +367,7 @@ a.button:not(:last-child) {
 
 /* ---------- Misc ---------- */
 
-.box > .divider {
+.divider {
 	width: calc(100% + 2.5rem);
 	margin-left: -1.25rem;
 	padding-bottom: 2em;
@@ -375,7 +375,7 @@ a.button:not(:last-child) {
 	border-bottom: 2px solid var(--primary-color);
 }
 @media only screen and (max-width: 768px) {
-	.box > .divider {
+	.divider {
 		width: calc(100% + 1.5rem);
 		margin-left: -0.75rem;
 	}
