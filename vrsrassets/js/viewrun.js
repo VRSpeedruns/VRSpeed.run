@@ -159,6 +159,7 @@ function openRun(id, loadOrState = false)
         
         boxRuns.style.display = "none";
         boxSingleRun.style.display = "block";
+        mainLoading.style.display = "none";
 
         get("https://www.speedrun.com/api/v1/users/" + run.status.examiner)
         .then((__data) =>
@@ -190,6 +191,7 @@ function openRun(id, loadOrState = false)
 function closeRun()
 {
     boxSingleRun.style.display = "none";
+    mainLoading.style.display = "block";
 }
 
 function loadSplits(id, timing = "default")

@@ -57,10 +57,16 @@
 						</div>
 					</div>
 					<div class="column is-9">
+						<div id="main-loading" class="loadingdiv" style="display: block;">
+							<div>
+								<div class="spinner"></div>
+								<div class="belowspinner">Loading...</div>
+							</div>
+						</div>
 						<div class="box" id="box-runs" style="display: none;">
                             <div class="tabs is-boxed"><ul id="tabs"></ul></div>
 							<div id="variables"></div>
-							<div id="runs-loading" style="display: block;">
+							<div id="runs-loading" class="loadingdiv" style="display: block;">
 								<div>
 									<div class="spinner"></div>
 									<div class="belowspinner">Loading...</div>

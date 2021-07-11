@@ -219,6 +219,7 @@ function loadGame(id, loadOrState = false, force = false)
 	if (boxRuns)
 	{
 		boxRuns.style.display = "none";
+		mainLoading.style.display = "block";
 	}
 	
 	document.documentElement.style.setProperty('--primary-color', currentGame.color)
@@ -627,6 +628,7 @@ function loadRuns(id, variables, loadOrState = false)
 		else
 		{
 			boxRuns.style.display = "block";
+			mainLoading.style.display = "none";
 		}
 	});
 }

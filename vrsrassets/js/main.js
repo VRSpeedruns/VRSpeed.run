@@ -1,7 +1,10 @@
 var pathPrefix;
+var mainLoading;
 
 function onLoad()
 {
+    mainLoading = document.getElementById("main-loading");
+
     pathPrefix = window.location.pathname.substring(0, 5) + "/";
 
     infoTippy();

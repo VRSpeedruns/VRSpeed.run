@@ -16,6 +16,22 @@
 	--place-bronze: #CD7F32;
 }
 
+::-webkit-scrollbar {
+	width: 14px;
+}
+::-webkit-scrollbar-track {
+	background-color: var(--background-mid-accent-color);
+}
+::-webkit-scrollbar-thumb {
+	width: 5px;
+	background-color: var(--primary-color);
+	border: 2px solid var(--background-mid-accent-color);
+	border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--primary-color-hover);
+}
+
 html {
 	background-color: var(--background-mid-accent-color);
 	color: var(--text-color);
@@ -87,13 +103,30 @@ a.button:not(:last-child) {
 /* ---------- Tabs ---------- */
 
 .tabs > ul {
-	margin-bottom: calc(1.25rem - 2px);
 	border-bottom: 2px solid var(--primary-color) !important;
 }
-.tabs {
+
+.tabs.is-boxed {
 	color: var(--text-color);
 	text-decoration: none;
+	margin-bottom: calc(1.25rem - 2px);
+	border-radius: 4px 4px 0 0;
 }
+.tabs.is-boxed::-webkit-scrollbar {
+	height: 8px;
+}
+.tabs.is-boxed::-webkit-scrollbar-track {
+	background-color: var(--background-mid-accent-color);
+}
+.tabs.is-boxed::-webkit-scrollbar-thumb {
+	background-color: var(--primary-color);
+	border: 0;
+	border-radius: 0;
+}
+.tabs.is-boxed::-webkit-scrollbar-thumb:hover {
+	background-color: var(--primary-color-hover);
+}
+
 .tabs.is-boxed a, .tabs.is-boxed a:hover, .tabs.is-boxed a:focus {
 	border-left: 0px !important;
 	border-right: 0px !important;
@@ -123,10 +156,6 @@ a.button:not(:last-child) {
 }
 .tabs li.is-active a:hover, .tabs li.is-active a:focus {
 	background-color: var(--primary-color-hover) !important;
-}
-
-.tabs:not(:last-child) {
-	margin-bottom: 0;
 }
 
 
@@ -497,7 +526,7 @@ a.button:not(:last-child) {
 /* ----------------------------------------- */
 /* source: https://tobiasahlin.com/spinkit/  */
 
-#runs-loading .spinner {
+.loadingdiv .spinner {
 	width: 40px;
 	height: 40px;
 	background-color: #777;
@@ -505,30 +534,31 @@ a.button:not(:last-child) {
 	margin: 100px auto;
 	-webkit-animation: sk-rotateplane 0.8s infinite ease-in-out;
 	animation: sk-rotateplane 0.8s infinite ease-in-out;
-  }
-  
-  @-webkit-keyframes sk-rotateplane {
+}
+
+@-webkit-keyframes sk-rotateplane {
 	0% { -webkit-transform: perspective(120px) }
 	50% { -webkit-transform: perspective(120px) rotateY(180deg) }
 	100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
-  }
-  
-  @keyframes sk-rotateplane {
-	0% { 
-	  transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-	  -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
-	} 50% { 
-	  transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-	  -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
-	} 100% { 
-	  transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-	  -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-	}
-  }
+}
 
+@keyframes sk-rotateplane {
+	0% { 
+		transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+		-webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+	}
+	50% { 
+		transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+		-webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+	}
+	100% {
+		transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+		-webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+	}
+}
 
 /* added by me */
-#runs-loading .belowspinner {
+.loadingdiv .belowspinner {
 	color: #777;
 	font-weight: bold;
 	font-size: 1.5rem;
@@ -536,10 +566,10 @@ a.button:not(:last-child) {
 	margin-top: -5rem;
 }
 
-#runs-loading {
+.loadingdiv {
 	display: flex;
 	align-items: center;
-	height: 100%;
+	padding-bottom: 5rem;
 }
 
 /* ---------- ---------- */
