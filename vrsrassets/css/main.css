@@ -27,6 +27,11 @@
 	background-color: var(--primary-color);
 	border: 2px solid var(--background-mid-accent-color);
 	border-radius: 4px;
+	
+	-webkit-transition: color .2s ease-out;
+	-moz-transition: color .2s ease-out;
+	-o-transition: color .2s ease-out;
+	transition: color .2s ease-out;
 }
 ::-webkit-scrollbar-thumb:hover {
 	background-color: var(--primary-color-hover);
@@ -44,6 +49,11 @@ body {
 }
 a:not(.player-link) {
 	color: var(--primary-color);
+	
+	-webkit-transition: color .2s ease-out;
+	-moz-transition: color .2s ease-out;
+	-o-transition: color .2s ease-out;
+	transition: color .2s ease-out;
 }
 
 a:hover {
@@ -60,6 +70,11 @@ a:hover {
 .button.is-dark.is-selected {
 	background-color: var(--primary-color);
 	color: var(--text-color-dark);
+	
+	-webkit-transition: background-color .2s ease-out;
+	-moz-transition: background-color .2s ease-out;
+	-o-transition: background-color .2s ease-out;
+	transition: background-color .2s ease-out;
 }
 .button.is-dark.is-selected:hover, .button.is-dark.is-selected:focus {
 	background-color: var(--primary-color-hover);
@@ -70,6 +85,11 @@ a:hover {
 }
 .button.is-dark > .icon {
 	color: var(--primary-color);
+	
+	-webkit-transition: color .2s ease-out;
+	-moz-transition: color .2s ease-out;
+	-o-transition: color .2s ease-out;
+	transition: color .2s ease-out;
 }
 .button.is-dark:hover > .icon {
 	color: var(--primary-color-hover);
@@ -104,6 +124,11 @@ a.button:not(:last-child) {
 
 .tabs > ul {
 	border-bottom: 2px solid var(--primary-color) !important;
+	
+	-webkit-transition: border .2s ease-out;
+	-moz-transition: border .2s ease-out;
+	-o-transition: border .2s ease-out;
+	transition: border .2s ease-out;
 }
 
 .tabs.is-boxed {
@@ -122,6 +147,11 @@ a.button:not(:last-child) {
 	background-color: var(--primary-color);
 	border: 0;
 	border-radius: 0;
+	
+	-webkit-transition: background-color .2s ease-out;
+	-moz-transition: background-color .2s ease-out;
+	-o-transition: background-color .2s ease-out;
+	transition: background-color .2s ease-out;
 }
 .tabs.is-boxed::-webkit-scrollbar-thumb:hover {
 	background-color: var(--primary-color-hover);
@@ -132,6 +162,11 @@ a.button:not(:last-child) {
 	border-right: 0px !important;
 	border-top: 0px !important;
 	border-bottom-color: var(--primary-color);
+	
+	-webkit-transition: border .2s ease-out;
+	-moz-transition: border .2s ease-out;
+	-o-transition: border .2s ease-out;
+	transition: border .2s ease-out;
 }
 .tabs li a {
 	text-decoration: none;
@@ -153,6 +188,11 @@ a.button:not(:last-child) {
 .tabs li.is-active a {
 	color: var(--text-color-dark);
 	background-color: var(--primary-color) !important;
+	
+	-webkit-transition: background-color .2s ease-out;
+	-moz-transition: background-color .2s ease-out;
+	-o-transition: background-color .2s ease-out;
+	transition: background-color .2s ease-out;
 }
 .tabs li.is-active a:hover, .tabs li.is-active a:focus {
 	background-color: var(--primary-color-hover) !important;
@@ -185,6 +225,11 @@ a.button:not(:last-child) {
 .is-variable.is-active, .is-variable.is-active:focus {
 	background-color: var(--primary-color) !important;
 	color: var(--text-color-dark) !important;
+	
+	-webkit-transition: background-color .2s ease-out;
+	-moz-transition: background-color .2s ease-out;
+	-o-transition: background-color .2s ease-out;
+	transition: background-color .2s ease-out;
 }
 .is-variable.is-active:hover {
 	background-color: var(--primary-color-hover) !important;
@@ -402,6 +447,11 @@ a.button:not(:last-child) {
 	padding-bottom: 2em;
 	margin-bottom: 2em;
 	border-bottom: 2px solid var(--primary-color);
+	
+	-webkit-transition: border .2s ease-out;
+	-moz-transition: border .2s ease-out;
+	-o-transition: border .2s ease-out;
+	transition: border .2s ease-out;
 }
 @media only screen and (max-width: 768px) {
 	.divider {
@@ -416,14 +466,29 @@ a.button:not(:last-child) {
 	background-color: var(--background-color);
 	border-color: var(--primary-color);
 	color: var(--text-color);
+	
+	-webkit-transition: border .2s ease-out;
+	-moz-transition: border .2s ease-out;
+	-o-transition: border .2s ease-out;
+	transition: border .2s ease-out;
 }
 .select:after {
 	border-color: var(--primary-color) !important;
+	
+	-webkit-transition: background-color .2s ease-out;
+	-moz-transition: background-color .2s ease-out;
+	-o-transition: background-color .2s ease-out;
+	transition: background-color .2s ease-out;
 }
 .select select:hover, .select select:focus, .select:hover:after, .select:focus:after {
 	
 	border-color: var(--primary-color-hover) !important;
 	box-shadow: none;
+	
+	-webkit-transition: border .2s ease-out;
+	-moz-transition: border .2s ease-out;
+	-o-transition: border .2s ease-out;
+	transition: border .2s ease-out;
 }
 
 .title {
@@ -511,6 +576,11 @@ a.button:not(:last-child) {
 .back-button a:hover {
 	text-decoration: none;
 	color: var(--primary-color-hover);
+	
+	-webkit-transition: color .2s ease-out;
+	-moz-transition: color .2s ease-out;
+	-o-transition: color .2s ease-out;
+	transition: color .2s ease-out;
 }
 
 .place-1st, .new-pb {
