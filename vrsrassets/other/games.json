@@ -4,16 +4,16 @@
         "abbreviation": "acc",
         "name": "Accounting",
         "hardware": "",
-        "color": "#8d16c7",
-        "hoverColor": "#a12adb"
+        "color": "#a134d6",
+        "hoverColor": "#b64bea"
     },
     {
         "id": "accountingplus",
         "abbreviation": "accplus",
         "name": "Accounting+",
         "hardware": "",
-        "color": "#8d16c7",
-        "hoverColor": "#a12adb"
+        "color": "#a134d6",
+        "hoverColor": "#b64bea"
     },
     {
         "id": "adventure_time_magic_mans_head_game",
@@ -52,8 +52,8 @@
         "abbreviation": "bc",
         "name": "Budget Cuts",
         "hardware": "",
-        "color": "#FF1F1F",
-        "hoverColor": "#fc4242"
+        "color": "#fb3e3e",
+        "hoverColor": "#ff5656"
     },
     {
         "id": "climbey",
@@ -76,8 +76,8 @@
         "abbreviation": "doom",
         "name": "DooM VFR",
         "hardware": "",
-        "color": "#CD001A",
-        "hoverColor": "#e6273f"
+        "color": "#e22c43",
+        "hoverColor": "#f1475c"
     },
     {
         "id": "duck_season",
@@ -124,8 +124,8 @@
         "abbreviation": "js",
         "name": "Job Simulator",
         "hardware": "",
-        "color": "#009100",
-        "hoverColor": "#17bf17"
+        "color": "#ceef79",
+        "hoverColor": "#e1ff95"
     },
     {
         "id": "lone_echo",
@@ -196,8 +196,8 @@
         "abbreviation": "shvr",
         "name": "SUPERHOT VR",
         "hardware": "",
-        "color": "#E62205",
-        "hoverColor": "#f54a31"
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e"
     },
     {
         "id": "surgeon_simulator_experience_reality",
@@ -244,8 +244,8 @@
         "abbreviation": "twdss",
         "name": "The Walking Dead: S & S",
         "hardware": "ylqk1v3l",
-        "color": "#FF1F1F",
-        "hoverColor": "#fc4242"
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e"
     },
     {
         "id": "tnn",
@@ -260,16 +260,16 @@
         "abbreviation": "ttt",
         "name": "To The Top",
         "hardware": "e8mmk2v8",
-        "color": "#FF1F1F",
-        "hoverColor": "#fc4242"
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e"
     },
     {
         "id": "trover",
         "abbreviation": "trover",
         "name": "Trover Saves the Universe",
         "hardware": "",
-        "color": "#9400CF",
-        "hoverColor": "#b22ce8"
+        "color": "#a134d6",
+        "hoverColor": "#b64bea"
     },
     {
         "id": "vs",
@@ -292,16 +292,16 @@
         "abbreviation": "vi",
         "name": "Vader Immortal",
         "hardware": "",
-        "color": "#CD001A",
-        "hoverColor": "#e6273f"
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e"
     },
     {
         "id": "vvr",
         "abbreviation": "vvr",
         "name": "Virtual Virtual Reality",
         "hardware": "",
-        "color": "#8d16c7",
-        "hoverColor": "#a12adb"
+        "color": "#a134d6",
+        "hoverColor": "#b64bea"
     },
     {
         "id": "windlands",
