@@ -320,6 +320,24 @@ function loadVariables(uri, category, loadOrState = false)
 					var tempIndex = 0;
 					for (var id in vars[i].values.values)
 					{
+						var skip = false;
+						for (var k = 0; k < currentGame.ignoredVariables.length; k++)
+						{
+							if (currentGame.ignoredVariables[k].id != vars[i].id)
+							{
+								continue;
+							}
+							if (currentGame.ignoredVariables[k].value == id)
+							{
+								skip = true;
+								break;
+							}
+						}
+						if (skip)
+						{
+							continue;
+						}
+
 						variables[i].values[tempIndex] = {
 							"id": id,
 							"name": vars[i].values.values[id].label
@@ -414,15 +432,16 @@ function displayCategoryVariables(index, loadOrState = false)
 	var vars = categories[index].variables;
 	for (var i = 0; i < vars.length; i++)
 	{
-		var temp = '<div class="buttons has-addons">';
-
-		for (var k = 0; k < vars[i].values.length; k++)
+		if (vars[i].values.length > 1)
 		{
-			temp += '<button id="' + vars[i].id + '-' + vars[i].values[k].id + '" class="button is-small is-dark is-variable" onclick="setVariable(\'' + vars[i].id + '\',\'' + vars[i].values[k].id + '\');">' + vars[i].values[k].name + '</button>';
+			var temp = '<div class="buttons has-addons">';
+			for (var k = 0; k < vars[i].values.length; k++)
+			{
+				temp += '<button id="' + vars[i].id + '-' + vars[i].values[k].id + '" class="button is-small is-dark is-variable" onclick="setVariable(\'' + vars[i].id + '\',\'' + vars[i].values[k].id + '\');">' + vars[i].values[k].name + '</button>';
+			}
+			variablesContainer.innerHTML += temp += '</div>';
 		}
 
-		variablesContainer.innerHTML += temp += '</div>';
-		
 		setVariable(vars[i].id, vars[i].values[0].id, false)
 	}
 
@@ -447,7 +466,12 @@ function setVariable(id, value, loadAfter = true)
 	if (!found)
 	{
 		currentVariables.push({"id": id, "value": value});
-		document.getElementById(id + "-" + value).classList.add("is-active");
+		
+		var ele = document.getElementById(id + "-" + value);
+		if (ele)
+		{
+			ele.classList.add("is-active");
+		}
 	}
 
 	if (loadAfter)
@@ -587,10 +611,10 @@ function loadRuns(id, variables, loadOrState = false)
 			var icons = '';
 			if (run.splits != null)
 			{
-				icons += '<i class="fas fa-stopwatch"></i>';
+				icons += '<i id="run-' + run.id + '-splits" class="fas fa-stopwatch"></i>';
 			}
 			
-			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-touch">' + platform + '</td><td class="is-hidden-touch">' + date + '</td><td id="run-' + run.id + '-splits" class="has-text-right is-hidden-touch">' + icons + '</td></tr>';
+			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-mobile">' + platform + '</td><td class="is-hidden-mobile">' + date + '</td><td class="has-text-right is-hidden-mobile">' + icons + '</td></tr>';
 		}
 		
 		if (!isMobile)
@@ -602,8 +626,7 @@ function loadRuns(id, variables, loadOrState = false)
 					tippy('#run-' + json.runs[i].run.id + '-splits', {
 						theme: 'vrsr-arrow',
 						content: 'Splits are available for this run.',
-						placement: 'right',
-						offset: [0,5],
+						placement: 'top',
 						delay: [225, 0],
 						duration: [150, 0]
 					});

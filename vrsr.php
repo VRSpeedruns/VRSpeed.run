@@ -33,9 +33,9 @@
 								<select id="games" onchange="onGameChange(this.value)"></select>
 							</div>
 							<div class="game-info-container">
-								<div class="game-image-container is-hidden-touch"><img id="game-image" src=""></div>
-								<div id="game-year" class="is-hidden-touch">...</div>
-								<div id="game-platforms" class="is-hidden-touch">...</div>
+								<div class="game-image-container is-hidden-mobile"><img id="game-image" src=""></div>
+								<div id="game-year" class="is-hidden-mobile">...</div>
+								<div id="game-platforms" class="is-hidden-mobile">...</div>
 								<div class="buttons is-centered">
 									<a id="game-links-leaderboard" class="button-outer" href="" target="_blank">
 										<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
@@ -81,9 +81,9 @@
 										<th>Rank</th>
 										<th>Player</th>
 										<th>Time</th>
-										<th id="runs-platform-hardware" class="is-hidden-touch">Platform</th>
-										<th class="is-hidden-touch">Date</th>
-										<th class="is-hidden-touch"></th>
+										<th id="runs-platform-hardware" class="is-hidden-mobile">Platform</th>
+										<th class="is-hidden-mobile">Date</th>
+										<th class="is-hidden-mobile"></th>
 									</tr>
 								</thead>
 								<tbody id="runs"></tbody>
@@ -157,7 +157,7 @@
 		<section class="section is-footer">
 			<div class="columns is-vcentered">
 				<div class="column is-4 has-text-right-desktop">
-					<p>Made with <i class="fas fa-heart is-heart" aria-hidden="true"></i> by <a href="https://github.com/bigfoott">Bigfoot</a></p>
+					<p>Made with <i class="fas fa-heart is-heart" aria-hidden="true"></i> by <a href="https://github.com/bigfoott">bigfoot</a></p>
 				</div> 
 				<div class="column is-4">
 					<p>Currently tracking <?= count($games); ?> games.</p>
