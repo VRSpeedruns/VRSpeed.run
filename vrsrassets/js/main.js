@@ -24,6 +24,12 @@ function onLoad()
 
         loadGame(getGame(), true);
 	});
+
+    if (isMobile)
+    {
+        var _about = document.getElementById("about-info");
+        _about.parentElement.prepend(_about);
+    }
 }
 
 function pushState(path)
@@ -99,13 +105,13 @@ function toggleAboutInfo()
 
 function infoTippy()
 {
-    if (isMobile) return;
-
     tippy.setDefaultProps({
         theme: 'vrsr-arrow',
         placement: 'bottom',
         duration: [150, 100]
     });
+
+    if (isMobile) return;
 
     tippy('#game-links-leaderboard', {
         offset: [0,7.5],

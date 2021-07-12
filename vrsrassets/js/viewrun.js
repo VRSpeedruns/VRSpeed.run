@@ -161,7 +161,7 @@ function openRun(id, loadOrState = false)
             player = run.players.data[0].name;
         }
 
-        player = '<a class="player-link" href="' + run.players.data[0].weblink + '">' + player + '</a>';
+        player = '<a class="player-link" href="' + run.players.data[0].weblink + '" target="_blank">' + player + '</a>';
 
         var srcLink = run.weblink;
         var vidLink = '';
@@ -263,7 +263,7 @@ function openRun(id, loadOrState = false)
                 player = flag + player;
             }
                 
-            runSingleVerifier.innerHTML = '<a class="player-link" href="' + _data.weblink + '">' + flag + verifier + '</a>';
+            runSingleVerifier.innerHTML = '<a class="player-link" href="' + _data.weblink + '" target="_blank">' + flag + verifier + '</a>';
         });
 
         if (run.splits !== null)
@@ -313,7 +313,7 @@ function loadSplits(id, timing = "default")
     }
     lastSplitsTippys = [];
     
-    runSingleSplitsUrl.href = 'https://splits.io/' + id + '?timing=' + timing;
+    runSingleSplitsUrl.href = 'https://splits.io/' + id;
 
     get('https://splits.io/api/v4/runs/' + id)
     .then((data) =>
@@ -325,6 +325,8 @@ function loadSplits(id, timing = "default")
             timing = run['default_timing'];
         }
         
+        runSingleSplitsUrl.href = 'https://splits.io/' + id + '?timing=' + timing;
+
         timing += "time";
 
         if (timing == "realtime")

@@ -211,6 +211,9 @@ a.button:not(:last-child) {
 .table.is-narrow {
 	font-size: 0.95em;
 }
+.table.is-narrow td, .table.is-narrow th {
+	padding: .25em;
+}
 .table.is-fullwidth {
 	width: calc(100% + 2.5rem) !important;
 	margin-left: -1.25rem;
@@ -415,7 +418,7 @@ a.button:not(:last-child) {
 
 /* ---------- Misc ---------- */
 
-.about-info > h1 {
+#about-info > h1 {
 	font-size: 1.2em;
 	margin-bottom: 0.75em;
 	font-weight: bold;
@@ -426,7 +429,7 @@ a.button:not(:last-child) {
 #about-info-more {
 	margin-top: 1em;
 }
-.about-info > p:not(:last-child), .about-info > div > p:not(:last-child) {
+#about-info > p:not(:last-child), #about-info > div > p:not(:last-child) {
 	margin-bottom: 1em;
 }
 

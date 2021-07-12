@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		
 		<link rel="icon" href="/vrsrassets/images/fav.png">
 		
@@ -26,7 +26,7 @@
 		<section class="section">
 			<div class="container">
 				<div class="columns">
-					<div class="column is-3">
+					<div class="column is-3 reverse-columns-mobile">
 						<div class="box">
 							<div class="select">
 								<select id="games" onchange="onGameChange(this.value)"></select>
@@ -54,7 +54,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="box about-info">
+						<div class="box" id="about-info">
 							<h1>About</h1>
 							<p>VRSR is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
 							<a id="about-info-toggle" onclick="toggleAboutInfo();"><i class="fas fa-caret-down"></i> Show more</a>
@@ -197,8 +197,8 @@
 				var isMobile = window.getComputedStyle(document.getElementById("js-mobile-check")).getPropertyValue("display") == "none";
 				var runLoadedCategory = "<?= $categoryId; ?>";
 			</script>
-			<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-			<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script> 
+			<script type="text/javascript" src="/assets/js/popper.min.js"></script>
+			<script type="text/javascript" src="/assets/js/tippy-bundle.umd.js"></script> 
 			<script type="text/javascript" src="/vrsrassets/js/colorinterpolation.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/gamedata.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
