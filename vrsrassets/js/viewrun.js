@@ -11,6 +11,8 @@ var runSingleVidText;
 var runSingleVidIcon;
 
 var runSingleSplitsContainer;
+var runSingleSplitsInner;
+var runSingleSplitsLoading;
 var runSingleSegments;
 var runSingleSplitsUrl;
 var runSingleSplitsBar;
@@ -33,7 +35,9 @@ function onSingleRunLoad()
     runSingleVidText = document.getElementById("run-single-vid-text");
     runSingleVidIcon = document.getElementById("run-single-vid-icon");
 
-    runSingleSplitsContainer = document.getElementById("run-single-splits-container")
+    runSingleSplitsContainer = document.getElementById("run-single-splits-container");
+    runSingleSplitsInner = document.getElementById("run-single-splits-inner");
+    runSingleSplitsLoading = document.getElementById("run-single-splits-loading");
     runSingleSegments = document.getElementById("run-single-segments");
     runSingleSplitsUrl = document.getElementById("run-single-splits-url");
     runSingleSplitsBar = document.getElementById("run-single-splits-bar");
@@ -137,7 +141,16 @@ function openRun(id, loadOrState = false)
         player = '<a class="player-link" href="' + run.players.data[0].weblink + '">' + player + '</a>';
 
         var srcLink = run.weblink;
-        var vidLink = run.videos.links[0].uri;
+        var vidLink = '';
+        if (run.videos != null)
+        {
+            vidLink = run.videos.links[0].uri;
+            runSingleVid.style.display = "block";
+        }
+        else
+        {
+            runSingleVid.style.display = "none";
+        }
 
         runSingleGame.innerText = game;
         runSingleCategory.innerText = category;
@@ -146,15 +159,29 @@ function openRun(id, loadOrState = false)
         runSingleSrc.href = srcLink;
         runSingleVid.href = vidLink;
 
+        runSingleVidIcon.classList.remove('fab');
+        runSingleVidIcon.classList.remove('fas');
+        runSingleVidIcon.classList.remove('fa-youtube');
+        runSingleVidIcon.classList.remove('fa-twitch');
+        runSingleVidIcon.classList.remove('fa-video');
+
         if (vidLink.includes("youtube.com") || vidLink.includes("youtu.be"))
         {
             runSingleVidText.innerText = 'Watch on YouTube';
+            runSingleVidIcon.classList.add('fab');
             runSingleVidIcon.classList.add('fa-youtube');
         }
         else if (vidLink.includes("twitch.tv"))
         {
             runSingleVidText.innerText = 'Watch on Twitch';
+            runSingleVidIcon.classList.add('fab');
             runSingleVidIcon.classList.add('fa-twitch');
+        }
+        else
+        {
+            runSingleVidText.innerText = 'Watch Run';
+            runSingleVidIcon.classList.add('fas');
+            runSingleVidIcon.classList.add('fa-video');
         }
         
         boxRuns.style.display = "none";
@@ -181,7 +208,7 @@ function openRun(id, loadOrState = false)
             loadSplits(splitsId);
         }
 
-        if (window.location.hash != '')
+        if (getHash() != '')
         {
             setHash('');
         }
@@ -196,9 +223,11 @@ function closeRun()
 
 function loadSplits(id, timing = "default")
 {
-    var uri = 'https://splits.io/api/v4/runs/' + id;
+    runSingleSplitsInner.style.display = "none";
+    runSingleSplitsLoading.style.display = "block";
+    runSingleSplitsContainer.style.display = "block";
 
-    get(uri)
+    get('https://splits.io/api/v4/runs/' + id)
     .then((data) =>
     {
         var run = (JSON.parse(data)).run;
@@ -302,7 +331,8 @@ function loadSplits(id, timing = "default")
             });
         }
 
-        runSingleSplitsContainer.style.display = "block";
+        runSingleSplitsInner.style.display = "block";
+        runSingleSplitsLoading.style.display = "none";
     });
 }
 

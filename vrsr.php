@@ -20,7 +20,6 @@
 		<link href="/assets/fa/css/all.css" rel="stylesheet">
 		<link rel="stylesheet" href="/assets/css/bulma.min.css">
 		<link rel="stylesheet" href="/vrsrassets/css/main.css">
-
 		<link rel="stylesheet" href="/assets/css/googlefonts.css">
 	</head>
 	<body onload="onLoad();">
@@ -53,6 +52,16 @@
 										<div class="button is-dark"><span class="icon"><i class="fas fa-chart-line"></i></span></div>
 									</a>
 								</div>
+							</div>
+						</div>
+						<div class="box about-info">
+							<h1>About</h1>
+							<p>VRSR is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
+							<a id="about-info-toggle" onclick="toggleAboutInfo();"><i class="fas fa-caret-down"></i> Show more</a>
+							<div id="about-info-more" style="display: none;">
+								<p>If there's a game that you believe belongs on here or you see a bug or error, please ping me (bigfoot#0001) in the VR Speedrunning Discord server.</p>
+								<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/7PKWZuW">VR Speedrunning Discord server</a>!</p>
+								<p>For the latest VR world records, check out the <a href="https://twitter.com/VRSpeedruns">VRSR Twitter bot</a>!</p>
 							</div>
 						</div>
 					</div>
@@ -114,7 +123,7 @@
 												View on Speedrun.com
 											</a>
 											<a id="run-single-vid" class="button is-dark is-fullwidth" href="", target="_blank">
-												<span class="icon has-text"><i id="run-single-vid-icon" class="fab"></i></span>
+												<span class="icon has-text"><i id="run-single-vid-icon" class="fab fas"></i></span>
 												<span id="run-single-vid-text">Watch on </span>
 											</a>
 										</div>
@@ -123,7 +132,13 @@
 							</div>
 							<div id="run-single-splits-container">
 								<div class="divider"></div>
-								<div class="container">
+								<div id="run-single-splits-loading" class="loadingdiv" style="display: block;">
+									<div>
+										<div class="spinner"></div>
+										<div class="belowspinner">Loading...</div>
+									</div>
+								</div>
+								<div class="container" id="run-single-splits-inner">
 									<div id="variables">
 										<div class="buttons has-addons">
 											<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>

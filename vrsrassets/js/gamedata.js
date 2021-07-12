@@ -113,12 +113,12 @@ function onGameDataLoad()
 		}
 	}
 
-	if (getGame() != null || window.location.hash.length > 1)
+	if (getGame() != null || getHash().length > 1)
 	{
 		var id = getGame();
 		if (id == null)
 		{
-			id = window.location.hash.substring(1);
+			id = getHash().substring(1);
 			replaceState(getPath());
 		}
 
@@ -386,9 +386,9 @@ function displayCategoryTabs(loadOrState = false)
 			}
 		}
 	}
-	else if (window.location.hash)
+	else if (getHash())
 	{
-		var hashName = window.location.hash.substring(1).replace(/ /g, '_').replace(catNameRegex, '');
+		var hashName = getHash().substring(1).replace(/ /g, '_').replace(catNameRegex, '');
 
 		for (var i = 0; i < categories.length; i++)
 		{

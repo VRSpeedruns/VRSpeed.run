@@ -400,6 +400,21 @@ a.button:not(:last-child) {
 
 /* ---------- Misc ---------- */
 
+.about-info > h1 {
+	font-size: 1.2em;
+	margin-bottom: 0.75em;
+	font-weight: bold;
+}
+#about-info-toggle:hover {
+	text-decoration: none;
+}
+#about-info-more {
+	margin-top: 1em;
+}
+.about-info > p:not(:last-child), .about-info > div > p:not(:last-child) {
+	margin-bottom: 1em;
+}
+
 .divider {
 	width: calc(100% + 2.5rem);
 	margin-left: -1.25rem;

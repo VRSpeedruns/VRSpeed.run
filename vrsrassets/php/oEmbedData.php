@@ -18,7 +18,7 @@ $game = null;
 $title = 'VR Speedrunning Leaderboards';
 $image = '/vrsrassets/images/logo.png';
 $color = '#0165fe';
-$description = 'A central hub to view the leaderboards for the largest VR speedgames.';
+$description = 'A central hub to view the leaderboards for the largest virtual reality games in speedrunning.';
 
 $categoryId = '';
 

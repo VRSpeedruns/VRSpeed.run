@@ -1,9 +1,13 @@
 var pathPrefix;
 var mainLoading;
+var aboutInfoToggle;
+var aboutInfoMore;
 
 function onLoad()
 {
     mainLoading = document.getElementById("main-loading");
+    aboutInfoToggle = document.getElementById("about-info-toggle");
+    aboutInfoMore = document.getElementById("about-info-more");
 
     pathPrefix = window.location.pathname.substring(0, 5) + "/";
 
@@ -39,6 +43,10 @@ function setHash(hash)
 
     replaceState(getPath() + hash);
 }
+function getHash()
+{
+    return window.location.hash;
+}
 function getPath()
 {
     return window.location.pathname.substring(6);
@@ -71,6 +79,21 @@ function backFixUrl()
     if (getRun())
     {
         pushState(getGame());
+    }
+}
+
+function toggleAboutInfo()
+{
+    if (aboutInfoMore.style.display == "none")
+    {
+        console.log("test");
+        aboutInfoMore.style.display = "block";
+        aboutInfoToggle.innerHTML = '<i class="fas fa-caret-up"></i> Show Less'
+    }
+    else
+    {
+        aboutInfoMore.style.display = "none";
+        aboutInfoToggle.innerHTML = '<i class="fas fa-caret-down"></i> Show More'
     }
 }
 
