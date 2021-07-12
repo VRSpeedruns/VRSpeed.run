@@ -412,6 +412,9 @@ function displayCategory(index, loadOrState = false)
 {
 	currentCatIndex = index;
 
+	var catName = categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, '');
+	gameInfoLinkLeaderboard.href = gameInfoLinkLeaderboard.href.split('#')[0] + '#' + catName;
+
 	for (var i = 0; i < categoryTabs.length; i++)
 	{
 		categoryTabs[i].classList.remove("is-active");

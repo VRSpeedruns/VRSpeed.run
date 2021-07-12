@@ -193,6 +193,10 @@ a.button:not(:last-child) {
 .is-variable > i {
 	margin-right: 0.5em;
 }
+.variable-right {
+	margin-left: auto;
+
+}
 
 .box, .tabs a, .tabs li:hover {
 	color: #eee;

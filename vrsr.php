@@ -59,7 +59,7 @@
 							<p>VRSR is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
 							<a id="about-info-toggle" onclick="toggleAboutInfo();"><i class="fas fa-caret-down"></i> Show more</a>
 							<div id="about-info-more" style="display: none;">
-								<p>If there's a game that you believe belongs on here or you see a bug or error, please ping me (bigfoot#0001) in the VR Speedrunning Discord server.</p>
+								<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping me (bigfoot#0001) in the VR Speedrunning Discord server.</p>
 								<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/7PKWZuW">VR Speedrunning Discord server</a>!</p>
 								<p>For the latest VR world records, check out the <a href="https://twitter.com/VRSpeedruns">VRSR Twitter bot</a>!</p>
 							</div>
@@ -144,7 +144,7 @@
 											<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
 											<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
 										</div>
-										<div class="buttons has-addons">
+										<div class="buttons has-addons variable-right">
 											<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> Splits.io</a>
 										</div>
 									</div>
