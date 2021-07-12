@@ -104,10 +104,11 @@
 							</div>
 							<div class="container">
 								<div class="columns">
-									<div class="column is-8">
-										<div class="run-modal-titles">
+									<div class="column is-10" id="run-single-info-container">
+										<div class="run-single-titles">
 											<h1>
-												<span id="run-single-game" style="font-weight: bold;"></span> -
+												<span id="run-single-game" style="font-weight: bold;"></span>
+												<span class="is-hidden-mobile"> -</span><span class="is-hidden-tablet"><br></span>
 												<span id="run-single-category"></span>
 											</h1>
 											<h2>
@@ -115,16 +116,17 @@
 												<span id="run-single-runner"></span>
 											</h2>
 										</div>
+										<p id="run-single-comment"></p>
+										<p>Played on <span id="run-single-platform">Oculus VR</span></p>
+										<p>Run verified by <span id="run-single-verifier"></span></p>
 									</div>
-									<div class="column is-4">
-										<div>
-											<a id="run-single-src" class="button is-dark is-fullwidth" href="", target="_blank">
-												<span class="icon has-text"><i class="fas fa-trophy"></i></span>
-												View on Speedrun.com
+									<div class="column is-2">
+										<div class="buttons is-centered is-right-mobile">
+											<a id="run-single-src" class="button-outer" href="" target="_blank">
+												<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
 											</a>
-											<a id="run-single-vid" class="button is-dark is-fullwidth" href="", target="_blank">
-												<span class="icon has-text"><i id="run-single-vid-icon" class="fab fas"></i></span>
-												<span id="run-single-vid-text">Watch on </span>
+											<a id="run-single-vid" class="button-outer" href="" target="_blank">
+												<div class="button is-dark"><span class="icon"><i id="run-single-vid-icon" class=""></i></span></div>
 											</a>
 										</div>
 									</div>
@@ -132,6 +134,15 @@
 							</div>
 							<div id="run-single-splits-container">
 								<div class="divider"></div>
+								<div id="variables">
+									<div class="buttons has-addons">
+										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
+										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
+									</div>
+									<div class="buttons has-addons variable-right">
+										<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> Splits.io</a>
+									</div>
+								</div>
 								<div id="run-single-splits-loading" class="loadingdiv" style="display: block;">
 									<div>
 										<div class="spinner"></div>
@@ -139,15 +150,6 @@
 									</div>
 								</div>
 								<div class="container" id="run-single-splits-inner">
-									<div id="variables">
-										<div class="buttons has-addons">
-											<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
-											<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
-										</div>
-										<div class="buttons has-addons variable-right">
-											<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> Splits.io</a>
-										</div>
-									</div>
 									<div id="run-single-splits-bar-outer"><div id="run-single-splits-bar"></div></div>
 									<div>
 										<table class="table is-narrow is-fullwidth">

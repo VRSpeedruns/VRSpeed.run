@@ -5,9 +5,12 @@ var runSingleGame;
 var runSingleCategory;
 var runSingleTime;
 var runSingleRunner;
+var runSingleComment;
+var runSinglePlatform;
+var runSingleVerifier;
+
 var runSingleSrc;
 var runSingleVid;
-var runSingleVidText;
 var runSingleVidIcon;
 
 var runSingleSplitsContainer;
@@ -21,6 +24,8 @@ var runSingleSplitsGT;
 
 var splitsBarColors;
 
+var lastSplitsTippys = [];
+
 function onSingleRunLoad()
 {
     boxRuns = document.getElementById("box-runs");
@@ -30,9 +35,12 @@ function onSingleRunLoad()
     runSingleCategory = document.getElementById("run-single-category");
     runSingleTime = document.getElementById("run-single-time");
     runSingleRunner = document.getElementById("run-single-runner");
+    runSingleComment = document.getElementById("run-single-comment");
+    runSinglePlatform = document.getElementById("run-single-platform");
+    runSingleVerifier = document.getElementById("run-single-verifier");
+
     runSingleSrc = document.getElementById("run-single-src");
     runSingleVid = document.getElementById("run-single-vid");
-    runSingleVidText = document.getElementById("run-single-vid-text");
     runSingleVidIcon = document.getElementById("run-single-vid-icon");
 
     runSingleSplitsContainer = document.getElementById("run-single-splits-container");
@@ -44,7 +52,14 @@ function onSingleRunLoad()
     runSingleSplitsRT = document.getElementById("run-single-splits-rt");
     runSingleSplitsGT = document.getElementById("run-single-splits-gt");
 
-    splitsBarColors = ['#007bff', '#6f42c1', '#28a745', '#ffc107', '#dc3545', '#fd7e14'];
+    if (!isMobile)
+    {
+        tippy('#run-single-src', {
+            content: "View the run on Speedrun.com",
+            placement: 'top',
+            offset: [0,7.5]
+        });
+    }
 }
 
 function openRun(id, loadOrState = false)
@@ -55,6 +70,14 @@ function openRun(id, loadOrState = false)
 	}
     
     runSingleSplitsContainer.style.display = "none";
+
+    var _c = h2r(currentGame.color);
+    var _base = "rgba(" + _c[0] + ", " + _c[1] + ", " + _c[2] + ", ";
+    splitsBarColors = [];
+    for (var i = 1; i < 4; i++)
+    {
+        splitsBarColors.push(_base + (0.25 * i) + ")");
+    }
 
     get("https://www.speedrun.com/api/v1/runs/" + id + "?embed=players,platform,game")
 	.then((data) =>
@@ -145,17 +168,26 @@ function openRun(id, loadOrState = false)
         if (run.videos != null)
         {
             vidLink = run.videos.links[0].uri;
-            runSingleVid.style.display = "block";
+            runSingleVid.style.display = "flex";
         }
         else
         {
             runSingleVid.style.display = "none";
         }
 
+        var platform = run.platform.data.name;
+        if (currentGame.hardware != "")
+        {
+            platform = "<b>" + runsHardwareArray[run.values[currentGame.hardware]] + "</b> (<i>" + platform + "</i>)";
+        }
+
         runSingleGame.innerText = game;
         runSingleCategory.innerText = category;
         runSingleTime.innerText = time;
         runSingleRunner.innerHTML = player;
+        runSingleComment.innerText = '"' + run.comment + '"';
+        runSinglePlatform.innerHTML = platform;
+
         runSingleSrc.href = srcLink;
         runSingleVid.href = vidLink;
 
@@ -165,23 +197,51 @@ function openRun(id, loadOrState = false)
         runSingleVidIcon.classList.remove('fa-twitch');
         runSingleVidIcon.classList.remove('fa-video');
 
+        if (runSingleVid._tippy)
+        {
+            runSingleVid._tippy.destroy();
+        }
+
         if (vidLink.includes("youtube.com") || vidLink.includes("youtu.be"))
         {
-            runSingleVidText.innerText = 'Watch on YouTube';
             runSingleVidIcon.classList.add('fab');
             runSingleVidIcon.classList.add('fa-youtube');
+
+            if (!isMobile)
+            {
+                tippy('#run-single-vid', {
+                    content: "Watch the run on YouTube",
+                    placement: 'top',
+                    offset: [0,7.5]
+                });
+            }
         }
         else if (vidLink.includes("twitch.tv"))
         {
-            runSingleVidText.innerText = 'Watch on Twitch';
             runSingleVidIcon.classList.add('fab');
             runSingleVidIcon.classList.add('fa-twitch');
+            
+            if (!isMobile)
+            {
+                tippy('#run-single-vid', {
+                    content: "Watch the run on Twitch",
+                    placement: 'top',
+                    offset: [0,7.5]
+                });
+            }
         }
         else
         {
-            runSingleVidText.innerText = 'Watch Run';
             runSingleVidIcon.classList.add('fas');
             runSingleVidIcon.classList.add('fa-video');
+            if (!isMobile)
+            {
+                tippy('#run-single-vid', {
+                    content: "Watch the run",
+                    placement: 'top',
+                    offset: [0,7.5]
+                });
+            }
         }
         
         boxRuns.style.display = "none";
@@ -195,6 +255,15 @@ function openRun(id, loadOrState = false)
             var verifier = getGradientName(_data.names.international,
                 _data["name-style"]["color-from"].dark,
                 _data["name-style"]["color-to"].dark);
+
+            var flag = '';
+            if (_data.location !== null)
+            {
+                flag = '<img class="runs-flag" src="https://www.speedrun.com/images/flags/' + _data.location.country.code + '.png">';
+                player = flag + player;
+            }
+                
+            runSingleVerifier.innerHTML = '<a class="player-link" href="' + _data.weblink + '">' + flag + verifier + '</a>';
         });
 
         if (run.splits !== null)
@@ -227,6 +296,25 @@ function loadSplits(id, timing = "default")
     runSingleSplitsLoading.style.display = "block";
     runSingleSplitsContainer.style.display = "block";
 
+    if (timing == "real")
+    {
+        runSingleSplitsRT.classList.add("is-active");
+        runSingleSplitsGT.classList.remove("is-active");
+    }
+    else if (timing == "game")
+    {
+        runSingleSplitsGT.classList.add("is-active");
+        runSingleSplitsRT.classList.remove("is-active");
+    }
+
+    for (var i = 0; i < lastSplitsTippys.length; i++)
+    {
+        lastSplitsTippys[i][0].destroy();
+    }
+    lastSplitsTippys = [];
+    
+    runSingleSplitsUrl.href = 'https://splits.io/' + id + '?timing=' + timing;
+
     get('https://splits.io/api/v4/runs/' + id)
     .then((data) =>
     {
@@ -236,8 +324,6 @@ function loadSplits(id, timing = "default")
         {
             timing = run['default_timing'];
         }
-
-        runSingleSplitsUrl.href = 'https://splits.io/' + id + '?timing=' + timing;
         
         timing += "time";
 
@@ -320,12 +406,10 @@ function loadSplits(id, timing = "default")
             }
             
             var content = '<div class="has-text-' + dir + '"><p class="has-text-weight-bold"><span class="sp-name-num">' + (seg["segment_number"] + 1) + '.</span> ' + seg["display_name"] + '</p><p class="sp-time">Duration: ' + msToTime(seg[timing + "_duration_ms"]) + '</p><p class="sp-time">Finished at: ' + msToTime(seg[timing + "_end_ms"]) + '</p><p class="sp-timesave">' + timesave + '</p></div>';
-
-            tippy('#bar-' + i, {
-                theme: 'vrsr-arrow',
+            
+            lastSplitsTippys[i] = tippy('#bar-' + i, {
                 content: content,
                 allowHTML: true,
-                placement: 'bottom',
                 offset: [0,7.5],
                 duration: [0, 0]
             });

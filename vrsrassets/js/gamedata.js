@@ -51,6 +51,7 @@ var runsContainer;
 var runsTable;
 var runsLoading;
 var runsPlatformHardware;
+var runsHardwareArray = [];
 
 var categoryTabs;
 
@@ -68,6 +69,8 @@ var platformsList;
 var defaultIndex;
 
 var catNameRegex = /[^a-zA-Z0-9-_]+/ig;
+
+var lastIconsTippys = [];
 
 function onGameDataLoad()
 {
@@ -505,6 +508,12 @@ function loadRuns(id, variables, loadOrState = false)
 		}
 	}
 
+	for (var i = 0; i < lastIconsTippys.length; i++)
+	{
+		lastIconsTippys[i][0].destroy();
+	}
+	lastIconsTippys = [];
+
 	get("https://www.speedrun.com/api/v1/leaderboards/" + gameId + "/category/" + id + "?embed=players,platforms,variables" + varString)
 	.then((data) =>
 	{
@@ -538,6 +547,8 @@ function loadRuns(id, variables, loadOrState = false)
 		}
 
 		runsContainer.innerHTML = '';
+		
+		runsHardwareArray = [];
 
 		for (var i = 0; i < json.runs.length; i++)
 		{
@@ -594,6 +605,15 @@ function loadRuns(id, variables, loadOrState = false)
 					{
 						platform = allVars[k].values.values[val].label;
 						runsPlatformHardware.innerText = "Hardware";
+
+						if (runsHardwareArray.length == 0)
+						{
+							for (var id in allVars[k].values.values)
+							{
+								runsHardwareArray[id] = allVars[k].values.values[id].label;
+							}
+						}
+						
 						break;
 					}
 				}
@@ -622,17 +642,17 @@ function loadRuns(id, variables, loadOrState = false)
 		
 		if (!isMobile)
 		{
+			var tippyCount = 0;
 			for (var i = 0; i <json.runs.length; i++)
 			{
 				if (json.runs[i].run.splits != null)
 				{
-					tippy('#run-' + json.runs[i].run.id + '-splits', {
+					lastIconsTippys[tippyCount] = tippy('#run-' + json.runs[i].run.id + '-splits', {
 						theme: 'vrsr-arrow',
 						content: 'Splits are available for this run.',
-						placement: 'top',
-						delay: [225, 0],
-						duration: [150, 0]
+						placement: 'top'
 					});
+					tippyCount++;
 				}
 			}
 		}

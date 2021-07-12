@@ -307,32 +307,43 @@ a.button:not(:last-child) {
 
 /* ---------- Single Run Info ---------- */
 
-.modal-background {
-	background-color: rgba(10, 10, 10, 0.5);
+.run-single-titles {
+	margin-bottom: 1em;
 }
-@media screen and (min-width: 769px) {
-	.modal-content {
-		margin: 0 auto;
-		max-height: calc(100vh - 40px);
-		width: 50%;
-	}
-}
-
-.run-modal-titles h1 {
+.run-single-titles h1 {
 	font-size: 1.5em;
 }
-.run-modal-titles h2 {
+.run-single-titles h2 {
 	font-size: 1.25em;
 }
 
+#run-single-comment {
+	font-style: italic;
+}
+#run-single-info-container > p:not(:empty) {
+	margin-top: 0.5em;
+}
+
+@media only screen and (max-width: 768px) {
+	.run-single-titles h1 {
+		font-size: 1.25em;
+	}
+	.run-single-titles h2 {
+		font-size: 1.15em;
+	}
+}
+
+
+
 /* ---------- Splits ---------- */
+
 
 #run-single-splits-bar-outer {
 	width: calc(100% + 2.5rem) !important;
 	margin-left: -1.25rem;
 
 	margin-bottom: 1.25rem;
-	background-color: var(--background-accent-color);
+	background-color: var(--background-color);
 	height: 4em;
 }
 @media only screen and (max-width: 768px) {

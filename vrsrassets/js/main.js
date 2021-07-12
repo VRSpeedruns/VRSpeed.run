@@ -101,40 +101,31 @@ function infoTippy()
 {
     if (isMobile) return;
 
-    tippy('#game-links-leaderboard', {
+    tippy.setDefaultProps({
         theme: 'vrsr-arrow',
-        content: 'View Leaderboard',
         placement: 'bottom',
-        offset: [0,7.5],
         duration: [150, 100]
+    });
+
+    tippy('#game-links-leaderboard', {
+        offset: [0,7.5],
+        content: 'View Leaderboard'
     });
     tippy('#game-links-guides', {
-        theme: 'vrsr-arrow',
-        content: 'View Guides',
-        placement: 'bottom',
         offset: [0,7.5],
-        duration: [150, 100]
+        content: 'View Guides'
     });
     tippy('#game-links-resources', {
-        theme: 'vrsr-arrow',
-        content: 'View Resources',
-        placement: 'bottom',
         offset: [0,7.5],
-        duration: [150, 100]
+        content: 'View Resources'
     });
     tippy('#game-links-forums', {
-        theme: 'vrsr-arrow',
-        content: 'View Forums',
-        placement: 'bottom',
         offset: [0,7.5],
-        duration: [150, 100]
+        content: 'View Forums'
     });
     tippy('#game-links-statistics', {
-        theme: 'vrsr-arrow',
-        content: 'View Statistics',
-        placement: 'bottom',
         offset: [0,7.5],
-        duration: [150, 100]
+        content: 'View Statistics'
     });
 }
 
