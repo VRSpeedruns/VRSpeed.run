@@ -9,7 +9,7 @@ function onLoad()
     aboutInfoToggle = document.getElementById("about-info-toggle");
     aboutInfoMore = document.getElementById("about-info-more");
 
-    pathPrefix = window.location.pathname.substring(0, 5) + "/";
+    pathPrefix = `${window.location.pathname.substring(0, 5)}/`;
 
     infoTippy();
     onGameDataLoad();
@@ -44,7 +44,7 @@ function setHash(hash)
 {
     if (hash != "")
     {
-        hash = '#' + hash;
+        hash = `#${hash}`;
     }
 
     replaceState(getPath() + hash);

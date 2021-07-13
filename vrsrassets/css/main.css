@@ -227,6 +227,15 @@ a.button:not(:last-child) {
 	border-bottom: 1px var(--background-accent-color);
 	text-align: center !important;
 }
+
+.table td.is-table-icons {
+	text-align: right !important;
+	padding-right: 1.25em;
+}
+.is-table-icons > i:not(:last-child) {
+	margin-right: 0.45em;
+}
+
 .table tbody tr {
 	cursor: pointer;
 }
@@ -423,6 +432,14 @@ a.button:not(:last-child) {
 	margin-bottom: 0.75em;
 	font-weight: bold;
 }
+#about-info-toggle {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
+}
 #about-info-toggle:hover {
 	text-decoration: none;
 }
@@ -485,12 +502,8 @@ a.button:not(:last-child) {
 .is-footer p, #game-year, #game-platforms {
 	color: #bbb;
 }
-.is-footer > div >  .links > a {
-	color: var(--text-color) !important;
-	font-size: 1.1em;
-}
-.is-footer > div > .links > a:hover {
-	color: var(--primary-color);
+.links > div > a > i {
+	margin-right: 0.25em;
 }
 
 #level-select-cols, #level-select-cols > div > .select  {
@@ -540,6 +553,13 @@ a.button:not(:last-child) {
 .back-button {
 	margin-bottom: 1.25rem;
 	font-weight: bold;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
 }
 .back-button a:hover {
 	text-decoration: none;

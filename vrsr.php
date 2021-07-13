@@ -182,10 +182,10 @@
 				<div class="column is-4 has-text-left-desktop">
 					<div class="links">
 						<div>
-							<a href="https://github.com/bigfoott/VRSR"><i class="fab fa-github" aria-hidden="true"></i> GitHub Repo</a>
+							<a href="https://github.com/bigfoott/VRSR"><i class="fab fa-github" aria-hidden="true"></i>GitHub Repo</a>
 						</div>
 						<div>
-							<a href="https://twitter.com/VRSpeedruns"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter Bot</a>
+							<a href="https://twitter.com/VRSpeedruns"><i class="fab fa-twitter" aria-hidden="true"></i>Twitter Bot</a>
 						</div>
 					</div> 
 				</div>

@@ -66,20 +66,20 @@ function openRun(id, loadOrState = false)
 {
     if (!loadOrState)
 	{
-		pushState(getGame() + "/run/" + id);
+        pushState(`${getGame()}/run/${id}`);
 	}
     
     runSingleSplitsContainer.style.display = "none";
 
     var _c = h2r(currentGame.color);
-    var _base = "rgba(" + _c[0] + ", " + _c[1] + ", " + _c[2] + ", ";
+    var _base = `rgba(${_c[0]}, ${_c[1]}, ${_c[2]}, `;
     splitsBarColors = [];
     for (var i = 1; i < 4; i++)
     {
-        splitsBarColors.push(_base + (0.25 * i) + ")");
+        splitsBarColors.push(`${_base}${0.25 * i})`);
     }
 
-    get("https://www.speedrun.com/api/v1/runs/" + id + "?embed=players,platform,game")
+    get(`https://www.speedrun.com/api/v1/runs/${id}?embed=players,platform,game`)
 	.then((data) =>
 	{
         if (currentCatIndex == undefined)
@@ -124,23 +124,10 @@ function openRun(id, loadOrState = false)
         }
         if (subcats.length > 0)
         {
-            category += " (" + subcats.join(", ") + ")";
+            category += ` (${subcats.join(", ")})`;
         }
 
-        var time = run.times.primary.replace('PT','').replace('H','h ').replace('M','m ');
-        if (time.includes('.'))
-        {
-            time = time.replace('.', 's ').replace('S', 'ms');
-            var ms = time.split('s ')[1].split('ms')[0];
-            ms = ms.replace(/^0+/, '');
-
-            time = time.split('s ')[0] + "s " + ms + "ms";
-            
-        }
-        else
-        {
-            time = time.replace('S','s');
-        }
+        var time = runTimeFormat(run.times.primary);
 
         var player = "";
         if (run.players.data[0].rel == "user")
@@ -152,7 +139,7 @@ function openRun(id, loadOrState = false)
 
             if (temp.location !== null)
 			{
-				flag = '<img class="runs-flag" src="https://www.speedrun.com/images/flags/' + temp.location.country.code + '.png">';
+				var flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
                 player = flag + player;
 			}
         }
@@ -161,7 +148,7 @@ function openRun(id, loadOrState = false)
             player = run.players.data[0].name;
         }
 
-        player = '<a class="player-link" href="' + run.players.data[0].weblink + '" target="_blank">' + player + '</a>';
+        player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${player}</a>`;
 
         var srcLink = run.weblink;
         var vidLink = '';
@@ -178,14 +165,18 @@ function openRun(id, loadOrState = false)
         var platform = run.platform.data.name;
         if (currentGame.hardware != "")
         {
-            platform = "<b>" + runsHardwareArray[run.values[currentGame.hardware]] + "</b> (<i>" + platform + "</i>)";
+            platform = `<b>${runsHardwareArray[run.values[currentGame.hardware]]}</b> (<i>${platform}</i>)`;
+        }
+        else
+        {
+            platform = `<b>${platform}</b>`
         }
 
         runSingleGame.innerText = game;
         runSingleCategory.innerText = category;
         runSingleTime.innerText = time;
         runSingleRunner.innerHTML = player;
-        runSingleComment.innerText = '"' + run.comment + '"';
+        runSingleComment.innerText = `"${run.comment}"`;
         runSinglePlatform.innerHTML = platform;
 
         runSingleSrc.href = srcLink;
@@ -248,7 +239,7 @@ function openRun(id, loadOrState = false)
         boxSingleRun.style.display = "block";
         mainLoading.style.display = "none";
 
-        get("https://www.speedrun.com/api/v1/users/" + run.status.examiner)
+        get(`https://www.speedrun.com/api/v1/users/${run.status.examiner}`)
         .then((__data) =>
         {
             var _data = (JSON.parse(__data)).data;
@@ -256,14 +247,13 @@ function openRun(id, loadOrState = false)
                 _data["name-style"]["color-from"].dark,
                 _data["name-style"]["color-to"].dark);
 
-            var flag = '';
             if (_data.location !== null)
             {
-                flag = '<img class="runs-flag" src="https://www.speedrun.com/images/flags/' + _data.location.country.code + '.png">';
-                player = flag + player;
+                var flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${_data.location.country.code}.png">`;
+                verifier = flag + verifier;
             }
                 
-            runSingleVerifier.innerHTML = '<a class="player-link" href="' + _data.weblink + '" target="_blank">' + flag + verifier + '</a>';
+            runSingleVerifier.innerHTML = `<a class="player-link" href="${_data.weblink}" target="_blank">${verifier}</a>`;
         });
 
         if (run.splits !== null)
@@ -271,8 +261,8 @@ function openRun(id, loadOrState = false)
             var splitArr = run.splits.uri.split('/');
             var splitsId = splitArr[splitArr.length - 1];
 
-            runSingleSplitsRT.setAttribute( 'onclick', 'loadSplits("' + splitsId + '", "real")' );
-            runSingleSplitsGT.setAttribute( 'onclick', 'loadSplits("' + splitsId + '", "game")' );
+            runSingleSplitsRT.setAttribute( 'onclick', `loadSplits("${splitsId}", "real")`);
+            runSingleSplitsGT.setAttribute( 'onclick', `loadSplits("${splitsId}", "game")`);
 
             loadSplits(splitsId);
         }
@@ -313,9 +303,9 @@ function loadSplits(id, timing = "default")
     }
     lastSplitsTippys = [];
     
-    runSingleSplitsUrl.href = 'https://splits.io/' + id;
+    runSingleSplitsUrl.href = `https://splits.io/${id}`;
 
-    get('https://splits.io/api/v4/runs/' + id)
+    get(`https://splits.io/api/v4/runs/${id}`)
     .then((data) =>
     {
         var run = (JSON.parse(data)).run;
@@ -325,7 +315,7 @@ function loadSplits(id, timing = "default")
             timing = run['default_timing'];
         }
         
-        runSingleSplitsUrl.href = 'https://splits.io/' + id + '?timing=' + timing;
+        runSingleSplitsUrl.href = `https://splits.io/${id}?timing=${timing}`;
 
         timing += "time";
 
@@ -340,7 +330,7 @@ function loadSplits(id, timing = "default")
             runSingleSplitsRT.classList.remove("is-active");
         }
 
-        var totalDuration = run[timing + "_duration_ms"];
+        var totalDuration = run[`${timing}_duration_ms`];
 
         runSingleSegments.innerHTML = '';
         runSingleSplitsBar.innerHTML = '';
@@ -350,19 +340,20 @@ function loadSplits(id, timing = "default")
         for (var i = 0; i < run.segments.length; i++)
         {
             var seg = run.segments[i];
-            duration += seg[timing + "_duration_ms"];
+            duration += seg[`${timing}_duration_ms`];
             
             var pbColor = '';
-            if (seg[timing + "_gold"])
+            if (seg[`${timing}_gold`])
             {
                 pbColor = ' class="new-pb has-text-weight-bold"';
             }
 
-            var row = '<tr' + pbColor + '><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
+            var row = `<tr${pbColor}><td>${(seg["segment_number"] + 1)}</td><td>${seg["display_name"]}</td><td>${msToTime(seg[`${timing}_duration_ms`])}</td><td>${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
 
-            var percent = (seg[timing + "_duration_ms"] / totalDuration) * 100;
+            var percent = (seg[`${timing}_duration_ms`] / totalDuration) * 100;
             var color = splitsBarColors[i % splitsBarColors.length];
-            runSingleSplitsBar.innerHTML += '<div id="bar-' + i + '" style="width: ' + percent + '%; background-color: ' + color + '"><div><div>' + seg["display_name"] + '</div><div class="sp-time">' + msToTime(seg[timing + "_duration_ms"]) + '</div></div></div>';
+            
+            runSingleSplitsBar.innerHTML += `<div id="bar-${i}" style="width: ${percent}%; background-color: ${color}"><div><div>${seg["display_name"]}</div><div class="sp-time">${msToTime(seg[`${timing}_duration_ms`])}</div></div></div>`;
             
             if (seg.name.substring(0, 1) == "-")
             {
@@ -373,7 +364,7 @@ function loadSplits(id, timing = "default")
                 temp += row;
                 
                 var catName = seg.name.substring(1).split("}")[0];
-                var head = '<tr class="sp-heading"><td></td><td>' + catName + '</td><td>' + msToTime(duration) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
+                var head = `<tr class="sp-heading"><td></td><td>${catName}</td><td>${msToTime(duration)}</td><td>${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
 
                 runSingleSegments.innerHTML += head + temp;
                 temp = '';
@@ -381,9 +372,9 @@ function loadSplits(id, timing = "default")
             }
             else
             {
-                duration -= seg[timing + "_duration_ms"];
+                duration -= seg[`${timing}_duration_ms`];
                 
-                runSingleSegments.innerHTML += '<tr' + pbColor + '><td>' + (seg["segment_number"] + 1) + '</td><td>' + seg["display_name"] + '</td><td>' + msToTime(seg[timing + "_duration_ms"]) + '</td><td>' + msToTime(seg[timing + "_end_ms"]) + '</td></tr>';
+                runSingleSegments.innerHTML += `<tr${pbColor}><td>${seg["segment_number"] + 1}</td><td>${seg["display_name"]}</td><td>${msToTime(seg[`${timing}_duration_ms`])}</td><td>'${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
             }
         }
         runSingleSegments.innerHTML += temp; //in case there's anything left over in temp for some reason
@@ -400,16 +391,16 @@ function loadSplits(id, timing = "default")
             var _timesave = seg[timing + "_duration_ms"] - seg[timing + "_shortest_duration_ms"];
             if (_timesave > 0)
             {
-                timesave = msToTimeSingle(_timesave) + ' of possible timesave';
+                timesave = `${msToTimeSingle(_timesave)} of possible timesave.`;
             }
             else
             {
                 timesave = '<span class="new-pb">New personal best!</span>';
             }
             
-            var content = '<div class="has-text-' + dir + '"><p class="has-text-weight-bold"><span class="sp-name-num">' + (seg["segment_number"] + 1) + '.</span> ' + seg["display_name"] + '</p><p class="sp-time">Duration: ' + msToTime(seg[timing + "_duration_ms"]) + '</p><p class="sp-time">Finished at: ' + msToTime(seg[timing + "_end_ms"]) + '</p><p class="sp-timesave">' + timesave + '</p></div>';
+            var content = `<div class="has-text-${dir}"><p class="has-text-weight-bold"><span class="sp-name-num">${seg["segment_number"] + 1}.</span> ${seg["display_name"]}</p><p class="sp-time">Duration: ${msToTime(seg[`${timing}_duration_ms`])}</p><p class="sp-time">Finished at: ${msToTime(seg[`${timing}_end_ms`])}</p><p class="sp-timesave">${timesave}</p></div>`;
             
-            lastSplitsTippys[i] = tippy('#bar-' + i, {
+            lastSplitsTippys[i] = tippy(`#bar-${i}`, {
                 content: content,
                 allowHTML: true,
                 offset: [0,7.5],
@@ -428,11 +419,11 @@ function msToTime(duration) {
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
   
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
+    hours = (hours < 10) ? `0${hours}` : hours;
+    minutes = (minutes < 10) ? `0${minutes}` : minutes;
+    seconds = (seconds < 10) ? `0${seconds}` : seconds;
   
-    return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+    return `${hours}:${minutes}:${seconds}.${milliseconds}`;
 }
 
 function msToTimeSingle(duration) {
@@ -443,19 +434,19 @@ function msToTimeSingle(duration) {
     
     if (hours > 0)
     {
-        return hours + "h";
+        return `${hours}h`;
     }
     else if (minutes > 0)
     {
-        return minutes + "m"
+        return `${minutes}m`
     }
     else if (seconds > 0)
     {
-        return seconds + "s";
+        return `${seconds}s`;
     }
     else if (milliseconds > 0)
     {
-        return milliseconds + "ms";
+        return `${milliseconds}ms`;
     }
     
     return '1ms';

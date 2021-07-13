@@ -157,7 +157,7 @@ function loadAllGames()
 {
 	for (var i = 0; i < gamesArray.length; i++)
 	{
-		gamesContainer.innerHTML += '<option value="' + gamesArray[i].abbreviation + '">' + gamesArray[i].name + '</option>';
+		gamesContainer.innerHTML += `<option value="${gamesArray[i].abbreviation}">${gamesArray[i].name}</option>`;
 	}
 }
 
@@ -190,7 +190,7 @@ function loadGame(id, loadOrState = false, force = false)
 
 	if (getRun() && runLoadedCategory == '')
 	{
-		get("https://www.speedrun.com/api/v1/runs/" + getRun())
+		get(`https://www.speedrun.com/api/v1/runs/${getRun()}`)
 		.then((data) =>
 		{
 			runLoadedCategory = (JSON.parse(data)).data.category;
@@ -217,7 +217,7 @@ function loadGame(id, loadOrState = false, force = false)
 		}
 	}
 
-	document.title = currentGame.name + " - VRSR";
+	document.title = `${currentGame.name} - VRSR`;
 
 	if (boxRuns)
 	{
@@ -229,13 +229,13 @@ function loadGame(id, loadOrState = false, force = false)
 	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
 
 	gameInfoImage.src = '';
-	gameInfoLinkLeaderboard.href = "https://www.speedrun.com/" + gameId + "/full_game";
-	gameInfoLinkGuides.href = "https://www.speedrun.com/" + gameId + "/guides";
-	gameInfoLinkResources.href = "https://www.speedrun.com/" + gameId + "/resources";
-	gameInfoLinkForums.href = "https://www.speedrun.com/" + gameId + "/forum";
-	gameInfoLinkStatistics.href = "https://www.speedrun.com/" + gameId + "/gamestats";
+	gameInfoLinkLeaderboard.href = `https://www.speedrun.com/${gameId}/full_game`;
+	gameInfoLinkGuides.href = `https://www.speedrun.com/${gameId}/guides`;
+	gameInfoLinkResources.href = `https://www.speedrun.com/${gameId}/resources`;
+	gameInfoLinkForums.href = `https://www.speedrun.com/${gameId}/forum`;
+	gameInfoLinkStatistics.href = `https://www.speedrun.com/${gameId}/gamestats`;
 
-	get("https://www.speedrun.com/api/v1/games/" + gameId + "?embed=platforms,categories,levels")
+	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,levels`)
 	.then((data) =>
 	{
 		var game = (JSON.parse(data)).data;
@@ -370,11 +370,11 @@ function displayCategoryTabs(loadOrState = false)
 
 	for (var i = 0; i < categories.length; i++)
 	{
-		categoriesContainer.innerHTML += '<li id="category-' + i + '"><a onclick="displayCategory(' + i + ')">' + categories[i].name + '</a></li>';
+		categoriesContainer.innerHTML += `<li id="category-${i}"><a onclick="displayCategory(${i})">${categories[i].name}</a></li>`;
 	}
 	for (var i = 0; i < categories.length; i++)
 	{
-		categoryTabs.push(document.getElementById("category-" + i));
+		categoryTabs.push(document.getElementById(`category-${i}`));
 	}
 
 	if (runLoadedCategory != '')
@@ -416,7 +416,7 @@ function displayCategory(index, loadOrState = false)
 	currentCatIndex = index;
 
 	var catName = categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, '');
-	gameInfoLinkLeaderboard.href = gameInfoLinkLeaderboard.href.split('#')[0] + '#' + catName;
+	gameInfoLinkLeaderboard.href = `${gameInfoLinkLeaderboard.href.split('#')[0]}#${catName}`;
 
 	for (var i = 0; i < categoryTabs.length; i++)
 	{
@@ -443,9 +443,9 @@ function displayCategoryVariables(index, loadOrState = false)
 			var temp = '<div class="buttons has-addons">';
 			for (var k = 0; k < vars[i].values.length; k++)
 			{
-				temp += '<button id="' + vars[i].id + '-' + vars[i].values[k].id + '" class="button is-small is-dark is-variable" onclick="setVariable(\'' + vars[i].id + '\',\'' + vars[i].values[k].id + '\');">' + vars[i].values[k].name + '</button>';
+				temp += `<button id="${vars[i].id}-${vars[i].values[k].id}" class="button is-small is-dark is-variable" onclick="setVariable('${vars[i].id}','${vars[i].values[k].id}');">${vars[i].values[k].name}</button>`;
 			}
-			variablesContainer.innerHTML += temp += '</div>';
+			variablesContainer.innerHTML += `${temp}</div>`;
 		}
 
 		setVariable(vars[i].id, vars[i].values[0].id, false)
@@ -461,8 +461,8 @@ function setVariable(id, value, loadAfter = true)
 	{
 		if (currentVariables[i].id == id)
 		{
-			document.getElementById(id + "-" + currentVariables[i].value).classList.remove("is-active");
-			document.getElementById(id + "-" + value).classList.add("is-active");
+			document.getElementById(`${id}-${currentVariables[i].value}`).classList.remove("is-active");
+			document.getElementById(`${id}-${value}`).classList.add("is-active");
 
 			currentVariables[i].value = value;
 			found = true;
@@ -473,7 +473,7 @@ function setVariable(id, value, loadAfter = true)
 	{
 		currentVariables.push({"id": id, "value": value});
 		
-		var ele = document.getElementById(id + "-" + value);
+		var ele = document.getElementById(`${id}-${value}`);
 		if (ele)
 		{
 			ele.classList.add("is-active");
@@ -504,7 +504,7 @@ function loadRuns(id, variables, loadOrState = false)
 	{
 		for (var i = 0; i < variables.length; i++)
 		{
-			varString += "&var-" + variables[i].id + "=" + variables[i].value;
+			varString += `&var-${variables[i].id}=${variables[i].value}`;
 		}
 	}
 
@@ -514,7 +514,7 @@ function loadRuns(id, variables, loadOrState = false)
 	}
 	lastIconsTippys = [];
 
-	get("https://www.speedrun.com/api/v1/leaderboards/" + gameId + "/category/" + id + "?embed=players,platforms,variables" + varString)
+	get(`https://www.speedrun.com/api/v1/leaderboards/${gameId}/category/${id}?embed=players,platforms,variables${varString}`)
 	.then((data) =>
 	{
 		var json = (JSON.parse(data)).data;
@@ -557,27 +557,14 @@ function loadRuns(id, variables, loadOrState = false)
 			var place = nth(json.runs[i].place);
 			if (place == "1st" || place == "2nd" || place == "3rd")
 			{
-				place = '<b class="place-' + place + '">' + place + '</b>';
+				place = `<b class="place-${place}">${place}</b>`;
 			}
 			else if (place == "0th")
 			{
 				place = "—";
 			}
 
-			var time = run.times.primary.replace('PT','').replace('H','h ').replace('M','m ');
-			if (time.includes('.'))
-			{
-				time = time.replace('.', 's ').replace('S', 'ms');
-				var ms = time.split('s ')[1].split('ms')[0];
-				ms = ms.replace(/^0+/, '');
-
-				time = time.split('s ')[0] + "s " + ms + "ms";
-				
-			}
-			else
-			{
-				time = time.replace('S','s');
-			}
+			var time = runTimeFormat(run.times.primary);
 
 			var player = "";
 			if (run.players[0].rel == "user")
@@ -628,16 +615,20 @@ function loadRuns(id, variables, loadOrState = false)
 			var flag = '';
 			if (run.players[0].id != undefined && players[run.players[0].id].region != '')
 			{
-				flag = '<img class="runs-flag" src="https://www.speedrun.com/images/flags/' + players[run.players[0].id].region + '.png">';
+				flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${players[run.players[0].id].region}.png">`;
 			}
 
 			var icons = '';
 			if (run.splits != null)
 			{
-				icons += '<i id="run-' + run.id + '-splits" class="fas fa-stopwatch"></i>';
+				icons += `<i id="run-${run.id}-splits" class="fas fa-stopwatch"></i>`;
+			}
+			if (run.videos != null)
+			{
+				icons += `<i id="run-${run.id}-video" class="fas fa-video"></i>`;
 			}
 			
-			runsContainer.innerHTML += '<tr id="run-' + run.id + '" onclick="openRun(\'' + run.id + '\')"><td>' + place + '</td><td style="font-weight: bold">' + flag + player + '</td><td>' + time + '</td><td class="is-hidden-mobile">' + platform + '</td><td class="is-hidden-mobile">' + date + '</td><td class="has-text-right is-hidden-mobile">' + icons + '</td></tr>';
+			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')"><td>${place}</td><td style="font-weight: bold">${flag}${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
 		}
 		
 		if (!isMobile)
@@ -647,9 +638,16 @@ function loadRuns(id, variables, loadOrState = false)
 			{
 				if (json.runs[i].run.splits != null)
 				{
-					lastIconsTippys[tippyCount] = tippy('#run-' + json.runs[i].run.id + '-splits', {
-						theme: 'vrsr-arrow',
+					lastIconsTippys[tippyCount] = tippy(`#run-${json.runs[i].run.id}-splits`, {
 						content: 'Splits are available for this run.',
+						placement: 'top'
+					});
+					tippyCount++;
+				}
+				if (json.runs[i].run.videos != null)
+				{
+					lastIconsTippys[tippyCount] = tippy(`#run-${json.runs[i].run.id}-video`, {
+						content: 'Video is available for this run.',
 						placement: 'top'
 					});
 					tippyCount++;
@@ -689,7 +687,7 @@ function getGradientName(name, start, end)
 
 	for (var k = 0; k < chars.length; k++)
 	{
-		player += '<span style="color: ' + colors[k] + '">' + chars[k] + '</span>';
+		player += `<span style="color: ${colors[k]}">${chars[k]}</span>`;
 	}
 
 	return player;
@@ -720,7 +718,7 @@ function timeAgo(date) {
 			_s = "";
 		}
 
-	  	return Math.floor(interval) + " year" + _s + " ago";
+		return `${Math.floor(interval)} year${_s} ago`;
 	}
 	interval = seconds / 2592000;
 	if (interval > 1) {
@@ -728,7 +726,7 @@ function timeAgo(date) {
 			_s = "";
 		}
 
-	  	return Math.floor(interval) + " month" + _s + " ago";
+		return `${Math.floor(interval)} month${_s} ago`;
 	}
 	interval = seconds / 86400;
 	if (interval > 1) {
@@ -737,7 +735,7 @@ function timeAgo(date) {
 			_s = "";
 		}
 
-	  	return Math.floor(interval) + " day" + _s + " ago";
+		return `${Math.floor(interval)} day${_s} ago`;
 	}
 	interval = seconds / 3600;
 	if (interval > 1) {
@@ -745,7 +743,7 @@ function timeAgo(date) {
 			_s = "";
 		}
 
-	  	return Math.floor(interval) + " hour" + _s + " ago";
+		return `${Math.floor(interval)} hour${_s} ago`;
 	}
 	interval = seconds / 60;
 	if (interval > 1) {
@@ -753,7 +751,28 @@ function timeAgo(date) {
 			_s = "";
 		}
 
-	  	return Math.floor(interval) + " minute" + _s + " ago";
+		return `${Math.floor(interval)} minute${_s} ago`;
 	}
 	return "Just now";
+}
+
+function runTimeFormat(time)
+{
+	time = time.replace('PT','').replace('H','h ').replace('M','m ');
+
+	if (time.includes('.'))
+	{
+		time = time.replace('.', 's ').replace('S', 'ms');
+		var ms = time.split('s ')[1].split('ms')[0];
+		ms = ms.replace(/^0+/, '');
+
+		time = `${time.split('s ')[0]}s ${ms}ms`;
+		
+	}
+	else
+	{
+		time = time.replace('S','s');
+	}
+	
+	return time;
 }
