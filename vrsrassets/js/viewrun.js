@@ -28,6 +28,7 @@ var runSingleSplitsTiming;
 var splitsBarColors;
 
 var lastSplitsTippys = [];
+var singleFlagAndModTippys = [];
 
 function onSingleRunLoad()
 {
@@ -84,6 +85,12 @@ function openRun(id, loadOrState = false)
     {
         splitsBarColors.push(`${_base}${0.25 * i})`);
     }
+    
+    for (var i = 0; i < singleFlagAndModTippys.length; i++)
+    {
+        singleFlagAndModTippys[i][0].destroy();
+    }
+    singleFlagAndModTippys = [];
 
     get(`https://www.speedrun.com/api/v1/runs/${id}?embed=players,platform,game`)
 	.then((data) =>
@@ -147,21 +154,57 @@ function openRun(id, loadOrState = false)
             player = getGradientName(rawPlayer,
                 temp["name-style"]["color-from"].dark, 
                 temp["name-style"]["color-to"].dark);
-
-            if (temp.location !== null)
-			{
-				flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
-			}
         }
         else
         {
             rawPlayer = run.players.data[0].name;
             player = rawPlayer;
         }
-        
-        var userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
 
-        player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${flag}${userIcon}${player}</a>`;
+        var singleFlagAndModTippysInfo = [];
+
+
+        var modIcon = '';
+        var flag = '';
+        var userIcon = '';
+        if (run.players.data[0].id != undefined)
+        {
+            if (currentMods[run.players.data[0].id] != undefined)
+            {
+                if (currentMods[run.players.data[0].id] == "moderator")
+                {
+                    modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
+
+                    singleFlagAndModTippysInfo.push({
+                        "id": `#singleruns-${run.players.data[0].id}-modIcon`,
+                        "text": "Mod"
+                    });
+                }
+                else if (currentMods[run.players.data[0].id] == "super-moderator")
+                {
+                    modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+
+                    singleFlagAndModTippysInfo.push({
+                        "id": `#singleruns-${run.players.data[0].id}-modIcon`,
+                        "text": "Super Mod"
+                    });
+                }
+            }
+
+            if (run.players.data[0].location !== null)
+			{
+				flag = `<img id="singleruns-${run.players.data[0].id}-userFlag" class="runs-flag" src="https://www.speedrun.com/images/flags/${run.players.data[0].location.country.code}.png">`;
+
+                singleFlagAndModTippysInfo.push({
+                    "id": `#singleruns-${run.players.data[0].id}-userFlag`,
+                    "text": run.players.data[0].location.country.names.international
+                });
+			}
+
+            userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+        }
+
+        player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${modIcon}${flag}${userIcon}${player}</a>`;
 
         var srcLink = run.weblink;
         var vidLink = '';
@@ -275,17 +318,56 @@ function openRun(id, loadOrState = false)
             var _data = (JSON.parse(__data)).data;
             var verifier = getGradientName(_data.names.international,
                 _data["name-style"]["color-from"].dark,
-                _data["name-style"]["color-to"].dark);
+                _data["name-style"]["color-to"].dark);            
 
+            var verifierModIcon = '';
             var verifierFlag = '';
+
+            if (currentMods[_data.id] != undefined)
+            {
+                if (currentMods[_data.id] == "moderator")
+                {
+                    verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
+
+                    singleFlagAndModTippysInfo.push({
+                        "id": `#singleruns-${_data.id}-verModIcon`,
+                        "text": "Mod"
+                    });
+                }
+                else if (currentMods[_data.id] == "super-moderator")
+                {
+                    verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+
+                    singleFlagAndModTippysInfo.push({
+                        "id": `#singleruns-${_data.id}-verModIcon`,
+                        "text": "Super Mod"
+                    });
+                }
+            }
+
             if (_data.location !== null)
             {
-                verifierFlag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${_data.location.country.code}.png">`;
+                verifierFlag = `<img id="singleruns-${_data.id}-verFlag" class="runs-flag" src="https://www.speedrun.com/images/flags/${_data.location.country.code}.png">`;
+
+                singleFlagAndModTippysInfo.push({
+                    "id": `#singleruns-${_data.id}-verFlag`,
+                    "text": _data.location.country.names.international
+                });
             }
 
             var verifierIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${_data.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
                 
-            runSingleVerifier.innerHTML = `<a class="player-link" href="${_data.weblink}" target="_blank">${verifierFlag}${verifierIcon}${verifier}</a>`;
+            runSingleVerifier.innerHTML = `<a class="player-link" href="${_data.weblink}" target="_blank">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
+
+            
+
+            for (var i = 0; i < singleFlagAndModTippysInfo.length; i++)
+			{
+				flagAndModTippys[i] = tippy(singleFlagAndModTippysInfo[i].id, {
+					content: singleFlagAndModTippysInfo[i].text,
+					placement: 'top'
+				});
+			}
         });
 
         if (run.splits !== null)

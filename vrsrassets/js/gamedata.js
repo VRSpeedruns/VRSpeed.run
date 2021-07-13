@@ -37,11 +37,12 @@ var gameId;
 var currentCatIndex;
 var currentVariables;
 var currentGame;
+var currentMods;
 var cats;
 var catIndex;
 var categories;
 var progress;
-var catCount;
+var catCount; 
 
 var gamesContainer;
 var categoriesContainer;
@@ -71,6 +72,7 @@ var defaultIndex;
 var catNameRegex = /[^a-zA-Z0-9-_]+/ig;
 
 var lastIconsTippys = [];
+var flagAndModTippys = [];
 
 function onGameDataLoad()
 {
@@ -214,7 +216,7 @@ function loadGame(id, loadOrState = false, force = false)
 			}
 
 			break;
-		}
+		} 
 	}
 
 	document.title = `${currentGame.name} - VRSR`;
@@ -263,6 +265,12 @@ function loadGame(id, loadOrState = false, force = false)
 		progress = 0;
 		catCount = 0;
 		
+		currentMods = [];
+		for (var id in game.moderators)
+		{
+			currentMods[id] = game.moderators[id];
+		}
+
 		for (var i = 0; i < cats.length; i++)
 		{
 			if (cats[i].type == "per-game")
@@ -520,6 +528,11 @@ function loadRuns(id, variables, loadOrState = false)
 		lastIconsTippys[i][0].destroy();
 	}
 	lastIconsTippys = [];
+	for (var i = 0; i < flagAndModTippys.length; i++)
+	{
+		flagAndModTippys[i][0].destroy();
+	}
+	flagAndModTippys = [];
 
 	get(`https://www.speedrun.com/api/v1/leaderboards/${gameId}/category/${id}?embed=players,platforms,variables${varString}`)
 	.then((data) =>
@@ -535,14 +548,19 @@ function loadRuns(id, variables, loadOrState = false)
 			if (p.rel == "guest") continue;
 
 			var loc = "";
+			var locName = "";
 			if (p.location !== null)
+			{
 				loc = p.location.country.code;
+				locName = p.location.country.names.international;
+			}
 
 			players[p.id] = {
 				"name": p.names.international,
 				"colorFrom": p["name-style"]["color-from"].dark,
 				"colorTo": p["name-style"]["color-to"].dark,
 				"region": loc,
+				"regionName": locName,
 				"link": p.weblink
 			};
 		}
@@ -556,6 +574,7 @@ function loadRuns(id, variables, loadOrState = false)
 		runsContainer.innerHTML = '';
 		
 		runsHardwareArray = [];
+		var flagAndModTippysInfo = [];
 
 		for (var i = 0; i < json.runs.length; i++)
 		{
@@ -622,13 +641,45 @@ function loadRuns(id, variables, loadOrState = false)
 
 			var date = timeAgo(new Date(run.submitted));
 
+			var modIcon = '';
 			var flag = '';
-			if (run.players[0].id != undefined && players[run.players[0].id].region != '')
+			var userIcon = '';
+			if (run.players[0].id != undefined)
 			{
-				flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${players[run.players[0].id].region}.png">`;
-			}
+				if (currentMods[run.players[0].id] != undefined)
+				{
+					if (currentMods[run.players[0].id] == "moderator")
+					{
+						modIcon = `<img id="runs-${run.players[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
+						
+						flagAndModTippysInfo.push({
+							"id": `#runs-${run.players[0].id}-modIcon`,
+							"text": "Mod"
+						});
+					}
+					else if (currentMods[run.players[0].id] == "super-moderator")
+					{
+						modIcon = `<img id="runs-${run.players[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+						
+						flagAndModTippysInfo.push({
+							"id": `#runs-${run.players[0].id}-modIcon`,
+							"text": "Super Mod"
+						});
+					}
+				}
+				
+				if (players[run.players[0].id].region != '')
+				{
+					flag = `<img id="runs-${run.players[0].id}-userFlag" class="runs-flag" src="https://www.speedrun.com/images/flags/${players[run.players[0].id].region}.png">`;
+					
+					flagAndModTippysInfo.push({
+						"id": `#runs-${run.players[0].id}-userFlag`,
+						"text": players[run.players[0].id].regionName
+					});
+				}
 
-			var userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+				userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+			}
 
 			var icons = '';
 			if (run.splits != null)
@@ -640,7 +691,7 @@ function loadRuns(id, variables, loadOrState = false)
 				icons += `<i id="run-${run.id}-video" class="fas fa-video"></i>`;
 			}
 			
-			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')"><td>${place}</td><td style="font-weight: bold">${flag}${userIcon}${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')"><td>${place}</td><td style="font-weight: bold">${modIcon}${flag}${userIcon}${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
 		}
 		
 		if (!isMobile)
@@ -664,6 +715,14 @@ function loadRuns(id, variables, loadOrState = false)
 					});
 					tippyCount++;
 				}
+			}
+
+			for (var i = 0; i < flagAndModTippysInfo.length; i++)
+			{
+				flagAndModTippys[i] = tippy(flagAndModTippysInfo[i].id, {
+					content: flagAndModTippysInfo[i].text,
+					placement: 'top'
+				});
 			}
 		}
 
