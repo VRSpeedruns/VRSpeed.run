@@ -103,8 +103,8 @@
 								<a onclick="closeRun(); backFixUrl(); loadGame(getGame(), true);"><i class="fas fa-arrow-left"></i> Back to Game</a>
 							</div>
 							<div class="container">
-								<div class="columns">
-									<div class="column is-10" id="run-single-info-container">
+								<div class="columns run-single-info-col is-mobile">
+									<div class="column is-10">
 										<div class="run-single-titles">
 											<h1>
 												<span id="run-single-game" style="font-weight: bold;"></span>
@@ -116,9 +116,6 @@
 												<span id="run-single-runner"></span>
 											</h2>
 										</div>
-										<p id="run-single-comment"></p>
-										<p>Played on <span id="run-single-platform">Oculus VR</span></p>
-										<p>Run verified by <span id="run-single-verifier"></span></p>
 									</div>
 									<div class="column is-2">
 										<div class="buttons is-centered is-right-mobile">
@@ -130,6 +127,11 @@
 											</a>
 										</div>
 									</div>
+								</div>
+								<div class="has-text-centered">
+									<p id="run-single-comment"></p>
+									<p>Played using <span id="run-single-platform"></span> on <span id="run-single-date"></span></p>
+									<p>Run verified by <span id="run-single-verifier"></span> on <span id="run-single-verifydate"></span></p>
 								</div>
 							</div>
 							<div id="run-single-splits-container">

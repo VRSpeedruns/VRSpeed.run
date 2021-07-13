@@ -8,6 +8,8 @@ var runSingleRunner;
 var runSingleComment;
 var runSinglePlatform;
 var runSingleVerifier;
+var runSingleDate;
+var runSingleVerifyDate;
 
 var runSingleSrc;
 var runSingleVid;
@@ -38,6 +40,8 @@ function onSingleRunLoad()
     runSingleComment = document.getElementById("run-single-comment");
     runSinglePlatform = document.getElementById("run-single-platform");
     runSingleVerifier = document.getElementById("run-single-verifier");
+    runSingleDate = document.getElementById("run-single-date");
+    runSingleVerifyDate = document.getElementById("run-single-verifydate");
 
     runSingleSrc = document.getElementById("run-single-src");
     runSingleVid = document.getElementById("run-single-vid");
@@ -130,25 +134,32 @@ function openRun(id, loadOrState = false)
         var time = runTimeFormat(run.times.primary);
 
         var player = "";
+        var rawPlayer = "";
+        var flag = "";
         if (run.players.data[0].rel == "user")
         {
             var temp = run.players.data[0];
-            player = getGradientName(temp.names.international,
+            
+            rawPlayer = temp.names.international;
+
+            player = getGradientName(rawPlayer,
                 temp["name-style"]["color-from"].dark, 
                 temp["name-style"]["color-to"].dark);
 
             if (temp.location !== null)
 			{
-				var flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
-                player = flag + player;
+				flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
 			}
         }
         else
         {
-            player = run.players.data[0].name;
+            rawPlayer = run.players.data[0].name;
+            player = rawPlayer;
         }
+        
+        var userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
 
-        player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${player}</a>`;
+        player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${flag}${userIcon}${player}</a>`;
 
         var srcLink = run.weblink;
         var vidLink = '';
@@ -172,12 +183,20 @@ function openRun(id, loadOrState = false)
             platform = `<b>${platform}</b>`
         }
 
+        var _date = new Date(run.date);
+        var date = _date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+        
+        _date = new Date(run.status["verify-date"]);
+        var verifyDate = _date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+
         runSingleGame.innerText = game;
         runSingleCategory.innerText = category;
         runSingleTime.innerText = time;
         runSingleRunner.innerHTML = player;
         runSingleComment.innerText = `"${run.comment}"`;
         runSinglePlatform.innerHTML = platform;
+        runSingleDate.innerText = date;
+        runSingleVerifyDate.innerText = verifyDate;
 
         runSingleSrc.href = srcLink;
         runSingleVid.href = vidLink;
@@ -239,6 +258,8 @@ function openRun(id, loadOrState = false)
         boxSingleRun.style.display = "block";
         mainLoading.style.display = "none";
 
+        runSingleVerifier.innerText = '...';
+
         get(`https://www.speedrun.com/api/v1/users/${run.status.examiner}`)
         .then((__data) =>
         {
@@ -247,13 +268,15 @@ function openRun(id, loadOrState = false)
                 _data["name-style"]["color-from"].dark,
                 _data["name-style"]["color-to"].dark);
 
+            var verifierFlag = '';
             if (_data.location !== null)
             {
-                var flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${_data.location.country.code}.png">`;
-                verifier = flag + verifier;
+                verifierFlag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${_data.location.country.code}.png">`;
             }
+
+            var verifierIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${_data.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
                 
-            runSingleVerifier.innerHTML = `<a class="player-link" href="${_data.weblink}" target="_blank">${verifier}</a>`;
+            runSingleVerifier.innerHTML = `<a class="player-link" href="${_data.weblink}" target="_blank">${verifierFlag}${verifierIcon}${verifier}</a>`;
         });
 
         if (run.splits !== null)

@@ -281,6 +281,9 @@ a.button:not(:last-child) {
 	margin-bottom: 1.25rem;
 }
 
+.game-info-container > .buttons:last-child {
+	margin-bottom: 0;
+}
 .game-info-container > .buttons {
 	margin: 0 auto;
 }
@@ -319,8 +322,9 @@ a.button:not(:last-child) {
 
 /* ---------- Single Run Info ---------- */
 
-.run-single-titles {
-	margin-bottom: 1em;
+
+.run-single-info-col:not(:last-child) {
+	margin-bottom: 0;
 }
 .run-single-titles h1 {
 	font-size: 1.5em;
@@ -331,9 +335,14 @@ a.button:not(:last-child) {
 
 #run-single-comment {
 	font-style: italic;
+	margin-bottom: 1em;
 }
 #run-single-info-container > p:not(:empty) {
 	margin-top: 0.5em;
+}
+
+.buttons.is-right-mobile > a {
+	margin-bottom: 0.75em;
 }
 
 @media only screen and (max-width: 768px) {
@@ -345,8 +354,6 @@ a.button:not(:last-child) {
 	}
 }
 
-
-
 /* ---------- Splits ---------- */
 
 
@@ -355,7 +362,6 @@ a.button:not(:last-child) {
 	margin-left: -1.25rem;
 
 	margin-bottom: 1.25rem;
-	background-color: var(--background-color);
 	height: 4em;
 }
 @media only screen and (max-width: 768px) {
@@ -369,7 +375,6 @@ a.button:not(:last-child) {
 		white-space: nowrap;
 
 		margin-bottom: 1.25rem;
-		background-color: var(--background-accent-color);
 		height: 4em;
 	}
 	#run-single-splits-bar {
@@ -524,6 +529,12 @@ a.button:not(:last-child) {
 	vertical-align: middle;
 	margin-bottom: 3px;
 	border-radius: 2px;
+}
+.runs-usericon {
+	max-height: 15px;
+	vertical-align: middle;
+	margin-right: 2px;
+	margin-bottom: 3px;
 }
 .player-link {
 	font-weight: bold;

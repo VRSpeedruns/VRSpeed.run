@@ -567,16 +567,19 @@ function loadRuns(id, variables, loadOrState = false)
 			var time = runTimeFormat(run.times.primary);
 
 			var player = "";
+			var rawPlayer = "";
 			if (run.players[0].rel == "user")
 			{
 				var start = players[run.players[0].id].colorFrom;
 				var end = players[run.players[0].id].colorTo;
 				
-				player = getGradientName(players[run.players[0].id].name, start, end);
+				rawPlayer = players[run.players[0].id].name;
+				player = getGradientName(rawPlayer, start, end);
 			}
 			else
 			{
-				player = run.players[0].name;
+				rawPlayer = run.players[0].name;
+				player = rawPlayer;
 			}
 			
 			var platform = platforms[run.system.platform];
@@ -618,6 +621,8 @@ function loadRuns(id, variables, loadOrState = false)
 				flag = `<img class="runs-flag" src="https://www.speedrun.com/images/flags/${players[run.players[0].id].region}.png">`;
 			}
 
+			var userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+
 			var icons = '';
 			if (run.splits != null)
 			{
@@ -628,7 +633,7 @@ function loadRuns(id, variables, loadOrState = false)
 				icons += `<i id="run-${run.id}-video" class="fas fa-video"></i>`;
 			}
 			
-			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')"><td>${place}</td><td style="font-weight: bold">${flag}${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')"><td>${place}</td><td style="font-weight: bold">${flag}${userIcon}${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
 		}
 		
 		if (!isMobile)
