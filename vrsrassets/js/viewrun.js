@@ -23,6 +23,7 @@ var runSingleSplitsUrl;
 var runSingleSplitsBar;
 var runSingleSplitsRT;
 var runSingleSplitsGT;
+var runSingleSplitsTiming;
 
 var splitsBarColors;
 
@@ -55,6 +56,7 @@ function onSingleRunLoad()
     runSingleSplitsBar = document.getElementById("run-single-splits-bar");
     runSingleSplitsRT = document.getElementById("run-single-splits-rt");
     runSingleSplitsGT = document.getElementById("run-single-splits-gt");
+    runSingleSplitsTiming = document.getElementById("run-single-splits-timing");
 
     if (!isMobile)
     {
@@ -163,7 +165,7 @@ function openRun(id, loadOrState = false)
 
         var srcLink = run.weblink;
         var vidLink = '';
-        if (run.videos != null)
+        if (run.videos != null && run.videos.links != undefined)
         {
             vidLink = run.videos.links[0].uri;
             runSingleVid.style.display = "flex";
@@ -353,11 +355,29 @@ function loadSplits(id, timing = "default")
         {
             runSingleSplitsRT.classList.add("is-active");
             runSingleSplitsGT.classList.remove("is-active");
+
+            if (run["gametime_duration_ms"] == 0)
+            {
+                runSingleSplitsTiming.style.display = "none";
+            }
+            else
+            {
+                runSingleSplitsTiming.style.display = "flex";
+            }
         }
         else if (timing == "gametime")
         {
             runSingleSplitsGT.classList.add("is-active");
             runSingleSplitsRT.classList.remove("is-active");
+
+            if (run["realtime_duration_ms"] == 0)
+            {
+                runSingleSplitsTiming.style.display = "none";
+            }
+            else
+            {
+                runSingleSplitsTiming.style.display = "flex";
+            }
         }
 
         var totalDuration = run[`${timing}_duration_ms`];
@@ -404,7 +424,7 @@ function loadSplits(id, timing = "default")
             {
                 duration -= seg[`${timing}_duration_ms`];
                 
-                runSingleSegments.innerHTML += `<tr${pbColor}><td>${seg["segment_number"] + 1}</td><td>${seg["display_name"]}</td><td>${msToTime(seg[`${timing}_duration_ms`])}</td><td>'${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
+                runSingleSegments.innerHTML += `<tr${pbColor}><td>${seg["segment_number"] + 1}</td><td>${seg["display_name"]}</td><td>${msToTime(seg[`${timing}_duration_ms`])}</td><td>${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
             }
         }
         runSingleSegments.innerHTML += temp; //in case there's anything left over in temp for some reason

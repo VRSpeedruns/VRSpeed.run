@@ -340,8 +340,9 @@ a.button:not(:last-child) {
 #run-single-comment:empty {
 	margin-bottom: 0;
 }
-#run-single-info-container > p:not(:empty) {
+.run-single-info-other > p:not(:empty) {
 	margin-top: 0.5em;
+	text-align: center;
 }
 
 .buttons.is-right-mobile > a {

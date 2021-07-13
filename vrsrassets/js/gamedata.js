@@ -438,15 +438,22 @@ function displayCategoryVariables(index, loadOrState = false)
 	var vars = categories[index].variables;
 	for (var i = 0; i < vars.length; i++)
 	{
-		if (vars[i].values.length > 1)
+		var temp = '';
+		for (var k = 0; k < vars[i].values.length; k++)
 		{
-			var temp = '<div class="buttons has-addons">';
-			for (var k = 0; k < vars[i].values.length; k++)
-			{
-				temp += `<button id="${vars[i].id}-${vars[i].values[k].id}" class="button is-small is-dark is-variable" onclick="setVariable('${vars[i].id}','${vars[i].values[k].id}');">${vars[i].values[k].name}</button>`;
-			}
-			variablesContainer.innerHTML += `${temp}</div>`;
+			temp += `<button id="${vars[i].id}-${vars[i].values[k].id}" class="button is-small is-dark is-variable" onclick="setVariable('${vars[i].id}','${vars[i].values[k].id}');">${vars[i].values[k].name}</button>`;
 		}
+
+		if (vars[i].values.length < 2)
+		{
+			temp = `<div class="buttons has-addons" style="display: none;">${temp}</div>`;
+		}
+		else
+		{
+			temp = `<div class="buttons has-addons">${temp}</div>`;
+		}
+
+		variablesContainer.innerHTML += temp;
 
 		setVariable(vars[i].id, vars[i].values[0].id, false)
 	}
@@ -628,7 +635,7 @@ function loadRuns(id, variables, loadOrState = false)
 			{
 				icons += `<i id="run-${run.id}-splits" class="fas fa-stopwatch"></i>`;
 			}
-			if (run.videos != null)
+			if (run.videos != null && run.videos.links != undefined)
 			{
 				icons += `<i id="run-${run.id}-video" class="fas fa-video"></i>`;
 			}
@@ -649,7 +656,7 @@ function loadRuns(id, variables, loadOrState = false)
 					});
 					tippyCount++;
 				}
-				if (json.runs[i].run.videos != null)
+				if (json.runs[i].run.videos != null && json.runs[i].run.videos.links != undefined)
 				{
 					lastIconsTippys[tippyCount] = tippy(`#run-${json.runs[i].run.id}-video`, {
 						content: 'Video is available for this run.',

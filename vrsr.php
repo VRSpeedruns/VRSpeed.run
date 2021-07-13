@@ -108,11 +108,12 @@
 										<div class="run-single-titles">
 											<h1>
 												<span id="run-single-game" style="font-weight: bold;"></span>
-												<span class="is-hidden-mobile"> -</span><span class="is-hidden-tablet"><br></span>
+													<span class="is-hidden-mobile"> -</span><span class="is-hidden-tablet"><br></span>
 												<span id="run-single-category"></span>
 											</h1>
 											<h2>
-												<span id="run-single-time" style="font-weight: bold;"></span> by
+												<span id="run-single-time" style="font-weight: bold;"></span>
+													<span class="is-hidden-mobile"> by</span><span class="is-hidden-tablet"><br></span>
 												<span id="run-single-runner"></span>
 											</h2>
 										</div>
@@ -128,7 +129,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="has-text-centered">
+								<div class="run-single-info-other">
 									<p id="run-single-comment"></p>
 									<p>Played using <span id="run-single-platform"></span> on <span id="run-single-date"></span></p>
 									<p>Run verified by <span id="run-single-verifier"></span> on <span id="run-single-verifydate"></span></p>
@@ -137,7 +138,7 @@
 							<div id="run-single-splits-container">
 								<div class="divider"></div>
 								<div id="variables">
-									<div class="buttons has-addons">
+									<div class="buttons has-addons" id="run-single-splits-timing">
 										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
 										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
 									</div>
