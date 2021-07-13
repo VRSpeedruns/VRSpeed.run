@@ -173,6 +173,13 @@ function openRun(id, loadOrState = false)
             runSingleVid.style.display = "none";
         }
 
+        var comment = '';
+        runSingleComment.innerHTML = '';
+        if (run.comment)
+        {
+            comment = `"${run.comment}"`;
+        }
+
         var platform = run.platform.data.name;
         if (currentGame.hardware != "")
         {
@@ -193,7 +200,7 @@ function openRun(id, loadOrState = false)
         runSingleCategory.innerText = category;
         runSingleTime.innerText = time;
         runSingleRunner.innerHTML = player;
-        runSingleComment.innerText = `"${run.comment}"`;
+        runSingleComment.innerText = comment;
         runSinglePlatform.innerHTML = platform;
         runSingleDate.innerText = date;
         runSingleVerifyDate.innerText = verifyDate;

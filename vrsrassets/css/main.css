@@ -337,6 +337,9 @@ a.button:not(:last-child) {
 	font-style: italic;
 	margin-bottom: 1em;
 }
+#run-single-comment:empty {
+	margin-bottom: 0;
+}
 #run-single-info-container > p:not(:empty) {
 	margin-top: 0.5em;
 }
