@@ -485,7 +485,21 @@ function loadSplits(id, timing = "default")
                 pbColor = ' class="new-pb has-text-weight-bold"';
             }
 
-            var row = `<tr${pbColor}><td>${(seg["segment_number"] + 1)}</td><td>${seg["display_name"]}</td><td>${msToTime(seg[`${timing}_duration_ms`])}</td><td>${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
+            var runName = seg["display_name"];
+            var runDur = "—";
+            var runFin = "—";
+            
+            if (!seg[`${timing}_skipped`])
+            {
+                runDur = msToTime(seg[`${timing}_duration_ms`]);
+                runFin = msToTime(seg[`${timing}_end_ms`])
+            }
+            else
+            {
+                runName += " <i>(Skipped)</i>"
+            }
+
+            var row = `<tr${pbColor}><td>${(seg["segment_number"] + 1)}</td><td>${runName}</td><td>${runDur}</td><td>${runFin}</td></tr>`;
 
             var percent = (seg[`${timing}_duration_ms`] / totalDuration) * 100;
             var color = splitsBarColors[i % splitsBarColors.length];
@@ -552,6 +566,8 @@ function loadSplits(id, timing = "default")
         splitsMiddleTippys = [];
         runSingleSplitsMiddleInfo.innerHTML = '';
 
+        var possibleTimesave = msToTimeAll(run[`${timing}_duration_ms`] - run[`${timing}_sum_of_best_ms`]);
+
         /*if (autosplitter is used)
         {
             runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-autosplitter" class="fas fa-magic"></i>';
@@ -561,7 +577,11 @@ function loadSplits(id, timing = "default")
         
         runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-attempts" class="fas fa-calculator"></i>';
         runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-sumofbest" class="fas fa-plus"></i>';
-        runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-timesave" class="fas fa-history"></i>'
+
+        if (possibleTimesave != '')
+        {
+            runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-timesave" class="fas fa-history"></i>';
+        }
 
         splitsMiddleTippys.push(tippy('#run-single-middle-attempts', {
             content: `<center><b>Attempts</b><br>${run.attempts}</center>`,
@@ -575,12 +595,16 @@ function loadSplits(id, timing = "default")
             offset: [0,2],
             placement: 'top'
         }));
-        splitsMiddleTippys.push(tippy('#run-single-middle-timesave', {
-            content: `<center><b>Possible Timesave</b><br>${msToTimeAll(run[`${timing}_duration_ms`] - run[`${timing}_sum_of_best_ms`])}</center>`,
-            allowHTML: true,
-            offset: [0,2],
-            placement: 'top'
-        }));
+        
+        if (possibleTimesave != '')
+        {
+            splitsMiddleTippys.push(tippy('#run-single-middle-timesave', {
+                content: `<center><b>Possible Timesave</b><br>${possibleTimesave}</center>`,
+                allowHTML: true,
+                offset: [0,2],
+                placement: 'top'
+            }));
+        }
 
         runSingleSplitsInner.style.display = "block";
         runSingleSplitsLoading.style.display = "none";
@@ -588,7 +612,7 @@ function loadSplits(id, timing = "default")
 }
 
 function msToTime(duration) {
-    var milliseconds = Math.floor((duration % 1000) / 10),
+    var milliseconds = Math.floor((duration % 1000)),
         seconds = Math.floor((duration / 1000) % 60),
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
@@ -601,11 +625,11 @@ function msToTime(duration) {
 }
 
 function msToTimeAll(duration) {
-    var milliseconds = Math.floor((duration % 1000) / 10),
+    var milliseconds = Math.floor((duration % 1000)),
         seconds = Math.floor((duration / 1000) % 60),
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-    
+
     if (hours > 0)
     {
         return `${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
@@ -623,11 +647,11 @@ function msToTimeAll(duration) {
         return `${milliseconds}ms`;
     }
     
-    return '1ms';
+    return '';
 }
 
 function msToTimeSingle(duration) {
-    var milliseconds = Math.floor((duration % 1000) / 10),
+    var milliseconds = Math.floor((duration % 1000)),
         seconds = Math.floor((duration / 1000) % 60),
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
@@ -649,5 +673,5 @@ function msToTimeSingle(duration) {
         return `${milliseconds}ms`;
     }
     
-    return '1ms';
+    return '<1ms';
 }
