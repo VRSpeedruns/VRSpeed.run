@@ -277,7 +277,10 @@ a.button:not(:last-child) {
 	
 	border-radius: 6px;
 }
-#game-platforms {
+#game-year, #game-platforms, #game-moderators {
+	color: #bbb;
+}
+#game-platforms, #game-moderators {
 	margin-bottom: 1.25rem;
 }
 
@@ -286,6 +289,15 @@ a.button:not(:last-child) {
 }
 .game-info-container > .buttons {
 	margin: 0 auto;
+}
+#game-moderators {
+	font-size: 0.8em;
+}
+#game-moderators a {
+	display: inline-block;
+}
+#game-moderators a:hover span {
+	text-decoration: underline solid 1px;
 }
 
 /* ---------- Tippy ---------- */
@@ -360,6 +372,12 @@ a.button:not(:last-child) {
 
 /* ---------- Splits ---------- */
 
+#run-single-splits-middleinfo > i {
+    padding-top: 8px;
+}
+#run-single-splits-middleinfo > i:not(:last-child) {
+	margin-right: 0.5em;
+}
 
 #run-single-splits-bar-outer {
 	width: calc(100% + 2.5rem) !important;
@@ -508,7 +526,7 @@ a.button:not(:last-child) {
 	color: #f14668;
 }
 
-.is-footer p, #game-year, #game-platforms {
+.is-footer p {
 	color: #bbb;
 }
 .links > div > a > i {
@@ -524,21 +542,27 @@ a.button:not(:last-child) {
 	border-radius: 4px;
 }
 
-#runs-none {
-	text-align: center;
-}
 .runs-flag {
 	margin-right: 0.25em;
-	height: 12px;
+	max-height: 15px;
 	vertical-align: middle;
+	padding-top: 3px;
 	margin-bottom: 3px;
 	border-radius: 2px;
+}
+.runs-flag.small {
+	max-height: 14px;
+	padding-top: 3px;
 }
 .runs-usericon {
 	max-height: 15px;
 	vertical-align: middle;
 	margin-right: 2px;
 	margin-bottom: 3px;
+}
+.runs-usericon.small {
+	max-height: 12px;
+	padding-top: 1x;
 }
 .player-link {
 	font-weight: bold;

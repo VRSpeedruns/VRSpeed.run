@@ -64,6 +64,7 @@ var gameInfoLinkGuides;
 var gameInfoLinkResources;
 var gameInfoLinkForums;
 var gameInfoLinkStatistics;
+var gameInfoModerators;
 
 var platformsList;
 
@@ -73,6 +74,7 @@ var catNameRegex = /[^a-zA-Z0-9-_]+/ig;
 
 var lastIconsTippys = [];
 var flagAndModTippys = [];
+var gameInfoModTippys = [];
 
 function onGameDataLoad()
 {
@@ -94,6 +96,7 @@ function onGameDataLoad()
 	gameInfoLinkResources = document.getElementById("game-links-resources");
 	gameInfoLinkForums = document.getElementById("game-links-forums");
 	gameInfoLinkStatistics = document.getElementById("game-links-statistics");
+	gameInfoModerators = document.getElementById("game-moderators");
 
 	platformsList = [];
 	platformsList["w89rwwel"] = "Vive";
@@ -236,13 +239,19 @@ function loadGame(id, loadOrState = false, force = false)
 	gameInfoLinkResources.href = `https://www.speedrun.com/${gameId}/resources`;
 	gameInfoLinkForums.href = `https://www.speedrun.com/${gameId}/forum`;
 	gameInfoLinkStatistics.href = `https://www.speedrun.com/${gameId}/gamestats`;
+	gameInfoModerators.innerHTML = 'Moderated by:<br>';
+
+	for (var i = 0; i < gameInfoModTippys.length; i++)
+	{
+		gameInfoModTippys[i][0].destroy();
+	}
+	gameInfoModTippys = [];
 
 	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,levels`)
 	.then((data) =>
 	{
 		var game = (JSON.parse(data)).data;
-		
-		gameInfoImage.src = game.assets["cover-large"].uri;
+		gameInfoImage.src = `https://www.speedrun.com/themes/${game.abbreviation}/cover-256.png`
 		gameInfoYear.innerText = game.released;
 
 		var tempPlatforms = [];
@@ -251,10 +260,6 @@ function loadGame(id, loadOrState = false, force = false)
 			if (game.platforms.data[i].id in platformsList)
 			{
 				tempPlatforms.push(platformsList[game.platforms.data[i].id]);
-			}
-			else
-			{
-				tempPlatforms.push(game.platforms.data[i].name);
 			}
 		}
 		gameInfoPlatforms.innerText = tempPlatforms.join(", ");
@@ -293,6 +298,70 @@ function loadGame(id, loadOrState = false, force = false)
 				}
 			}
 		}
+
+		get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=moderators`)
+		.then((data) =>
+		{
+			var mods = (JSON.parse(data)).data.moderators.data;
+
+			var gameInfoModTippysInfo = [];
+
+			for (var i = 0; i < mods.length; i++)
+			{
+				if (i > 0)
+				{
+					gameInfoModerators.innerHTML += ', ';
+				}
+
+				var name = getGradientName(mods[i].names.international,
+					mods[i]["name-style"]["color-from"].dark,
+					mods[i]["name-style"]["color-to"].dark);   
+
+				var modIcon = '';
+				var flag = '';
+
+				if (currentMods[mods[i].id] == "super-moderator")
+				{
+					modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+
+					gameInfoModTippysInfo.push({
+						"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
+						"text": "Super Mod"
+					});
+				}
+				else //"moderator"
+				{
+					modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
+
+					gameInfoModTippysInfo.push({
+						"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
+						"text": "Mod"
+					});
+				}
+
+				if (mods[i].location !== null)
+				{
+					flag = `<img id="gameinfo-mods-${mods[i].id}-userFlag" class="runs-flag small" src="https://www.speedrun.com/images/flags/${mods[i].location.country.code}.png">`;
+
+					gameInfoModTippysInfo.push({
+						"id": `#gameinfo-mods-${mods[i].id}-userFlag`,
+						"text": mods[i].location.country.names.international
+					});
+				}
+
+				var userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${mods[i].names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+
+				gameInfoModerators.innerHTML += `<a class="player-link" href="${mods[i].weblink}" target="_blank">${modIcon}${flag}${userIcon}${name}</a>`;
+			}
+
+			for (var i = 0; i < gameInfoModTippysInfo.length; i++)
+			{
+				gameInfoModTippys[i] = tippy(gameInfoModTippysInfo[i].id, {
+					content: gameInfoModTippysInfo[i].text,
+					placement: 'top'
+				});
+			}
+		});
 	});
 }
 

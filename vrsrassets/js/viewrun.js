@@ -24,11 +24,13 @@ var runSingleSplitsBar;
 var runSingleSplitsRT;
 var runSingleSplitsGT;
 var runSingleSplitsTiming;
+var runSingleSplitsMiddleInfo;
 
 var splitsBarColors;
 
 var lastSplitsTippys = [];
 var singleFlagAndModTippys = [];
+var splitsMiddleTippys = [];
 
 function onSingleRunLoad()
 {
@@ -58,6 +60,7 @@ function onSingleRunLoad()
     runSingleSplitsRT = document.getElementById("run-single-splits-rt");
     runSingleSplitsGT = document.getElementById("run-single-splits-gt");
     runSingleSplitsTiming = document.getElementById("run-single-splits-timing");
+    runSingleSplitsMiddleInfo = document.getElementById("run-single-splits-middleinfo");
 
     if (!isMobile)
     {
@@ -419,6 +422,8 @@ function loadSplits(id, timing = "default")
     
     runSingleSplitsUrl.href = `https://splits.io/${id}`;
 
+    runSingleSplitsMiddleInfo.innerHTML = '';
+
     get(`https://splits.io/api/v4/runs/${id}`)
     .then((data) =>
     {
@@ -540,6 +545,43 @@ function loadSplits(id, timing = "default")
             });
         }
 
+        for (var i = 0; i < splitsMiddleTippys.length; i++)
+        {
+            splitsMiddleTippys[i][0].destroy();
+        }
+        splitsMiddleTippys = [];
+        runSingleSplitsMiddleInfo.innerHTML = '';
+
+        /*if (autosplitter is used)
+        {
+            runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-autosplitter" class="fas fa-magic"></i>';
+
+            !! finish this if the api gets updated (or i figure out how to do it) !!
+        }*/
+        
+        runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-attempts" class="fas fa-calculator"></i>';
+        runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-sumofbest" class="fas fa-plus"></i>';
+        runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-timesave" class="fas fa-history"></i>'
+
+        splitsMiddleTippys.push(tippy('#run-single-middle-attempts', {
+            content: `<center><b>Attempts</b><br>${run.attempts}</center>`,
+            allowHTML: true,
+            offset: [0,2],
+            placement: 'top'
+        }));
+        splitsMiddleTippys.push(tippy('#run-single-middle-sumofbest', {
+            content: `<center><b>Sum of Best</b><br>${msToTimeAll(run[`${timing}_sum_of_best_ms`])}</center>`,
+            allowHTML: true,
+            offset: [0,2],
+            placement: 'top'
+        }));
+        splitsMiddleTippys.push(tippy('#run-single-middle-timesave', {
+            content: `<center><b>Possible Timesave</b><br>${msToTimeAll(run[`${timing}_duration_ms`] - run[`${timing}_sum_of_best_ms`])}</center>`,
+            allowHTML: true,
+            offset: [0,2],
+            placement: 'top'
+        }));
+
         runSingleSplitsInner.style.display = "block";
         runSingleSplitsLoading.style.display = "none";
     });
@@ -556,6 +598,32 @@ function msToTime(duration) {
     seconds = (seconds < 10) ? `0${seconds}` : seconds;
   
     return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+}
+
+function msToTimeAll(duration) {
+    var milliseconds = Math.floor((duration % 1000) / 10),
+        seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    
+    if (hours > 0)
+    {
+        return `${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
+    }
+    else if (minutes > 0)
+    {
+        return `${minutes}m ${seconds}s ${milliseconds}ms`
+    }
+    else if (seconds > 0)
+    {
+        return `${seconds}s ${milliseconds}ms`;
+    }
+    else if (milliseconds > 0)
+    {
+        return `${milliseconds}ms`;
+    }
+    
+    return '1ms';
 }
 
 function msToTimeSingle(duration) {

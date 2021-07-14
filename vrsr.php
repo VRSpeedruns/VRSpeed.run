@@ -35,6 +35,7 @@
 								<div class="game-image-container is-hidden-mobile"><img id="game-image" src=""></div>
 								<div id="game-year" class="is-hidden-mobile">...</div>
 								<div id="game-platforms" class="is-hidden-mobile">...</div>
+								<div id="game-moderators" class="is-hidden-mobile">...</div>
 								<div class="buttons is-centered">
 									<a id="game-links-leaderboard" class="button-outer" href="" target="_blank">
 										<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
@@ -81,7 +82,7 @@
 									<div class="belowspinner">Loading...</div>
 								</div>
 							</div>
-							<div id="runs-none" style="display: none;">
+							<div id="runs-none" class="has-text-centered" style="display: none;">
 								<i>There are no runs in this category.</i>
 							</div>
 							<table id="runs-table" class="table is-narrow is-fullwidth">
@@ -139,9 +140,10 @@
 								<div class="divider"></div>
 								<div id="variables">
 									<div class="buttons has-addons" id="run-single-splits-timing">
-										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Realtime</button>
-										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Gametime</button>
+										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Real<span class="is-hidden-mobile">time</span></button>
+										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Game<span class="is-hidden-mobile">time</span></button>
 									</div>
+									<div id="run-single-splits-middleinfo"></div>
 									<div class="buttons has-addons variable-right">
 										<a id="run-single-splits-url" class="button is-small is-dark is-variable" target="_blank"><i class="fas fa-external-link-alt"></i> Splits.io</a>
 									</div>
@@ -177,18 +179,19 @@
 		<section class="section is-footer">
 			<div class="columns is-vcentered">
 				<div class="column is-4 has-text-right-desktop">
-					<p>Made with <i class="fas fa-heart is-heart" aria-hidden="true"></i> by <a href="https://github.com/bigfoott">bigfoot</a></p>
+					<p>Made with <i class="fas fa-heart is-heart" aria-hidden="true"></i> by <a href="https://github.com/bigfoott" target="_blank">bigfoot</a></p>
 				</div> 
 				<div class="column is-4">
-					<p>Currently tracking <?= count($games); ?> games.</p>
+					<p>Currently providing data for <?= count($games); ?> games.</p>
+					<p><a href="https://www.speedrun.com/" target="_blank">Speedrun.com</a> data accessed using the <a href="https://github.com/speedruncomorg/api" target="_blank">SR.C REST API</a>.
 				</div>
 				<div class="column is-4 has-text-left-desktop">
 					<div class="links">
 						<div>
-							<a href="https://github.com/bigfoott/VRSR"><i class="fab fa-github" aria-hidden="true"></i>GitHub Repo</a>
+							<a href="https://github.com/bigfoott/VRSR" target="_blank"><i class="fab fa-github" aria-hidden="true"></i>GitHub Repo</a>
 						</div>
 						<div>
-							<a href="https://twitter.com/VRSpeedruns"><i class="fab fa-twitter" aria-hidden="true"></i>Twitter Bot</a>
+							<a href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i>Twitter Bot</a>
 						</div>
 					</div> 
 				</div>

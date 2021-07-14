@@ -92,7 +92,6 @@ function toggleAboutInfo()
 {
     if (aboutInfoMore.style.display == "none")
     {
-        console.log("test");
         aboutInfoMore.style.display = "block";
         aboutInfoToggle.innerHTML = '<i class="fas fa-caret-up"></i> Show Less'
     }
