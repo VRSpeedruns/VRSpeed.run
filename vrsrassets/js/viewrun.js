@@ -568,12 +568,12 @@ function loadSplits(id, timing = "default")
 
         var possibleTimesave = msToTimeAll(run[`${timing}_duration_ms`] - run[`${timing}_sum_of_best_ms`]);
 
-        /*if (autosplitter is used)
+        if (run["uses_autosplitter"])
         {
             runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-autosplitter" class="fas fa-magic"></i>';
 
-            !! finish this if the api gets updated (or i figure out how to do it) !!
-        }*/
+            
+        }
         
         runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-attempts" class="fas fa-calculator"></i>';
         runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-sumofbest" class="fas fa-plus"></i>';
@@ -581,6 +581,16 @@ function loadSplits(id, timing = "default")
         if (possibleTimesave != '')
         {
             runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-timesave" class="fas fa-history"></i>';
+        }
+
+        if (run["uses_autosplitter"])
+        {
+            splitsMiddleTippys.push(tippy('#run-single-middle-autosplitter', {
+                content: `<b>Used Autosplitter</b>`,
+                allowHTML: true,
+                offset: [0,2],
+                placement: 'top'
+            }));
         }
 
         splitsMiddleTippys.push(tippy('#run-single-middle-attempts', {
@@ -595,7 +605,7 @@ function loadSplits(id, timing = "default")
             offset: [0,2],
             placement: 'top'
         }));
-        
+
         if (possibleTimesave != '')
         {
             splitsMiddleTippys.push(tippy('#run-single-middle-timesave', {

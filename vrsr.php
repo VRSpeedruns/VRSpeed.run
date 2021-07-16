@@ -177,15 +177,16 @@
 			</div>
 		</section>
 		<section class="section is-footer">
-			<div class="columns is-vcentered">
-				<div class="column is-4 has-text-right-desktop">
-					<p>Made with <i class="fas fa-heart is-heart" aria-hidden="true"></i> by <a href="https://github.com/bigfoott" target="_blank">bigfoot</a></p>
+			<div class="columns is-centered is-vcentered">
+				<div class="column is-4 has-text-right-tablet">
+					<p>Currently providing data for <?= count($games); ?> games.</p>
+					<p>Made with <i class="fas fa-heart is-heart" aria-hidden="true"></i> by <a href="https://github.com/bigfoott" target="_blank">bigfoot</a>.</p>
 				</div> 
 				<div class="column is-4">
-					<p>Currently providing data for <?= count($games); ?> games.</p>
-					<p><a href="https://www.speedrun.com/" target="_blank">Speedrun.com</a> data accessed using the <a href="https://github.com/speedruncomorg/api" target="_blank">SR.C REST API</a>.
+					<p><a href="https://www.speedrun.com/" target="_blank">Speedrun.com</a> data accessed using the <a href="https://github.com/speedruncomorg/api" target="_blank">SR.C REST API</a>.</p>
+					<p><a href="https://www.speedrun.com/" target="_blank">Splits.io</a> data accessed using the <a href="https://github.com/glacials/splits-io/blob/master/docs/api.md" target="_blank">Splits.io API</a>.</p>
 				</div>
-				<div class="column is-4 has-text-left-desktop">
+				<div class="column is-4 has-text-left-tablet">
 					<div class="links">
 						<div>
 							<a href="https://github.com/bigfoott/VRSR" target="_blank"><i class="fab fa-github" aria-hidden="true"></i>GitHub Repo</a>
