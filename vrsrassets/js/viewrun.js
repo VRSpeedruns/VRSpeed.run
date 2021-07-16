@@ -5,6 +5,7 @@ var runSingleGame;
 var runSingleCategory;
 var runSingleTime;
 var runSingleRunner;
+var runSinglePlace;
 var runSingleComment;
 var runSinglePlatform;
 var runSingleVerifier;
@@ -41,6 +42,7 @@ function onSingleRunLoad()
     runSingleCategory = document.getElementById("run-single-category");
     runSingleTime = document.getElementById("run-single-time");
     runSingleRunner = document.getElementById("run-single-runner");
+    runSinglePlace = document.getElementById("run-single-place");
     runSingleComment = document.getElementById("run-single-comment");
     runSinglePlatform = document.getElementById("run-single-platform");
     runSingleVerifier = document.getElementById("run-single-verifier");
@@ -209,6 +211,21 @@ function openRun(id, loadOrState = false)
 
         player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${modIcon}${flag}${userIcon}${player}</a>`;
 
+        var place = document.getElementById(`run-${id}`).dataset.place;
+        place = nth(parseInt(place));
+        if (place == "1st" || place == "2nd" || place == "3rd")
+        {
+            place = `<b class="place-${place}">${place}</b>`;
+        }
+        else if (place == "0th")
+        {
+            place = "";
+        }
+        if (place != "")
+        {
+            place = " - " + place;
+        }
+
         var srcLink = run.weblink;
         var vidLink = '';
         if (run.videos != null && run.videos.links != undefined)
@@ -248,6 +265,7 @@ function openRun(id, loadOrState = false)
         runSingleCategory.innerText = category;
         runSingleTime.innerText = time;
         runSingleRunner.innerHTML = player;
+        runSinglePlace.innerHTML = place;
         runSingleComment.innerText = comment;
         runSinglePlatform.innerHTML = platform;
         runSingleDate.innerText = date;

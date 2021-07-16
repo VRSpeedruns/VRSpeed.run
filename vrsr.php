@@ -115,7 +115,7 @@
 											<h2>
 												<span id="run-single-time" style="font-weight: bold;"></span>
 													<span class="is-hidden-mobile"> by</span><span class="is-hidden-tablet"><br></span>
-												<span id="run-single-runner"></span>
+												<span id="run-single-runner"></span><span id="run-single-place"></span>
 											</h2>
 										</div>
 									</div>

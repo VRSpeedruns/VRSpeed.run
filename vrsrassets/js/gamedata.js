@@ -760,7 +760,7 @@ function loadRuns(id, variables, loadOrState = false)
 				icons += `<i id="run-${run.id}-video" class="fas fa-video"></i>`;
 			}
 			
-			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')"><td>${place}</td><td style="font-weight: bold">${modIcon}${flag}${userIcon}${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}"><td>${place}</td><td style="font-weight: bold">${modIcon}${flag}${userIcon}${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
 		}
 		
 		if (!isMobile)
