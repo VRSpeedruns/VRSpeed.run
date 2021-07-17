@@ -24,7 +24,50 @@
 	</head>
 	<body onload="onLoad();">
 		<section class="section">
-			<div class="container">
+			<div class="container" id="home-container">
+				<div class="has-text-centered" style="margin-bottom: 3em">
+					<h1 class="title is-1">VR Speedrunning Leaderboards</h1>
+					<a class="title is-4" href="/vrsr/hla">View the Leaderboards</a>
+				</div>
+				<div class="columns is-centered">
+					<div class="column is-3">
+						<div class="box">
+							<h1 class="is-box-heading">Recent World Records</h1>
+							<div class="divider thin"></div>
+							<div class="world-records">
+								<div class="wr"> <!-- placeholder example -->
+									<figure class="image is-2by1">
+										<div class="wr-img" style="background-image: linear-gradient(0.75turn, transparent, var(--background-color)),
+    url('https://www.speedrun.com/themes/hla/cover-256.png');"></div>
+										<div class="wr-img-gradient"></div>
+									</figure>
+									<div class="wr-game">Half-Life: Alyx</div>
+									<div class="wr-category">Any% (No Spin, FTP)</div>
+									<div class="wr-time">14m 27s 50ms</div>
+									<div class="wr-runner">Lemmons</div>
+									<div class="wr-link"><a>View Run <i class="fas fa-arrow-right"></i></a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="column is-6">
+						<div class="box">
+							
+						</div>
+					</div>
+					<div class="column is-3">
+						<div class="box" id="about-info">
+							<h1 class="is-box-heading">About</h1>
+							<div class="divider thin"></div>
+							<p>VRSR is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
+							<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping me (bigfoot#0001) in the VR Speedrunning Discord server.</p>
+							<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/7PKWZuW">VR Speedrunning Discord server</a>!</p>
+							<p>For the latest VR world records, check out the <a href="https://twitter.com/VRSpeedruns">VRSR Twitter bot</a>!</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container" id="main-container">
 				<div class="columns">
 					<div class="column is-3 reverse-columns-mobile">
 						<div class="box">
@@ -53,16 +96,6 @@
 										<div class="button is-dark"><span class="icon"><i class="fas fa-chart-line"></i></span></div>
 									</a>
 								</div>
-							</div>
-						</div>
-						<div class="box" id="about-info">
-							<h1>About</h1>
-							<p>VRSR is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
-							<a id="about-info-toggle" onclick="toggleAboutInfo();"><i class="fas fa-caret-down"></i> Show more</a>
-							<div id="about-info-more" style="display: none;">
-								<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping me (bigfoot#0001) in the VR Speedrunning Discord server.</p>
-								<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/7PKWZuW">VR Speedrunning Discord server</a>!</p>
-								<p>For the latest VR world records, check out the <a href="https://twitter.com/VRSpeedruns">VRSR Twitter bot</a>!</p>
 							</div>
 						</div>
 					</div>

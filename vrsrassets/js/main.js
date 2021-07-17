@@ -38,7 +38,14 @@ function pushState(path)
 }
 function replaceState(path)
 {
-    history.replaceState(null, document.title, pathPrefix + path);
+    if (path)
+    {
+        history.replaceState(null, document.title, pathPrefix + path);
+    }
+    else
+    {
+        history.replaceState(null, document.title, pathPrefix.substring(0, 5));
+    }
 }
 function setHash(hash)
 {
@@ -85,20 +92,6 @@ function backFixUrl()
     if (getRun())
     {
         pushState(getGame());
-    }
-}
-
-function toggleAboutInfo()
-{
-    if (aboutInfoMore.style.display == "none")
-    {
-        aboutInfoMore.style.display = "block";
-        aboutInfoToggle.innerHTML = '<i class="fas fa-caret-up"></i> Show Less'
-    }
-    else
-    {
-        aboutInfoMore.style.display = "none";
-        aboutInfoToggle.innerHTML = '<i class="fas fa-caret-down"></i> Show More'
     }
 }
 

@@ -1,7 +1,7 @@
 /* ---------- Main/Misc ---------- */
 :root {
-	--primary-color: #ddd;
-	--primary-color-hover: #fff;
+	--primary-color: #0066FF;
+	--primary-color-hover: #3888ff;
 	--text-color: #eee;
 	--text-color-dark: #111;
 	--background-color: #2E3136;
@@ -452,11 +452,67 @@ a.button:not(:last-child) {
 	}
 }
 
+/* ---------- World Records ---------- */
+
+.world-records {
+
+}
+
+.wr {
+	position: relative;
+}
+.wr:not(:last-child) {
+	margin-bottom: 1.25em;
+}
+.wr > .image > img {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
+}
+.wr-game, .wr-category, .wr-time, .wr-runner, .wr-link, .wr-img {
+	position: absolute;
+}
+.wr-game {
+	top: 0.5em;
+
+	font-size: 1.25em;
+	font-weight: bold;
+}
+.wr-category {
+	top: 1.85em;
+
+	font-size: 1.1em;
+	font-weight: bold;
+}
+.wr-time {
+	top: 4.25em;
+}
+.wr-runner {
+	top: 5.25em;
+}
+.wr-link {
+	bottom: 0.5em;
+}
+.wr-link a:hover {
+	text-decoration: none;
+}
+
+.wr-img {
+	top: 0;
+	
+	width: 100%;
+	padding-top: 50%;
+	background-position: center;
+}
+
 /* ---------- Misc ---------- */
 
-#about-info > h1 {
+.is-box-heading {
 	font-size: 1.2em;
-	margin-bottom: 0.75em;
+	/*margin-bottom: 0.75em;*/
 	font-weight: bold;
 }
 #about-info-toggle {
@@ -484,10 +540,18 @@ a.button:not(:last-child) {
 	margin-bottom: 2em;
 	border-bottom: 2px solid var(--primary-color);
 }
+.divider.thin {
+	padding-bottom: 1.25em;
+	margin-bottom: 1.25em;
+}
 @media only screen and (max-width: 768px) {
 	.divider {
 		width: calc(100% + 1.5rem);
 		margin-left: -0.75rem;
+	}
+	.divider.thin {
+		padding-bottom: 0.75em;
+		margin-bottom: 0.75em;
 	}
 }
 

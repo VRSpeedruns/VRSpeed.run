@@ -32,6 +32,9 @@ Variable Object
 	]
 }*/
 
+var homeContainer;
+var mainContainer;
+
 var ready;
 var gameId;
 var currentCatIndex;
@@ -78,6 +81,9 @@ var gameInfoModTippys = [];
 
 function onGameDataLoad()
 {
+	homeContainer = document.getElementById("home-container");
+	mainContainer = document.getElementById("main-container");
+
 	gamesContainer = document.getElementById("games");
 	categoriesContainer = document.getElementById("tabs")
 	variablesContainer = document.getElementById("variables");
@@ -147,14 +153,19 @@ function onGameDataLoad()
 		}
 		else
 		{
-			gamesContainer.selectedIndex = defaultIndex;
-			loadGame('hla', true);
+			replaceState(null);
+			homeContainer.style.display = "block";
+			mainContainer.style.display = "none";
+			//gamesContainer.selectedIndex = defaultIndex;
+			//loadGame('hla', true);
 		}
 	}
 	else
 	{
-		gamesContainer.selectedIndex = defaultIndex;
-		loadGame('hla', true);
+		homeContainer.style.display = "block";
+		mainContainer.style.display = "none";
+		//gamesContainer.selectedIndex = defaultIndex;
+		//loadGame('hla', true);
 	}
 }
 
@@ -174,6 +185,20 @@ function onGameChange(id)
 
 function loadGame(id, loadOrState = false, force = false)
 {
+	if (!id)
+	{
+		document.documentElement.style.setProperty('--primary-color', '#0066FF')
+		document.documentElement.style.setProperty('--primary-color-hover', '#3888ff')
+
+		homeContainer.style.display = "block";
+		mainContainer.style.display = "none";
+
+		return;
+	}
+
+	homeContainer.style.display = "none";
+	mainContainer.style.display = "block";
+
 	if (getGame() !== id)
 	{
 		pushState(id);
