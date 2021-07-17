@@ -4,7 +4,9 @@ VRSR is a central hub to view the leaderboards for the largest virtual reality g
 
 ## Logic
 
-TODO
+A semi-comprehensive writeup explaining the order and usage of each function. Mostly made for me when I need to bugfix this project in 3 months and don't remember how it works. :)
+
+[Read here.](LOGIC.md)
 
 ## External Tools/Libraries
 
