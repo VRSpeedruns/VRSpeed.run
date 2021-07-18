@@ -472,7 +472,7 @@ a.button:not(:last-child) {
     -ms-user-select: none;
 	user-select: none;
 }
-.wr-game, .wr-category, .wr-time, .wr-runner, .wr-link, .wr-img {
+.wr-game, .wr-category, .wr-time, .wr-runner, .wr-date, .wr-link, .wr-img {
 	position: absolute;
 }
 .wr-game {
@@ -493,8 +493,12 @@ a.button:not(:last-child) {
 .wr-runner {
 	top: 5.25em;
 }
+.wr-date {
+	bottom: 0.5em;
+}
 .wr-link {
 	bottom: 0.5em;
+	right: 0.5em;
 }
 .wr-link a:hover {
 	text-decoration: none;

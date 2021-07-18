@@ -30,7 +30,7 @@
 					<a class="title is-4" href="/vrsr/hla">View the Leaderboards</a>
 				</div>
 				<div class="columns is-centered">
-					<div class="column is-3">
+					<div class="column is-3 is-hidden-touch">
 						<div class="box">
 							<h1 class="is-box-heading">Recent World Records</h1>
 							<div class="divider thin"></div>
@@ -45,6 +45,7 @@
 									<div class="wr-category">Any% (No Spin, FTP)</div>
 									<div class="wr-time">14m 27s 50ms</div>
 									<div class="wr-runner">Lemmons</div>
+									<div class="wr-date">3 days ago</div>
 									<div class="wr-link"><a>View Run <i class="fas fa-arrow-right"></i></a></div>
 								</div>
 							</div>
