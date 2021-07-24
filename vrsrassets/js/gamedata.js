@@ -242,6 +242,8 @@ function loadGame(id, loadOrState = false, force = false)
 	
 	ready = false;
 
+	setCookie('last_game', id, 10080); //7 days
+
 	for (var i = 0; i < gamesArray.length; i++)
 	{
 		if (gamesArray[i].abbreviation == id)

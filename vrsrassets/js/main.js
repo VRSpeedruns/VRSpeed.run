@@ -18,6 +18,11 @@ function onLoad()
         replaceState(null);
     }
 
+    if (getCookie('last_game') != '')
+    {
+        defaultGame = getCookie('last_game');
+    }
+
     document.getElementById("view-lb").href = pathPrefix + defaultGame;
 
     infoTippy();

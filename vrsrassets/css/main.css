@@ -456,6 +456,17 @@ a.button:not(:last-child) {
 
 /* ---------- World Records ---------- */
 
+#world-records {
+	margin-top: 0.75em;
+}
+#world-records > div {
+	padding: 0.75rem;
+}
+@media only screen and (max-width: 768px) {
+	#world-records > div {
+		padding: 0.25rem;
+	}
+}
 .wr-link {
 	color: var(--text-color) !important;
 	
