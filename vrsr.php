@@ -24,39 +24,26 @@
 	</head>
 	<body onload="onLoad();">
 		<section class="section">
-			<div class="container" id="home-container">
-				<div class="has-text-centered" style="margin-bottom: 3em">
-					<h1 class="title is-1">VR Speedrunning Leaderboards</h1>
-					<a class="title is-4" href="/vrsr/hla">View the Leaderboards</a>
-				</div>
+			<div class="container" id="home-container" style="display: none;">
 				<div class="columns is-centered">
-					<div class="column is-3 is-hidden-touch">
+					
+					<div class="column is-8 has-text-centered" style="margin-bottom: 1em;">
+						<figure class="image is-128x128" style="margin: 0 auto;">
+							<img src="/vrsrassets/images/logo.png">
+						</figure>
+						<h1 class="site-header">VR Speedrunning Leaderboards</h1>
+						<a id="view-lb" class="title is-4" href="">View the Leaderboards</a>
+					</div>
+				</div>
+				<div class="columns is-centered is-multiline">
+					<div class="column is-5">
 						<div class="box">
-							<h1 class="is-box-heading">Recent World Records</h1>
+							<h1 class="is-box-heading">Latest World Records</h1>
 							<div class="divider thin"></div>
-							<div class="world-records">
-								<div class="wr"> <!-- placeholder example -->
-									<figure class="image is-2by1">
-										<div class="wr-img" style="background-image: linear-gradient(0.75turn, transparent, var(--background-color)),
-    url('https://www.speedrun.com/themes/hla/cover-256.png');"></div>
-										<div class="wr-img-gradient"></div>
-									</figure>
-									<div class="wr-game">Half-Life: Alyx</div>
-									<div class="wr-category">Any% (No Spin, FTP)</div>
-									<div class="wr-time">14m 27s 50ms</div>
-									<div class="wr-runner">Lemmons</div>
-									<div class="wr-date">3 days ago</div>
-									<div class="wr-link"><a>View Run <i class="fas fa-arrow-right"></i></a></div>
-								</div>
-							</div>
+							<div id="world-records" class="columns is-multiline is-mobile"></div>
 						</div>
 					</div>
-					<div class="column is-6">
-						<div class="box">
-							
-						</div>
-					</div>
-					<div class="column is-3">
+					<div class="column is-5">
 						<div class="box" id="about-info">
 							<h1 class="is-box-heading">About</h1>
 							<div class="divider thin"></div>
@@ -68,7 +55,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container" id="main-container">
+			<div class="container" id="main-container" style="display: none;">
 				<div class="columns">
 					<div class="column is-3 reverse-columns-mobile">
 						<div class="box">
@@ -218,15 +205,15 @@
 				</div> 
 				<div class="column is-4">
 					<p><a href="https://www.speedrun.com/" target="_blank">Speedrun.com</a> data accessed using the <a href="https://github.com/speedruncomorg/api" target="_blank">SR.C REST API</a>.</p>
-					<p><a href="https://www.speedrun.com/" target="_blank">Splits.io</a> data accessed using the <a href="https://github.com/glacials/splits-io/blob/master/docs/api.md" target="_blank">Splits.io API</a>.</p>
+					<p><a href="https://www.speedrun.com/" target="_blank">Splits.io</a> data accessed using the <a href="https://github.com/glacials/splits-io/blob/main/docs/api.md" target="_blank">Splits.io API</a>.</p>
 				</div>
 				<div class="column is-4 has-text-left-tablet">
 					<div class="links">
 						<div>
-							<a href="https://github.com/bigfoott/VRSR" target="_blank"><i class="fab fa-github" aria-hidden="true"></i>GitHub Repo</a>
+							<a href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a>
 						</div>
 						<div>
-							<a href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i>Twitter Bot</a>
+							<a href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i>Twitter</a>
 						</div>
 					</div> 
 				</div>
@@ -243,6 +230,7 @@
 			<script type="text/javascript" src="/vrsrassets/js/colorinterpolation.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/gamedata.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/latestwrs.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/main.js"></script>
 		</section>
 	</body>

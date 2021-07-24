@@ -10,6 +10,7 @@
 	--button-background-color: #393C42;
 	--button-background-hover-color: #41434b;
 	--tippy-background-color: hsla(228, 8%, 12%, 0.975);
+	--background-color-transparent: hsla(218, 8%, 20%, 0.75);
 
 	--place-gold: #f5b946;
 	--place-silver: #C0C0C0;
@@ -279,6 +280,7 @@ a.button:not(:last-child) {
 }
 #game-year, #game-platforms, #game-moderators {
 	color: #bbb;
+	font-size: 0.9em;
 }
 #game-platforms, #game-moderators {
 	margin-bottom: 1.25rem;
@@ -454,17 +456,9 @@ a.button:not(:last-child) {
 
 /* ---------- World Records ---------- */
 
-.world-records {
-
-}
-
-.wr {
-	position: relative;
-}
-.wr:not(:last-child) {
-	margin-bottom: 1.25em;
-}
-.wr > .image > img {
+.wr-link {
+	color: var(--text-color) !important;
+	
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -472,47 +466,65 @@ a.button:not(:last-child) {
     -ms-user-select: none;
 	user-select: none;
 }
-.wr-game, .wr-category, .wr-time, .wr-runner, .wr-date, .wr-link, .wr-img {
-	position: absolute;
-}
-.wr-game {
-	top: 0.5em;
-
-	font-size: 1.25em;
-	font-weight: bold;
-}
-.wr-category {
-	top: 1.85em;
-
-	font-size: 1.1em;
-	font-weight: bold;
-}
-.wr-time {
-	top: 4.25em;
-}
-.wr-runner {
-	top: 5.25em;
-}
-.wr-date {
-	bottom: 0.5em;
-}
-.wr-link {
-	bottom: 0.5em;
-	right: 0.5em;
-}
-.wr-link a:hover {
+.wr-link:hover {
+	color: var(--text-color);
 	text-decoration: none;
 }
 
-.wr-img {
-	top: 0;
+.wr-wrapper {	
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	padding: 0.25em 0.4em;
+}
+.wr-game, .wr-category, .wr-time, .wr-runner, .wr-date, .wr-link, .wr-img {
+	text-overflow: ellipsis;
+    white-space: nowrap;
+	overflow: hidden;
+}
+.wr-game {
+	font-size: 1.25em;
+	font-weight: bold;
+
+	width: 100%;
+}
+.wr-category {
+	top: 1.45em;
+
+	font-size: 1.1em;
+	font-weight: bold;
 	
 	width: 100%;
-	padding-top: 50%;
-	background-position: center;
+}
+
+@media only screen and (max-width: 1216px) {
+	.wr-game {
+		font-size: 1em;
+	}
+	.wr-category {
+		font-size: 0.9em;
+	}
+	.wr-time, .wr-runner, .wr-date, .wr-link {
+		font-size: 0.8em;
+	}
 }
 
 /* ---------- Misc ---------- */
+
+.site-header {
+	margin-top: 0.5rem;
+	font-family: 'Bebas Neue';
+	font-weight: normal;
+	color: var(--text-color);
+	font-size: 5rem;
+}
+
+@media only screen and (max-width: 768px) {
+	.site-header {
+		font-size: 3.5rem;
+	}
+}
 
 .is-box-heading {
 	font-size: 1.2em;

@@ -3,6 +3,8 @@ var mainLoading;
 var aboutInfoToggle;
 var aboutInfoMore;
 
+var defaultGame = 'hla';
+
 function onLoad()
 {
     mainLoading = document.getElementById("main-loading");
@@ -11,7 +13,15 @@ function onLoad()
 
     pathPrefix = `${window.location.pathname.substring(0, 5)}/`;
 
+    if (window.location.pathname.substring(5) == "/")
+    {
+        replaceState(null);
+    }
+
+    document.getElementById("view-lb").href = pathPrefix + defaultGame;
+
     infoTippy();
+    latestWRsLoad();
     onGameDataLoad();
     onSingleRunLoad();
 
@@ -53,7 +63,6 @@ function setHash(hash)
     {
         hash = `#${hash}`;
     }
-
     replaceState(getPath() + hash);
 }
 function getHash()
@@ -131,8 +140,31 @@ function get(url) {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		req.open('GET', url);
-		req.onload = () => req.status === 200 ? resolve(req.response) : reject(Error(req.statusText));
+		//req.onload = () => req.status === 200 ? resolve(req.response) : reject(Error(req.statusText));
+        req.onload = () => resolve(req.response);
 		req.onerror = (e) => reject(Error(`Network Error: ${e}`));
 		req.send();
 	});
 }
+
+function setCookie(cname, cvalue, minutes) {
+    const d = new Date();
+    d.setTime(d.getTime() + (minutes*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }

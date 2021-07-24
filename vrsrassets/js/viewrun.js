@@ -33,6 +33,9 @@ var lastSplitsTippys = [];
 var singleFlagAndModTippys = [];
 var splitsMiddleTippys = [];
 
+var runLoadLastAttempt;
+var runLoadAttempts;
+
 function onSingleRunLoad()
 {
     boxRuns = document.getElementById("box-runs");
@@ -64,6 +67,8 @@ function onSingleRunLoad()
     runSingleSplitsTiming = document.getElementById("run-single-splits-timing");
     runSingleSplitsMiddleInfo = document.getElementById("run-single-splits-middleinfo");
 
+    loadRunAttempts = 0;
+
     if (!isMobile)
     {
         tippy('#run-single-src', {
@@ -74,9 +79,25 @@ function onSingleRunLoad()
     }
 }
 
-function openRun(id, loadOrState = false)
+function openRun(id, loadOrState = false, isRetry = false)
 {
-    if (!loadOrState)
+    if (runLoadLastAttempt != id)
+    {
+        runLoadLastAttempt = id;
+        runLoadAttempts = 0;
+    }
+    runLoadAttempts++;
+
+    if (runLoadAttempts > 2)
+    {
+        console.error(`Error loading run with ID ${id}.`)
+
+        replaceState(getGame());
+        loadGame(getGame(), true);
+        return;
+    }
+
+    if (!loadOrState && runLoadAttempts == 1)
 	{
         pushState(`${getGame()}/run/${id}`);
 	}
@@ -210,6 +231,20 @@ function openRun(id, loadOrState = false)
         }
 
         player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${modIcon}${flag}${userIcon}${player}</a>`;
+
+        if (!document.getElementById(`run-${id}`))
+        {
+            loadRuns(categories[currentCatIndex].id, currentVariables);
+
+            if (isRetry)
+            {
+                loadGame(getGame());
+            }
+            else
+            {
+                return;
+            }
+        }
 
         var place = document.getElementById(`run-${id}`).dataset.place;
         place = nth(parseInt(place));

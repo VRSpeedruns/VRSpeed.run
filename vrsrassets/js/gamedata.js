@@ -211,7 +211,10 @@ function loadGame(id, loadOrState = false, force = false)
 		}
 		else
 		{	
-			setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
+			if (!getRun())
+			{
+				setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
+			}
 			loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState);
 		}
 
@@ -223,8 +226,16 @@ function loadGame(id, loadOrState = false, force = false)
 		get(`https://www.speedrun.com/api/v1/runs/${getRun()}`)
 		.then((data) =>
 		{
-			runLoadedCategory = (JSON.parse(data)).data.category;
-			loadGame(id, loadOrState, force);
+			var temp = (JSON.parse(data));
+			if (temp.status == 404)
+			{
+				replaceState(getGame());
+				loadGame(getGame());
+				return;
+			}
+			
+			runLoadedCategory = temp.data.category;
+			loadGame(temp.data.game, loadOrState, force);
 			return;
 		});
 	}
@@ -526,7 +537,10 @@ function displayCategory(index, loadOrState = false)
 	}
 	categoryTabs[currentCatIndex].classList.add("is-active");
 
-	setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
+	if (!getRun())
+	{
+		setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
+	}
 	
 	displayCategoryVariables(index, loadOrState);
 }
