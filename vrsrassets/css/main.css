@@ -36,6 +36,7 @@
 html {
 	background-color: var(--background-mid-accent-color);
 	color: var(--text-color);
+	overflow: auto;
 }
 body {
 	background-color: var(--background-accent-color);
@@ -159,15 +160,11 @@ a.button:not(:last-child) {
 
 #variables {
 	display: flex;
-	margin-bottom: 1rem;
-}
-#variables:empty {
-	margin-bottom: 0;
 }
 #variables > .buttons, .is-variable {
 	margin-bottom: 0;
 	font-weight: bold;
-	margin-bottom: 0;
+	margin-bottom: 1rem;
 }
 #variables > .buttons > .button {
 	margin-bottom: 0;
@@ -521,26 +518,172 @@ a.button:not(:last-child) {
 	}
 }
 
+/* ---------- Game Selector ---------- */
+
+.game-selector {
+	position: relative;
+}
+#game-selector-button {
+	font-size: 0.95em;
+	letter-spacing: -0.25px;
+
+	border: 1px solid var(--primary-color);
+	border-radius: 4px;
+
+	padding-bottom: calc(.5em - 1px);
+    padding-left: calc(.75em - 1px);
+    padding-right: 2.5em;
+    padding-top: calc(.5em - 1px);
+
+	position: relative;
+
+	margin-bottom: 1.25em;
+
+	cursor: pointer;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#game-selector-button:hover {
+	border-color: var(--primary-color-hover);
+}
+#game-selector-button:after {
+	right: 1.125em;
+	z-index: 4;
+
+	border: 3px solid var(--primary-color);
+    border-radius: 2px;
+    border-right: 0;
+    border-top: 0;
+    content: " ";
+    display: block;
+    height: .625em;
+    margin-top: -.4375em;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: rotate(-45deg);
+    transform-origin: center;
+    width: .625em;
+
+	box-sizing: inherit;
+}
+#game-selector-button:hover:after {
+	border-color: var(--primary-color-hover);
+}
+#game-selector-menu:not(.is-active) {
+	display: none;
+}
+#game-selector-menu {
+	position: absolute;
+	z-index: 5;
+	width: 100%;
+	top: calc(2.5em - 1px);
+
+	background-color: var(--background-color);
+	border-radius: 0px 0px 4px 4px !important;
+	border: 2px solid var(--background-mid-accent-color);
+	border-right: 0;
+	border-top: 0;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
+}
+#pc-games {
+	max-width: 100%;
+	height: 100%;
+	position: relative;
+	
+	max-height: 315px;
+	overflow-y: auto;
+}
+#pc-games > .game {
+	width: 100%;
+	padding-left: 0.5em;
+	font-size: 0.95em;
+	height: 21px;
+	position: relative;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#pc-games > .game > .letter {
+	position: absolute;
+	top: 2px;
+	right: 0.5em;
+	
+	font-size: 0.8em;
+}
+#pc-games > .game:hover {
+	background-color: var(--button-background-hover-color);
+	cursor: pointer;
+}
+#pc-games > .game.is-selected {
+	background-color: var(--primary-color);
+	color: var(--text-color-dark);
+}
+#pc-games > .game.is-selected:hover {
+	background-color: var(--primary-color-hover);
+}
+
 /* ---------- Misc ---------- */
 
+.is-tooltip-text {
+	text-decoration: dotted underline;
+}
+
+#view-lb {
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+@media only screen and (max-width: 768px) {
+	#view-lb {
+		font-size: 1.1rem;
+	}
+}
+
 .site-header {
-	margin-top: 0.5rem;
-	font-family: 'Bebas Neue';
-	font-weight: normal;
-	color: var(--text-color);
-	font-size: 5rem;
+	margin-bottom: 1em;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
 }
 
 @media only screen and (max-width: 768px) {
 	.site-header {
-		font-size: 3.5rem;
+		margin-left: 1em;
+		margin-right: 1em;
 	}
 }
 
 .is-box-heading {
-	font-size: 1.2em;
-	/*margin-bottom: 0.75em;*/
-	font-weight: bold;
+	font-size: 1.3em;
+	letter-spacing: 2px;
+	font-family: 'Bebas Neue';
+
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+	user-select: none;
 }
 #about-info-toggle {
 	-webkit-touch-callout: none;
@@ -623,6 +766,22 @@ a.button:not(:last-child) {
 }
 .is-footer a:hover {
 	text-decoration: underline solid 1px;
+}
+.is-footer > .columns {
+	margin-bottom: 0 !important;
+}
+.is-footer > .columns > .column {
+	padding-bottom: 0;
+}
+@media only screen and (max-width: 768px) {
+	.links {
+		display: flex;
+		justify-content: center;
+	}
+	.links > div:not(:last-child)
+	{
+		margin-right: 1.5em;
+	}
 }
 .links > div > a > i {
 	margin-right: 0.25em;

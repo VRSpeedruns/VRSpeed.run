@@ -119,6 +119,13 @@ function infoTippy()
 
     if (isMobile) return;
 
+    tippy('#tippy-me', {
+        offset: [0,7.5],
+        content: 'bigfoot#0001',
+        placement: 'top'
+    });
+
+
     tippy('#game-links-leaderboard', {
         offset: [0,7.5],
         content: 'View Leaderboard'

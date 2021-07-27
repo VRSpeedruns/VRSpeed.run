@@ -58,8 +58,17 @@
         "abbreviation": "bc",
         "name": "Budget Cuts",
         "hardware": "",
-        "color": "#fb3e3e",
-        "hoverColor": "#ff5656",
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e",
+        "ignoredVariables": []
+    },
+    {
+        "id": "budget_cuts_2_mission_insolvency",
+        "abbreviation": "bc2",
+        "name": "Budget Cuts 2: Mission Insolvency",
+        "hardware": "",
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e",
         "ignoredVariables": []
     },
     {
@@ -69,6 +78,15 @@
         "hardware": "",
         "color": "#ED821A",
         "hoverColor": "#f29941",
+        "ignoredVariables": []
+    },
+    {
+        "id": "compound",
+        "abbreviation": "comp",
+        "name": "COMPOUND",
+        "hardware": "",
+        "color": "#F454FF",
+        "hoverColor": "#F99EFF",
         "ignoredVariables": []
     },
     {
@@ -104,12 +122,48 @@
         ]
     },
     {
+        "id": "espire_1_vr_operative",
+        "abbreviation": "esp",
+        "name": "Espire 1 VR Operative",
+        "hardware": "",
+        "color": "#6CA1CD",
+        "hoverColor": "#85B7E1",
+        "ignoredVariables": []
+    },
+    {
         "id": "everybodysgolfvr",
         "abbreviation": "eg",
         "name": "Everybody's Golf VR",
         "hardware": "",
         "color": "#70BD6A",
         "hoverColor": "#9be695",
+        "ignoredVariables": []
+    },
+    {
+        "id": "fnafvr_helpwanted",
+        "abbreviation": "fnafvr",
+        "name": "FNAF VR: Help Wanted",
+        "hardware": "",
+        "color": "#DB1646",
+        "hoverColor": "#F13E6A",
+        "ignoredVariables": [
+            {
+                "id": "j84676yl",
+                "value": "5lmwg2jq"
+            },
+            {
+                "id": "j84676yl",
+                "value": "21gd8661"
+            }
+        ]
+    },
+    {
+        "id": "gorn",
+        "abbreviation": "gorn",
+        "name": "GORN",
+        "hardware": "",
+        "color": "#992547",
+        "hoverColor": "#c73862",
         "ignoredVariables": []
     },
     {
@@ -272,6 +326,15 @@
         "hardware": "kn0zqxz8",
         "color": "#26BCC6",
         "hoverColor": "#4fe6f0",
+        "ignoredVariables": []
+    },
+    {
+        "id": "trdm",
+        "abbreviation": "trdm",
+        "name": "The Room VR: A Dark Matter",
+        "hardware": "",
+        "color": "#3C8FA8",
+        "hoverColor": "#56AEC9",
         "ignoredVariables": []
     },
     {

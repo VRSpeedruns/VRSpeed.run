@@ -27,12 +27,11 @@
 			<div class="container" id="home-container" style="display: none;">
 				<div class="columns is-centered">
 					
-					<div class="column is-8 has-text-centered" style="margin-bottom: 1em;">
-						<figure class="image is-128x128" style="margin: 0 auto;">
-							<img src="/vrsrassets/images/logo.png">
+					<div class="column is-6 has-text-centered" style="margin-bottom: 1em;">
+						<figure class="image site-header">
+							<img src="/vrsrassets/images/header.png">
 						</figure>
-						<h1 class="site-header">VR Speedrunning Leaderboards</h1>
-						<a id="view-lb" class="title is-4" href="">View the Leaderboards</a>
+						<a id="view-lb" href="">View the Leaderboards</a>
 					</div>
 				</div>
 				<div class="columns is-centered is-multiline">
@@ -48,8 +47,8 @@
 							<h1 class="is-box-heading">About</h1>
 							<div class="divider thin"></div>
 							<p>VRSR is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
-							<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping me (bigfoot#0001) in the VR Speedrunning Discord server.</p>
 							<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/7PKWZuW">VR Speedrunning Discord server</a>!</p>
+							<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping <span id="tippy-me" class="is-tooltip-text">me</span> in the above Discord server.</p>
 							<p>For the latest VR world records, check out the <a href="https://twitter.com/VRSpeedruns">VRSR Twitter bot</a>!</p>
 						</div>
 					</div>
@@ -59,8 +58,14 @@
 				<div class="columns">
 					<div class="column is-3 reverse-columns-mobile">
 						<div class="box">
-							<div class="select">
+							<div class="select is-hidden-tablet">
 								<select id="games" onchange="onGameChange(this.value)"></select>
+							</div>
+							<div class="game-selector is-hidden-mobile">
+								<div id="game-selector-button" onclick="toggleGameSelector()" title=""></div>
+								<div id="game-selector-menu">
+									<div id="pc-games"></div>
+								</div>
 							</div>
 							<div class="game-info-container">
 								<div class="game-image-container is-hidden-mobile"><img id="game-image" src=""></div>
@@ -209,6 +214,9 @@
 				</div>
 				<div class="column is-4 has-text-left-tablet">
 					<div class="links">
+						<div>
+							<a href="https://bigft.io/vrsr"><i class="fas fa-home" aria-hidden="true" style="margin-left: -1px;"></i>Home</a>
+						</div>
 						<div>
 							<a href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a>
 						</div>

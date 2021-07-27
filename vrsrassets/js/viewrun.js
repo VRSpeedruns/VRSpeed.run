@@ -628,12 +628,12 @@ function loadSplits(id, timing = "default")
             
         }
         
-        runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-attempts" class="fas fa-calculator"></i>';
+        runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-attempts" class="fas fa-redo-alt"></i>';
         runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-sumofbest" class="fas fa-plus"></i>';
 
         if (possibleTimesave != '')
         {
-            runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-timesave" class="fas fa-history"></i>';
+            runSingleSplitsMiddleInfo.innerHTML += '<i id="run-single-middle-timesave" class="fas fa-clock"></i>';
         }
 
         if (run["uses_autosplitter"])

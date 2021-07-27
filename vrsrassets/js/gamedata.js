@@ -52,6 +52,12 @@ var categoriesContainer;
 var variablesContainer;
 var runsContainer;
 
+var pcGamesContainer;
+var gameSelectorMenu;
+var gameSelectorButton;
+var gameSelectorCurrentGame;
+var gameSelectorTempCurrentGame;
+
 var runsTable;
 var runsLoading;
 var runsPlatformHardware;
@@ -88,6 +94,10 @@ function onGameDataLoad()
 	categoriesContainer = document.getElementById("tabs")
 	variablesContainer = document.getElementById("variables");
 	runsContainer = document.getElementById("runs");
+	
+	pcGamesContainer = document.getElementById("pc-games");
+	gameSelectorMenu = document.getElementById("game-selector-menu");
+	gameSelectorButton = document.getElementById("game-selector-button");
 
 	runsTable = document.getElementById("runs-table");
 	runsNone = document.getElementById("runs-none");
@@ -114,7 +124,7 @@ function onGameDataLoad()
 	platformsList["wxeo2d6r"] = "PSN";
 	platformsList["nzeljv9q"] = "PS4 Pro";
 
-
+	setGameSelectorEvents();
 	loadAllGames();
 
 	defaultIndex = -1;
@@ -149,6 +159,10 @@ function onGameDataLoad()
 		if (gameIndex > -1)
 		{
 			gamesContainer.selectedIndex = gameIndex;
+			gameSelectorCurrentGame = document.getElementById(`game-${id}`);
+			gameSelectorCurrentGame.classList.add("is-selected");
+			gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
+			gameSelectorButton.title = gameSelectorButton.innerText;
 			loadGame(id, true);
 		}
 		else
@@ -171,14 +185,117 @@ function onGameDataLoad()
 
 function loadAllGames()
 {
+	var lastLetter = '';
 	for (var i = 0; i < gamesArray.length; i++)
 	{
 		gamesContainer.innerHTML += `<option value="${gamesArray[i].abbreviation}">${gamesArray[i].name}</option>`;
+
+		if (gamesArray[i].name.substring(0, 1) != lastLetter)
+		{
+			lastLetter = gamesArray[i].name.substring(0, 1);
+
+			pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();">${gamesArray[i].name}<div class="letter">${lastLetter}</div></div>`;
+		}
+		else
+		{
+			pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();">${gamesArray[i].name}</div>`;
+		}
+	}
+}
+function setGameSelectorEvents()
+{
+	//close selector if user clicks off
+	document.addEventListener('click', (e) => {
+		if (gameSelectorMenu.classList.contains("is-active"))
+		{
+			if (!gameSelectorMenu.contains(e.target) && e.target != gameSelectorMenu && e.target != gameSelectorButton)
+			{
+				if (gameSelectorTempCurrentGame)
+				{
+					gameSelectorTempCurrentGame.click();
+					gameSelectorTempCurrentGame = null;
+				}
+				else
+				{
+					gameSelectorMenu.classList.remove("is-active");
+				}
+			}
+		}
+	});
+
+	//handle up and down arrow keys
+	document.addEventListener('keydown', (e) => {
+		if (gameSelectorMenu.classList.contains("is-active"))
+		{
+			if ((e.key == "ArrowUp" || e.key == "ArrowDown") && !gameSelectorTempCurrentGame)
+			{
+				gameSelectorTempCurrentGame = gameSelectorCurrentGame;
+			}
+			if (e.key == "ArrowUp" && gameSelectorTempCurrentGame.previousSibling)
+			{
+				e.preventDefault();
+
+				gameSelectorTempCurrentGame.classList.remove("is-selected");
+
+				gameSelectorTempCurrentGame = gameSelectorTempCurrentGame.previousSibling;
+
+				gameSelectorTempCurrentGame.classList.add("is-selected");
+
+				scrollIfNeeded(gameSelectorTempCurrentGame, pcGamesContainer);
+			}
+			else if (e.key == "ArrowDown" && gameSelectorTempCurrentGame.nextSibling)
+			{
+				e.preventDefault();
+
+				gameSelectorTempCurrentGame.classList.remove("is-selected");
+
+				gameSelectorTempCurrentGame = gameSelectorTempCurrentGame.nextSibling;
+
+				gameSelectorTempCurrentGame.classList.add("is-selected");
+				
+				scrollIfNeeded(gameSelectorTempCurrentGame, pcGamesContainer);
+			}
+			else if (e.key == "Enter" || e.key == "Escape")
+			{
+				if (gameSelectorTempCurrentGame)
+				{
+					gameSelectorCurrentGame = gameSelectorTempCurrentGame;
+					gameSelectorTempCurrentGame = null;
+					gameSelectorCurrentGame.click();
+				}
+				else
+				{
+					gameSelectorMenu.classList.remove("is-active");
+				}
+			}
+		}
+	});
+}
+function toggleGameSelector()
+{
+	if (gameSelectorMenu.classList.contains("is-active"))
+	{
+		gameSelectorMenu.classList.remove("is-active");
+	}
+	else
+	{
+		gameSelectorMenu.classList.add("is-active");
+		scrollIfNeeded(gameSelectorCurrentGame, pcGamesContainer);
 	}
 }
 
-function onGameChange(id)
+function onGameChange(id, frompcselect = false)
 {
+	if (frompcselect)
+	{
+		console.log(gameSelectorTempCurrentGame);
+		if (gameSelectorTempCurrentGame)
+		{
+			gameSelectorTempCurrentGame.classList.remove("is-selected");
+			gameSelectorTempCurrentGame = null;
+		}
+	}
+
 	closeRun();
 	loadGame(id);
 }
@@ -255,6 +372,15 @@ function loadGame(id, loadOrState = false, force = false)
 			{
 				gamesContainer.selectedIndex = i;
 			}
+
+			if (gameSelectorCurrentGame)
+			{
+				gameSelectorCurrentGame.classList.remove("is-selected");
+			}
+			gameSelectorCurrentGame = document.getElementById(`game-${gamesArray[i].abbreviation}`);
+			gameSelectorCurrentGame.classList.add("is-selected");
+			gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
+			gameSelectorButton.title = gameSelectorButton.innerText;
 
 			break;
 		} 
@@ -957,3 +1083,15 @@ function runTimeFormat(time)
 	
 	return time;
 }
+
+function scrollIfNeeded(element, container) {
+	if (element.offsetTop < container.scrollTop) {
+	  container.scrollTop = element.offsetTop;
+	} else {
+	  const offsetBottom = element.offsetTop + element.offsetHeight;
+	  const scrollBottom = container.scrollTop + container.offsetHeight;
+	  if (offsetBottom > scrollBottom) {
+		container.scrollTop = offsetBottom - container.offsetHeight;
+	  }
+	}
+  }
