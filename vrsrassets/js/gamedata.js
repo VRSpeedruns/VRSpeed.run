@@ -57,6 +57,8 @@ var gameSelectorMenu;
 var gameSelectorButton;
 var gameSelectorCurrentGame;
 var gameSelectorTempCurrentGame;
+var gameSelectorText;
+var gameSelectorTextTime;
 
 var runsTable;
 var runsLoading;
@@ -98,6 +100,8 @@ function onGameDataLoad()
 	pcGamesContainer = document.getElementById("pc-games");
 	gameSelectorMenu = document.getElementById("game-selector-menu");
 	gameSelectorButton = document.getElementById("game-selector-button");
+	gameSelectorText = '';
+	gameSelectorTextTime = Date.now();
 
 	runsTable = document.getElementById("runs-table");
 	runsNone = document.getElementById("runs-none");
@@ -212,13 +216,11 @@ function setGameSelectorEvents()
 			{
 				if (gameSelectorTempCurrentGame)
 				{
-					gameSelectorTempCurrentGame.click();
+					gameSelectorTempCurrentGame.classList.remove("is-selected");
 					gameSelectorTempCurrentGame = null;
 				}
-				else
-				{
-					gameSelectorMenu.classList.remove("is-active");
-				}
+				gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
+				toggleGameSelector();
 			}
 		}
 	});
@@ -227,10 +229,11 @@ function setGameSelectorEvents()
 	document.addEventListener('keydown', (e) => {
 		if (gameSelectorMenu.classList.contains("is-active"))
 		{
-			if ((e.key == "ArrowUp" || e.key == "ArrowDown") && !gameSelectorTempCurrentGame)
+			if (!gameSelectorTempCurrentGame)
 			{
 				gameSelectorTempCurrentGame = gameSelectorCurrentGame;
 			}
+
 			if (e.key == "ArrowUp" && gameSelectorTempCurrentGame.previousSibling)
 			{
 				e.preventDefault();
@@ -240,6 +243,8 @@ function setGameSelectorEvents()
 				gameSelectorTempCurrentGame = gameSelectorTempCurrentGame.previousSibling;
 
 				gameSelectorTempCurrentGame.classList.add("is-selected");
+				
+				gameSelectorButton.innerText = gameSelectorTempCurrentGame.firstChild.nodeValue;
 
 				scrollIfNeeded(gameSelectorTempCurrentGame, pcGamesContainer);
 			}
@@ -253,19 +258,45 @@ function setGameSelectorEvents()
 
 				gameSelectorTempCurrentGame.classList.add("is-selected");
 				
+				gameSelectorButton.innerText = gameSelectorTempCurrentGame.firstChild.nodeValue;
+				
 				scrollIfNeeded(gameSelectorTempCurrentGame, pcGamesContainer);
 			}
-			else if (e.key == "Enter" || e.key == "Escape")
+			else if (e.key == "Enter")
+			{
+				gameSelectorCurrentGame = gameSelectorTempCurrentGame;
+				gameSelectorTempCurrentGame = null;
+				gameSelectorCurrentGame.click();
+				gameSelectorText = '';
+			}
+			else if (e.key == "Escape")
 			{
 				if (gameSelectorTempCurrentGame)
 				{
-					gameSelectorCurrentGame = gameSelectorTempCurrentGame;
+					gameSelectorTempCurrentGame.classList.remove("is-selected");
 					gameSelectorTempCurrentGame = null;
-					gameSelectorCurrentGame.click();
 				}
-				else
+				gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
+				toggleGameSelector();
+			}
+			else if (/[a-zA-Z0-9-_.,:; ]/.test(e.key))
+			{
+				e.preventDefault();
+
+				gameSelectorText += e.key.toLowerCase();
+				gameSelectorTypeDelay(Date.now());
+				
+				for (var i = 0; i < gamesArray.length; i++)
 				{
-					gameSelectorMenu.classList.remove("is-active");
+					if (gamesArray[i].name.substring(0, gameSelectorText.length).toLowerCase() == gameSelectorText)
+					{
+						gameSelectorTempCurrentGame.classList.remove("is-selected");
+						gameSelectorTempCurrentGame = document.getElementById(`game-${gamesArray[i].abbreviation}`);
+						gameSelectorTempCurrentGame.classList.add("is-selected");
+						gameSelectorButton.innerText = gameSelectorTempCurrentGame.firstChild.nodeValue;
+						
+						break;
+					}
 				}
 			}
 		}
@@ -273,22 +304,34 @@ function setGameSelectorEvents()
 }
 function toggleGameSelector()
 {
+	gameSelectorMenu.classList.toggle("is-active");
+	
 	if (gameSelectorMenu.classList.contains("is-active"))
 	{
-		gameSelectorMenu.classList.remove("is-active");
+		gameSelectorCurrentGame.classList.add("is-selected");
+		scrollIfNeeded(gameSelectorCurrentGame, pcGamesContainer);
 	}
 	else
 	{
-		gameSelectorMenu.classList.add("is-active");
-		scrollIfNeeded(gameSelectorCurrentGame, pcGamesContainer);
+		gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
+		gameSelectorText = '';
 	}
 }
-
+function gameSelectorTypeDelay(time)
+{
+	gameSelectorTextTime = time;
+	setTimeout(function()
+	{ 
+		if (gameSelectorMenu.classList.contains("is-active") && gameSelectorTextTime == time)
+		{
+			gameSelectorText = '';
+		}
+	}, 2000);
+}
 function onGameChange(id, frompcselect = false)
 {
 	if (frompcselect)
 	{
-		console.log(gameSelectorTempCurrentGame);
 		if (gameSelectorTempCurrentGame)
 		{
 			gameSelectorTempCurrentGame.classList.remove("is-selected");
@@ -470,6 +513,7 @@ function loadGame(id, loadOrState = false, force = false)
 
 			var gameInfoModTippysInfo = [];
 
+			gameInfoModerators.innerHTML = 'Moderated by:<br>';
 			for (var i = 0; i < mods.length; i++)
 			{
 				if (i > 0)
