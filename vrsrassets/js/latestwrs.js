@@ -80,11 +80,13 @@ function loadWR(id)
         var date = timeAgo(new Date(run.submitted));
 
         var abbr = '';
+        var color = '';
         for (var i = 0; i < gamesArray.length; i++)
         {
             if (gamesArray[i].id == run.game.data.abbreviation)
             {
                 abbr = gamesArray[i].abbreviation;
+                color = gamesArray[i].color;
                 break;
             }
         }
@@ -124,7 +126,10 @@ function loadWR(id)
                     <div class="wr-date">${date}</div>
                    </div></a>`;
 
+            document.getElementById(`wr-${id}`).style.backgroundColor = color;
             document.getElementById(`wr-${id}`).innerHTML = html;
+
+            document.getElementById("instance-style").innerHTML += `#wr-${id}:before, #wr-${id}:after { background-color: ${color}; }`
         });
     });
 }

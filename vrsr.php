@@ -248,6 +248,7 @@
 			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/latestwrs.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/main.js"></script>
+			<style id="instance-style"></style>
 		</section>
 	</body>
 </html>
