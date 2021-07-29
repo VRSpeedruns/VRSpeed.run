@@ -14,6 +14,8 @@ function getLatest()
         get('https://api.github.com/repos/VRSRBot/test/releases?per_page=4')
         .then((data) =>
         {
+			if (!getErrorCheck(data)) return;
+
             var wrs = [];
             var _data = (JSON.parse(data));
 
@@ -50,6 +52,8 @@ function loadWR(id)
     get(`https://www.speedrun.com/api/v1/runs/${id}?embed=players,platform,game,category`)
 	.then((data) =>
 	{
+        if (!getErrorCheck(data)) return;
+
         var run = (JSON.parse(data)).data;
 
         var game = run.game.data.names.international;
@@ -90,6 +94,8 @@ function loadWR(id)
         get(`https://www.speedrun.com/api/v1/categories/${run.category.data.id}/variables`)
         .then((data) =>
         {
+			if (!getErrorCheck(data)) return;
+
             var variables = (JSON.parse(data)).data;
 
             var subcats = [];

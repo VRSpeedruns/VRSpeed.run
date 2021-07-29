@@ -162,8 +162,8 @@
         "abbreviation": "gorn",
         "name": "GORN",
         "hardware": "",
-        "color": "#992547",
-        "hoverColor": "#c73862",
+        "color": "#c73862",
+        "hoverColor": "#e34b78",
         "ignoredVariables": []
     },
     {
@@ -180,8 +180,8 @@
         "abbreviation": "ieytd",
         "name": "I Expect You To Die",
         "hardware": "",
-        "color": "#E57842",
-        "hoverColor": "#f29363",
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e",
         "ignoredVariables": []
     },
     {

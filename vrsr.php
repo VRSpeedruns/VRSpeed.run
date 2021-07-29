@@ -24,6 +24,14 @@
 	</head>
 	<body onload="onLoad();">
 		<section class="section">
+			<div id="src-error-container" class="columns is-centered" style="display: none;">
+				<div class="column is-6">
+					<div class="notification is-danger">
+						<p>There appears to be issues accessing the Speedrun.com API. If refreshing the page does not work, try coming back later.</p>
+						<p>Error message: <span id="src-error-response"></span></p>
+					</div>
+				</div>
+			</div>
 			<div class="container" id="home-container" style="display: none;">
 				<div class="columns is-centered">
 					
@@ -100,7 +108,7 @@
 							</div>
 						</div>
 						<div class="box" id="box-runs" style="display: none;">
-                            <div class="tabs is-boxed"><ul id="tabs"></ul></div>
+                            <div class="tabs is-boxed"><ul id="tabs"></ul><div id="misc-cats-container"></div></div>
 							<div id="variables"></div>
 							<div id="runs-loading" class="loadingdiv" style="display: block;">
 								<div>
@@ -214,15 +222,15 @@
 				</div>
 				<div class="column is-4 has-text-left-tablet">
 					<div class="links">
-						<div>
+						<p>
 							<a href="https://bigft.io/vrsr"><i class="fas fa-home" aria-hidden="true" style="margin-left: -1px;"></i>Home</a>
-						</div>
-						<div>
+						</p>
+						<p>
 							<a href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a>
-						</div>
-						<div>
+						</p>
+						<p>
 							<a href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i>Twitter</a>
-						</div>
+						</p>
 					</div> 
 				</div>
 			</div>

@@ -3,6 +3,9 @@ var mainLoading;
 var aboutInfoToggle;
 var aboutInfoMore;
 
+var srcErrorContainer;
+var srcErrorResponse;
+
 var defaultGame = 'hla';
 
 function onLoad()
@@ -10,6 +13,9 @@ function onLoad()
     mainLoading = document.getElementById("main-loading");
     aboutInfoToggle = document.getElementById("about-info-toggle");
     aboutInfoMore = document.getElementById("about-info-more");
+    
+    srcErrorContainer = document.getElementById("src-error-container");
+    srcErrorResponse = document.getElementById("src-error-response");
 
     pathPrefix = `${window.location.pathname.substring(0, 5)}/`;
 
@@ -157,6 +163,18 @@ function get(url) {
 		req.onerror = (e) => reject(Error(`Network Error: ${e}`));
 		req.send();
 	});
+}
+
+function getErrorCheck(data)
+{
+    var temp = (JSON.parse(data));
+    if (temp.status == 420)
+    {
+        srcErrorResponse.innerText = `${temp.message} (Error code ${temp.status})`
+        srcErrorContainer.style.display = "flex";
+        return false;
+    }
+    else return true;
 }
 
 function setCookie(cname, cvalue, minutes) {

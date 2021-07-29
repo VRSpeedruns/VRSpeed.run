@@ -121,6 +121,8 @@ function openRun(id, loadOrState = false, isRetry = false)
     get(`https://www.speedrun.com/api/v1/runs/${id}?embed=players,platform,game`)
 	.then((data) =>
 	{
+        if (!getErrorCheck(data)) return;
+        
         if (currentCatIndex == undefined)
         {
             openRun(id, loadOrState);
@@ -371,6 +373,8 @@ function openRun(id, loadOrState = false, isRetry = false)
         get(`https://www.speedrun.com/api/v1/users/${run.status.examiner}`)
         .then((__data) =>
         {
+			if (!getErrorCheck(__data)) return;
+            
             var _data = (JSON.parse(__data)).data;
             var verifier = getGradientName(_data.names.international,
                 _data["name-style"]["color-from"].dark,
@@ -480,6 +484,8 @@ function loadSplits(id, timing = "default")
     get(`https://splits.io/api/v4/runs/${id}`)
     .then((data) =>
     {
+        if (!getErrorCheck(data)) return;
+        
         var run = (JSON.parse(data)).run;
 
         if (timing == "default")

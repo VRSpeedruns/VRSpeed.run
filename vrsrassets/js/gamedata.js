@@ -5,6 +5,7 @@ Category Object
 {
 	"id": "",
 	"name": "",
+	"misc": false
 	"variables": [
 		{
 			... Variable Object ...
@@ -21,6 +22,7 @@ Variable Object
 {
 	"id": "",
 	"name": "",
+	"default": ""
 	"values": [
 		{
 			"id": "",
@@ -51,6 +53,9 @@ var gamesContainer;
 var categoriesContainer;
 var variablesContainer;
 var runsContainer;
+var miscCatsContainer;
+var miscTab;
+var miscCategories;
 
 var pcGamesContainer;
 var gameSelectorMenu;
@@ -96,6 +101,7 @@ function onGameDataLoad()
 	categoriesContainer = document.getElementById("tabs")
 	variablesContainer = document.getElementById("variables");
 	runsContainer = document.getElementById("runs");
+	miscCatsContainer = document.getElementById("misc-cats-container")
 	
 	pcGamesContainer = document.getElementById("pc-games");
 	gameSelectorMenu = document.getElementById("game-selector-menu");
@@ -128,7 +134,7 @@ function onGameDataLoad()
 	platformsList["wxeo2d6r"] = "PSN";
 	platformsList["nzeljv9q"] = "PS4 Pro";
 
-	setGameSelectorEvents();
+	setEvents();
 	loadAllGames();
 
 	defaultIndex = -1;
@@ -206,7 +212,7 @@ function loadAllGames()
 		}
 	}
 }
-function setGameSelectorEvents()
+function setEvents()
 {
 	//close selector if user clicks off
 	document.addEventListener('click', (e) => {
@@ -293,12 +299,32 @@ function setGameSelectorEvents()
 						gameSelectorTempCurrentGame.classList.remove("is-selected");
 						gameSelectorTempCurrentGame = document.getElementById(`game-${gamesArray[i].abbreviation}`);
 						gameSelectorTempCurrentGame.classList.add("is-selected");
+						scrollIfNeeded(gameSelectorTempCurrentGame, pcGamesContainer);
 						gameSelectorButton.innerText = gameSelectorTempCurrentGame.firstChild.nodeValue;
 						
 						break;
 					}
 				}
 			}
+		}
+	});
+
+	//close misc tab if user clicks off
+	document.addEventListener('mousedown', (e) => {
+		if (miscCatsContainer.classList.contains("is-active"))
+		{
+			if (!miscCatsContainer.contains(e.target) && e.target != miscCatsContainer && !miscTab.contains(e.target) && e.target != miscTab)
+			{
+				miscCatsContainer.classList.remove("is-active");
+			}
+		}
+	});
+
+	//close misc tab if user scrolls category tabs row
+	categoriesContainer.addEventListener('scroll', (e) => {
+		if (miscCatsContainer.classList.contains("is-active"))
+		{
+			miscCatsContainer.classList.remove("is-active");
 		}
 	});
 }
@@ -386,6 +412,8 @@ function loadGame(id, loadOrState = false, force = false)
 		get(`https://www.speedrun.com/api/v1/runs/${getRun()}`)
 		.then((data) =>
 		{
+			if (!getErrorCheck(data)) return;
+
 			var temp = (JSON.parse(data));
 			if (temp.status == 404)
 			{
@@ -441,6 +469,8 @@ function loadGame(id, loadOrState = false, force = false)
 	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
 
 	gameInfoImage.src = '';
+	gameInfoYear.innerText = '...';
+	gameInfoPlatforms.innerText = '...';
 	gameInfoLinkLeaderboard.href = `https://www.speedrun.com/${gameId}/full_game`;
 	gameInfoLinkGuides.href = `https://www.speedrun.com/${gameId}/guides`;
 	gameInfoLinkResources.href = `https://www.speedrun.com/${gameId}/resources`;
@@ -457,6 +487,8 @@ function loadGame(id, loadOrState = false, force = false)
 	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,levels`)
 	.then((data) =>
 	{
+		if (!getErrorCheck(data)) return;
+
 		var game = (JSON.parse(data)).data;
 		gameInfoImage.src = `https://www.speedrun.com/themes/${game.abbreviation}/cover-256.png`
 		gameInfoYear.innerText = game.released;
@@ -490,6 +522,7 @@ function loadGame(id, loadOrState = false, force = false)
 				categories[catCount] = {
 					"id": cats[i].id,
 					"name": cats[i].name,
+					"misc": cats[i].miscellaneous,
 					"variables": []
 				};
 				catIndex[cats[i].id] = catCount++;
@@ -509,6 +542,8 @@ function loadGame(id, loadOrState = false, force = false)
 		get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=moderators`)
 		.then((data) =>
 		{
+			if (!getErrorCheck(data)) return;
+
 			var mods = (JSON.parse(data)).data.moderators.data;
 
 			var gameInfoModTippysInfo = [];
@@ -578,6 +613,8 @@ function loadVariables(uri, category, loadOrState = false)
 	get(uri)
 	.then((data) =>
 	{
+		if (!getErrorCheck(data)) return;
+
 		var _vars = (JSON.parse(data)).data;
 		
 		if (_vars.length > 0)
@@ -602,6 +639,7 @@ function loadVariables(uri, category, loadOrState = false)
 					variables[i] = {
 						"id": vars[i].id,
 						"name": vars[i].name,
+						"default": vars[i].values.default,
 						"values": []
 					};
 					
@@ -651,15 +689,41 @@ function loadVariables(uri, category, loadOrState = false)
 function displayCategoryTabs(loadOrState = false)
 {
 	categoriesContainer.innerHTML = '';
+	miscCatsContainer.innerHTML = '';
 	categoryTabs = [];
+	var miscCats = [];
+	miscCategories = [];
 
 	for (var i = 0; i < categories.length; i++)
 	{
-		categoriesContainer.innerHTML += `<li id="category-${i}"><a onclick="displayCategory(${i})">${categories[i].name}</a></li>`;
+		if (categories[i].misc)
+		{
+			miscCategories.push(i);
+			miscCats.push(`<li id="category-${i}"><a onclick="displayCategory(${i}); miscTabToggle();">${categories[i].name}</a></li>`);
+		}
+		else
+		{
+			categoriesContainer.innerHTML += `<li id="category-${i}"><a onclick="displayCategory(${i});">${categories[i].name}</a></li>`;
+		}
+	}
+	if (miscCats.length > 0)
+	{
+		categoriesContainer.innerHTML += '<li id="category-misc"><a onclick="miscTabToggle();">Misc. <i class="fas fa-chevron-down"></i></a></li>';
+
+		miscTab = document.getElementById("category-misc");
+
+		for (var i = 0; i < miscCats.length; i++)
+		{
+			miscCatsContainer.innerHTML += miscCats[i];
+		}
 	}
 	for (var i = 0; i < categories.length; i++)
 	{
-		categoryTabs.push(document.getElementById(`category-${i}`));
+		var cat = document.getElementById(`category-${i}`);
+		if (cat)
+		{
+			categoryTabs.push(cat);
+		}
 	}
 
 	if (runLoadedCategory != '')
@@ -696,6 +760,21 @@ function displayCategoryTabs(loadOrState = false)
 	}
 }
 
+function miscTabToggle()
+{
+	miscCatsContainer.classList.toggle("is-active");
+
+	if (miscCatsContainer.classList.contains("is-active"))
+	{
+		var left = miscTab.getBoundingClientRect().left - miscTab.parentElement.getBoundingClientRect().left;
+		left += miscTab.getBoundingClientRect().right - miscTab.getBoundingClientRect().left;
+		var top = miscTab.getBoundingClientRect().bottom - miscTab.getBoundingClientRect().top;
+
+		miscCatsContainer.style.left = `${left}px`;
+		miscCatsContainer.style.top = `${top}px`;
+	}
+}
+
 function displayCategory(index, loadOrState = false)
 {
 	currentCatIndex = index;
@@ -708,6 +787,16 @@ function displayCategory(index, loadOrState = false)
 		categoryTabs[i].classList.remove("is-active");
 	}
 	categoryTabs[currentCatIndex].classList.add("is-active");
+
+	if (miscCategories.includes(index))
+	{
+		miscTab.classList.add("is-active");
+	}
+	else if (miscTab)
+	{
+		miscTab.classList.remove("is-active");
+	}
+	
 
 	if (!getRun())
 	{
@@ -743,7 +832,24 @@ function displayCategoryVariables(index, loadOrState = false)
 
 		variablesContainer.innerHTML += temp;
 
-		setVariable(vars[i].id, vars[i].values[0].id, false)
+		var defaultVal = vars[i].default;
+		if (!defaultVal)
+		{
+			defaultVal = vars[i].values[0].id;
+		}
+		else
+		{
+			for (var k = 0; k < currentGame.ignoredVariables.length; k++)
+			{
+				if (currentGame.ignoredVariables[k].id == vars[i].id && currentGame.ignoredVariables[k].value == defaultVal)
+				{
+					defaultVal = vars[i].values[0].id;
+					break;
+				}
+			}
+		}
+
+		setVariable(vars[i].id, defaultVal, false)
 	}
 
 	loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState);
@@ -817,6 +923,8 @@ function loadRuns(id, variables, loadOrState = false)
 	get(`https://www.speedrun.com/api/v1/leaderboards/${gameId}/category/${id}?embed=players,platforms,variables${varString}`)
 	.then((data) =>
 	{
+		if (!getErrorCheck(data)) return;
+
 		var json = (JSON.parse(data)).data;
 
 		var players = [];
