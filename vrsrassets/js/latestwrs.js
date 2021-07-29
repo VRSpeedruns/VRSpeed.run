@@ -56,7 +56,6 @@ function loadWR(id)
 
         var run = (JSON.parse(data)).data;
 
-        var game = run.game.data.names.international;
         var category = run.category.data.name;
 
         var time = runTimeFormat(run.times.primary);
@@ -79,12 +78,14 @@ function loadWR(id)
 
         var date = timeAgo(new Date(run.submitted));
 
+        var game = '';
         var abbr = '';
         var color = '';
         for (var i = 0; i < gamesArray.length; i++)
         {
             if (gamesArray[i].id == run.game.data.abbreviation)
             {
+                game = gamesArray[i].name;
                 abbr = gamesArray[i].abbreviation;
                 color = gamesArray[i].color;
                 break;

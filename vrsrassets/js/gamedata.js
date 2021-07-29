@@ -1027,7 +1027,7 @@ function loadRuns(id, variables, loadOrState = false)
 				runsPlatformHardware.innerText = "Platform";
 			}
 
-			var date = timeAgo(new Date(run.submitted));
+			var date = `<span title="${new Date(run.submitted).toDateString()}">${timeAgo(new Date(run.submitted))}</span>`;
 
 			var modIcon = '';
 			var flag = '';

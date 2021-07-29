@@ -522,6 +522,9 @@ a.button:not(:last-child) {
 #world-records > div {
 	padding: 0.75rem;
 }
+#world-records > div:nth-child(-n+2) {
+	padding-top: 0;
+}
 @media only screen and (max-width: 768px) {
 	#world-records > div {
 		padding: 0.25rem;
