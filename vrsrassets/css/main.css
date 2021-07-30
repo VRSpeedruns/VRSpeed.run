@@ -4,13 +4,14 @@
 	--primary-color-hover: #3888ff;
 	--text-color: #eee;
 	--text-color-dark: #111;
+	--text-color-light: #bbb;
 	--background-color: #2E3136;
 	--background-mid-accent-color: #282b30;
 	--background-accent-color: #26282C;
 	--button-background-color: #393C42;
 	--button-background-hover-color: #41434b;
 	--tippy-background-color: hsla(228, 8%, 12%, 0.975);
-	--background-color-transparent: hsla(218, 8%, 20%, 0.75);
+	--background-color-transparent: hsla(218, 8%, 20%, 0.85);
 
 	--place-gold: #f5b946;
 	--place-silver: #C0C0C0;
@@ -301,7 +302,7 @@ a.button:not(:last-child) {
 	border-radius: 6px;
 }
 #game-year, #game-platforms, #game-moderators {
-	color: #bbb;
+	color: var(--text-color-light);
 	font-size: 0.9em;
 }
 #game-platforms, #game-moderators {
@@ -695,6 +696,7 @@ a.button:not(:last-child) {
 #pc-games > .game {
 	width: 100%;
 	padding-left: 0.5em;
+	padding-right: 1.4em;
 	font-size: 0.95em;
 	height: 21px;
 	position: relative;
@@ -709,6 +711,9 @@ a.button:not(:last-child) {
 	right: 0.5em;
 	
 	font-size: 0.8em;
+}
+#pc-games > .game:not(.is-selected) > .letter {
+	color: var(--text-color-light);
 }
 #pc-games > .game:hover {
 	background-color: var(--button-background-hover-color);
@@ -848,7 +853,7 @@ a.button:not(:last-child) {
 }
 
 .is-footer p {
-	color: #bbb;
+	color: var(--text-color-light);
 	margin-bottom: 0.25em;
 }
 .is-footer > .columns {

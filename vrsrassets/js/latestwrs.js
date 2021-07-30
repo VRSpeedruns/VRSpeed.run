@@ -61,6 +61,7 @@ function loadWR(id)
         var time = runTimeFormat(run.times.primary);
         
         var player = "";
+        var flag = "";
         if (run.players.data[0].rel == "user")
         {
             var temp = run.players.data[0];
@@ -75,6 +76,13 @@ function loadWR(id)
         {
             player = run.players.data[0].name;
         }
+
+        if (temp.location !== null)
+        {
+            flag = `<img class="runs-flag small" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
+        }
+
+		var userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${temp.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
 
         var date = timeAgo(new Date(run.submitted));
 
@@ -123,14 +131,14 @@ function loadWR(id)
                     <div class="wr-game">${game}</div>
                     <div class="wr-category">${category}</div>
                     <div class="wr-time">${time}</div>
-                    <div class="wr-runner">${player}</div>
+                    <div class="wr-runner">${flag}${userIcon}${player}</div>
                     <div class="wr-date">${date}</div>
                    </div></a>`;
 
             document.getElementById(`wr-${id}`).style.backgroundColor = color;
             document.getElementById(`wr-${id}`).innerHTML = html;
 
-            document.getElementById("instance-style").innerHTML += `#wr-${id}:before, #wr-${id}:after { background-color: ${color}; }`
+            document.getElementById("instance-style").innerHTML += `#wr-${id}:before, #wr-${id}:after { background-color: ${color}; }`;
         });
     });
 }

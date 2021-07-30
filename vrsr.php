@@ -218,7 +218,7 @@
 				</div> 
 				<div class="column is-4">
 					<p><a href="https://www.speedrun.com/" target="_blank">Speedrun.com</a> data accessed using the <a href="https://github.com/speedruncomorg/api" target="_blank">SR.C REST API</a>.</p>
-					<p><a href="https://www.speedrun.com/" target="_blank">Splits.io</a> data accessed using the <a href="https://github.com/glacials/splits-io/blob/main/docs/api.md" target="_blank">Splits.io API</a>.</p>
+					<p><a href="https://splits.io/" target="_blank">Splits.io</a> data accessed using the <a href="https://github.com/glacials/splits-io/blob/main/docs/api.md" target="_blank">Splits.io API</a>.</p>
 				</div>
 				<div class="column is-4 has-text-left-tablet">
 					<div class="links">
