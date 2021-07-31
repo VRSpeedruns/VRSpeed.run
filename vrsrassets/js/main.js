@@ -17,9 +17,9 @@ function onLoad()
     srcErrorContainer = document.getElementById("src-error-container");
     srcErrorResponse = document.getElementById("src-error-response");
 
-    pathPrefix = `${window.location.pathname.substring(0, 5)}/`;
+    pathPrefix = `/`;
 
-    if (window.location.pathname.substring(5) == "/")
+    if (window.location.pathname == "/")
     {
         replaceState(null);
     }
@@ -65,7 +65,7 @@ function replaceState(path)
     }
     else
     {
-        history.replaceState(null, document.title, pathPrefix.substring(0, 5));
+        history.replaceState(null, document.title, "");
     }
 }
 function setHash(hash)
@@ -82,7 +82,7 @@ function getHash()
 }
 function getPath()
 {
-    return window.location.pathname.substring(6);
+    return window.location.pathname.substring(1);
 }
 function getGame()
 {
@@ -99,7 +99,7 @@ function getRun()
 {
     if (getPath().includes('/run/'))
     {
-        return getPath().split('/')[2].split('/')[0]; 
+        return getPath().split('/')[2].split('/')[0];
     }
     else
     {
@@ -170,7 +170,7 @@ function getErrorCheck(data)
     var temp = (JSON.parse(data));
     if (temp.status == 420)
     {
-        srcErrorResponse.innerText = `${temp.message} (Error code ${temp.status})`
+        srcErrorResponse.innerText = `"${temp.message}" (Error code ${temp.status})`
         srcErrorContainer.style.display = "flex";
         return false;
     }

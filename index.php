@@ -1,4 +1,9 @@
-<?php include 'vrsrassets/php/oEmbedData.php'; ?>
+<?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+include 'vrsrassets/php/oEmbedData.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +14,7 @@
 		
 		<title>VRSR</title>
 		
-		<meta property="og:site_name" content="Bigft.io">
+		<meta property="og:site_name" content="VRSpeed.run">
 		<meta property="og:title" content="<?= $title; ?>">
 		<meta property="og:description" content="<?= $description; ?>">
 		<meta name="description" content="<?= $description; ?>">
@@ -223,7 +228,7 @@
 				<div class="column is-4 has-text-left-tablet">
 					<div class="links">
 						<p>
-							<a href="https://bigft.io/vrsr"><i class="fas fa-home" aria-hidden="true" style="margin-left: -1px;"></i>Home</a>
+							<a href="/"><i class="fas fa-home" aria-hidden="true" style="margin-left: -1px;"></i>Home</a>
 						</p>
 						<p>
 							<a href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a>

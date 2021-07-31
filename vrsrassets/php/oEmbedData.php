@@ -3,7 +3,7 @@ $games = json_decode(file_get_contents('vrsrassets/other/games.json'));
 	
 $gameId = '';
 $runId = '';
-$substr = substr($_SERVER['REQUEST_URI'], 6);
+$substr = substr($_SERVER['REQUEST_URI'], 1);
 if (strlen($substr) > 0)
 {
     $expl = explode('/', $substr);
