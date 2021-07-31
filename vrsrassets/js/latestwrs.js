@@ -100,7 +100,7 @@ function loadWR(id)
             }
         }
 
-        var link = `${pathPrefix}${abbr}/run/${id}`;
+        var link = `/${abbr}/run/${id}`;
 
         get(`https://www.speedrun.com/api/v1/categories/${run.category.data.id}/variables`)
         .then((data) =>

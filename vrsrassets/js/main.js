@@ -1,4 +1,3 @@
-var pathPrefix;
 var mainLoading;
 var aboutInfoToggle;
 var aboutInfoMore;
@@ -17,8 +16,6 @@ function onLoad()
     srcErrorContainer = document.getElementById("src-error-container");
     srcErrorResponse = document.getElementById("src-error-response");
 
-    pathPrefix = `/`;
-
     if (window.location.pathname == "/")
     {
         replaceState(null);
@@ -29,7 +26,7 @@ function onLoad()
         defaultGame = getCookie('last_game');
     }
 
-    document.getElementById("view-lb").href = pathPrefix + defaultGame;
+    document.getElementById("view-lb").href = `/${defaultGame}`;
 
     infoTippy();
     latestWRsLoad();
@@ -55,13 +52,13 @@ function onLoad()
 
 function pushState(path)
 {
-    history.pushState(null, document.title, pathPrefix + path);
+    history.pushState(null, document.title, `/${path}`);
 }
 function replaceState(path)
 {
     if (path)
     {
-        history.replaceState(null, document.title, pathPrefix + path);
+        history.replaceState(null, document.title, `/${path}`);
     }
     else
     {
