@@ -10,8 +10,8 @@ A semi-comprehensive writeup explaining the order and usage of each function. Mo
 
 ## External Tools/Libraries
 
-- [Speedrun.com REST API](https://github.com/speedruncomorg/api)
-- [Splits.io API](https://github.com/glacials/splits-io/blob/master/docs/api.md)
+- [Speedrun.com REST API](https://github.com/speedruncomorg/api) under [CC-BY-NC 4.0](https://github.com/speedruncomorg/api#content-license)
+- [Splits.io API](https://github.com/glacials/splits-io/blob/master/docs/api.md) under [AGPL-3.0](https://github.com/glacials/splits-io/blob/main/LICENSE)
 
 Everything below is hosted locally.
 
