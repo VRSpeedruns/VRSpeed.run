@@ -82,7 +82,7 @@ function loadWR(id)
             flag = `<img class="runs-flag small" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
         }
 
-		var userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${temp.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+		var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${temp.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
 
         var date = timeAgo(new Date(run.submitted));
 

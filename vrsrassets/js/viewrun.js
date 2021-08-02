@@ -229,7 +229,7 @@ function openRun(id, loadOrState = false, isRetry = false)
                 });
 			}
 
-            userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+            userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
         }
 
         player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${modIcon}${flag}${userIcon}${player}</a>`;
@@ -415,7 +415,7 @@ function openRun(id, loadOrState = false, isRetry = false)
                 });
             }
 
-            var verifierIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${_data.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+            var verifierIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${_data.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
                 
             runSingleVerifier.innerHTML = `<a class="player-link" href="${_data.weblink}" target="_blank">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
 

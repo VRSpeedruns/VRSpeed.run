@@ -7,7 +7,7 @@
 		
 		<link rel="icon" href="/vrsrassets/images/fav.png">
 		
-		<title>VRSR</title>
+		<title>VR Speedrunning Leaderboards</title>
 		
 		<meta property="og:site_name" content="VRSpeed.run">
 		<meta property="og:title" content="<?= $title; ?>">
@@ -209,6 +209,20 @@
 					</div>
 				</div>
 			</div>
+			<div class="container" id="user-container" style="display: none;">
+				<div class="columns">
+					<div class="column is-3">
+						<div class="box">
+							
+						</div>
+					</div>
+					<div class="column is-9">
+						<div class="box">
+							<div id="user-runs-table"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 		<section class="section is-footer">
 			<div class="columns is-centered is-vcentered">
@@ -244,6 +258,7 @@
 			<script type="text/javascript" src="/assets/js/popper.min.js"></script>
 			<script type="text/javascript" src="/assets/js/tippy-bundle.umd.js"></script> 
 			<script type="text/javascript" src="/vrsrassets/js/colorinterpolation.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/viewuser.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/gamedata.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/latestwrs.js"></script>

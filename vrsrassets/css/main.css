@@ -1,10 +1,11 @@
 /* ---------- Main/Misc ---------- */
 :root {
-	--primary-color: #0066FF;
-	--primary-color-hover: #3888ff;
+	--primary-color: #FF9C00;
+	--primary-color-hover: #FFBB4D;
 	--text-color: #eee;
 	--text-color-dark: #111;
 	--text-color-light: #bbb;
+	
 	--background-color: #2E3136;
 	--background-mid-accent-color: #282b30;
 	--background-accent-color: #26282C;
@@ -725,6 +726,39 @@ a.button:not(:last-child) {
 }
 #pc-games > .game.is-selected:hover {
 	background-color: var(--primary-color-hover);
+}
+
+/* ---------- User ---------- */
+
+.user-runs-container {
+	min-height: 7em;
+	margin-left: 7em;
+}
+
+.user-runs-image {
+	position: relative;
+}
+.user-runs-image > img {
+	width: 5em;
+	position: absolute;
+	top: 0;
+	margin-left: -7em;
+}
+
+
+@media only screen and (max-width: 768px) {
+	.user-runs-image {
+		display: none;
+	}
+}
+
+.user-runs-heading {
+	font-size: 1.2em;
+	font-weight: bold;
+	
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: -1.1em;
 }
 
 /* ---------- Misc ---------- */

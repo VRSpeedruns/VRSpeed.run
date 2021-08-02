@@ -30,6 +30,7 @@ function onLoad()
 
     infoTippy();
     latestWRsLoad();
+    onUserLoad();
     onGameDataLoad();
     onSingleRunLoad();
 
@@ -62,7 +63,7 @@ function replaceState(path)
     }
     else
     {
-        history.replaceState(null, document.title, "");
+        history.replaceState(null, document.title, "/");
     }
 }
 function setHash(hash)
@@ -97,6 +98,17 @@ function getRun()
     if (getPath().includes('/run/'))
     {
         return getPath().split('/')[2].split('/')[0];
+    }
+    else
+    {
+        return null;
+    }
+}
+function getUser()
+{
+    if (getPath().length > 5 && getPath().substring(0, 5) == 'user/')
+    {
+        return getPath().substring(5);
     }
     else
     {

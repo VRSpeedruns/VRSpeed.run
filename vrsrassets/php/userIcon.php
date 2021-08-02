@@ -17,7 +17,7 @@
     {
         //image not found; return empty image
 
-        $fp = fopen('https://bigft.io/vrsrassets/images/noUserIcon.png', 'rb');
+        $fp = fopen('https://vrspeed.run/vrsrassets/images/noUserIcon.png', 'rb');
         header("Content-Type: image/png");
         header("Content-Length: " . filesize($url));
         fpassthru($fp);

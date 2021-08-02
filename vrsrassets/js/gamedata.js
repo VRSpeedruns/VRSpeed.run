@@ -147,13 +147,14 @@ function onGameDataLoad()
 		}
 	}
 
-	if (getGame() != null || getHash().length > 1)
+	if (getGame() != null)
 	{
 		var id = getGame();
-		if (id == null)
+
+		if (getUser())
 		{
-			id = getHash().substring(1);
-			replaceState(getPath());
+			loadUser(getUser());
+			return;
 		}
 
 		var gameIndex = -1;
@@ -180,16 +181,14 @@ function onGameDataLoad()
 			replaceState(null);
 			homeContainer.style.display = "block";
 			mainContainer.style.display = "none";
-			//gamesContainer.selectedIndex = defaultIndex;
-			//loadGame('hla', true);
+			userContainer.style.display = "none";
 		}
 	}
 	else
 	{
 		homeContainer.style.display = "block";
 		mainContainer.style.display = "none";
-		//gamesContainer.selectedIndex = defaultIndex;
-		//loadGame('hla', true);
+		userContainer.style.display = "none";
 	}
 }
 
@@ -378,12 +377,19 @@ function loadGame(id, loadOrState = false, force = false)
 
 		homeContainer.style.display = "block";
 		mainContainer.style.display = "none";
+		userContainer.style.display = "none";
 
+		return;
+	}
+	else if (getUser())
+	{
+		loadUser(getUser());
 		return;
 	}
 
 	homeContainer.style.display = "none";
 	mainContainer.style.display = "block";
+    userContainer.style.display = "none";
 
 	if (getGame() !== id)
 	{
@@ -592,7 +598,7 @@ function loadGame(id, loadOrState = false, force = false)
 					});
 				}
 
-				var userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${mods[i].names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+				var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${mods[i].names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
 
 				gameInfoModerators.innerHTML += `<a class="player-link" href="${mods[i].weblink}" target="_blank">${modIcon}${flag}${userIcon}${name}</a>`;
 			}
@@ -1066,7 +1072,7 @@ function loadRuns(id, variables, loadOrState = false)
 					});
 				}
 
-				userIcon = `<img class="runs-usericon" src="https://bigft.io/vrsrassets/php/userIcon?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+				userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
 			}
 
 			var icons = '';
