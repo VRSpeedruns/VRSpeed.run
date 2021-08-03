@@ -165,7 +165,7 @@
 									</div>
 								</div>
 								<div class="run-single-info-other">
-									<p id="run-single-comment"></p>
+									<div id="run-single-comment-outer"><span id="run-single-comment"></span></div>
 									<p>Played using <span id="run-single-platform"></span> on <span id="run-single-date"></span></p>
 									<p>Run verified by <span id="run-single-verifier"></span> on <span id="run-single-verifydate"></span></p>
 								</div>

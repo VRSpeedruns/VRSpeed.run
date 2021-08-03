@@ -377,14 +377,23 @@ a.button:not(:last-child) {
 	font-size: 1.25em;
 }
 
+#run-single-comment-outer {
+	width: 100%;
+	text-align: center;
+}
 #run-single-comment {
 	font-style: italic;
 	margin-bottom: 1em;
+	width: auto;
+	padding: 0.5em;
+	background-color: var(--background-table-even);
+	border-radius: 4px;
+	display: inline-block;
 }
 #run-single-comment:empty {
 	margin-bottom: 0;
 }
-.run-single-info-other > p:not(:empty) {
+.run-single-info-other > p, #run-single-comment:not(:empty) {
 	margin-top: 0.5em;
 	text-align: center;
 }
@@ -485,7 +494,6 @@ a.button:not(:last-child) {
 }
 
 /* ---------- World Records ---------- */
-
 
 .wr {
 	position: relative;
@@ -737,7 +745,7 @@ a.button:not(:last-child) {
 /* ---------- User ---------- */
 
 .user-runs-container {
-	min-height: 8em;
+	min-height: 7.35em;
 	margin-left: 7em;
 }
 .user-runs-image {
@@ -754,8 +762,8 @@ a.button:not(:last-child) {
 	font-size: 1.2em;
 	font-weight: bold;
 	
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
+	margin-top: 0.6em;
+	margin-bottom: 0.4em;
 	margin-left: -1.1em;
 }
 
@@ -777,6 +785,9 @@ a.button:not(:last-child) {
 	border-bottom-left-radius: 6px;
 }
 
+#user-runs-table {
+	margin-top: -1em;
+}
 #user-username {
 	font-size: 1.1em;
 	margin-bottom: 0.75em;
@@ -807,6 +818,10 @@ a.button:not(:last-child) {
 
 /* ---------- Misc ---------- */
 
+#runs-loading, #runs-none {
+	padding-bottom: 1.25rem;
+}
+
 #box-runs {
 	padding-bottom: 0;
 }
@@ -817,9 +832,6 @@ a.button:not(:last-child) {
 	border-bottom-right-radius: 4px;
 }
 
-#box-single-run {
-	padding-bottom: 0;
-}
 #run-single-segments-table, #run-single-segments tr:last-child td:first-child {
 	border-bottom-left-radius: 4px;
 }

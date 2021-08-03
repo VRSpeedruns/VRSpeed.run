@@ -279,7 +279,7 @@ function openRun(id, loadOrState = false, isRetry = false)
         }
 
         var comment = '';
-        runSingleComment.innerHTML = '';
+        runSingleComment.innerText = '';
         if (run.comment)
         {
             comment = `"${run.comment}"`;
@@ -441,7 +441,12 @@ function openRun(id, loadOrState = false, isRetry = false)
             runSingleSplitsRT.setAttribute( 'onclick', `loadSplits("${splitsId}", "real")`);
             runSingleSplitsGT.setAttribute( 'onclick', `loadSplits("${splitsId}", "game")`);
 
+            boxSingleRun.style.paddingBottom = "0";
             loadSplits(splitsId);
+        }
+        else
+        {
+            boxSingleRun.style.paddingBottom = "1.25rem";
         }
 
         if (getHash() != '')

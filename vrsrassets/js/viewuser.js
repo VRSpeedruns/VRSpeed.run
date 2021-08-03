@@ -171,7 +171,7 @@ function loadUserRuns(id)
             }
 
             var html = `<div class="user-runs-container"><div class="user-runs-image"><a href="/${thisGame.abbreviation}"><img src="https://www.speedrun.com/themes/${games[i].game.abbreviation}/cover-256.png"></a></div>
-            <div class="user-runs-heading"><a href="/${thisGame.abbreviation}" class="thick-underline" style="color: ${thisGame.color};">${thisGame.name}</a></div><table id="user-runs-table" class="table is-narrow is-fullwidth"><tbody class="user-runs-tbody">`;
+            <div class="user-runs-heading"><a href="/${thisGame.abbreviation}" class="thick-underline" style="color: ${thisGame.color};">${thisGame.name}</a></div><table class="table is-narrow is-fullwidth"><tbody class="user-runs-tbody">`;
 
             for (var k = 0; k < games[i].runs.length; k++)
             {
