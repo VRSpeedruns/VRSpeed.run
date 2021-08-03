@@ -54,6 +54,9 @@ a:hover {
 	color: var(--primary-color-hover);
 	text-decoration: underline solid 1px;
 }
+a.thick-underline:hover {
+	text-decoration: underline solid 2px;
+}
 
 /* ---------- Button ---------- */
 
@@ -322,9 +325,6 @@ a.button:not(:last-child) {
 #game-moderators a {
 	display: inline-block;
 }
-#game-moderators a:hover span {
-	text-decoration: underline solid 1px;
-}
 
 /* ---------- Tippy ---------- */
 
@@ -524,7 +524,7 @@ a.button:not(:last-child) {
 #world-records > div {
 	padding: 0.75rem;
 }
-#world-records > div:nth-child(-n+2) {
+#world-records > div:nth-child(-n+3) {
 	padding-top: 0;
 }
 @media only screen and (max-width: 768px) {
@@ -731,27 +731,19 @@ a.button:not(:last-child) {
 /* ---------- User ---------- */
 
 .user-runs-container {
-	min-height: 7em;
+	min-height: 8em;
 	margin-left: 7em;
 }
-
 .user-runs-image {
 	position: relative;
 }
 .user-runs-image > img {
 	width: 5em;
 	position: absolute;
-	top: 0;
+	top: 0.4em;
 	margin-left: -7em;
+	border-radius: 4px;
 }
-
-
-@media only screen and (max-width: 768px) {
-	.user-runs-image {
-		display: none;
-	}
-}
-
 .user-runs-heading {
 	font-size: 1.2em;
 	font-weight: bold;
@@ -759,6 +751,33 @@ a.button:not(:last-child) {
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 	margin-left: -1.1em;
+}
+
+@media only screen and (max-width: 768px) {
+	.user-runs-image {
+		display: none;
+	}
+	.user-runs-container {
+		margin-left: 0;
+	}
+	.user-runs-heading {
+		margin-left: 0;
+	}
+}
+.user-runs-tbody tr:first-child td:first-child {
+	border-top-left-radius: 6px;
+}
+.user-runs-tbody tr:last-child td:first-child {
+	border-bottom-left-radius: 6px;
+}
+
+#user-username {
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-bottom: 0.5em;
+}
+#user-pfp {
+	border-radius: 6px;
 }
 
 /* ---------- Misc ---------- */
@@ -949,6 +968,9 @@ a.button:not(:last-child) {
 }
 .player-link:hover > span {
 	text-decoration: underline solid 2px;
+}
+.player-link.thin:hover > span {
+	text-decoration: underline solid 1px;
 }
 
 @media only screen and (max-width: 768px) {

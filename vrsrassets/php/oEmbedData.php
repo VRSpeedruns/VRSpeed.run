@@ -3,6 +3,7 @@ $games = json_decode(file_get_contents('vrsrassets/other/games.json'));
 	
 $gameId = '';
 $runId = '';
+$user = '';
 $substr = substr($_SERVER['REQUEST_URI'], 1);
 if (strlen($substr) > 0)
 {
@@ -11,7 +12,21 @@ if (strlen($substr) > 0)
     if (strpos($substr, '/run/') !== false)
     {
         $runId = $expl[2];
+
+        if (strpos($runId, '?') !== false)
+        {
+            $runId = explode('?', $runId)[0];
+        }
     }
+    else if (strpos($substr, 'user/') !== false)
+    {
+        $user = $expl[1];
+
+        if (strpos($runId, '?') !== false)
+        {
+            $user = explode('?', $runId)[0];
+        }
+    } 
 }
 
 $game = null;
@@ -66,6 +81,18 @@ if ($title != 'VR Speedrunning Leaderboards' &&  $runId != '')
         }
 
         $description = $run->category->data->name . ' completed in ' . $time . ' by ' . $player;
+    }
+}
+else if ($title == 'VR Speedrunning Leaderboards' &&  $user != '')
+{
+    $title = $user . ' - VRSR';
+    $description = 'User page for ' . $user;
+
+    $get = file_get_contents('https://www.speedrun.com/themes/user/' . $user . '/image.png');
+    
+    if (strlen($get) > 0)
+    {
+        $image = 'https://www.speedrun.com/themes/user/' . $user . '/image.png';
     }
 }
 ?>

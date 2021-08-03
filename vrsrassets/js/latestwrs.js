@@ -9,6 +9,7 @@ function latestWRsLoad()
 
 function getLatest()
 {
+    latestWRContainer.innerHTML = `<div id="latest-wr-loading" class="loadingdiv column is-12" style="display: block; margin-top: -2.5em;"><div><div class="spinner"></div><div class="belowspinner">Loading...</div></div></div>`;
     if (getCookie('latest_wrs') == "")
     {
         get('https://api.github.com/repos/VRSRBot/test/releases?per_page=4')
@@ -38,6 +39,7 @@ function getLatest()
 
 function loadWRs(wrs)
 {
+    removedLoading = false;
     for (var i = 0; i < wrs.length; i++)
     {
         latestWRContainer.innerHTML += `<div class="column is-6"><div class="wr" id="wr-${wrs[i]}"></div></div>`;
@@ -53,6 +55,8 @@ function loadWR(id)
 	.then((data) =>
 	{
         if (!getErrorCheck(data)) return;
+
+        document.getElementById("latest-wr-loading").style.display = "none";
 
         var run = (JSON.parse(data)).data;
 
@@ -74,7 +78,7 @@ function loadWR(id)
         }
         else
         {
-            player = run.players.data[0].name;
+            player = `<b>${run.players.data[0].name}/b>`;
         }
 
         if (temp.location !== null)
@@ -82,7 +86,7 @@ function loadWR(id)
             flag = `<img class="runs-flag small" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
         }
 
-		var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${temp.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+		var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${temp.names.international}" onload="handleIconLoad(this);">`;
 
         var date = timeAgo(new Date(run.submitted));
 

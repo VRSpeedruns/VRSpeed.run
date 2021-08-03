@@ -16,9 +16,17 @@ function onLoad()
     srcErrorContainer = document.getElementById("src-error-container");
     srcErrorResponse = document.getElementById("src-error-response");
 
+    if (window.location.href.includes("?"))
+    {
+        var url = window.location.href.substring(window.location.origin.length + 1);
+        url = url.substring(0, url.indexOf("?"))
+        replaceState(url);
+    }
+
     if (window.location.pathname == "/")
     {
         replaceState(null);
+        latestWRsLoad()
     }
 
     if (getCookie('last_game') != '')
@@ -29,7 +37,7 @@ function onLoad()
     document.getElementById("view-lb").href = `/${defaultGame}`;
 
     infoTippy();
-    latestWRsLoad();
+    //latestWRsLoad();
     onUserLoad();
     onGameDataLoad();
     onSingleRunLoad();
@@ -161,6 +169,19 @@ function infoTippy()
         offset: [0,7.5],
         content: 'View Statistics'
     });
+
+    tippy('#user-links-src', {
+        offset: [0,7.5],
+        content: 'View User'
+    });
+    tippy('#user-links-info', {
+        offset: [0,7.5],
+        content: "View User's Info"
+    });
+    tippy('#user-links-forum', {
+        offset: [0,7.5],
+        content: "View User's Forum Posts"
+    });
 }
 
 function get(url) {
@@ -174,16 +195,27 @@ function get(url) {
 	});
 }
 
+var nonErrorCount = 0;
 function getErrorCheck(data)
 {
     var temp = (JSON.parse(data));
     if (temp.status == 420)
     {
+        nonErrorCount = 0;
+
         srcErrorResponse.innerText = `"${temp.message}" (Error code ${temp.status})`
         srcErrorContainer.style.display = "flex";
         return false;
     }
-    else return true;
+    else
+    {
+        if (++nonErrorCount > 4)
+        {
+            srcErrorContainer.style.display = "none";
+        }
+
+        return true;
+    }
 }
 
 function setCookie(cname, cvalue, minutes) {

@@ -430,13 +430,11 @@ function loadGame(id, loadOrState = false, force = false)
 			
 			runLoadedCategory = temp.data.category;
 			loadGame(temp.data.game, loadOrState, force);
-			return;
 		});
+		return;
 	}
 	
 	ready = false;
-
-	setCookie('last_game', id, 10080); //7 days
 
 	for (var i = 0; i < gamesArray.length; i++)
 	{
@@ -462,6 +460,8 @@ function loadGame(id, loadOrState = false, force = false)
 			break;
 		} 
 	}
+
+	setCookie('last_game', id, 10080); //7 days
 
 	document.title = `${currentGame.name} - VRSR`;
 
@@ -598,9 +598,9 @@ function loadGame(id, loadOrState = false, force = false)
 					});
 				}
 
-				var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${mods[i].names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+				var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${mods[i].names.international}" onload="handleIconLoad(this);">`;
 
-				gameInfoModerators.innerHTML += `<a class="player-link" href="${mods[i].weblink}" target="_blank">${modIcon}${flag}${userIcon}${name}</a>`;
+				gameInfoModerators.innerHTML += `<a class="player-link thin" href="/user/${mods[i].names.international}">${modIcon}${flag}${userIcon}${name}</a>`;
 			}
 
 			for (var i = 0; i < gameInfoModTippysInfo.length; i++)
@@ -1072,7 +1072,7 @@ function loadRuns(id, variables, loadOrState = false)
 					});
 				}
 
-				userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+				userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${rawPlayer}" onload="handleIconLoad(this);">`;
 			}
 
 			var icons = '';
@@ -1084,8 +1084,13 @@ function loadRuns(id, variables, loadOrState = false)
 			{
 				icons += `<i id="run-${run.id}-video" class="fas fa-video"></i>`;
 			}
+
+			if (player != rawPlayer)
+				player = `<a class="player-link thin" href="/user/${rawPlayer}" onclick="event.stopPropagation();">${modIcon}${flag}${userIcon}${player}</a>`;
+			else
+				player = `<b>${player}</b>`
 			
-			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}"><td>${place}</td><td style="font-weight: bold">${modIcon}${flag}${userIcon}${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}"><td>${place}</td><td style="font-weight: bold">${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
 		}
 		
 		if (!isMobile)
@@ -1253,3 +1258,11 @@ function scrollIfNeeded(element, container) {
 	  }
 	}
   }
+
+function handleIconLoad(_this)
+{
+	if (_this.width == 1 && _this.height == 1)
+	{
+		_this.remove();
+	}
+}

@@ -1,6 +1,18 @@
 <?php
-    $input = preg_replace("/[^a-zA-Z0-9\s._]/", "", $_SERVER['QUERY_STRING']);
-    $url = 'https://www.speedrun.com/themes/user/'.$input.'/icon.png';
+    $type = preg_replace("/[^a-zA-Z0-9\s._]/", "", $_GET['t']);
+    $user = preg_replace("/[^a-zA-Z0-9\s._]/", "", $_GET['u']);
+
+    $url = '';
+
+    if ($type == "i") //icon
+    {
+        $url = 'https://www.speedrun.com/themes/user/'.$user.'/icon.png';
+    }
+    else if ($type == "p") //profile pic
+    {
+        $url = 'https://www.speedrun.com/themes/user/'.$user.'/image.png';
+    }
+
     $get = file_get_contents($url);
     
     if (strlen($get) > 0)

@@ -229,10 +229,13 @@ function openRun(id, loadOrState = false, isRetry = false)
                 });
 			}
 
-            userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${rawPlayer}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+            userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${rawPlayer}" onload="handleIconLoad(this);">`;
         }
 
-        player = `<a class="player-link" href="${run.players.data[0].weblink}" target="_blank">${modIcon}${flag}${userIcon}${player}</a>`;
+        if (player != rawPlayer)
+            player = `<a class="player-link" href="/user/${rawPlayer}">${modIcon}${flag}${userIcon}${player}</a>`;
+        else
+            player = `<b>${player}</b>`;
 
         if (!document.getElementById(`run-${id}`))
         {
@@ -415,9 +418,9 @@ function openRun(id, loadOrState = false, isRetry = false)
                 });
             }
 
-            var verifierIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?${_data.names.international}" onload="if (this.width == 1 && this.height == 1) this.remove();">`;
+            var verifierIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${_data.names.international}" onload="handleIconLoad(this);">`;
                 
-            runSingleVerifier.innerHTML = `<a class="player-link" href="${_data.weblink}" target="_blank">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
+            runSingleVerifier.innerHTML = `<a class="player-link" href="/user/${_data.names.international}">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
 
             
 
@@ -544,7 +547,8 @@ function loadSplits(id, timing = "default")
                 pbColor = ' class="new-pb has-text-weight-bold"';
             }
 
-            var runName = seg["display_name"];
+            var runName = seg["display_name"].replace("<", "&lt;").replace(">", "&gt;");
+
             var runDur = "—";
             var runFin = "—";
             
@@ -563,7 +567,7 @@ function loadSplits(id, timing = "default")
             var percent = (seg[`${timing}_duration_ms`] / totalDuration) * 100;
             var color = splitsBarColors[i % splitsBarColors.length];
             
-            runSingleSplitsBar.innerHTML += `<div id="bar-${i}" style="width: ${percent}%; background-color: ${color}"><div><div>${seg["display_name"]}</div><div class="sp-time">${msToTime(seg[`${timing}_duration_ms`])}</div></div></div>`;
+            runSingleSplitsBar.innerHTML += `<div id="bar-${i}" style="width: ${percent}%; background-color: ${color}"><div><div>${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</div><div class="sp-time">${msToTime(seg[`${timing}_duration_ms`])}</div></div></div>`;
             
             if (seg.name.substring(0, 1) == "-")
             {
@@ -584,7 +588,7 @@ function loadSplits(id, timing = "default")
             {
                 duration -= seg[`${timing}_duration_ms`];
                 
-                runSingleSegments.innerHTML += `<tr${pbColor}><td>${seg["segment_number"] + 1}</td><td>${seg["display_name"]}</td><td>${msToTime(seg[`${timing}_duration_ms`])}</td><td>${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
+                runSingleSegments.innerHTML += `<tr${pbColor}><td>${seg["segment_number"] + 1}</td><td>${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</td><td>${msToTime(seg[`${timing}_duration_ms`])}</td><td>${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
             }
         }
         runSingleSegments.innerHTML += temp; //in case there's anything left over in temp for some reason
@@ -608,7 +612,7 @@ function loadSplits(id, timing = "default")
                 timesave = '<span class="new-pb">New personal best!</span>';
             }
             
-            var content = `<div class="has-text-${dir}"><p class="has-text-weight-bold"><span class="sp-name-num">${seg["segment_number"] + 1}.</span> ${seg["display_name"]}</p><p class="sp-time">Duration: ${msToTime(seg[`${timing}_duration_ms`])}</p><p class="sp-time">Finished at: ${msToTime(seg[`${timing}_end_ms`])}</p><p class="sp-timesave">${timesave}</p></div>`;
+            var content = `<div class="has-text-${dir}"><p class="has-text-weight-bold"><span class="sp-name-num">${seg["segment_number"] + 1}.</span> ${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</p><p class="sp-time">Duration: ${msToTime(seg[`${timing}_duration_ms`])}</p><p class="sp-time">Finished at: ${msToTime(seg[`${timing}_end_ms`])}</p><p class="sp-timesave">${timesave}</p></div>`;
             
             lastSplitsTippys[i] = tippy(`#bar-${i}`, {
                 content: content,

@@ -27,7 +27,7 @@
 			<div id="src-error-container" class="columns is-centered" style="display: none;">
 				<div class="column is-6">
 					<div class="notification is-danger">
-						<p>There appears to be issues accessing the Speedrun.com API. If refreshing the page does not work, try coming back later.</p>
+						<p style="font-weight: bold;"><i class="fas fa-exclamation-triangle"></i> There appear to be issues accessing the SR.C API. If refreshing the page doesn't work, try coming back later.</p>
 						<p>Error message: <span id="src-error-response"></span></p>
 					</div>
 				</div>
@@ -213,11 +213,31 @@
 				<div class="columns">
 					<div class="column is-3">
 						<div class="box">
-							
+							<div class="has-text-centered">
+								<div id="user-username"></div>
+								<div style="margin: 0 auto; "><img id="user-pfp" style="height: 128px" src="" onload="if (this.naturalWidth == 1 && this.naturalHeight == 1) this.parentElement.style.height = '0px';"></div>
+								<div class="buttons is-centered">
+									<a id="user-links-src" class="button-outer" href="" target="_blank">
+										<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
+									</a>
+									<a id="user-links-info" class="button-outer" href="" target="_blank">
+										<div class="button is-dark"><span class="icon"><i class="fas fa-info-circle"></i></span></div>
+									</a>
+									<a id="user-links-forum" class="button-outer" href="" target="_blank">
+										<div class="button is-dark"><span class="icon"><i class="fas fa-comments"></i></span></div>
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="column is-9">
 						<div class="box">
+							<div id="user-runs-loading" class="loadingdiv" style="display: block;">
+								<div>
+									<div class="spinner"></div>
+									<div class="belowspinner">Loading...</div>
+								</div>
+							</div>
 							<div id="user-runs-table"></div>
 						</div>
 					</div>
