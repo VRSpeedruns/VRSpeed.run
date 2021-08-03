@@ -39,7 +39,6 @@ function getLatest()
 
 function loadWRs(wrs)
 {
-    removedLoading = false;
     for (var i = 0; i < wrs.length; i++)
     {
         latestWRContainer.innerHTML += `<div class="column is-6"><div class="wr" id="wr-${wrs[i]}"></div></div>`;

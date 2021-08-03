@@ -203,11 +203,11 @@ function loadAllGames()
 		{
 			lastLetter = gamesArray[i].name.substring(0, 1);
 
-			pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();">${gamesArray[i].name}<div class="letter">${lastLetter}</div></div>`;
+			pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();" title="${gamesArray[i].name}">${gamesArray[i].name}<div class="letter">${lastLetter}</div></div>`;
 		}
 		else
 		{
-			pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();">${gamesArray[i].name}</div>`;
+			pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();" title="${gamesArray[i].name}">${gamesArray[i].name}</div>`;
 		}
 	}
 }

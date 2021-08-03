@@ -3,6 +3,9 @@ var userRunsTable;
 
 var userUsername;
 var userPfp;
+var userPronouns;
+var userRunCount;
+var userModeratorOf;
 var userLinksSrc;
 var userLinksInfo;
 var userLinksForum;
@@ -18,6 +21,9 @@ function onUserLoad()
     
     userUsername = document.getElementById("user-username");
     userPfp = document.getElementById("user-pfp");
+    userPronouns = document.getElementById("user-pronouns");
+    userRunCount = document.getElementById("user-run-count");
+    userModeratorOf = document.getElementById("user-moderator-of");
     userLinksSrc = document.getElementById("user-links-src");
     userLinksInfo = document.getElementById("user-links-info");
     userLinksForum = document.getElementById("user-links-forum");
@@ -72,9 +78,9 @@ function loadUser(username)
     
         var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${user.names.international}" onload="handleIconLoad(this);">`;
 
-        userUsername.innerHTML = `${flag}${userIcon}${player}`;
+        userUsername.innerHTML = `<a class="player-link" href="${user.weblink}">${flag}${userIcon}${player}</a>`;
 
-        if (user.location !== null)
+        if (!isMobile && user.location !== null)
         {
             userRunTippys.push(tippy(`#user-${user.id}-userFlag`, {
                 content: user.location.country.names.international,
@@ -82,13 +88,17 @@ function loadUser(username)
             }));
         }
 
-        loadUserRuns(username);
+        userPronouns.innerHTML = user.pronouns;
+        userRunCount.innerHTML = '';
+
+        loadUserRuns(user.id);
+        loadUserModeratorOf(user.id);
     });    
 }
 
-function loadUserRuns(username)
+function loadUserRuns(id)
 {
-    get(`https://www.speedrun.com/api/v1/users/${username}/personal-bests?embed=game,category,platform`)
+    get(`https://www.speedrun.com/api/v1/users/${id}/personal-bests?embed=game,category,platform`)
     //get(`https://vrspeed.run/vrsrassets/other/temp.json`)
     .then((data) =>
     {
@@ -119,9 +129,13 @@ function loadUserRuns(username)
         }
         if (gameCheck.length == 0)
         {
+            userRunsLoading.style.display = "none";
             userRunsTable.innerHTML = "<center>This user hasn't submitted any virtual reality speedruns.</center>";
+            loadUserRunCount();
             return;
         }
+        
+        loadUserRunCount(`https://www.speedrun.com/api/v1/runs?user=${id}&max=200&embed=game`);
 
         for (var i = 0; i < runs.length; i++)
         {
@@ -156,8 +170,8 @@ function loadUserRuns(username)
                 }
             }
 
-            var html = `<div class="user-runs-container"><div class="user-runs-image"><img src="https://www.speedrun.com/themes/${games[i].game.abbreviation}/cover-256.png"></div>
-            <div class="user-runs-heading"><a href="/${thisGame.abbreviation}" class="thick-underline" style="color: ${thisGame.color};">${games[i].game.names.international}</a></div><table id="user-runs-table" class="table is-narrow is-fullwidth"><tbody class="user-runs-tbody">`;
+            var html = `<div class="user-runs-container"><div class="user-runs-image"><a href="/${thisGame.abbreviation}"><img src="https://www.speedrun.com/themes/${games[i].game.abbreviation}/cover-256.png"></a></div>
+            <div class="user-runs-heading"><a href="/${thisGame.abbreviation}" class="thick-underline" style="color: ${thisGame.color};">${thisGame.name}</a></div><table id="user-runs-table" class="table is-narrow is-fullwidth"><tbody class="user-runs-tbody">`;
 
             for (var k = 0; k < games[i].runs.length; k++)
             {
@@ -182,19 +196,25 @@ function loadUserRuns(username)
                 {
                     icons += `<i id="run-${run.id}-splits" class="fas fa-stopwatch"></i>`;
 
-                    userRunTippysInfo.push({
-                        "id": `#run-${run.id}-splits`,
-                        "text": "Splits are available for this run."
-                    });
+                    if (!isMobile)
+                    {
+                        userRunTippysInfo.push({
+                            "id": `#run-${run.id}-splits`,
+                            "text": "Splits are available for this run."
+                        });
+                    }
                 }
                 if (run.videos != null && run.videos.links != undefined)
                 {
                     icons += `<i id="run-${run.id}-video" class="fas fa-video"></i>`;
 
-                    userRunTippysInfo.push({
-                        "id": `#run-${run.id}-video`,
-                        "text": "Video is available for this run."
-                    });
+                    if (!isMobile)
+                    {
+                        userRunTippysInfo.push({
+                            "id": `#run-${run.id}-video`,
+                            "text": "Video is available for this run."
+                        });
+                    }
                 }
 
                 html += `<tr id="run-${run.id}" onclick="openUserRun('${thisGame.abbreviation}', '${run.id}')" data-place="${run.place}"><td>${place}</td><td style="font-weight: bold">${run.category.name}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
@@ -212,6 +232,79 @@ function loadUserRuns(username)
                 placement: 'top'
             }));
         }
+    });
+}
+
+function loadUserModeratorOf(id)
+{
+    userModeratorOf.innerHTML = '';
+    get(`https://www.speedrun.com/api/v1/games?moderator=${id}&max=${gamesArray.length <= 200 ? gamesArray.length : 200}`)
+    .then((data) =>
+    {
+        if (!getErrorCheck(data)) return;
+        
+        var modGames = (JSON.parse(data)).data;
+        
+        if (modGames.length > 0)
+        {
+            userModeratorOf.innerHTML = "Moderator of:<br>";
+            var first = true;
+
+            for (var i = 0; i < modGames.length; i++)
+            {
+                for (var k = 0; k < gamesArray.length; k++)
+                {
+                    if (modGames[i].abbreviation == gamesArray[k].id)
+                    {
+                        var comma = first ? '' : ', ';
+                        userModeratorOf.innerHTML += `${comma}<a href="/${gamesArray[k].abbreviation}" style="color: ${gamesArray[k].color}">${gamesArray[k].name}</a>`;
+                        first = false;
+                        break;
+                    }
+                }
+            }
+        }
+    });
+}
+
+function loadUserRunCount(link = "", count = 0)
+{
+    if (link == "")
+    {
+        userRunCount.innerHTML = 'Total VR Runs: <b>0</b>';
+        return;
+    }
+    
+    get(link)
+    .then((data) =>
+    {
+        if (!getErrorCheck(data)) return;
+
+        var runs = (JSON.parse(data));
+        var pagination = runs.pagination;
+        runs = runs.data;
+
+        for (var i = 0; i < runs.length; i++)
+        {
+            if (gamesArray.filter(e => e.id == runs[i].game.data.abbreviation).length > 0)
+            {
+                count++;
+            }
+        }
+
+        if (pagination.links.length > 0)
+        {
+            for (var i = 0; i < pagination.links.length; i++)
+            {
+                if (pagination.links[i].rel == "next")
+                {
+                    loadUserRunCount(pagination.links[i].uri, count);
+                    return;
+                }
+            }
+        }
+
+        userRunCount.innerHTML = `Total VR Runs: <b>${count}</b>`;
     });
 }
 
