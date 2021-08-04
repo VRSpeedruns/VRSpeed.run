@@ -44,7 +44,6 @@ function loadUser(username)
 	userRunTippys = [];
 
     get(`https://www.speedrun.com/api/v1/users/${username}`)
-    //get(`https://vrspeed.run/vrsrassets/other/temp2.json`)
     .then((data) =>
     {
         if (!getErrorCheck(data)) return;
@@ -102,8 +101,7 @@ function loadUser(username)
 
 function loadUserRuns(id)
 {
-    get(`https://www.speedrun.com/api/v1/users/${id}/personal-bests?embed=game,category,platform`)
-    //get(`https://vrspeed.run/vrsrassets/other/temp.json`)
+    get(`https://www.speedrun.com/api/v1/users/${id}/personal-bests?embed=game,category,category.variables,platform`)
     .then((data) =>
     {
         if (!getErrorCheck(data)) return;
@@ -191,6 +189,24 @@ function loadUserRuns(id)
                     place = "—";
                 }
 
+                var category = `<b>${run.category.name}</b>`;
+                var subcats = [];
+
+                for (var m = 0; m < run.category.variables.data.length; m++)
+                {
+                    var variable = run.category.variables.data[m];
+
+                    if (variable.scope.type == "full-game" || variable.scope.type == "global")
+                    {
+                        subcats.push(variable.values.values[run.values[variable.id]].label);
+                    }
+                }
+                
+                if (subcats.length > 0)
+                {
+                    category += ` (${subcats.join(", ")})`;
+                }
+
                 var time = runTimeFormat(run.times.primary);
                 var platform = run.system.platform.name;
                 var date = `<span title="${new Date(run.submitted).toDateString()}">${timeAgo(new Date(run.submitted))}</span>`;
@@ -221,7 +237,7 @@ function loadUserRuns(id)
                     }
                 }
 
-                html += `<tr id="run-${run.id}" onclick="openUserRun('${thisGame.abbreviation}', '${run.id}')" data-place="${run.place}" data-runtarget="${thisGame.abbreviation}/run/${run.id}"><td>${place}</td><td style="font-weight: bold">${run.category.name}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+                html += `<tr id="run-${run.id}" onclick="openUserRun('${thisGame.abbreviation}', '${run.id}')" data-place="${run.place}" data-runtarget="${thisGame.abbreviation}/run/${run.id}"><td>${place}</td><td>${category}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
             }
 
             userRunsTable.innerHTML += html + '</tbody></table></div>';
