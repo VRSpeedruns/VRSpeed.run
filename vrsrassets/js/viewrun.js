@@ -282,7 +282,12 @@ function openRun(id, loadOrState = false, isRetry = false)
         runSingleComment.innerText = '';
         if (run.comment)
         {
+            runSingleComment.style.display = "inline-block";
             comment = `"${run.comment}"`;
+        }
+        if (comment == '')
+        {
+            runSingleComment.style.display = "none";
         }
 
         var platform = run.platform.data.name;

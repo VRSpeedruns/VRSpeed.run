@@ -174,14 +174,18 @@ function onGameDataLoad()
 			gameSelectorCurrentGame.classList.add("is-selected");
 			gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
 			gameSelectorButton.title = gameSelectorButton.innerText;
+			
 			loadGame(id, true);
 		}
 		else
 		{
 			replaceState(null);
+			
 			homeContainer.style.display = "block";
 			mainContainer.style.display = "none";
 			userContainer.style.display = "none";
+
+			latestWRsLoad();
 		}
 	}
 	else
@@ -372,8 +376,8 @@ function loadGame(id, loadOrState = false, force = false)
 {
 	if (!id)
 	{
-		document.documentElement.style.setProperty('--primary-color', '#0066FF')
-		document.documentElement.style.setProperty('--primary-color-hover', '#3888ff')
+		document.documentElement.style.setProperty('--primary-color', '#FF9C00')
+		document.documentElement.style.setProperty('--primary-color-hover', '#FFBB4D')
 
 		homeContainer.style.display = "block";
 		mainContainer.style.display = "none";
@@ -557,11 +561,6 @@ function loadGame(id, loadOrState = false, force = false)
 			gameInfoModerators.innerHTML = 'Moderated by:<br>';
 			for (var i = 0; i < mods.length; i++)
 			{
-				if (i > 0)
-				{
-					gameInfoModerators.innerHTML += ', ';
-				}
-
 				var name = getGradientName(mods[i].names.international,
 					mods[i]["name-style"]["color-from"].dark,
 					mods[i]["name-style"]["color-to"].dark);   
@@ -600,7 +599,11 @@ function loadGame(id, loadOrState = false, force = false)
 
 				var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${mods[i].names.international}" onload="handleIconLoad(this);">`;
 
-				gameInfoModerators.innerHTML += `<a class="player-link thin" href="/user/${mods[i].names.international}">${modIcon}${flag}${userIcon}${name}</a>`;
+				var _comma = '';
+				if (i + 1 < mods.length)
+					_comma = ',&nbsp;'
+
+				gameInfoModerators.innerHTML += `<span><a class="player-link thin" href="/user/${mods[i].names.international}">${modIcon}${flag}${userIcon}${name}</a>${_comma}</span>`;
 			}
 
 			for (var i = 0; i < gameInfoModTippysInfo.length; i++)
@@ -863,27 +866,30 @@ function displayCategoryVariables(index, loadOrState = false)
 
 function setVariable(id, value, loadAfter = true)
 {
-	var found = false;
-	for (var i = 0; i < currentVariables.length; i++)
+	if (id != undefined && value != undefined)
 	{
-		if (currentVariables[i].id == id)
+		var found = false;
+		for (var i = 0; i < currentVariables.length; i++)
 		{
-			document.getElementById(`${id}-${currentVariables[i].value}`).classList.remove("is-active");
-			document.getElementById(`${id}-${value}`).classList.add("is-active");
+			if (currentVariables[i].id == id)
+			{
+				document.getElementById(`${id}-${currentVariables[i].value}`).classList.remove("is-active");
+				document.getElementById(`${id}-${value}`).classList.add("is-active");
 
-			currentVariables[i].value = value;
-			found = true;
-			break;
+				currentVariables[i].value = value;
+				found = true;
+				break;
+			}
 		}
-	}
-	if (!found)
-	{
-		currentVariables.push({"id": id, "value": value});
-		
-		var ele = document.getElementById(`${id}-${value}`);
-		if (ele)
+		if (!found)
 		{
-			ele.classList.add("is-active");
+			currentVariables.push({"id": id, "value": value});
+			
+			var ele = document.getElementById(`${id}-${value}`);
+			if (ele)
+			{
+				ele.classList.add("is-active");
+			}
 		}
 	}
 
@@ -1090,7 +1096,7 @@ function loadRuns(id, variables, loadOrState = false)
 			else
 				player = `<b>${player}</b>`
 			
-			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}"><td>${place}</td><td style="font-weight: bold">${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}" data-runtarget="${currentGame.abbreviation}/run/${run.id}"><td>${place}</td><td style="font-weight: bold">${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
 		}
 		
 		if (!isMobile)
@@ -1145,22 +1151,6 @@ function loadRuns(id, variables, loadOrState = false)
 			mainLoading.style.display = "none";
 		}
 	});
-}
-
-function getGradientName(name, start, end)
-{
-	var player = "";
-
-	var chars = name.split('');
-
-	var colors = interpolate(start, end, chars.length)
-
-	for (var k = 0; k < chars.length; k++)
-	{
-		player += `<span style="color: ${colors[k]}">${chars[k]}</span>`;
-	}
-
-	return player;
 }
 
 function nth(d) {

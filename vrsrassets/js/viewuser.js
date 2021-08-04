@@ -70,6 +70,10 @@ function loadUser(username)
             user["name-style"]["color-from"].dark, 
             user["name-style"]["color-to"].dark);
         
+        var color = getAverageColor(user["name-style"]["color-from"].dark, user["name-style"]["color-to"].dark);
+        document.documentElement.style.setProperty('--primary-color', color);
+		document.documentElement.style.setProperty('--primary-color-hover', color);
+
         var flag = '';
         if (user.location !== null)
         {
@@ -217,7 +221,7 @@ function loadUserRuns(id)
                     }
                 }
 
-                html += `<tr id="run-${run.id}" onclick="openUserRun('${thisGame.abbreviation}', '${run.id}')" data-place="${run.place}"><td>${place}</td><td style="font-weight: bold">${run.category.name}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+                html += `<tr id="run-${run.id}" onclick="openUserRun('${thisGame.abbreviation}', '${run.id}')" data-place="${run.place}" data-runtarget="${thisGame.abbreviation}/run/${run.id}"><td>${place}</td><td style="font-weight: bold">${run.category.name}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
             }
 
             userRunsTable.innerHTML += html + '</tbody></table></div>';

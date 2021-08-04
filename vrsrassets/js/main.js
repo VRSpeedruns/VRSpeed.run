@@ -52,11 +52,44 @@ function onLoad()
         loadGame(getGame(), true);
 	});
 
-    if (isMobile)
-    {
-        var _about = document.getElementById("about-info");
-        _about.parentElement.prepend(_about);
-    }
+    //open run in new tab w/ middleclick
+	document.addEventListener('mouseup', (e) => {
+		if (e.button == 1)
+        {
+            var target = e.target;
+            for (var i = 0; i < 2; i++)
+            {
+                if (target.dataset.runtarget)
+                {
+                    break;
+                }
+                target = target.parentElement;
+            }
+            if (target.dataset.runtarget)
+            {
+                window.open(`https://vrspeed.run/${target.dataset.runtarget}`);
+            }
+        }
+	});
+    //disable browser scroll/other default middle click functions when clicking on a run
+    document.addEventListener('mousedown', (e) => {
+		if (e.button == 1)
+        {
+            var target = e.target;
+            for (var i = 0; i < 2; i++)
+            {
+                if (target.dataset.runtarget)
+                {
+                    break;
+                }
+                target = target.parentElement;
+            }
+            if (target.dataset.runtarget)
+            {
+                e.preventDefault();
+            }
+        }
+	});
 }
 
 function pushState(path)

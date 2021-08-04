@@ -1,6 +1,25 @@
-//SOURCE: https://codepen.io/njmcode/pen/axoyD/
+function getGradientName(name, start, end)
+{
+  var player = "";
 
-//(made by me)
+  var chars = name.split('');
+
+  var colors = interpolate(start, end, chars.length)
+
+  for (var k = 0; k < chars.length; k++)
+  {
+    player += `<span style="color: ${colors[k]}">${chars[k]}</span>`;
+  }
+
+  return player;
+}
+
+function getAverageColor(start, end)
+{
+  var colors = interpolate(start, end, 3)
+  return colors[1];
+}
+
 function interpolate(start, end, length)
 {
     var scol = h2r(start);
@@ -17,6 +36,8 @@ function interpolate(start, end, length)
 
     return colors;
 }
+
+//SOURCE: https://codepen.io/njmcode/pen/axoyD/
 
 // Converts a #ffffff hex string into an [r,g,b] array
 var h2r = function(hex) {

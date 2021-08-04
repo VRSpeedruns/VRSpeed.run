@@ -328,7 +328,7 @@ a.button:not(:last-child) {
 #game-moderators {
 	font-size: 0.8em;
 }
-#game-moderators a {
+#game-moderators span {
 	display: inline-block;
 }
 
@@ -846,12 +846,10 @@ a.button:not(:last-child) {
 .notification.is-danger > p:not(:last-child) {
 	margin-bottom: 1.25em;
 }
-.notification.is-danger > i {
-	font-size: 1.75em;
-
-	position: absolute;
-	top: 0.5em;
-	right: 0.5em;
+@media only screen and (max-width: 768px) {
+	.notification.is-danger {
+		font-size: 0.8em;
+	}
 }
 
 .is-tooltip-text {
