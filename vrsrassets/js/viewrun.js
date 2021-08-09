@@ -90,7 +90,7 @@ function openRun(id, loadOrState = false, isRetry = false)
 
     if (runLoadAttempts > 2)
     {
-        console.error(`Error loading run with ID ${id}.`)
+        sendErrorNotification(`There was an error when trying to load run with ID "${id}."`);
 
         replaceState(getGame());
         loadGame(getGame(), true);
@@ -233,7 +233,14 @@ function openRun(id, loadOrState = false, isRetry = false)
         }
 
         if (player != rawPlayer)
-            player = `<a class="player-link" href="/user/${rawPlayer}">${modIcon}${flag}${userIcon}${player}</a>`;
+        {
+            singleFlagAndModTippysInfo.push({
+                "id": `#singleruns-${run.players.data[0].id}-card`,
+                "text": getCardHTML(rawPlayer, `${flag}${userIcon}${player}`, getAverageColor(temp["name-style"]["color-from"].dark, temp["name-style"]["color-to"].dark))
+            });
+            
+            player = `<a class="player-link" id="singleruns-${run.players.data[0].id}-card" href="/user/${rawPlayer}">${modIcon}${flag}${userIcon}${player}</a>`;
+        }
         else
             player = `<b>${player}</b>`;
 
@@ -283,7 +290,7 @@ function openRun(id, loadOrState = false, isRetry = false)
         if (run.comment)
         {
             runSingleComment.style.display = "inline-block";
-            comment = `"${run.comment}"`;
+            comment = run.comment;
         }
         if (comment == '')
         {
@@ -386,7 +393,7 @@ function openRun(id, loadOrState = false, isRetry = false)
             var _data = (JSON.parse(__data)).data;
             var verifier = getGradientName(_data.names.international,
                 _data["name-style"]["color-from"].dark,
-                _data["name-style"]["color-to"].dark);            
+                _data["name-style"]["color-to"].dark);
 
             var verifierModIcon = '';
             var verifierFlag = '';
@@ -427,14 +434,33 @@ function openRun(id, loadOrState = false, isRetry = false)
                 
             runSingleVerifier.innerHTML = `<a class="player-link" href="/user/${_data.names.international}">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
 
-            
+            singleFlagAndModTippysInfo.push({
+                "id": `#run-single-verifier`,
+                "text": getCardHTML(_data.names.international, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]["color-from"].dark, _data["name-style"]["color-to"].dark))
+            });
 
             for (var i = 0; i < singleFlagAndModTippysInfo.length; i++)
 			{
-				flagAndModTippys[i] = tippy(singleFlagAndModTippysInfo[i].id, {
-					content: singleFlagAndModTippysInfo[i].text,
-					placement: 'top'
-				});
+                if (singleFlagAndModTippysInfo[i].id.endsWith("-card") || singleFlagAndModTippysInfo[i].id == "#run-single-verifier")
+				{
+					singleFlagAndModTippys[i] = tippy(singleFlagAndModTippysInfo[i].id, {
+						content: singleFlagAndModTippysInfo[i].text,
+						placement: 'bottom',
+						delay: [700, 0],
+						offset: [0, 0],
+						theme: 'clear',
+						allowHTML: true,
+						interactive: true,
+                        appendTo: document.body
+					});
+				}
+                else
+                {
+                    singleFlagAndModTippys[i] = tippy(singleFlagAndModTippysInfo[i].id, {
+                        content: singleFlagAndModTippysInfo[i].text,
+                        placement: 'top'
+                    });
+                }                
 			}
         });
 

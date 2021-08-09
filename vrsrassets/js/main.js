@@ -5,6 +5,8 @@ var aboutInfoMore;
 var srcErrorContainer;
 var srcErrorResponse;
 
+var errorContainer;
+
 var defaultGame = 'hla';
 
 function onLoad()
@@ -15,6 +17,8 @@ function onLoad()
     
     srcErrorContainer = document.getElementById("src-error-container");
     srcErrorResponse = document.getElementById("src-error-response");
+
+    errorContainer = document.getElementById("error-container");
 
     if (window.location.href.includes("?"))
     {
@@ -217,6 +221,24 @@ function infoTippy()
     });
 }
 
+function getCardHTML(username, name, color)
+{
+    return `<div class="box is-card">
+                <figure class="image">
+                    <img src="https://vrspeed.run/vrsrassets/php/userIcon.php?t=p&u=${username}" onload="cardHandleNoImage(this)">
+                </figure>
+                <a class="player-link" href="/user/${username}">${name}</a><br>
+                <a href="https://www.speedrun.com/user/${username}" style="color: ${color}">View user on Speedrun.com</a>
+            </div>`
+}
+function cardHandleNoImage(_this, w, h)
+{
+    if (_this.naturalWidth == 1 && _this.naturalHeight == 1)
+    {
+        _this.parentElement.parentElement.style.paddingLeft = "8px";
+    }
+}
+
 function get(url) {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
@@ -236,8 +258,9 @@ function getErrorCheck(data)
     {
         nonErrorCount = 0;
 
-        srcErrorResponse.innerText = `"${temp.message}" (Error code ${temp.status})`
-        srcErrorContainer.style.display = "flex";
+        //srcErrorResponse.innerText = `"${temp.message}" (Error code ${temp.status})`
+        //srcErrorContainer.style.display = "flex";
+        sendErrorNotification(`There was an error when trying to access the Speedrun.com API.<br>"${temp.message}" (Error code ${temp.status})`);
         return false;
     }
     else
@@ -248,6 +271,45 @@ function getErrorCheck(data)
         }
 
         return true;
+    }
+}
+
+function sendErrorNotification(message)
+{
+    var time = Math.trunc(Date.now() / 500);
+
+    if (!document.getElementById(`error-${time}`))
+    {
+        errorContainer.insertAdjacentHTML('beforeend', `<div id="error-${time}" class="notification is-danger">
+        <button class="delete" onclick="closeErrorNotification(this.parentElement.id)"></button>
+        <p>${message}</p></div>`);
+
+        setTimeout(() =>
+        {
+            closeErrorNotification(`error-${time}`);
+        }, 7500);
+    }
+}
+function closeErrorNotification(id)
+{
+    if (document.getElementById(id))
+    {
+        document.getElementById(id).classList.add('closed');
+        setInterval(() =>
+        {
+            if (document.getElementById(id))
+            {
+                if (window.getComputedStyle(document.getElementById(id)).opacity < 0.1)
+                {
+                    document.getElementById(id).remove();
+                    clearInterval();
+                }
+            }
+            else
+            {
+                clearInterval();
+            }
+        }, 750);
     }
 }
 

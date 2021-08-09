@@ -8,7 +8,6 @@ var userRunCount;
 var userModeratorOf;
 var userLinksSrc;
 var userLinksInfo;
-var userLinksForum;
 
 var userRunsLoading;
 
@@ -26,7 +25,6 @@ function onUserLoad()
     userModeratorOf = document.getElementById("user-moderator-of");
     userLinksSrc = document.getElementById("user-links-src");
     userLinksInfo = document.getElementById("user-links-info");
-    userLinksForum = document.getElementById("user-links-forum");
 
     userRunsLoading = document.getElementById("user-runs-loading");
 }
@@ -53,6 +51,8 @@ function loadUser(username)
         {
             replaceState(null);
             loadGame(null);
+            sendErrorNotification(`User "${username}" not found.`);
+            latestWRsLoad();
             return;
         }
 
@@ -61,7 +61,6 @@ function loadUser(username)
         document.title = `${user.names.international} - VRSR`;
         userLinksSrc.href = user.weblink;
         userLinksInfo.href = `${user.weblink}/info`;
-        userLinksForum.href = `${user.weblink}/allposts`;
 
         userPfp.src = `/vrsrassets/php/userIcon.php?t=p&u=${user.names.international}`;
 
@@ -81,7 +80,7 @@ function loadUser(username)
     
         var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${user.names.international}" onload="handleIconLoad(this);">`;
 
-        userUsername.innerHTML = `<a class="player-link" href="${user.weblink}">${flag}${userIcon}${player}</a>`;
+        userUsername.innerHTML = `<b>${flag}${userIcon}${player}</b>`;
 
         if (!isMobile && user.location !== null)
         {
@@ -132,7 +131,7 @@ function loadUserRuns(id)
         if (gameCheck.length == 0)
         {
             userRunsLoading.style.display = "none";
-            userRunsTable.innerHTML = "<center>This user hasn't submitted any virtual reality speedruns.</center>";
+            userRunsTable.innerHTML = `<center style="padding-top: 0.9rem;">This user hasn't submitted any virtual reality speedruns.</center>`;
             loadUserRunCount();
             return;
         }
@@ -196,9 +195,13 @@ function loadUserRuns(id)
                 {
                     var variable = run.category.variables.data[m];
 
-                    if (variable.scope.type == "full-game" || variable.scope.type == "global")
+                    if (variable["is-subcategory"])
                     {
-                        subcats.push(variable.values.values[run.values[variable.id]].label);
+                        var value = variable.values.values[run.values[variable.id]];
+                        if (value)
+                        {
+                            subcats.push(value.label);
+                        }
                     }
                 }
                 

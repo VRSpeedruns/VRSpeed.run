@@ -8,11 +8,12 @@
 	
 	--background-color: #2E3136;
 	--background-mid-accent-color: #282b30;
-	--background-accent-color: #26282C;
+	--background-accent-color: #26282c;
 	--button-background-color: #393C42;
 	--button-background-hover-color: #41434b;
 	--tippy-background-color: hsla(228, 8%, 12%, 0.975);
 	--background-color-transparent: hsla(218, 8%, 20%, 0.85);
+	--background-card: hsl(220, 7%, 12%);
 
 	--background-table-odd: hsl(217, 8%, 16%);
 	--background-table-even: hsl(217, 8%, 18%);
@@ -334,33 +335,36 @@ a.button:not(:last-child) {
 
 /* ---------- Tippy ---------- */
 
-.tippy-box[data-theme~='vrsr'], .tippy-box[data-theme~='vrsr-arrow'] {
+.tippy-box[data-theme~='vrsr'], .tippy-box[data-theme~='vrsr-arrow'], .tippy-box[data-theme~='clear'] {
 	background-color: var(--tippy-background-color);
 	color: var(--text-color);
 }
-.tippy-box[data-theme~='vrsr'][data-placement^='top'] > .tippy-arrow::before {
+.tippy-box[data-theme~='clear'] {
+	background-color: transparent;
+}
+.tippy-box[data-theme~='vrsr'][data-placement^='top'] > .tippy-arrow::before, .tippy-box[data-theme~='clear'][data-placement^='top'] > .tippy-arrow::before {
 	border-top-color: transparent;
 }
-	.tippy-box[data-theme~='vrsr'][data-placement^='bottom'] > .tippy-arrow::before {
+.tippy-box[data-theme~='vrsr'][data-placement^='bottom'] > .tippy-arrow::before, .tippy-box[data-theme~='clear'][data-placement^='bottom'] > .tippy-arrow::before {
 	border-bottom-color: transparent;
 }
-	.tippy-box[data-theme~='vrsr'][data-placement^='left'] > .tippy-arrow::before {
+.tippy-box[data-theme~='vrsr'][data-placement^='left'] > .tippy-arrow::before, .tippy-box[data-theme~='clear'][data-placement^='left'] > .tippy-arrow::before {
 	border-left-color: transparent;
 }
-	.tippy-box[data-theme~='vrsr'][data-placement^='right'] > .tippy-arrow::before {
+.tippy-box[data-theme~='vrsr'][data-placement^='right'] > .tippy-arrow::before, .tippy-box[data-theme~='clear'][data-placement^='right'] > .tippy-arrow::before {
 	border-right-color: transparent;
 }
 
 .tippy-box[data-theme~='vrsr-arrow'][data-placement^='top'] > .tippy-arrow::before {
 	border-top-color: var(--tippy-background-color);
 }
-	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='bottom'] > .tippy-arrow::before {
+.tippy-box[data-theme~='vrsr-arrow'][data-placement^='bottom'] > .tippy-arrow::before {
 	border-bottom-color: var(--tippy-background-color);
 }
-	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='left'] > .tippy-arrow::before {
+.tippy-box[data-theme~='vrsr-arrow'][data-placement^='left'] > .tippy-arrow::before {
 	border-left-color: var(--tippy-background-color);
 }
-	.tippy-box[data-theme~='vrsr-arrow'][data-placement^='right'] > .tippy-arrow::before {
+.tippy-box[data-theme~='vrsr-arrow'][data-placement^='right'] > .tippy-arrow::before {
 	border-right-color: var(--tippy-background-color);
 }
 
@@ -814,6 +818,71 @@ a.button:not(:last-child) {
 #user-moderator-of a {
 	display: inline-block;
 	font-weight: bold;
+}
+
+/* ---------- Error ---------- */
+
+#error-container {
+	position: fixed;
+	z-index: 15;
+	top: 2em;
+	right: 2em;
+	direction: rtl;
+}
+#error-container > .notification {
+	transition: opacity 0.75s;
+	width: fit-content;
+	max-width: 50vw;
+	direction: ltr;
+}
+#error-container > .notification.closed {
+	opacity: 0;
+}
+#error-container > .notification.closed:hover {
+	transition: opacity 0s;
+	opacity: 1;
+}
+
+@media only screen and (max-width: 768px) {
+	#error-container {
+		font-size: 1.25em;
+		top: 1em;
+		transform: translateX(1em);
+	}
+	#error-container > .notification {
+		max-width: 100%;
+	}
+}
+
+/* ---------- Cards ---------- */
+
+.box.is-card {
+	position: relative;
+
+	background-color: var(--background-card);
+	text-align: left;
+	padding: 8px;
+	padding-left: 56px;
+	height: 56px;
+
+	box-shadow: 0px 0px 10px 8px rgba(10, 10, 10, 0.15);
+}
+.box.is-card > .image {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	height: 40px;
+	width: 40px;
+}
+.box.is-card > .image > img {
+	border-radius: 4px;
+}
+.box.is-card > a.player-link {
+	font-size: 1.1em;
+}
+.box.is-card > a:not(.player-link) {
+	font-size: 0.9em;
+	font-weight: normal;
 }
 
 /* ---------- Misc ---------- */

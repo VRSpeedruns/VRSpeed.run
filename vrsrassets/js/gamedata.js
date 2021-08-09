@@ -324,7 +324,7 @@ function setEvents()
 	});
 
 	//close misc tab if user scrolls category tabs row
-	categoriesContainer.addEventListener('scroll', (e) => {
+	categoriesContainer.addEventListener('scroll', () => {
 		if (miscCatsContainer.classList.contains("is-active"))
 		{
 			miscCatsContainer.classList.remove("is-active");
@@ -603,15 +603,39 @@ function loadGame(id, loadOrState = false, force = false)
 				if (i + 1 < mods.length)
 					_comma = ',&nbsp;'
 
-				gameInfoModerators.innerHTML += `<span><a class="player-link thin" href="/user/${mods[i].names.international}">${modIcon}${flag}${userIcon}${name}</a>${_comma}</span>`;
+				gameInfoModerators.innerHTML += `<span><a class="player-link thin" id="gameinfo-mods-${mods[i].id}-card" href="/user/${mods[i].names.international}">${modIcon}${flag}${userIcon}${name}</a>${_comma}</span>`;
+							
+				gameInfoModTippysInfo.push({
+					"id": `#gameinfo-mods-${mods[i].id}-card`,
+					"text": getCardHTML(mods[i].names.international, `${flag}${userIcon}${name}` , getAverageColor(mods[i]["name-style"]["color-from"].dark, mods[i]["name-style"]["color-to"].dark))
+				});
 			}
 
-			for (var i = 0; i < gameInfoModTippysInfo.length; i++)
+			if (!isMobile)
 			{
-				gameInfoModTippys[i] = tippy(gameInfoModTippysInfo[i].id, {
-					content: gameInfoModTippysInfo[i].text,
-					placement: 'top'
-				});
+				for (var i = 0; i < gameInfoModTippysInfo.length; i++)
+				{
+					if (gameInfoModTippysInfo[i].id.endsWith("-card"))
+					{
+						gameInfoModTippys[i] = tippy(gameInfoModTippysInfo[i].id, {
+							content: gameInfoModTippysInfo[i].text,
+							placement: 'bottom',
+							delay: [700, 0],
+							offset: [0, 0],
+							theme: 'clear',
+							allowHTML: true,
+							interactive: true,
+							appendTo: document.body
+						});
+					}
+					else
+					{
+						gameInfoModTippys[i] = tippy(gameInfoModTippysInfo[i].id, {
+							content: gameInfoModTippysInfo[i].text,
+							placement: 'top'
+						});
+					}
+				}
 			}
 		});
 	});
@@ -1091,12 +1115,21 @@ function loadRuns(id, variables, loadOrState = false)
 				icons += `<i id="run-${run.id}-video" class="fas fa-video"></i>`;
 			}
 
+			var fullPlayer = '';
 			if (player != rawPlayer)
-				player = `<a class="player-link thin" href="/user/${rawPlayer}" onclick="event.stopPropagation();">${modIcon}${flag}${userIcon}${player}</a>`;
+				fullPlayer = `<a class="player-link thin" id="runs-${run.id}-usercard" href="/user/${rawPlayer}" onclick="event.stopPropagation();">${modIcon}${flag}${userIcon}${player}</a>`;
 			else
-				player = `<b>${player}</b>`
+				fullPlayer = `<b>${player}</b>`
 			
-			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}" data-runtarget="${currentGame.abbreviation}/run/${run.id}"><td>${place}</td><td style="font-weight: bold">${player}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}" data-runtarget="${currentGame.abbreviation}/run/${run.id}"><td>${place}</td><td style="font-weight: bold">${fullPlayer}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+			
+			if (run.players[0].rel == "user")
+			{
+				flagAndModTippysInfo.push({
+					"id": `#runs-${run.id}-usercard`,
+					"text": getCardHTML(rawPlayer, `${flag}${userIcon}${player}`, getAverageColor("" + players[run.players[0].id].colorFrom, "" + players[run.players[0].id].colorTo))
+				});
+			}
 		}
 		
 		if (!isMobile)
@@ -1124,10 +1157,26 @@ function loadRuns(id, variables, loadOrState = false)
 
 			for (var i = 0; i < flagAndModTippysInfo.length; i++)
 			{
-				flagAndModTippys[i] = tippy(flagAndModTippysInfo[i].id, {
-					content: flagAndModTippysInfo[i].text,
-					placement: 'top'
-				});
+				if (flagAndModTippysInfo[i].id.endsWith("-usercard"))
+				{
+					flagAndModTippys[i] = tippy(flagAndModTippysInfo[i].id, {
+						content: flagAndModTippysInfo[i].text,
+						placement: 'bottom',
+						delay: [700, 0],
+						offset: [0, 0],
+						theme: 'clear',
+						allowHTML: true,
+						interactive: true,
+						appendTo: document.body
+					});
+				}
+				else
+				{
+					flagAndModTippys[i] = tippy(flagAndModTippysInfo[i].id, {
+						content: flagAndModTippysInfo[i].text,
+						placement: 'top'
+					});
+				}
 			}
 		}
 
@@ -1162,9 +1211,6 @@ function nth(d) {
 		default: return d + "th";
 	}
 }
-
-const NOW = new Date()
-const times = [["day", 86400], ["month", 2592000], ["year", 31536000]]
 
 function timeAgo(date) {
 

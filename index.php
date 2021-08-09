@@ -32,6 +32,7 @@
 					</div>
 				</div>
 			</div>
+			<div id="error-container"></div>
 			<div class="container" id="home-container" style="display: none;">
 				<div class="columns is-centered">
 					
@@ -225,9 +226,6 @@
 									</a>
 									<a id="user-links-info" class="button-outer" href="" target="_blank">
 										<div class="button is-dark"><span class="icon"><i class="fas fa-info-circle"></i></span></div>
-									</a>
-									<a id="user-links-forum" class="button-outer" href="" target="_blank">
-										<div class="button is-dark"><span class="icon"><i class="fas fa-comments"></i></span></div>
 									</a>
 								</div>
 							</div>
