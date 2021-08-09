@@ -439,29 +439,32 @@ function openRun(id, loadOrState = false, isRetry = false)
                 "text": getCardHTML(_data.names.international, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]["color-from"].dark, _data["name-style"]["color-to"].dark))
             });
 
-            for (var i = 0; i < singleFlagAndModTippysInfo.length; i++)
-			{
-                if (singleFlagAndModTippysInfo[i].id.endsWith("-card") || singleFlagAndModTippysInfo[i].id == "#run-single-verifier")
-				{
-					singleFlagAndModTippys[i] = tippy(singleFlagAndModTippysInfo[i].id, {
-						content: singleFlagAndModTippysInfo[i].text,
-						placement: 'bottom',
-						delay: [700, 0],
-						offset: [0, 0],
-						theme: 'clear',
-						allowHTML: true,
-						interactive: true,
-                        appendTo: document.body
-					});
-				}
-                else
+            if (!isMobile)
+            {
+                for (var i = 0; i < singleFlagAndModTippysInfo.length; i++)
                 {
-                    singleFlagAndModTippys[i] = tippy(singleFlagAndModTippysInfo[i].id, {
-                        content: singleFlagAndModTippysInfo[i].text,
-                        placement: 'top'
-                    });
-                }                
-			}
+                    if (singleFlagAndModTippysInfo[i].id.endsWith("-card") || singleFlagAndModTippysInfo[i].id == "#run-single-verifier")
+                    {
+                        singleFlagAndModTippys[i] = tippy(singleFlagAndModTippysInfo[i].id, {
+                            content: singleFlagAndModTippysInfo[i].text,
+                            placement: 'bottom',
+                            delay: [700, 0],
+                            offset: [0, 0],
+                            theme: 'clear',
+                            allowHTML: true,
+                            interactive: true,
+                            appendTo: document.body
+                        });
+                    }
+                    else
+                    {
+                        singleFlagAndModTippys[i] = tippy(singleFlagAndModTippysInfo[i].id, {
+                            content: singleFlagAndModTippysInfo[i].text,
+                            placement: 'top'
+                        });
+                    }                
+                }
+            }
         });
 
         if (run.splits !== null)

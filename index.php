@@ -78,9 +78,9 @@
 							</div>
 							<div class="game-info-container">
 								<div class="game-image-container is-hidden-mobile"><img id="game-image" src=""></div>
-								<div id="game-year" class="is-hidden-mobile">...</div>
-								<div id="game-platforms" class="is-hidden-mobile">...</div>
-								<div id="game-moderators" class="is-hidden-mobile">...</div>
+								<div id="game-year">...</div>
+								<div id="game-platforms">...</div>
+								<div id="game-moderators">...</div>
 								<div class="buttons is-centered">
 									<a id="game-links-leaderboard" class="button-outer" href="" target="_blank">
 										<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
@@ -138,32 +138,26 @@
 							<div class="back-button">
 								<a onclick="closeRun(); backFixUrl(); loadGame(getGame(), true);"><i class="fas fa-arrow-left"></i> Back to Game</a>
 							</div>
+							<div class="buttons is-right" id="single-run-buttons">
+								<a id="run-single-src" class="button-outer" href="" target="_blank">
+									<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
+								</a>
+								<a id="run-single-vid" class="button-outer" href="" target="_blank">
+									<div class="button is-dark"><span class="icon"><i id="run-single-vid-icon" class=""></i></span></div>
+								</a>
+							</div>
 							<div class="container">
-								<div class="columns run-single-info-col is-mobile">
-									<div class="column is-10">
-										<div class="run-single-titles">
-											<h1>
-												<span id="run-single-game" style="font-weight: bold;"></span>
-													<span class="is-hidden-mobile"> -</span><span class="is-hidden-tablet"><br></span>
-												<span id="run-single-category"></span>
-											</h1>
-											<h2>
-												<span id="run-single-time" style="font-weight: bold;"></span>
-													<span class="is-hidden-mobile"> by</span><span class="is-hidden-tablet"><br></span>
-												<span id="run-single-runner"></span><span id="run-single-place"></span>
-											</h2>
-										</div>
-									</div>
-									<div class="column is-2">
-										<div class="buttons is-centered is-right-mobile">
-											<a id="run-single-src" class="button-outer" href="" target="_blank">
-												<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
-											</a>
-											<a id="run-single-vid" class="button-outer" href="" target="_blank">
-												<div class="button is-dark"><span class="icon"><i id="run-single-vid-icon" class=""></i></span></div>
-											</a>
-										</div>
-									</div>
+								<div class="run-single-titles">
+									<h1>
+										<span id="run-single-game" style="font-weight: bold;"></span>
+											<span class="is-hidden-mobile"> -</span><span class="is-hidden-tablet"><br></span>
+										<span id="run-single-category"></span>
+									</h1>
+									<h2>
+										<span id="run-single-time" style="font-weight: bold;"></span>
+											<span class="is-hidden-mobile"> by</span><span class="is-hidden-tablet"><br></span>
+										<span id="run-single-runner"></span><span id="run-single-place"></span>
+									</h2>
 								</div>
 								<div class="run-single-info-other">
 									<div id="run-single-comment-outer"><span id="run-single-comment"></span></div>

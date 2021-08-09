@@ -370,9 +370,15 @@ a.button:not(:last-child) {
 
 /* ---------- Single Run Info ---------- */
 
+#box-single-run {
+	position: relative;
+}
 
 .run-single-info-col:not(:last-child) {
 	margin-bottom: 0;
+}
+.run-single-titles {
+	margin-bottom: 1.1em;
 }
 .run-single-titles h1 {
 	font-size: 1.5em;
@@ -404,6 +410,17 @@ a.button:not(:last-child) {
 
 .buttons.is-right-mobile > a {
 	margin-bottom: 0.75em;
+}
+#single-run-buttons {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+}
+@media only screen and (max-width: 768px) {
+	#single-run-buttons {
+		top: 0.5rem;
+		right: 0.5rem;
+	}
 }
 
 @media only screen and (max-width: 768px) {
@@ -787,6 +804,14 @@ a.button:not(:last-child) {
 }
 .user-runs-tbody tr:last-child td:first-child {
 	border-bottom-left-radius: 6px;
+}
+@media only screen and (max-width: 768px) {
+	.user-runs-tbody tr:first-child td:first-child {
+		border-top-left-radius: 0;
+	}
+	.user-runs-tbody tr:last-child td:first-child {
+		border-bottom-left-radius: 0;
+	}
 }
 
 #user-runs-table {
