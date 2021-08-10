@@ -78,7 +78,6 @@
 							</div>
 							<div class="game-info-container">
 								<div class="game-image-container is-hidden-mobile"><img id="game-image" src=""></div>
-								<div id="game-year">...</div>
 								<div id="game-platforms">...</div>
 								<div id="game-moderators">...</div>
 								<div class="buttons is-centered">

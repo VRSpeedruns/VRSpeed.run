@@ -731,7 +731,7 @@ a.button:not(:last-child) {
 }
 #pc-games > .game {
 	width: 100%;
-	padding-left: 0.5em;
+	padding-left: 1.75em;
 	padding-right: 1.4em;
 	font-size: 0.95em;
 	height: 21px;
@@ -747,6 +747,14 @@ a.button:not(:last-child) {
 	right: 0.5em;
 	
 	font-size: 0.8em;
+}
+#pc-games > .game > .circle {
+	position: absolute;
+	top: 4.5px;
+	left: 0.5em;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
 }
 #pc-games > .game:not(.is-selected) > .letter {
 	color: var(--text-color-light);

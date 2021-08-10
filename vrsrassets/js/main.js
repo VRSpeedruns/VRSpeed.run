@@ -281,7 +281,7 @@ function sendErrorNotification(message)
     if (!document.getElementById(`error-${time}`))
     {
         errorContainer.insertAdjacentHTML('beforeend', `<div id="error-${time}" class="notification is-danger">
-        <button class="delete" onclick="closeErrorNotification(this.parentElement.id)"></button>
+        <button class="delete" onclick="closeErrorNotification(this.parentElement.id, true)"></button>
         <p>${message}</p></div>`);
 
         setTimeout(() =>
@@ -290,7 +290,7 @@ function sendErrorNotification(message)
         }, 7500);
     }
 }
-function closeErrorNotification(id)
+function closeErrorNotification(id, click = false)
 {
     if (document.getElementById(id))
     {
@@ -299,7 +299,7 @@ function closeErrorNotification(id)
         {
             if (document.getElementById(id))
             {
-                if (window.getComputedStyle(document.getElementById(id)).opacity < 0.1)
+                if (click || window.getComputedStyle(document.getElementById(id)).opacity < 0.1)
                 {
                     document.getElementById(id).remove();
                     clearInterval();

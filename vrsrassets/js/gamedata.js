@@ -73,7 +73,6 @@ var runsHardwareArray = [];
 var categoryTabs;
 
 var gameInfoImage;
-var gameInfoYear;
 var gameInfoPlatforms;
 var gameInfoLinkLeaderboard;
 var gameInfoLinkGuides;
@@ -115,7 +114,6 @@ function onGameDataLoad()
 	runsPlatformHardware = document.getElementById("runs-platform-hardware");
 
 	gameInfoImage = document.getElementById("game-image");
-	gameInfoYear = document.getElementById("game-year");
 	gameInfoPlatforms = document.getElementById("game-platforms");
 	gameInfoLinkLeaderboard = document.getElementById("game-links-leaderboard");
 	gameInfoLinkGuides = document.getElementById("game-links-guides");
@@ -201,18 +199,21 @@ function loadAllGames()
 	var lastLetter = '';
 	for (var i = 0; i < gamesArray.length; i++)
 	{
+		// mobile/old selector
 		gamesContainer.innerHTML += `<option value="${gamesArray[i].abbreviation}">${gamesArray[i].name}</option>`;
 
+
+		// desktop selector
+		var letterHTML = '';
 		if (gamesArray[i].name.substring(0, 1) != lastLetter)
 		{
 			lastLetter = gamesArray[i].name.substring(0, 1);
+			letterHTML = `<div class="letter">${lastLetter}</div>`;
+		}
 
-			pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();" title="${gamesArray[i].name}">${gamesArray[i].name}<div class="letter">${lastLetter}</div></div>`;
-		}
-		else
-		{
-			pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();" title="${gamesArray[i].name}">${gamesArray[i].name}</div>`;
-		}
+		var circleHTML = `<div class="circle" style="background-color: ${gamesArray[i].color}"></div>`;
+
+		pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();" title="${gamesArray[i].name}">${gamesArray[i].name}${letterHTML}${circleHTML}</div>`;
 	}
 }
 function setEvents()
@@ -479,7 +480,6 @@ function loadGame(id, loadOrState = false, force = false)
 	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
 
 	gameInfoImage.src = '';
-	gameInfoYear.innerText = '...';
 	gameInfoPlatforms.innerText = '...';
 	gameInfoLinkLeaderboard.href = `https://www.speedrun.com/${gameId}/full_game`;
 	gameInfoLinkGuides.href = `https://www.speedrun.com/${gameId}/guides`;
@@ -501,7 +501,6 @@ function loadGame(id, loadOrState = false, force = false)
 
 		var game = (JSON.parse(data)).data;
 		gameInfoImage.src = `https://www.speedrun.com/themes/${game.abbreviation}/cover-256.png`
-		gameInfoYear.innerText = game.released;
 
 		var tempPlatforms = [];
 		for (var i = 0; i < game.platforms.data.length; i++)
