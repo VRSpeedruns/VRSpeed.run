@@ -42,7 +42,8 @@
 html {
 	background-color: var(--background-mid-accent-color);
 	color: var(--text-color);
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 body {
 	background-color: var(--background-accent-color);

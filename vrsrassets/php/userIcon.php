@@ -6,16 +6,16 @@
 
     if ($type == "i") //icon
     {
-        $url = 'https://www.speedrun.com/themes/user/'.$user.'/icon.png';
+        $url = 'https://www.speedrun.com/userasset/'.$user.'/icon';
     }
     else if ($type == "p") //profile pic
     {
-        $url = 'https://www.speedrun.com/themes/user/'.$user.'/image.png';
+        $url = 'https://www.speedrun.com/userasset/'.$user.'/image';
     }
 
     $get = file_get_contents($url);
     
-    if (strlen($get) > 0)
+    if ($get !== FALSE)
     {
         //image found
 

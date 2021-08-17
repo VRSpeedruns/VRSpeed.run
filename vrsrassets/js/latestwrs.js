@@ -85,7 +85,7 @@ function loadWR(id)
             flag = `<img class="runs-flag small" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
         }
 
-		var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${temp.names.international}" onload="handleIconLoad(this);">`;
+		var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${temp.id}" onload="handleIconLoad(this);">`;
 
         var date = timeAgo(new Date(run.submitted));
 
@@ -130,7 +130,7 @@ function loadWR(id)
                 category += ` (${subcats.join(", ")})`;
             }
 
-            var html = `<a class="wr-link" href="${link}"><div class="wr-wrapper" style="background-image: linear-gradient(var(--background-color-transparent), var(--background-color-transparent)), url('https://www.speedrun.com/themes/${run.game.data.abbreviation}/cover-256.png');">
+            var html = `<a class="wr-link" href="${link}"><div class="wr-wrapper" style="background-image: linear-gradient(var(--background-color-transparent), var(--background-color-transparent)), url('${run.game.data.assets["cover-large"].uri.replace("http://", "https://")}');">
                     <div class="wr-game">${game}</div>
                     <div class="wr-category">${category}</div>
                     <div class="wr-time">${time}</div>

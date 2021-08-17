@@ -229,14 +229,14 @@ function openRun(id, loadOrState = false, isRetry = false)
                 });
 			}
 
-            userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${rawPlayer}" onload="handleIconLoad(this);">`;
+            userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${run.players.data[0].id}" onload="handleIconLoad(this);">`;
         }
 
         if (player != rawPlayer)
         {
             singleFlagAndModTippysInfo.push({
                 "id": `#singleruns-${run.players.data[0].id}-card`,
-                "text": getCardHTML(rawPlayer, `${flag}${userIcon}${player}`, getAverageColor(temp["name-style"]["color-from"].dark, temp["name-style"]["color-to"].dark))
+                "text": getCardHTML(rawPlayer, run.players.data[0].id, `${flag}${userIcon}${player}`, getAverageColor(temp["name-style"]["color-from"].dark, temp["name-style"]["color-to"].dark))
             });
             
             player = `<a class="player-link" id="singleruns-${run.players.data[0].id}-card" href="/user/${rawPlayer}">${modIcon}${flag}${userIcon}${player}</a>`;
@@ -430,13 +430,13 @@ function openRun(id, loadOrState = false, isRetry = false)
                 });
             }
 
-            var verifierIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${_data.names.international}" onload="handleIconLoad(this);">`;
+            var verifierIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${_data.id}" onload="handleIconLoad(this);">`;
                 
             runSingleVerifier.innerHTML = `<a class="player-link" href="/user/${_data.names.international}">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
 
             singleFlagAndModTippysInfo.push({
                 "id": `#run-single-verifier`,
-                "text": getCardHTML(_data.names.international, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]["color-from"].dark, _data["name-style"]["color-to"].dark))
+                "text": getCardHTML(_data.names.international, _data.id, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]["color-from"].dark, _data["name-style"]["color-to"].dark))
             });
 
             if (!isMobile)
@@ -515,7 +515,7 @@ function loadSplits(id, timing = "default")
 
     for (var i = 0; i < lastSplitsTippys.length; i++)
     {
-        lastSplitsTippys[i][0].destroy();
+        lastSplitsTippys[i].destroy();
     }
     lastSplitsTippys = [];
     
@@ -656,10 +656,15 @@ function loadSplits(id, timing = "default")
             lastSplitsTippys[i] = tippy(`#bar-${i}`, {
                 content: content,
                 allowHTML: true,
-                offset: [0,7.5],
-                duration: [0, 0]
-            });
+                offset: [0,7.5]
+            })[0];
         }
+
+        tippy.createSingleton(lastSplitsTippys, {
+            delay: 0,
+            allowHTML: true,
+            moveTransition: 'transform 0.175s ease-out'
+        });
 
         for (var i = 0; i < splitsMiddleTippys.length; i++)
         {

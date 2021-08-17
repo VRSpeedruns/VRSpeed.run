@@ -500,7 +500,7 @@ function loadGame(id, loadOrState = false, force = false)
 		if (!getErrorCheck(data)) return;
 
 		var game = (JSON.parse(data)).data;
-		gameInfoImage.src = `https://www.speedrun.com/themes/${game.abbreviation}/cover-256.png`
+		gameInfoImage.src = game.assets["cover-large"].uri.replace("http://", "https://");
 
 		var tempPlatforms = [];
 		for (var i = 0; i < game.platforms.data.length; i++)
@@ -540,7 +540,7 @@ function loadGame(id, loadOrState = false, force = false)
 				{
 					if (cats[i].links[j].rel == "variables")
 					{
-						loadVariables(cats[i].links[j].uri, cats[i].id, loadOrState);
+						loadVariables(cats[i].links[j].uri.replace("http://", "https://"), cats[i].id, loadOrState);
 
 						break;
 					}
@@ -596,7 +596,7 @@ function loadGame(id, loadOrState = false, force = false)
 					});
 				}
 
-				var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${mods[i].names.international}" onload="handleIconLoad(this);">`;
+				var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${mods[i].id}" onload="handleIconLoad(this);">`;
 
 				var _comma = '';
 				if (i + 1 < mods.length)
@@ -606,7 +606,7 @@ function loadGame(id, loadOrState = false, force = false)
 							
 				gameInfoModTippysInfo.push({
 					"id": `#gameinfo-mods-${mods[i].id}-card`,
-					"text": getCardHTML(mods[i].names.international, `${flag}${userIcon}${name}` , getAverageColor(mods[i]["name-style"]["color-from"].dark, mods[i]["name-style"]["color-to"].dark))
+					"text": getCardHTML(mods[i].names.international, mods[i].id, `${flag}${userIcon}${name}` , getAverageColor(mods[i]["name-style"]["color-from"].dark, mods[i]["name-style"]["color-to"].dark))
 				});
 			}
 
@@ -946,7 +946,7 @@ function loadRuns(id, variables, loadOrState = false)
 
 	for (var i = 0; i < lastIconsTippys.length; i++)
 	{
-		lastIconsTippys[i][0].destroy();
+		lastIconsTippys[i].destroy();
 	}
 	lastIconsTippys = [];
 	for (var i = 0; i < flagAndModTippys.length; i++)
@@ -1101,7 +1101,7 @@ function loadRuns(id, variables, loadOrState = false)
 					});
 				}
 
-				userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${rawPlayer}" onload="handleIconLoad(this);">`;
+				userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${run.players[0].id}" onload="handleIconLoad(this);">`;
 			}
 
 			var icons = '';
@@ -1126,7 +1126,7 @@ function loadRuns(id, variables, loadOrState = false)
 			{
 				flagAndModTippysInfo.push({
 					"id": `#runs-${run.id}-usercard`,
-					"text": getCardHTML(rawPlayer, `${flag}${userIcon}${player}`, getAverageColor("" + players[run.players[0].id].colorFrom, "" + players[run.players[0].id].colorTo))
+					"text": getCardHTML(rawPlayer, run.players[0].id, `${flag}${userIcon}${player}`, getAverageColor("" + players[run.players[0].id].colorFrom, "" + players[run.players[0].id].colorTo))
 				});
 			}
 		}
@@ -1134,14 +1134,17 @@ function loadRuns(id, variables, loadOrState = false)
 		if (!isMobile)
 		{
 			var tippyCount = 0;
-			for (var i = 0; i <json.runs.length; i++)
+			for (var i = 0; i < json.runs.length; i++)
 			{
+				var singleArr = [];
+
 				if (json.runs[i].run.splits != null)
 				{
 					lastIconsTippys[tippyCount] = tippy(`#run-${json.runs[i].run.id}-splits`, {
 						content: 'Splits are available for this run.',
 						placement: 'top'
-					});
+					})[0];
+					singleArr.push(lastIconsTippys[tippyCount]);
 					tippyCount++;
 				}
 				if (json.runs[i].run.videos != null && json.runs[i].run.videos.links != undefined)
@@ -1149,8 +1152,18 @@ function loadRuns(id, variables, loadOrState = false)
 					lastIconsTippys[tippyCount] = tippy(`#run-${json.runs[i].run.id}-video`, {
 						content: 'Video is available for this run.',
 						placement: 'top'
-					});
+					})[0];
+					singleArr.push(lastIconsTippys[tippyCount]);
 					tippyCount++;
+				}
+
+				if (singleArr.length > 0)
+				{
+					tippy.createSingleton(singleArr, {
+						delay: [0, 50],
+						moveTransition: 'transform 0.175s ease-out',
+						placement: 'top'
+					});
 				}
 			}
 

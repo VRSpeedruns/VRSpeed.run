@@ -62,7 +62,7 @@ function loadUser(username)
         userLinksSrc.href = user.weblink;
         userLinksInfo.href = `${user.weblink}/info`;
 
-        userPfp.src = `/vrsrassets/php/userIcon.php?t=p&u=${user.names.international}`;
+        userPfp.src = `/vrsrassets/php/userIcon.php?t=p&u=${user.id}`;
 
         var player = getGradientName(user.names.international,
             user["name-style"]["color-from"].dark, 
@@ -78,7 +78,7 @@ function loadUser(username)
             flag = `<img id="user-${user.id}-userFlag" class="runs-flag" src="https://www.speedrun.com/images/flags/${user.location.country.code}.png">`;
         }
     
-        var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${user.names.international}" onload="handleIconLoad(this);">`;
+        var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${user.id}" onload="handleIconLoad(this);">`;
 
         userUsername.innerHTML = `<b>${flag}${userIcon}${player}</b>`;
 
@@ -171,7 +171,7 @@ function loadUserRuns(id)
                 }
             }
 
-            var html = `<div class="user-runs-container"><div class="user-runs-image"><a href="/${thisGame.abbreviation}"><img src="https://www.speedrun.com/themes/${games[i].game.abbreviation}/cover-256.png"></a></div>
+            var html = `<div class="user-runs-container"><div class="user-runs-image"><a href="/${thisGame.abbreviation}"><img src="${games[i].game.assets["cover-large"].uri.replace("http://", "https://")}"></a></div>
             <div class="user-runs-heading"><a href="/${thisGame.abbreviation}" class="thick-underline" style="color: ${thisGame.color};">${thisGame.name}</a></div><table class="table is-narrow is-fullwidth"><tbody class="user-runs-tbody">`;
 
             for (var k = 0; k < games[i].runs.length; k++)

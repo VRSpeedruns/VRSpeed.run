@@ -185,47 +185,54 @@ function infoTippy()
         placement: 'top'
     });
 
-
-    tippy('#game-links-leaderboard', {
+    var gameArr = [];
+    gameArr[0] = tippy('#game-links-leaderboard', {
         offset: [0,7.5],
         content: 'View Leaderboard'
-    });
-    tippy('#game-links-guides', {
+    })[0];
+    gameArr[1] = tippy('#game-links-guides', {
         offset: [0,7.5],
         content: 'View Guides'
-    });
-    tippy('#game-links-resources', {
+    })[0];
+    gameArr[2] = tippy('#game-links-resources', {
         offset: [0,7.5],
         content: 'View Resources'
-    });
-    tippy('#game-links-forums', {
+    })[0];
+    gameArr[3] = tippy('#game-links-forums', {
         offset: [0,7.5],
         content: 'View Forums'
-    });
-    tippy('#game-links-statistics', {
+    })[0];
+    gameArr[4] = tippy('#game-links-statistics', {
         offset: [0,7.5],
         content: 'View Statistics'
+    })[0];
+
+    tippy.createSingleton(gameArr, {
+        delay: 0,
+        moveTransition: 'transform 0.175s ease-out'
     });
 
-    tippy('#user-links-src', {
+    var userArr = [];
+    userArr[0] = tippy('#user-links-src', {
         offset: [0,7.5],
         content: 'View User'
-    });
-    tippy('#user-links-info', {
+    })[0];
+    userArr[1] = tippy('#user-links-info', {
         offset: [0,7.5],
         content: "View User's Info"
-    });
-    tippy('#user-links-forum', {
-        offset: [0,7.5],
-        content: "View User's Forum Posts"
+    })[0];
+
+    tippy.createSingleton(userArr, {
+        delay: 0,
+        moveTransition: 'transform 0.175s ease-out'
     });
 }
 
-function getCardHTML(username, name, color)
+function getCardHTML(username, userid, name, color)
 {
     return `<div class="box is-card">
                 <figure class="image">
-                    <img src="https://vrspeed.run/vrsrassets/php/userIcon.php?t=p&u=${username}" onload="cardHandleNoImage(this)">
+                    <img src="https://vrspeed.run/vrsrassets/php/userIcon.php?t=p&u=${userid}" onload="cardHandleNoImage(this)">
                 </figure>
                 <a class="player-link" href="/user/${username}">${name}</a><br>
                 <a href="https://www.speedrun.com/user/${username}" style="color: ${color}">View user on Speedrun.com</a>
