@@ -775,8 +775,11 @@ a.button:not(:last-child) {
 /* ---------- User ---------- */
 
 .user-runs-container {
-	min-height: 7.35em;
 	margin-left: 7em;
+}
+.user-runs-container:not(:last-child)
+{
+	margin-bottom: 1.25rem;
 }
 .user-runs-image {
 	position: relative;
@@ -792,7 +795,7 @@ a.button:not(:last-child) {
 	font-size: 1.2em;
 	font-weight: bold;
 	
-	margin-top: 0.6em;
+	margin-top: 0.4em;
 	margin-bottom: 0.4em;
 	margin-left: -1.1em;
 }
@@ -802,6 +805,7 @@ a.button:not(:last-child) {
 		display: none;
 	}
 	.user-runs-container {
+		min-height: auto!important;
 		margin-left: 0;
 	}
 	.user-runs-heading {
@@ -824,7 +828,7 @@ a.button:not(:last-child) {
 }
 
 #user-runs-table {
-	margin-top: -1em;
+	margin-top: -0.775em;
 }
 #user-username {
 	font-size: 1.1em;
@@ -852,10 +856,10 @@ a.button:not(:last-child) {
 	color: #a265ff;
 }
 #user-accounts > #user-acc-youtube {
-	color: #ff373d;
+	color: #ee4444;
 }
 #user-accounts > #user-acc-youtube:hover {
-	color: rgb(255, 88, 94);
+	color: #ff5e5e;
 }
 #user-accounts > #user-acc-twitter {
 	color: #1d9bf0;

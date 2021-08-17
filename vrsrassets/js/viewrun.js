@@ -672,7 +672,7 @@ function loadSplits(id, timing = "default")
             }
             else
             {
-                timesave = '<span class="new-pb">New personal best!</span>';
+                timesave = '<span class="new-pb"><i class="fas fa-medal"></i> New personal best!</span>';
             }
             
             var content = `<div class="has-text-${dir}"><p class="has-text-weight-bold"><span class="sp-name-num">${seg["segment_number"] + 1}.</span> ${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</p><p class="sp-time">Duration: ${msToTime(seg[`${timing}_duration_ms`])}</p><p class="sp-time">Finished at: ${msToTime(seg[`${timing}_end_ms`])}</p><p class="sp-timesave">${timesave}</p></div>`;
