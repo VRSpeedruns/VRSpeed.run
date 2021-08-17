@@ -4,6 +4,7 @@ var userRunsTable;
 var userUsername;
 var userPfp;
 var userPronouns;
+var userAccounts;
 var userRunCount;
 var userModeratorOf;
 var userLinksSrc;
@@ -21,6 +22,7 @@ function onUserLoad()
     userUsername = document.getElementById("user-username");
     userPfp = document.getElementById("user-pfp");
     userPronouns = document.getElementById("user-pronouns");
+    userAccounts = document.getElementById("user-accounts");
     userRunCount = document.getElementById("user-run-count");
     userModeratorOf = document.getElementById("user-moderator-of");
     userLinksSrc = document.getElementById("user-links-src");
@@ -90,8 +92,47 @@ function loadUser(username)
             }));
         }
 
+        var accounts = '';
+        if (user.twitch)
+        {
+            accounts += `<a id="user-acc-twitch" href="${user.twitch.uri}"><i class="fab fa-twitch"></i></a>`;
+        }
+        if (user.youtube)
+        {
+            accounts += `<a id="user-acc-youtube" href="${user.youtube.uri}"><i class="fab fa-youtube"></i></a>`;
+        }
+        if (user.twitter)
+        {
+            accounts += `<a id="user-acc-twitter" href="${user.twitter.uri}"><i class="fab fa-twitter"></i></a>`;
+        }
+
         userPronouns.innerHTML = user.pronouns;
+        userAccounts.innerHTML = accounts;
         userRunCount.innerHTML = '';
+
+        var accountTippy = [];
+        if (user.twitch)
+        {
+            accountTippy.push(tippy('#user-acc-twitch', {
+                content: 'Twitch'
+            })[0]);
+        }
+        if (user.youtube)
+        {
+            accountTippy.push(tippy('#user-acc-youtube', {
+                content: 'YouTube'
+            })[0]);
+        }
+        if (user.twitter)
+        {
+            accountTippy.push(tippy('#user-acc-twitter', {
+                content: 'Twitter'
+            })[0]);
+        }
+        tippy.createSingleton(accountTippy, {
+            delay: [0, 75],
+            moveTransition: 'transform 0.175s ease-out'
+        })
 
         loadUserRuns(user.id);
         loadUserModeratorOf(user.id);
@@ -248,13 +289,24 @@ function loadUserRuns(id)
         
         userRunsLoading.style.display = "none";
 
+        var iconSingletonObjs = [];
+        var offset = userRunTippys.length;
+
         for (var i = 0; i < userRunTippysInfo.length; i++)
         {    
-            userRunTippys.push(tippy(userRunTippysInfo[i].id, {
+            userRunTippys[i + offset] = tippy(userRunTippysInfo[i].id, {
                 content: userRunTippysInfo[i].text,
                 placement: 'top'
-            }));
+            });
+
+            iconSingletonObjs.push(userRunTippys[i + offset][0]);
         }
+
+        tippy.createSingleton(iconSingletonObjs, {
+            delay: [0, 75],
+            moveTransition: 'transform 0.175s ease-out',
+            placement: 'top'
+        });
     });
 }
 

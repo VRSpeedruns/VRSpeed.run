@@ -839,6 +839,30 @@ a.button:not(:last-child) {
 	margin-bottom: 0.75em;
 	color: var(--text-color-light);
 }
+#user-accounts:not(:empty) {
+	margin-bottom: 0.75em;
+}
+#user-accounts > a:not(:last-child) {
+	margin-right: 0.5em;
+}
+#user-accounts > #user-acc-twitch {
+	color: #9146ff;
+}
+#user-accounts > #user-acc-twitch:hover {
+	color: #a265ff;
+}
+#user-accounts > #user-acc-youtube {
+	color: #ff373d;
+}
+#user-accounts > #user-acc-youtube:hover {
+	color: rgb(255, 88, 94);
+}
+#user-accounts > #user-acc-twitter {
+	color: #1d9bf0;
+}
+#user-accounts > #user-acc-twitter:hover {
+	color: #3cb1ff;
+}
 #user-run-count:not(:empty) {
 	font-size: 0.8em;
 	margin-bottom: 0.75em;
@@ -956,7 +980,8 @@ a.button:not(:last-child) {
 }
 
 .is-tooltip-text {
-	text-decoration: dotted underline;
+	border-bottom: 2px dotted var(--text-color-light);
+	margin-bottom: -2px;
 }
 
 #view-lb {
@@ -1002,6 +1027,9 @@ a.button:not(:last-child) {
     -ms-user-select: none;
 	user-select: none;
 }
+#about-info {
+	height: 100%;
+}
 #about-info-toggle {
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -1017,7 +1045,7 @@ a.button:not(:last-child) {
 	margin-top: 1em;
 }
 #about-info > p:not(:last-child), #about-info > div > p:not(:last-child) {
-	margin-bottom: 1em;
+	margin-bottom: 1.25rem;
 }
 
 .divider {
@@ -1028,7 +1056,7 @@ a.button:not(:last-child) {
 	border-bottom: 2px solid var(--primary-color);
 }
 .divider.thin {
-	padding-bottom: 1.25em;
+	padding-bottom: 1em;
 	margin-bottom: 1.25em;
 }
 @media only screen and (max-width: 768px) {
@@ -1115,13 +1143,13 @@ a.button:not(:last-child) {
 	margin-right: 0.25em;
 	max-height: 15px;
 	vertical-align: middle;
-	padding-top: 3px;
+	padding-top: 1px;
 	margin-bottom: 3px;
 	border-radius: 2px;
 }
 .runs-flag.small {
-	max-height: 14px;
-	padding-top: 3px;
+	max-height: 12px;
+	padding-bottom: 1px;
 }
 .runs-usericon {
 	max-height: 15px;

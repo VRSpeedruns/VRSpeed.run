@@ -243,6 +243,7 @@ function cardHandleNoImage(_this, w, h)
     if (_this.naturalWidth == 1 && _this.naturalHeight == 1)
     {
         _this.parentElement.parentElement.style.paddingLeft = "8px";
+        _this.remove();
     }
 }
 

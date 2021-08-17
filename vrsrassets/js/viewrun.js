@@ -210,12 +210,24 @@ function openRun(id, loadOrState = false, isRetry = false)
                 }
                 else if (currentMods[run.players.data[0].id] == "super-moderator")
                 {
-                    modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+                    if (currentGame.verifiers.includes(run.players.data[0].id))
+                    {
+                        modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/verifier.png">`;
 
-                    singleFlagAndModTippysInfo.push({
-                        "id": `#singleruns-${run.players.data[0].id}-modIcon`,
-                        "text": "Super Mod"
-                    });
+                        singleFlagAndModTippysInfo.push({
+                            "id": `#singleruns-${run.players.data[0].id}-modIcon`,
+                            "text": "Verifier"
+                        });
+                    }
+                    else
+                    {
+                        modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+
+                        singleFlagAndModTippysInfo.push({
+                            "id": `#singleruns-${run.players.data[0].id}-modIcon`,
+                            "text": "Super Mod"
+                        });
+                    }
                 }
             }
 
@@ -411,12 +423,24 @@ function openRun(id, loadOrState = false, isRetry = false)
                 }
                 else if (currentMods[_data.id] == "super-moderator")
                 {
-                    verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+                    if (currentGame.verifiers.includes(_data.id))
+                    {
+                        verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/verifier.png">`;
 
-                    singleFlagAndModTippysInfo.push({
-                        "id": `#singleruns-${_data.id}-verModIcon`,
-                        "text": "Super Mod"
-                    });
+                        singleFlagAndModTippysInfo.push({
+                            "id": `#singleruns-${_data.id}-verModIcon`,
+                            "text": "Verifier"
+                        });
+                    }
+                    else
+                    {
+                        verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+
+                        singleFlagAndModTippysInfo.push({
+                            "id": `#singleruns-${_data.id}-verModIcon`,
+                            "text": "Super Mod"
+                        });
+                    }
                 }
             }
 
@@ -661,14 +685,14 @@ function loadSplits(id, timing = "default")
         }
 
         tippy.createSingleton(lastSplitsTippys, {
-            delay: 0,
+            delay: [0, 75],
             allowHTML: true,
             moveTransition: 'transform 0.175s ease-out'
         });
 
         for (var i = 0; i < splitsMiddleTippys.length; i++)
         {
-            splitsMiddleTippys[i][0].destroy();
+            splitsMiddleTippys[i].destroy();
         }
         splitsMiddleTippys = [];
         runSingleSplitsMiddleInfo.innerHTML = '';
@@ -693,11 +717,11 @@ function loadSplits(id, timing = "default")
         if (run["uses_autosplitter"])
         {
             splitsMiddleTippys.push(tippy('#run-single-middle-autosplitter', {
-                content: `<b>Used Autosplitter</b>`,
+                content: `<center><b>Used<br>Autosplitter</b></center>`,
                 allowHTML: true,
                 offset: [0,2],
                 placement: 'top'
-            }));
+            })[0]);
         }
 
         splitsMiddleTippys.push(tippy('#run-single-middle-attempts', {
@@ -705,13 +729,13 @@ function loadSplits(id, timing = "default")
             allowHTML: true,
             offset: [0,2],
             placement: 'top'
-        }));
+        })[0]);
         splitsMiddleTippys.push(tippy('#run-single-middle-sumofbest', {
             content: `<center><b>Sum of Best</b><br>${msToTimeAll(run[`${timing}_sum_of_best_ms`])}</center>`,
             allowHTML: true,
             offset: [0,2],
             placement: 'top'
-        }));
+        })[0]);
 
         if (possibleTimesave != '')
         {
@@ -720,8 +744,15 @@ function loadSplits(id, timing = "default")
                 allowHTML: true,
                 offset: [0,2],
                 placement: 'top'
-            }));
+            })[0]);
         }
+
+        tippy.createSingleton(splitsMiddleTippys, {
+            delay: [0, 75],
+            moveTransition: 'transform 0.175s ease-out',
+            allowHTML: true,
+            placement: 'top'
+        });
 
         runSingleSplitsInner.style.display = "block";
         runSingleSplitsLoading.style.display = "none";

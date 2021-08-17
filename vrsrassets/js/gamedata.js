@@ -13,6 +13,9 @@ Category Object
 		{
 			...
 		}
+	],
+	"verifiers": [
+		... strings (user ids) ...
 	]
 }
 
@@ -500,7 +503,7 @@ function loadGame(id, loadOrState = false, force = false)
 		if (!getErrorCheck(data)) return;
 
 		var game = (JSON.parse(data)).data;
-		gameInfoImage.src = game.assets["cover-large"].uri.replace("http://", "https://");
+		gameInfoImage.src = game.assets["cover-large"].uri;
 
 		var tempPlatforms = [];
 		for (var i = 0; i < game.platforms.data.length; i++)
@@ -540,7 +543,7 @@ function loadGame(id, loadOrState = false, force = false)
 				{
 					if (cats[i].links[j].rel == "variables")
 					{
-						loadVariables(cats[i].links[j].uri.replace("http://", "https://"), cats[i].id, loadOrState);
+						loadVariables(cats[i].links[j].uri, cats[i].id, loadOrState);
 
 						break;
 					}
@@ -569,16 +572,28 @@ function loadGame(id, loadOrState = false, force = false)
 
 				if (currentMods[mods[i].id] == "super-moderator")
 				{
-					modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+					if (currentGame.verifiers.includes(mods[i].id))
+					{
+						modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/verifier.png">`;
 
-					gameInfoModTippysInfo.push({
-						"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
-						"text": "Super Mod"
-					});
+						gameInfoModTippysInfo.push({
+							"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
+							"text": "Verifier"
+						});
+					}
+					else
+					{
+						modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+
+						gameInfoModTippysInfo.push({
+							"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
+							"text": "Super Mod"
+						});
+					}
 				}
 				else //"moderator"
 				{
-					modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
+					modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/mod.png">`;
 
 					gameInfoModTippysInfo.push({
 						"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
@@ -596,7 +611,7 @@ function loadGame(id, loadOrState = false, force = false)
 					});
 				}
 
-				var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${mods[i].id}" onload="handleIconLoad(this);">`;
+				var userIcon = `<img class="runs-usericon small" src="/vrsrassets/php/userIcon.php?t=i&u=${mods[i].id}" onload="handleIconLoad(this);">`;
 
 				var _comma = '';
 				if (i + 1 < mods.length)
@@ -606,7 +621,7 @@ function loadGame(id, loadOrState = false, force = false)
 							
 				gameInfoModTippysInfo.push({
 					"id": `#gameinfo-mods-${mods[i].id}-card`,
-					"text": getCardHTML(mods[i].names.international, mods[i].id, `${flag}${userIcon}${name}` , getAverageColor(mods[i]["name-style"]["color-from"].dark, mods[i]["name-style"]["color-to"].dark))
+					"text": getCardHTML(mods[i].names.international, mods[i].id, `${flag.replace(" small", "")}${userIcon.replace(" small", "")}${name}` , getAverageColor(mods[i]["name-style"]["color-from"].dark, mods[i]["name-style"]["color-to"].dark))
 				});
 			}
 
@@ -1082,12 +1097,24 @@ function loadRuns(id, variables, loadOrState = false)
 					}
 					else if (currentMods[run.players[0].id] == "super-moderator")
 					{
-						modIcon = `<img id="runs-${run.players[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
-						
-						flagAndModTippysInfo.push({
-							"id": `#runs-${run.players[0].id}-modIcon`,
-							"text": "Super Mod"
-						});
+						if (currentGame.verifiers.includes(run.players[0].id))
+						{
+							modIcon = `<img id="runs-${run.players[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/verifier.png">`;
+							
+							flagAndModTippysInfo.push({
+								"id": `#runs-${run.players[0].id}-modIcon`,
+								"text": "Verifier"
+							});
+						}
+						else
+						{
+							modIcon = `<img id="runs-${run.players[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+							
+							flagAndModTippysInfo.push({
+								"id": `#runs-${run.players[0].id}-modIcon`,
+								"text": "Super Mod"
+							});
+						}
 					}
 				}
 				
@@ -1136,15 +1163,12 @@ function loadRuns(id, variables, loadOrState = false)
 			var tippyCount = 0;
 			for (var i = 0; i < json.runs.length; i++)
 			{
-				var singleArr = [];
-
 				if (json.runs[i].run.splits != null)
 				{
 					lastIconsTippys[tippyCount] = tippy(`#run-${json.runs[i].run.id}-splits`, {
 						content: 'Splits are available for this run.',
 						placement: 'top'
 					})[0];
-					singleArr.push(lastIconsTippys[tippyCount]);
 					tippyCount++;
 				}
 				if (json.runs[i].run.videos != null && json.runs[i].run.videos.links != undefined)
@@ -1153,19 +1177,15 @@ function loadRuns(id, variables, loadOrState = false)
 						content: 'Video is available for this run.',
 						placement: 'top'
 					})[0];
-					singleArr.push(lastIconsTippys[tippyCount]);
 					tippyCount++;
 				}
-
-				if (singleArr.length > 0)
-				{
-					tippy.createSingleton(singleArr, {
-						delay: [0, 50],
-						moveTransition: 'transform 0.175s ease-out',
-						placement: 'top'
-					});
-				}
 			}
+
+			tippy.createSingleton(lastIconsTippys, {
+				delay: [0, 75],
+				moveTransition: 'transform 0.175s ease-out',
+				placement: 'top'
+			});
 
 			for (var i = 0; i < flagAndModTippysInfo.length; i++)
 			{

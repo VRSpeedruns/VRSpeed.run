@@ -211,6 +211,7 @@
 								<div id="user-username"></div>
 								<div style="margin: 0 auto; "><img id="user-pfp" style="height: 128px" src="" onload="if (this.naturalWidth == 1 && this.naturalHeight == 1) this.parentElement.style.height = '0px';"></div>
 								<div id="user-pronouns"></div>
+								<div id="user-accounts"></div>
 								<div id="user-run-count"></div>
 								<div id="user-moderator-of"></div>
 								<div class="buttons is-centered">

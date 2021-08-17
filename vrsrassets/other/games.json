@@ -6,7 +6,8 @@
         "hardware": "",
         "color": "#a134d6",
         "hoverColor": "#b64bea",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "accountingplus",
@@ -15,7 +16,8 @@
         "hardware": "",
         "color": "#a134d6",
         "hoverColor": "#b64bea",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "adventure_time_magic_mans_head_game",
@@ -24,7 +26,8 @@
         "hardware": "",
         "color": "#FDED52",
         "hoverColor": "#fff382",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "arizona_sunshine",
@@ -33,7 +36,8 @@
         "hardware": "",
         "color": "#FBC539",
         "hoverColor": "#ffd463",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "batman_arkham_vr",
@@ -42,7 +46,8 @@
         "hardware": "",
         "color": "#5E91B9",
         "hoverColor": "#85bbe6",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "boneworks",
@@ -51,7 +56,8 @@
         "hardware": "r8romd08",
         "color": "#E6B400",
         "hoverColor": "#facc28",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "budget_cuts",
@@ -60,7 +66,8 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "budget_cuts_2_mission_insolvency",
@@ -69,7 +76,8 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "climbey",
@@ -78,7 +86,8 @@
         "hardware": "",
         "color": "#ED821A",
         "hoverColor": "#f29941",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "compound",
@@ -87,7 +96,8 @@
         "hardware": "",
         "color": "#F454FF",
         "hoverColor": "#F99EFF",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "doctor_who_the_edge_of_time",
@@ -96,7 +106,8 @@
         "hardware": "",
         "color": "#515bd0",
         "hoverColor": "#6f79ed",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "doom_vfr",
@@ -105,7 +116,8 @@
         "hardware": "",
         "color": "#e22c43",
         "hoverColor": "#f1475c",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "duck_season",
@@ -119,7 +131,8 @@
                 "id": "wl33ryvl",
                 "value": "gq7z9nr1"
             }
-        ]
+        ],
+        "verifiers": []
     },
     {
         "id": "espire_1_vr_operative",
@@ -128,7 +141,8 @@
         "hardware": "",
         "color": "#6CA1CD",
         "hoverColor": "#85B7E1",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "everybodysgolfvr",
@@ -137,7 +151,8 @@
         "hardware": "",
         "color": "#70BD6A",
         "hoverColor": "#9be695",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "fnafvr_helpwanted",
@@ -155,7 +170,8 @@
                 "id": "j84676yl",
                 "value": "21gd8661"
             }
-        ]
+        ],
+        "verifiers": []
     },
     {
         "id": "gorn",
@@ -164,7 +180,8 @@
         "hardware": "",
         "color": "#c73862",
         "hoverColor": "#e34b78",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "hla",
@@ -173,7 +190,8 @@
         "hardware": "",
         "color": "#FF862C",
         "hoverColor": "#ffa058",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "i_expect_you_to_die",
@@ -182,7 +200,11 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": [
+            "qjonq4n8",
+            "x720pev8"
+        ]
     },
     {
         "id": "jet_island",
@@ -191,7 +213,8 @@
         "hardware": "",
         "color": "#ad4c50",
         "hoverColor": "#d1696d",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "job_simulator",
@@ -200,7 +223,8 @@
         "hardware": "",
         "color": "#ceef79",
         "hoverColor": "#e1ff95",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "lone_echo",
@@ -209,7 +233,8 @@
         "hardware": "",
         "color": "#278f96",
         "hoverColor": "#40bac2",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "luckys_tale",
@@ -218,7 +243,8 @@
         "hardware": "",
         "color": "#009DEC",
         "hoverColor": "#2fb6fa",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "moss",
@@ -227,7 +253,8 @@
         "hardware": "",
         "color": "#FDCB1C",
         "hoverColor": "#ffda57",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "paper_beast",
@@ -236,7 +263,8 @@
         "hardware": "",
         "color": "#E65F03",
         "hoverColor": "#ff8736",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "psvr",
@@ -245,7 +273,8 @@
         "hardware": "",
         "color": "#0088FF",
         "hoverColor": "#38a2ff",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "rick_and_morty_virtual_rick-ality",
@@ -254,7 +283,8 @@
         "hardware": "",
         "color": "#39C428",
         "hoverColor": "#5ef04d",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "robo_recall",
@@ -263,7 +293,8 @@
         "hardware": "",
         "color": "#92AAD5",
         "hoverColor": "#b3caf5",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "star_wars_tales_from_the_galaxys_edge",
@@ -272,7 +303,8 @@
         "hardware": "",
         "color": "#F79F41",
         "hoverColor": "#ffb96e",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "shvr",
@@ -281,7 +313,8 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "surgeon_simulator_experience_reality",
@@ -290,7 +323,8 @@
         "hardware": "",
         "color": "#C2252C",
         "hoverColor": "#e6434a",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "the_climb",
@@ -299,7 +333,8 @@
         "hardware": "",
         "color": "#00B3FF",
         "hoverColor": "#4fcbff",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "the_climb_2",
@@ -308,7 +343,8 @@
         "hardware": "",
         "color": "#00E2FF",
         "hoverColor": "#4fcbff",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "the_lab",
@@ -317,7 +353,8 @@
         "hardware": "",
         "color": "#7DBDFD",
         "hoverColor": "#a3d1ff",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "talos_principle_vr",
@@ -326,7 +363,8 @@
         "hardware": "kn0zqxz8",
         "color": "#26BCC6",
         "hoverColor": "#4fe6f0",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "trdm",
@@ -335,7 +373,8 @@
         "hardware": "",
         "color": "#3C8FA8",
         "hoverColor": "#56AEC9",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "the_walking_dead_saints_and_sinners",
@@ -344,7 +383,8 @@
         "hardware": "ylqk1v3l",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "tnn",
@@ -353,7 +393,8 @@
         "hardware": "",
         "color": "#00A40C",
         "hoverColor": "#1ed62b",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "to_the_top",
@@ -362,7 +403,8 @@
         "hardware": "e8mmk2v8",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "trover",
@@ -376,7 +418,8 @@
                 "id": "ylpmx96l",
                 "value": "jqzx44k1"
             }
-        ]
+        ],
+        "verifiers": []
     },
     {
         "id": "vs",
@@ -385,7 +428,8 @@
         "hardware": "",
         "color": "#FDEA8E",
         "hoverColor": "#fff3b8",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "vertigo_remastered",
@@ -394,7 +438,8 @@
         "hardware": "",
         "color": "#7B63B8",
         "hoverColor": "#a18ade",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "vader_immortal",
@@ -403,7 +448,8 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "vvr",
@@ -412,7 +458,8 @@
         "hardware": "",
         "color": "#a134d6",
         "hoverColor": "#b64bea",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     },
     {
         "id": "windlands",
@@ -421,6 +468,7 @@
         "hardware": "",
         "color": "#2A65FC",
         "hoverColor": "#5c8aff",
-        "ignoredVariables": []
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
