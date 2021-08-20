@@ -497,7 +497,7 @@ function loadGame(id, loadOrState = false, force = false)
 	}
 	gameInfoModTippys = [];
 
-	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,levels`)
+	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,levels}`)
 	.then((data) =>
 	{
 		if (!getErrorCheck(data)) return;
@@ -1310,6 +1310,11 @@ function runTimeFormat(time)
 	else
 	{
 		time = time.replace('S','s');
+	}
+
+	if (time.includes("m") && !time.includes("s"))
+	{
+		time += " 0s";
 	}
 	
 	return time;

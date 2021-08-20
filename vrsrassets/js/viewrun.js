@@ -654,14 +654,18 @@ function loadSplits(id, timing = "default")
                 runSingleSegments.innerHTML += `<tr${pbColor}><td>${seg["segment_number"] + 1}</td><td>${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</td><td>${msToTime(seg[`${timing}_duration_ms`])}</td><td>${msToTime(seg[`${timing}_end_ms`])}</td></tr>`;
             }
         }
-        runSingleSegments.innerHTML += temp; //in case there's anything left over in temp for some reason
+        runSingleSegments.innerHTML += temp;
+
+        var barPercentSum = 0;
 
         for (var i = 0; i < run.segments.length; i++)
         {
             var seg = run.segments[i];
 
+            barPercentSum += seg[`${timing}_duration_ms`] / totalDuration;
+
             var dir = "left";
-            if (i >= run.segments.length / 2)
+            if (barPercentSum > 0.5)
                 dir = "right";
             
             var timesave = '';
@@ -678,13 +682,12 @@ function loadSplits(id, timing = "default")
             var content = `<div class="has-text-${dir}"><p class="has-text-weight-bold"><span class="sp-name-num">${seg["segment_number"] + 1}.</span> ${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</p><p class="sp-time">Duration: ${msToTime(seg[`${timing}_duration_ms`])}</p><p class="sp-time">Finished at: ${msToTime(seg[`${timing}_end_ms`])}</p><p class="sp-timesave">${timesave}</p></div>`;
             
             lastSplitsTippys[i] = tippy(`#bar-${i}`, {
-                content: content,
-                allowHTML: true,
-                offset: [0,7.5]
+                content: content
             })[0];
         }
 
         tippy.createSingleton(lastSplitsTippys, {
+            offset: [0,7.5],
             delay: [0, 75],
             allowHTML: true,
             moveTransition: 'transform 0.175s ease-out'

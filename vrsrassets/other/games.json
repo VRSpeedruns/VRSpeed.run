@@ -100,6 +100,16 @@
         "verifiers": []
     },
     {
+        "id": "contagion_vr_outbreak",
+        "abbreviation": "cvro",
+        "name": "Contagion VR: Outbreak",
+        "hardware": "",
+        "color": "#FF862C",
+        "hoverColor": "#ffa058",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
         "id": "doctor_who_the_edge_of_time",
         "abbreviation": "drwho",
         "name": "Doctor Who: The Edge Of Time",

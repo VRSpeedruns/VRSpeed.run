@@ -779,7 +779,11 @@ a.button:not(:last-child) {
 }
 .user-runs-container:not(:last-child)
 {
-	margin-bottom: 1.25rem;
+	margin-bottom: 1.5rem;
+}
+.user-runs-container:last-child
+{
+	margin-bottom: 0.4rem;
 }
 .user-runs-image {
 	position: relative;

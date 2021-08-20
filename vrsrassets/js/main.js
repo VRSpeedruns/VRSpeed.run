@@ -177,13 +177,13 @@ function infoTippy()
         duration: [150, 100]
     });
 
-    if (isMobile) return;
-
     tippy('#tippy-me', {
         offset: [0,7.5],
         content: 'bigfoot#0001',
         placement: 'top'
     });
+
+    if (isMobile) return;
 
     var gameArr = [];
     gameArr[0] = tippy('#game-links-leaderboard', {
@@ -231,9 +231,9 @@ function infoTippy()
 function getCardHTML(username, userid, name, color)
 {
     return `<div class="box is-card">
-                <figure class="image">
+                <a class="image" href="/user/${username}">
                     <img src="https://vrspeed.run/vrsrassets/php/userIcon.php?t=p&u=${userid}" onload="cardHandleNoImage(this)">
-                </figure>
+                </a>
                 <a class="player-link" href="/user/${username}">${name}</a><br>
                 <a href="https://www.speedrun.com/user/${username}" style="color: ${color}">View user on Speedrun.com</a>
             </div>`
@@ -247,7 +247,30 @@ function cardHandleNoImage(_this, w, h)
     }
 }
 
-function get(url) {
+function makeUnique(url)
+{
+    // As the server-side cache appears to be unpredictable in how often it updates,
+    // this method adds a number based on the current epoch time to the end of query
+    // strings, which bypasses the server-side cache. Retrieved data is now accurate
+    // to the minute.
+
+    if (url.includes("?"))
+    {
+        return `${url}&${Math.trunc(Date.now() / 60)}`
+    }
+    else
+    {
+        return `${url}?${Math.trunc(Date.now() / 60)}`
+    }
+}
+
+function get(url)
+{
+    if (url.includes("speedrun.com/api/v1"))
+    {
+        url = makeUnique(url);
+    }
+
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		req.open('GET', url);

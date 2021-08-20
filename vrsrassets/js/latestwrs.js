@@ -22,7 +22,7 @@ function getLatest()
 
             for (var i = 0; i < _data.length; i++)
             {
-                wrs[i] = _data[i].tag_name;
+                wrs[i] = _data[i].name;
             }
 
             setCookie('latest_wrs', JSON.stringify(wrs), 20);
