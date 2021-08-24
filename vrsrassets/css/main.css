@@ -966,6 +966,33 @@ a.button:not(:last-child) {
 	font-weight: normal;
 }
 
+/* ---------- Navbar ---------- */
+
+.navbar {
+	background-color: var(--background-color);
+	box-shadow: 0 2px 4px rgb(0 0 0 / 8%)
+}
+.navbar > div {
+	width: 100%;
+	margin: 0 auto;
+}
+
+@media screen and (min-width: 1024px) {
+	.navbar > div {
+		max-width: 960px;
+	}
+}
+@media screen and (min-width: 1216px) {
+	.navbar > div {
+		max-width: 1152px;
+	}
+}
+@media screen and (min-width: 1408px) {
+	.navbar > div {
+		max-width: 1344px;
+	}
+}
+
 /* ---------- Misc ---------- */
 
 #runs-loading, #runs-none {

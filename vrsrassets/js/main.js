@@ -281,28 +281,15 @@ function get(url)
 	});
 }
 
-var nonErrorCount = 0;
 function getErrorCheck(data)
 {
     var temp = (JSON.parse(data));
     if (temp.status == 420)
     {
-        nonErrorCount = 0;
-
-        //srcErrorResponse.innerText = `"${temp.message}" (Error code ${temp.status})`
-        //srcErrorContainer.style.display = "flex";
         sendErrorNotification(`There was an error when trying to access the Speedrun.com API.<br>"${temp.message}" (Error code ${temp.status})`);
         return false;
     }
-    else
-    {
-        if (++nonErrorCount > 4)
-        {
-            srcErrorContainer.style.display = "none";
-        }
-
-        return true;
-    }
+    return true;
 }
 
 function sendErrorNotification(message)

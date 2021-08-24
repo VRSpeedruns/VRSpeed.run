@@ -22,16 +22,23 @@
 		<link rel="stylesheet" href="/vrsrassets/css/main.css">
 		<link rel="stylesheet" href="/assets/css/googlefonts.css">
 	</head>
-	<body onload="onLoad();">
-		<section class="section">
-			<div id="src-error-container" class="columns is-centered" style="display: none;">
-				<div class="column is-6">
-					<div class="notification is-danger">
-						<p style="font-weight: bold;">There appear to be issues accessing the Speedrun.com API.<br>If refreshing the page doesn't work, please try coming back later.</p>
-						<p>Error message: <span id="src-error-response"></span></p>
-					</div>
+	<body onload="onLoad();" class="has-navbar-fixed-top">
+		<nav class="navbar is-fixed-top">
+			<div>
+				<div class="navbar-brand">
+					<a class="navbar-item" href="/">
+						<img src="/vrsrassets/images/navbrand.png">
+					</a>
+
+					<a role="button" class="navbar-burger" onclick="">
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+					</a>
 				</div>
 			</div>
+		</nav>
+		<section class="section">
 			<div id="error-container"></div>
 			<div class="container" id="home-container" style="display: none;">
 				<div class="columns is-centered">
