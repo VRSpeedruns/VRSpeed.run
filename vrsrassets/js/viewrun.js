@@ -88,7 +88,12 @@ function openRun(id, loadOrState = false, isRetry = false)
     }
     runLoadAttempts++;
 
-    if (runLoadAttempts > 2)
+    var ignorePlace = false;
+    if (runLoadAttempts == 2)
+    {
+        ignorePlace = true;
+    }
+    else if (runLoadAttempts > 2)
     {
         sendErrorNotification(`There was an error when trying to load run with ID "${id}."`);
 
@@ -241,14 +246,15 @@ function openRun(id, loadOrState = false, isRetry = false)
                 });
 			}
 
-            userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${run.players.data[0].id}" onload="handleIconLoad(this);">`;
+            if (run.players.data[0].assets.icon.uri)
+                userIcon = `<img class="runs-usericon" src="${run.players.data[0].assets.icon.uri}">`;
         }
 
         if (player != rawPlayer)
         {
             singleFlagAndModTippysInfo.push({
                 "id": `#singleruns-${run.players.data[0].id}-card`,
-                "text": getCardHTML(rawPlayer, run.players.data[0].id, `${flag}${userIcon}${player}`, getAverageColor(temp["name-style"]["color-from"].dark, temp["name-style"]["color-to"].dark))
+                "text": getCardHTML(rawPlayer, run.players.data[0].assets.image.uri, `${flag}${userIcon}${player}`, getAverageColor(temp["name-style"]["color-from"].dark, temp["name-style"]["color-to"].dark))
             });
             
             player = `<a class="player-link" id="singleruns-${run.players.data[0].id}-card" href="/user/${rawPlayer}">${modIcon}${flag}${userIcon}${player}</a>`;
@@ -256,7 +262,7 @@ function openRun(id, loadOrState = false, isRetry = false)
         else
             player = `<b>${player}</b>`;
 
-        if (!document.getElementById(`run-${id}`))
+        if (!ignorePlace && !document.getElementById(`run-${id}`))
         {
             loadRuns(categories[currentCatIndex].id, currentVariables);
 
@@ -270,19 +276,23 @@ function openRun(id, loadOrState = false, isRetry = false)
             }
         }
 
-        var place = document.getElementById(`run-${id}`).dataset.place;
-        place = nth(parseInt(place));
-        if (place == "1st" || place == "2nd" || place == "3rd")
+        var place = '';
+        if (!ignorePlace)
         {
-            place = `<b class="place-${place}">${place}</b>`;
-        }
-        else if (place == "0th")
-        {
-            place = "";
-        }
-        if (place != "")
-        {
-            place = " - " + place;
+            place = document.getElementById(`run-${id}`).dataset.place;
+            place = nth(parseInt(place));
+            if (place == "1st" || place == "2nd" || place == "3rd")
+            {
+                place = `<b class="place-${place}">${place}</b>`;
+            }
+            else if (place == "0th")
+            {
+                place = "";
+            }
+            if (place != "")
+            {
+                place = " - " + place;
+            }
         }
 
         var srcLink = run.weblink;
@@ -312,12 +322,17 @@ function openRun(id, loadOrState = false, isRetry = false)
         var platform = run.platform.data.name;
         if (currentGame.hardware != "")
         {
-            platform = `<b>${runsHardwareArray[run.values[currentGame.hardware]]}</b> (<i>${platform}</i>)`;
+            if (platform)
+                platform = `using <b>${runsHardwareArray[run.values[currentGame.hardware]]}</b> (<i>${platform}</i>)`;
+            else
+                platform = `using <b>${runsHardwareArray[run.values[currentGame.hardware]]}</b>`;
+        }
+        else if (platform)
+        {
+            platform = `using <b>${platform}</b>`
         }
         else
-        {
-            platform = `<b>${platform}</b>`
-        }
+            platform = '';
 
         var _date = new Date(run.date);
         var date = _date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
@@ -343,6 +358,8 @@ function openRun(id, loadOrState = false, isRetry = false)
         runSingleVidIcon.classList.remove('fa-youtube');
         runSingleVidIcon.classList.remove('fa-twitch');
         runSingleVidIcon.classList.remove('fa-video');
+
+        runLoadLastAttempt = "";
 
         if (runSingleVid._tippy)
         {
@@ -394,6 +411,16 @@ function openRun(id, loadOrState = false, isRetry = false)
         boxRuns.style.display = "none";
         boxSingleRun.style.display = "block";
         mainLoading.style.display = "none";
+
+        var backButton = document.getElementById("back-button");
+        if (ignorePlace)
+        {
+            backButton.style.display = "none";
+        }
+        else
+        {
+            backButton.style.display = "block";
+        }
 
         runSingleVerifier.innerText = '...';
 
@@ -454,13 +481,15 @@ function openRun(id, loadOrState = false, isRetry = false)
                 });
             }
 
-            var verifierIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${_data.id}" onload="handleIconLoad(this);">`;
+            verifierIcon = '';
+            if (_data.assets.icon.uri)
+                verifierIcon = `<img class="runs-usericon" src="${_data.assets.icon.uri}"">`;
                 
             runSingleVerifier.innerHTML = `<a class="player-link" href="/user/${_data.names.international}">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
 
             singleFlagAndModTippysInfo.push({
                 "id": `#run-single-verifier`,
-                "text": getCardHTML(_data.names.international, _data.id, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]["color-from"].dark, _data["name-style"]["color-to"].dark))
+                "text": getCardHTML(_data.names.international, _data.assets.image.uri, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]["color-from"].dark, _data["name-style"]["color-to"].dark))
             });
 
             if (!isMobile)
@@ -629,8 +658,16 @@ function loadSplits(id, timing = "default")
 
             var percent = (seg[`${timing}_duration_ms`] / totalDuration) * 100;
             var color = splitsBarColors[i % splitsBarColors.length];
+
+            var newpb = '';
+            if ((seg[timing + "_duration_ms"] - seg[timing + "_shortest_duration_ms"]) <= 0)
+            {
+                newpb = `<i class="fas fa-square-full"></i>
+                    <i class="fas fa-star" style="color: var(--background-accent-color);"></i>
+                    <i class="fas fa-star" style="color: ${color}"></i>`;
+            }
             
-            runSingleSplitsBar.innerHTML += `<div id="bar-${i}" style="width: ${percent}%; background-color: ${color}"><div><div>${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</div><div class="sp-time">${msToTime(seg[`${timing}_duration_ms`])}</div></div></div>`;
+            runSingleSplitsBar.innerHTML += `<div id="bar-${i}" style="width: ${percent}%; background-color: ${color}">${newpb}<div><div>${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</div><div class="sp-time">${msToTime(seg[`${timing}_duration_ms`])}</div></div></div>`;
             
             if (seg.name.substring(0, 1) == "-")
             {

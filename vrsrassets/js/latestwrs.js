@@ -85,7 +85,9 @@ function loadWR(id)
             flag = `<img class="runs-flag small" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
         }
 
-		var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${temp.id}" onload="handleIconLoad(this);">`;
+        var userIcon = '';
+        if (temp.assets.icon.uri)
+		    userIcon = `<img class="runs-usericon" src="${temp.assets.icon.uri}">`;
 
         var date = timeAgo(new Date(run.submitted));
 

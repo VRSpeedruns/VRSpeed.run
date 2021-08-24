@@ -64,7 +64,15 @@ function loadUser(username)
         userLinksSrc.href = user.weblink;
         userLinksInfo.href = `${user.weblink}/info`;
 
-        userPfp.src = `/vrsrassets/php/userIcon.php?t=p&u=${user.id}`;
+        if (user.assets.image.uri)
+        {
+            userPfp.style.display = "inline-block";
+            userPfp.src = user.assets.image.uri;
+        }
+        else
+        {
+            userPfp.style.display = "none";
+        }
 
         var player = getGradientName(user.names.international,
             user["name-style"]["color-from"].dark, 
@@ -80,7 +88,10 @@ function loadUser(username)
             flag = `<img id="user-${user.id}-userFlag" class="runs-flag" src="https://www.speedrun.com/images/flags/${user.location.country.code}.png">`;
         }
     
-        var userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${user.id}" onload="handleIconLoad(this);">`;
+        var userIcon = '';
+
+        if (user.assets.icon.uri)
+            userIcon = `<img class="runs-usericon" src="${user.assets.icon.uri}">`;
 
         userUsername.innerHTML = `<b>${flag}${userIcon}${player}</b>`;
 
@@ -253,6 +264,7 @@ function loadUserRuns(id)
 
                 var time = runTimeFormat(run.times.primary);
                 var platform = run.system.platform.name;
+                if (!platform) platform = '—';
                 var date = `<span title="${new Date(run.submitted).toDateString()}">${timeAgo(new Date(run.submitted))}</span>`;
                 
                 var icons = '';

@@ -59,6 +59,7 @@
 							<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/7PKWZuW">VR Speedrunning Discord server</a>!</p>
 							<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping <span id="tippy-me" class="is-tooltip-text">me</span> in the above Discord server.</p>
 							<p>For the latest VR world records, check out the <a href="https://twitter.com/VRSpeedruns">VRSR Twitter bot</a>!</p>
+							<p>I maintain this site in my spare time. If you'd like to support me, consider checking out <a href="https://ko-fi.com/bigfoott" target="_blank">my Ko-fi page</a>! 😊</p>
 						</div>
 					</div>
 				</div>
@@ -124,7 +125,9 @@
 									<tr>
 										<th>Rank</th>
 										<th>Player</th>
-										<th>Time</th>
+										<th id="runs-time-primary"></th>
+										<th id="runs-time-secondary" class="is-hidden-mobile"></th>
+										<th id="runs-time-tertiary" class="is-hidden-mobile"></th>
 										<th id="runs-platform-hardware" class="is-hidden-mobile">Platform</th>
 										<th class="is-hidden-mobile">Date</th>
 										<th class="is-hidden-mobile"></th>
@@ -134,7 +137,7 @@
 							</table>
 						</div>
 						<div class="box" id="box-single-run" style="display: none;">
-							<div class="back-button">
+							<div id="back-button">
 								<a onclick="closeRun(); backFixUrl(); loadGame(getGame(), true);"><i class="fas fa-arrow-left"></i> Back to Game</a>
 							</div>
 							<div class="buttons is-right" id="single-run-buttons">
@@ -160,7 +163,7 @@
 								</div>
 								<div class="run-single-info-other">
 									<div id="run-single-comment-outer"><span id="run-single-comment"></span></div>
-									<p>Played using <span id="run-single-platform"></span> on <span id="run-single-date"></span></p>
+									<p>Played <span id="run-single-platform"></span> on <span id="run-single-date"></span></p>
 									<p>Run verified by <span id="run-single-verifier"></span> on <span id="run-single-verifydate"></span></p>
 								</div>
 							</div>
@@ -209,7 +212,7 @@
 						<div class="box">
 							<div class="has-text-centered">
 								<div id="user-username"></div>
-								<div style="margin: 0 auto; "><img id="user-pfp" style="height: 128px" src="" onload="if (this.naturalWidth == 1 && this.naturalHeight == 1) this.parentElement.style.height = '0px';"></div>
+								<div style="margin: 0 auto;"><img id="user-pfp" style="height: 128px" src=""></div>
 								<div id="user-pronouns"></div>
 								<div id="user-accounts"></div>
 								<div id="user-run-count"></div>

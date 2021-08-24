@@ -22,9 +22,9 @@ if (strlen($substr) > 0)
     {
         $user = $expl[1];
 
-        if (strpos($runId, '?') !== false)
+        if (strpos($user, '?') !== false)
         {
-            $user = explode('?', $runId)[0];
+            $user = explode('?', $user)[0];
         }
     } 
 }
@@ -43,8 +43,9 @@ foreach ($games as $_game)
     if ($game->abbreviation == $gameId)
     {
         $title = $game->name . ' - VRSR';
-        $image = 'https://www.speedrun.com/themes/' . $game->id . '/cover-256.png';
+        $image = 'https://www.speedrun.com/gameasset/' . $game->api_id . '/cover';
         $color = $game->color;
+
         break;
     }
 }

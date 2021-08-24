@@ -228,23 +228,23 @@ function infoTippy()
     });
 }
 
-function getCardHTML(username, userid, name, color)
+function getCardHTML(username, pfp, name, color)
 {
-    return `<div class="box is-card">
-                <a class="image" href="/user/${username}">
-                    <img src="https://vrspeed.run/vrsrassets/php/userIcon.php?t=p&u=${userid}" onload="cardHandleNoImage(this)">
-                </a>
+    var image = '';
+    var padding = '';
+    if (pfp)
+    {
+        image = `<a class="image" href="/user/${username}"><img src="${pfp}"></a>`;
+    }
+    else
+    {
+        padding = ' style="padding-left: 8px;"';
+    }
+
+    return `<div class="box is-card"${padding}>${image}
                 <a class="player-link" href="/user/${username}">${name}</a><br>
                 <a href="https://www.speedrun.com/user/${username}" style="color: ${color}">View user on Speedrun.com</a>
             </div>`
-}
-function cardHandleNoImage(_this, w, h)
-{
-    if (_this.naturalWidth == 1 && _this.naturalHeight == 1)
-    {
-        _this.parentElement.parentElement.style.paddingLeft = "8px";
-        _this.remove();
-    }
 }
 
 function makeUnique(url)
@@ -252,15 +252,15 @@ function makeUnique(url)
     // As the server-side cache appears to be unpredictable in how often it updates,
     // this method adds a number based on the current epoch time to the end of query
     // strings, which bypasses the server-side cache. Retrieved data is now accurate
-    // to the minute.
+    // every five minutes.
 
     if (url.includes("?"))
     {
-        return `${url}&${Math.trunc(Date.now() / 60)}`
+        return `${url}&${Math.trunc(Date.now() / 300)}`;
     }
     else
     {
-        return `${url}?${Math.trunc(Date.now() / 60)}`
+        return `${url}?${Math.trunc(Date.now() / 300)}`;
     }
 }
 

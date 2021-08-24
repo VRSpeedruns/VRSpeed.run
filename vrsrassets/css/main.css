@@ -470,10 +470,25 @@ a.button:not(:last-child) {
 	}
 }
 #run-single-splits-bar > div {
-	overflow: hidden;
+	overflow-x: hidden;
 	height: 100%;
 	display: inline-block;
 	white-space: nowrap;
+	position: relative;
+}
+#run-single-splits-bar > div > i {
+	position: absolute;
+}
+#run-single-splits-bar > div > .fa-square-full {
+	transform: rotate(45deg);
+	font-size: 24px;
+	top: -12px;
+	right: -12px;
+}
+#run-single-splits-bar > div > .fa-star {
+	font-size: 8px;
+	top: 1px;
+	right: 1px;
 }
 #run-single-splits-bar > div > div {
 	cursor: default;
@@ -1162,7 +1177,7 @@ a.button:not(:last-child) {
 .runs-usericon {
 	max-height: 15px;
 	vertical-align: middle;
-	margin-right: 2px;
+	margin-right: 0.25em;
 	margin-bottom: 3px;
 }
 .runs-usericon.small {
@@ -1197,7 +1212,7 @@ a.button:not(:last-child) {
 	}
 }
 
-.back-button {
+#back-button {
 	margin-bottom: 1.25rem;
 	font-weight: bold;
 	
@@ -1208,7 +1223,7 @@ a.button:not(:last-child) {
     -ms-user-select: none;
 	user-select: none;
 }
-.back-button a:hover {
+#back-button a:hover {
 	text-decoration: none;
 	color: var(--primary-color-hover);
 }

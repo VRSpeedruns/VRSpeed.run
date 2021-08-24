@@ -45,6 +45,8 @@ var gameId;
 var currentCatIndex;
 var currentVariables;
 var currentGame;
+var currentGamePrimaryTiming;
+var currentGameTimings;
 var currentMods;
 var cats;
 var catIndex;
@@ -72,6 +74,9 @@ var runsTable;
 var runsLoading;
 var runsPlatformHardware;
 var runsHardwareArray = [];
+var runsTimePrimary;
+var runsTimeSecondary;
+var runsTimeTertiary;
 
 var categoryTabs;
 
@@ -85,6 +90,7 @@ var gameInfoLinkStatistics;
 var gameInfoModerators;
 
 var platformsList;
+var timingMethodNames;
 
 var defaultIndex;
 
@@ -115,6 +121,9 @@ function onGameDataLoad()
 	runsNone = document.getElementById("runs-none");
 	runsLoading = document.getElementById("runs-loading");
 	runsPlatformHardware = document.getElementById("runs-platform-hardware");
+	runsTimePrimary = document.getElementById("runs-time-primary");
+	runsTimeSecondary = document.getElementById("runs-time-secondary");
+	runsTimeTertiary = document.getElementById("runs-time-tertiary");
 
 	gameInfoImage = document.getElementById("game-image");
 	gameInfoPlatforms = document.getElementById("game-platforms");
@@ -134,6 +143,11 @@ function onGameDataLoad()
 	platformsList["nzelkr6q"] = "PS4";
 	platformsList["wxeo2d6r"] = "PSN";
 	platformsList["nzeljv9q"] = "PS4 Pro";
+
+	timingMethodNames = [];
+	timingMethodNames["realtime"] = "Time with loads";
+	timingMethodNames["realtime_noloads"] = "Time without loads";
+	timingMethodNames["ingame"] = "In-game Time";
 
 	setEvents();
 	loadAllGames();
@@ -435,9 +449,19 @@ function loadGame(id, loadOrState = false, force = false)
 				loadGame(getGame());
 				return;
 			}
+
+			var game = '';
+			for (var i = 0; i < gamesArray.length; i++)
+			{
+				if (gamesArray[i].api_id == temp.data.game)
+				{
+					game = gamesArray[i].abbreviation;
+					break;
+				}
+			}
 			
 			runLoadedCategory = temp.data.category;
-			loadGame(temp.data.game, loadOrState, force);
+			loadGame(game, loadOrState, force);
 		});
 		return;
 	}
@@ -497,13 +521,42 @@ function loadGame(id, loadOrState = false, force = false)
 	}
 	gameInfoModTippys = [];
 
-	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,levels}`)
+	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories`)
 	.then((data) =>
 	{
 		if (!getErrorCheck(data)) return;
 
 		var game = (JSON.parse(data)).data;
 		gameInfoImage.src = game.assets["cover-large"].uri;
+
+		currentGamePrimaryTiming = game.ruleset["default-time"];
+		currentGameTimings = game.ruleset["run-times"];
+		currentGameTimings.splice(currentGameTimings.indexOf(currentGamePrimaryTiming), 1);
+
+
+		if (currentGameTimings.length > 0)
+		{
+			runsTimePrimary.innerText = timingMethodNames[currentGamePrimaryTiming];
+
+			runsTimeSecondary.style.display = "table-cell";
+			runsTimeSecondary.innerText = timingMethodNames[currentGameTimings[0]];
+
+			if (currentGameTimings.length > 1)
+			{
+				runsTimeTertiary.style.display = "table-cell";
+				runsTimeTertiary.innerText = timingMethodNames[currentGameTimings[1]];
+			}
+			else
+			{
+				runsTimeTertiary.style.display = "none";
+			}
+		}
+		else
+		{
+			runsTimePrimary.innerText = "Time";
+			runsTimeSecondary.style.display = "none";
+			runsTimeTertiary.style.display = "none";
+		}
 
 		var tempPlatforms = [];
 		for (var i = 0; i < game.platforms.data.length; i++)
@@ -611,7 +664,9 @@ function loadGame(id, loadOrState = false, force = false)
 					});
 				}
 
-				var userIcon = `<img class="runs-usericon small" src="/vrsrassets/php/userIcon.php?t=i&u=${mods[i].id}" onload="handleIconLoad(this);">`;
+				var userIcon = '';
+				if (mods[i].assets.icon.uri)
+					userIcon = `<img class="runs-usericon small" src="${mods[i].assets.icon.uri}">`;
 
 				var _comma = '';
 				if (i + 1 < mods.length)
@@ -621,7 +676,7 @@ function loadGame(id, loadOrState = false, force = false)
 							
 				gameInfoModTippysInfo.push({
 					"id": `#gameinfo-mods-${mods[i].id}-card`,
-					"text": getCardHTML(mods[i].names.international, mods[i].id, `${flag.replace(" small", "")}${userIcon.replace(" small", "")}${name}` , getAverageColor(mods[i]["name-style"]["color-from"].dark, mods[i]["name-style"]["color-to"].dark))
+					"text": getCardHTML(mods[i].names.international, mods[i].assets.image.uri, `${flag.replace(" small", "")}${userIcon.replace(" small", "")}${name}` , getAverageColor(mods[i]["name-style"]["color-from"].dark, mods[i]["name-style"]["color-to"].dark))
 				});
 			}
 
@@ -746,11 +801,11 @@ function displayCategoryTabs(loadOrState = false)
 		if (categories[i].misc)
 		{
 			miscCategories.push(i);
-			miscCats.push(`<li id="category-${i}"><a onclick="displayCategory(${i}); miscTabToggle();">${categories[i].name}</a></li>`);
+			miscCats.push(`<li id="category-${i}"><a onclick="displayCategory(${i}, false, true); miscTabToggle();">${categories[i].name}</a></li>`);
 		}
 		else
 		{
-			categoriesContainer.innerHTML += `<li id="category-${i}"><a onclick="displayCategory(${i});">${categories[i].name}</a></li>`;
+			categoriesContainer.innerHTML += `<li id="category-${i}"><a onclick="displayCategory(${i}, false, true);">${categories[i].name}</a></li>`;
 		}
 	}
 	if (miscCats.length > 0)
@@ -822,7 +877,7 @@ function miscTabToggle()
 	}
 }
 
-function displayCategory(index, loadOrState = false)
+function displayCategory(index, loadOrState = false, buttonClick = false)
 {
 	currentCatIndex = index;
 
@@ -845,7 +900,7 @@ function displayCategory(index, loadOrState = false)
 	}
 	
 
-	if (!getRun())
+	if (buttonClick)
 	{
 		setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
 	}
@@ -993,14 +1048,7 @@ function loadRuns(id, variables, loadOrState = false)
 				locName = p.location.country.names.international;
 			}
 
-			players[p.id] = {
-				"name": p.names.international,
-				"colorFrom": p["name-style"]["color-from"].dark,
-				"colorTo": p["name-style"]["color-to"].dark,
-				"region": loc,
-				"regionName": locName,
-				"link": p.weblink
-			};
+			players[p.id] = p;
 		}
 
 		for (var i = 0; i < json.platforms.data.length; i++)
@@ -1028,16 +1076,51 @@ function loadRuns(id, variables, loadOrState = false)
 				place = "—";
 			}
 
-			var time = runTimeFormat(run.times.primary);
+			var allTimes = [];
+			if (run.times[currentGamePrimaryTiming])
+			{
+				allTimes.push(`<td>${runTimeFormat(run.times[currentGamePrimaryTiming])}</td>`);
+			}
+			else
+			{
+				allTimes.push(`<td class="run-time-primary-empty"></td>`);
+			}
+
+			if (currentGameTimings.length > 0 && run.times[currentGameTimings[0]])
+			{
+				allTimes.push(`<td>${runTimeFormat(run.times[currentGameTimings[0]])}</td>`);
+			}
+			else
+			{
+				allTimes.push(`<td class="run-time-secondary-empty"></td>`);
+			}
+			
+
+			if (currentGameTimings.length > 1 && run.times[currentGameTimings[1]])
+			{
+				allTimes.push(`<td>${runTimeFormat(run.times[currentGameTimings[1]])}</td>`);
+			}
+			else
+			{
+				allTimes.push(`<td class="run-time-tertiary-empty"></td>`);
+			}
+			
+			if (isMobile && allTimes.length > 1)
+			{
+				allTimes = [ allTimes[0] ];
+				runsTimePrimary.innerText = "Time";
+			}
+
+			var playerObj = players[run.players[0].id];
 
 			var player = "";
 			var rawPlayer = "";
-			if (run.players[0].rel == "user")
+			if (playerObj)
 			{
-				var start = players[run.players[0].id].colorFrom;
-				var end = players[run.players[0].id].colorTo;
+				var start = playerObj["name-style"]["color-from"].dark;
+				var end = playerObj["name-style"]["color-to"].dark;
 				
-				rawPlayer = players[run.players[0].id].name;
+				rawPlayer = playerObj.names.international;
 				player = getGradientName(rawPlayer, start, end);
 			}
 			else
@@ -1047,6 +1130,7 @@ function loadRuns(id, variables, loadOrState = false)
 			}
 			
 			var platform = platforms[run.system.platform];
+			if (!platform) platform = "—";
 
 			if (currentGame.hardware != "")
 			{
@@ -1082,53 +1166,56 @@ function loadRuns(id, variables, loadOrState = false)
 			var modIcon = '';
 			var flag = '';
 			var userIcon = '';
-			if (run.players[0].id != undefined)
+			if (playerObj)
 			{
-				if (currentMods[run.players[0].id] != undefined)
+				if (currentMods[playerObj.id] != undefined)
 				{
-					if (currentMods[run.players[0].id] == "moderator")
+					if (currentMods[playerObj.id] == "moderator")
 					{
-						modIcon = `<img id="runs-${run.players[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
+						modIcon = `<img id="runs-${playerObj.id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
 						
 						flagAndModTippysInfo.push({
-							"id": `#runs-${run.players[0].id}-modIcon`,
+							"id": `#runs-${playerObj.id}-modIcon`,
 							"text": "Mod"
 						});
 					}
-					else if (currentMods[run.players[0].id] == "super-moderator")
+					else if (currentMods[playerObj.id] == "super-moderator")
 					{
-						if (currentGame.verifiers.includes(run.players[0].id))
+						if (currentGame.verifiers.includes(playerObj.id))
 						{
-							modIcon = `<img id="runs-${run.players[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/verifier.png">`;
+							modIcon = `<img id="runs-${playerObj.id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/verifier.png">`;
 							
 							flagAndModTippysInfo.push({
-								"id": `#runs-${run.players[0].id}-modIcon`,
+								"id": `#runs-${playerObj.id}-modIcon`,
 								"text": "Verifier"
 							});
 						}
 						else
 						{
-							modIcon = `<img id="runs-${run.players[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+							modIcon = `<img id="runs-${playerObj.id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
 							
 							flagAndModTippysInfo.push({
-								"id": `#runs-${run.players[0].id}-modIcon`,
+								"id": `#runs-${playerObj.id}-modIcon`,
 								"text": "Super Mod"
 							});
 						}
 					}
 				}
-				
-				if (players[run.players[0].id].region != '')
+
+				if (playerObj.assets.icon.uri)
 				{
-					flag = `<img id="runs-${run.players[0].id}-userFlag" class="runs-flag" src="https://www.speedrun.com/images/flags/${players[run.players[0].id].region}.png">`;
+					userIcon = `<img class="runs-usericon" src="${playerObj.assets.icon.uri}">`;
+				}
+				
+				if (playerObj.location)
+				{
+					flag = `<img id="runs-${run.players[0].id}-userFlag" class="runs-flag" src="https://www.speedrun.com/images/flags/${playerObj.location.country.code}.png">`;
 					
 					flagAndModTippysInfo.push({
-						"id": `#runs-${run.players[0].id}-userFlag`,
-						"text": players[run.players[0].id].regionName
+						"id": `#runs-${playerObj.id}-userFlag`,
+						"text": playerObj.location.country.names.international
 					});
 				}
-
-				userIcon = `<img class="runs-usericon" src="/vrsrassets/php/userIcon.php?t=i&u=${run.players[0].id}" onload="handleIconLoad(this);">`;
 			}
 
 			var icons = '';
@@ -1147,14 +1234,33 @@ function loadRuns(id, variables, loadOrState = false)
 			else
 				fullPlayer = `<b>${player}</b>`
 			
-			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}" data-runtarget="${currentGame.abbreviation}/run/${run.id}"><td>${place}</td><td style="font-weight: bold">${fullPlayer}</td><td>${time}</td><td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
+			runsContainer.innerHTML += `<tr id="run-${run.id}" onclick="openRun('${run.id}')" data-place="${json.runs[i].place}" data-runtarget="${currentGame.abbreviation}/run/${run.id}"><td>${place}</td><td style="font-weight: bold">${fullPlayer}</td>${allTimes.join("")}<td class="is-hidden-mobile">${platform}</td><td class="is-hidden-mobile">${date}</td><td class="has-text-right is-hidden-mobile is-table-icons">${icons}</td></tr>`;
 			
-			if (run.players[0].rel == "user")
+			if (playerObj)
 			{
 				flagAndModTippysInfo.push({
 					"id": `#runs-${run.id}-usercard`,
-					"text": getCardHTML(rawPlayer, run.players[0].id, `${flag}${userIcon}${player}`, getAverageColor("" + players[run.players[0].id].colorFrom, "" + players[run.players[0].id].colorTo))
+					"text": getCardHTML(rawPlayer, playerObj.assets.image.uri, `${flag}${userIcon}${player}`,
+						getAverageColor(playerObj["name-style"]["color-from"].dark, playerObj["name-style"]["color-to"].dark))
 				});
+			}
+		}
+
+		var colTypes = ["primary", "secondary", "tertiary"];
+		for (var i = 0; i < colTypes.length; i++)
+		{
+			var column = document.getElementsByClassName(`run-time-${colTypes[i]}-empty`);
+			if (column.length == json.runs.length)
+			{
+				document.getElementById(`runs-time-${colTypes[i]}`).style.display = "none";
+				for (var k = 0; k < column.length; k++)
+				{
+					column[k].style.display = "none";
+				}
+			}
+			else
+			{
+				document.getElementById(`runs-time-${colTypes[i]}`).style.display = "table-cell";
 			}
 		}
 		
@@ -1320,22 +1426,18 @@ function runTimeFormat(time)
 	return time;
 }
 
-function scrollIfNeeded(element, container) {
-	if (element.offsetTop < container.scrollTop) {
-	  container.scrollTop = element.offsetTop;
-	} else {
-	  const offsetBottom = element.offsetTop + element.offsetHeight;
-	  const scrollBottom = container.scrollTop + container.offsetHeight;
-	  if (offsetBottom > scrollBottom) {
-		container.scrollTop = offsetBottom - container.offsetHeight;
-	  }
-	}
-  }
-
-function handleIconLoad(_this)
+function scrollIfNeeded(element, container)
 {
-	if (_this.width == 1 && _this.height == 1)
+	if (element.offsetTop < container.scrollTop)
 	{
-		_this.remove();
+	  	container.scrollTop = element.offsetTop;
+	}
+	else
+	{
+		const offsetBottom = element.offsetTop + element.offsetHeight;
+		const scrollBottom = container.scrollTop + container.offsetHeight;
+		if (offsetBottom > scrollBottom) {
+			container.scrollTop = offsetBottom - container.offsetHeight;
+		}
 	}
 }
