@@ -54,7 +54,11 @@ function onLoad()
     onUserLoad();
     onGameDataLoad();
     onSingleRunLoad();
+    setMainEvents();
+}
 
+function setMainEvents()
+{
     window.addEventListener('popstate', (e) =>
     {
 		if (!getRun())
@@ -84,6 +88,7 @@ function onLoad()
             }
         }
 	});
+
     //disable browser scroll/other default middle click functions when clicking on a run
     document.addEventListener('mousedown', (e) => {
 		if (e.button == 1)
@@ -100,6 +105,18 @@ function onLoad()
             if (target.dataset.runtarget)
             {
                 e.preventDefault();
+            }
+        }
+	});
+
+    document.addEventListener('click', (e) => {
+        var dropdowns = document.getElementsByClassName('navbar-item has-dropdown is-active');
+
+		for (var i = 0; i < dropdowns.length; i++)
+        {
+            if (!dropdowns[i].contains(e.target))
+            {
+                dropdowns[i].classList.remove("is-active");
             }
         }
 	});
@@ -190,6 +207,11 @@ function navbarMobileToggle()
     }
 }
 
+function toggleNavDropdown(element)
+{
+    element.classList.toggle('is-active');
+}
+
 function infoTippy()
 {
     tippy.setDefaultProps({
@@ -229,7 +251,7 @@ function infoTippy()
     })[0];
 
     tippy.createSingleton(gameArr, {
-        delay: 0,
+        delay: [0, 75],
         moveTransition: 'transform 0.175s ease-out'
     });
 
@@ -244,7 +266,7 @@ function infoTippy()
     })[0];
 
     tippy.createSingleton(userArr, {
-        delay: 0,
+        delay: [0, 75],
         moveTransition: 'transform 0.175s ease-out'
     });
 }

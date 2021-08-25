@@ -81,6 +81,27 @@ function onSingleRunLoad()
 
 function openRun(id, loadOrState = false)
 {
+    if (runLoadLastAttempt != id)
+    {
+        runLoadLastAttempt = id;
+        runLoadAttempts = 0;
+    }
+    runLoadAttempts++;
+
+    var ignorePlace = false;
+    if (runLoadAttempts == 2)
+    {
+        ignorePlace = true;
+    }
+    else if (runLoadAttempts > 2)
+    {
+        sendErrorNotification(`There was an error when trying to load run with ID "${id}."`);
+
+        replaceState(getGame());
+        loadGame(getGame(), true);
+        return;
+    }
+
     if (!loadOrState && runLoadAttempts == 1)
 	{
         pushState(`${getGame()}/run/${id}`);
@@ -241,19 +262,31 @@ function openRun(id, loadOrState = false)
         else
             player = `<b>${player}</b>`;
 
-        var placeObj = document.getElementById(`run-${id}`);
-
         var place = '';
+        var placeObj = document.getElementById(`run-${id}`);
         if (placeObj)
         {
             place = nth(parseInt(placeObj.dataset.place));
             if (place == "1st" || place == "2nd" || place == "3rd")
             {
-                place = `- <b class="place-${place}">${place}</b>`;
+                place = ` - <b class="place-${place}">${place}</b>`;
             }
             else if (place == "0th")
             {
                 place = "";
+            }
+        }
+        else if (!ignorePlace)
+        {
+            loadRuns(categories[currentCatIndex].id, currentVariables);
+
+            if (isRetry)
+            {
+                loadGame(getGame());
+            }
+            else
+            {
+                return;
             }
         }
 

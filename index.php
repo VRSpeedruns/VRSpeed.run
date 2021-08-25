@@ -26,22 +26,27 @@
 		<nav class="navbar is-fixed-top">
 			<div>
 				<div class="navbar-brand">
-					<a class="navbar-item" href="/">
+					<a class="navbar-item in-brand" href="/">
 						<img src="/vrsrassets/images/navbrand.png">
 					</a>
-
-					
-
 					<a role="button" class="navbar-burger" onclick="navbarMobileToggle()">
 						<span aria-hidden="true"></span>
 						<span aria-hidden="true"></span>
 						<span aria-hidden="true"></span>
 					</a>
 				</div>
-
 				<div class="navbar-menu" id="navbar-menu">
 					<div class="navbar-start">
 						<a id="view-lb" class="navbar-item">View Leaderboard</a>
+						<div class="navbar-item has-dropdown">
+							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">Community <i class="fas fa-sort-down"></i></a>
+							<div class="navbar-dropdown">
+								<a class="navbar-item in-dropdown" href="https://discord.gg/7PKWZuW" target="_blank">Discord</a>
+								<hr class="navbar-divider">
+								<a class="navbar-item in-dropdown" href="https://www.speedrun.com/" target="_blank">Speedrun.com</a>
+								<a class="navbar-item in-dropdown" href="https://splits.io/" target="_blank">Splits.io</a>
+							</div>
+						</div>
 					</div>
 					<div class="navbar-end">
 						<div class="navbar-item is-game-sel-item">
