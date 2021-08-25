@@ -195,6 +195,7 @@ a.button:not(:last-child) {
 
 #variables {
 	display: flex;
+	flex-wrap: wrap;
 }
 #variables > .buttons, .is-variable {
 	margin-bottom: 0;
@@ -294,11 +295,17 @@ a.button:not(:last-child) {
 
 .game-info-container {
 	text-align: center;
+	position: relative;
 }
 .game-image-container {
 	height: 10rem;
 	min-height: 10rem;
 	margin-bottom: 1.2rem;
+}
+#game-name {
+	font-size: 1.2rem;
+	font-weight: bold;
+	margin-bottom: 1.1rem;
 }
 #game-image {
 	max-height: 10rem;
@@ -332,6 +339,23 @@ a.button:not(:last-child) {
 }
 #game-moderators span {
 	display: inline-block;
+}
+
+#game-info-fav {
+	position: absolute;
+	top: -12px;
+	right: -9px;
+	color: var(--primary-color);
+	cursor: pointer;
+}
+#game-info-fav:hover {
+	color: var(--primary-color-hover);
+}
+@media only screen and (max-width: 768px) {
+	#game-info-fav {
+		top: -3px;
+		right: 0;
+	}
 }
 
 /* ---------- Tippy ---------- */
@@ -647,6 +671,7 @@ a.button:not(:last-child) {
 
 .game-selector {
 	position: relative;
+	color: var(--text-color);
 }
 #game-selector-button {
 	font-size: 0.95em;
@@ -662,7 +687,7 @@ a.button:not(:last-child) {
 
 	position: relative;
 
-	margin-bottom: 1.25em;
+	width: 21em;
 
 	cursor: pointer;
 	
@@ -681,26 +706,6 @@ a.button:not(:last-child) {
 	border-color: var(--primary-color-hover);
 }
 #game-selector-button:after {
-	/*right: 1.125em;
-	z-index: 4;
-
-	border: 3px solid var(--primary-color);
-    border-radius: 2px;
-    border-right: 0;
-    border-top: 0;
-    content: " ";
-    display: block;
-    height: .625em;
-    margin-top: -.4375em;
-    pointer-events: none;
-    position: absolute;
-    top: 50%;
-    transform: rotate(-45deg);
-    transform-origin: center;
-    width: .625em;
-
-	box-sizing: inherit;*/
-
 	color: var(--primary-color);
 	font-family: "Font Awesome 5 Free";
     content: "\f078";
@@ -744,6 +749,8 @@ a.button:not(:last-child) {
 	
 	max-height: 315px;
 	overflow-y: auto;
+
+	background-color: var(--background-mid-accent-color);
 }
 #pc-games > .game {
 	width: 100%;
@@ -753,6 +760,8 @@ a.button:not(:last-child) {
 	height: 21px;
 	position: relative;
 
+	background-color: var(--background-color);
+
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -761,6 +770,13 @@ a.button:not(:last-child) {
 	position: absolute;
 	top: 2px;
 	right: 0.5em;
+	
+	font-size: 0.8em;
+}
+#pc-games > .game > .letter-fav {
+	position: absolute;
+	top: 2px;
+	right: 0.275em;
 	
 	font-size: 0.8em;
 }
@@ -905,7 +921,7 @@ a.button:not(:last-child) {
 
 #error-container {
 	position: fixed;
-	z-index: 15;
+	z-index: 31;
 	top: 2em;
 	right: 2em;
 	direction: rtl;
@@ -976,20 +992,53 @@ a.button:not(:last-child) {
 	width: 100%;
 	margin: 0 auto;
 }
+.navbar-item:not(.is-game-sel-item) {
+	color: var(--text-color) !important;
+}
+.navbar-item:hover:not(.is-game-sel-item) {
+	background-color: inherit !important;
+	color: var(--primary-color-hover) !important;
+	text-decoration: none;
+}
+
+.is-game-sel-item {
+	padding-right: 0;
+}
+@media only screen and (max-width: 768px) {
+	.is-game-sel-item {
+		padding-right: 0.75rem;
+	}
+}
 
 @media screen and (min-width: 1024px) {
 	.navbar > div {
 		max-width: 960px;
+		display: flex;
+	}
+	.navbar.is-home-page > div {
+		max-width: 800px;
 	}
 }
 @media screen and (min-width: 1216px) {
 	.navbar > div {
 		max-width: 1152px;
 	}
+	.navbar.is-home-page > div {
+		max-width: 960px;
+	}
 }
 @media screen and (min-width: 1408px) {
 	.navbar > div {
 		max-width: 1344px;
+	}
+	.navbar.is-home-page > div {
+		max-width: 1120px;
+	}
+}
+
+@media screen and (max-width: 1023px) {
+	.navbar-menu {
+		background-color: var(--background-mid-accent-color);
 	}
 }
 
@@ -1032,19 +1081,6 @@ a.button:not(:last-child) {
 .is-tooltip-text {
 	border-bottom: 2px dotted var(--text-color-light);
 	margin-bottom: -2px;
-}
-
-#view-lb {
-	font-weight: bold;
-	font-size: 1.5rem;
-}
-@media only screen and (max-width: 768px) {
-	#view-lb {
-		font-size: 1.1rem;
-	}
-}
-#view-lb:hover {
-	text-decoration: underline solid 2px;
 }
 
 .site-header {
@@ -1121,7 +1157,6 @@ a.button:not(:last-child) {
 }
 
 .select, .select > select {
-	margin-bottom: 1.25rem;
 	width: 100%;
 	background-color: var(--background-color);
 	border-color: var(--primary-color);
@@ -1148,6 +1183,7 @@ a.button:not(:last-child) {
 	text-align: center;
 	color: #eee;
 	font-size: 0.85em;
+	padding: 2rem 1.5rem;
 }
 .is-footer > p {
 	margin-bottom: 1em;

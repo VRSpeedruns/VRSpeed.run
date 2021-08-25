@@ -80,6 +80,7 @@ var runsTimeTertiary;
 
 var categoryTabs;
 
+var gameInfoName;
 var gameInfoImage;
 var gameInfoPlatforms;
 var gameInfoLinkLeaderboard;
@@ -88,6 +89,8 @@ var gameInfoLinkResources;
 var gameInfoLinkForums;
 var gameInfoLinkStatistics;
 var gameInfoModerators;
+var gameInfoFav;
+var gameInfoFavTippy;
 
 var platformsList;
 var timingMethodNames;
@@ -125,6 +128,7 @@ function onGameDataLoad()
 	runsTimeSecondary = document.getElementById("runs-time-secondary");
 	runsTimeTertiary = document.getElementById("runs-time-tertiary");
 
+	gameInfoName = document.getElementById("game-name");
 	gameInfoImage = document.getElementById("game-image");
 	gameInfoPlatforms = document.getElementById("game-platforms");
 	gameInfoLinkLeaderboard = document.getElementById("game-links-leaderboard");
@@ -133,6 +137,13 @@ function onGameDataLoad()
 	gameInfoLinkForums = document.getElementById("game-links-forums");
 	gameInfoLinkStatistics = document.getElementById("game-links-statistics");
 	gameInfoModerators = document.getElementById("game-moderators");
+	gameInfoFav = document.getElementById("game-info-fav");
+
+	gameInfoFavTippy = tippy("#game-info-fav", {
+		content: 'Add to favorites',
+		placement: 'top',
+		hideOnClick: false
+	})[0];
 
 	platformsList = [];
 	platformsList["w89rwwel"] = "Vive";
@@ -213,9 +224,58 @@ function onGameDataLoad()
 
 function loadAllGames()
 {
+	pcGamesContainer.innerHTML = '';
+	gamesContainer.innerHTML = '';
+
+	var favGames = [];
+	if (getCookie('fav_games') != '')
+	{
+		favGames = JSON.parse(getCookie('fav_games'));
+
+		for (var i = 0; i < favGames.length; i++)
+		{
+			var game = gamesArray.filter(g => { return g.abbreviation == favGames[i]; })[0];
+			if (game)
+			{
+				// mobile/old selector
+				gamesContainer.innerHTML += `<option value="${game.abbreviation}">${game.name}</option>`;
+
+
+				// desktop selector
+				var fav = '';
+				if (i == 0)
+				{
+					fav = `<div class="letter-fav"><i class="fas fa-star"></i></div>`;
+				}
+
+				var bottomGap = '';
+				if (i + 1 >= favGames.length)
+				{
+					bottomGap = `style="margin-bottom: 11px;" `;
+				}
+
+				var selected = '';
+				if (currentGame && currentGame.abbreviation == game.abbreviation)
+				{
+					selected = ' is-selected';
+				}
+
+				var circleHTML = `<div class="circle" style="background-color: ${game.color}"></div>`;
+
+				pcGamesContainer.innerHTML += `<div class="game${selected}" id="game-${game.abbreviation}" onclick="onGameChange('${game.abbreviation}', true); toggleGameSelector();" ${bottomGap}title="${game.name}">${game.name}${fav}${circleHTML}</div>`;
+			}
+			else
+			{
+				favGames = favGames.filter(g => g !== favGames[i]);
+			}
+		}
+	}
+
 	var lastLetter = '';
 	for (var i = 0; i < gamesArray.length; i++)
 	{
+		if (favGames.includes(gamesArray[i].abbreviation)) continue;
+
 		// mobile/old selector
 		gamesContainer.innerHTML += `<option value="${gamesArray[i].abbreviation}">${gamesArray[i].name}</option>`;
 
@@ -228,9 +288,15 @@ function loadAllGames()
 			letterHTML = `<div class="letter">${lastLetter}</div>`;
 		}
 
+		var selected = '';
+		if (currentGame && currentGame.abbreviation == gamesArray[i].abbreviation)
+		{
+			selected = ' is-selected';
+		}
+
 		var circleHTML = `<div class="circle" style="background-color: ${gamesArray[i].color}"></div>`;
 
-		pcGamesContainer.innerHTML += `<div class="game" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();" title="${gamesArray[i].name}">${gamesArray[i].name}${letterHTML}${circleHTML}</div>`;
+		pcGamesContainer.innerHTML += `<div class="game${selected}" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();" title="${gamesArray[i].name}">${gamesArray[i].name}${letterHTML}${circleHTML}</div>`;
 	}
 }
 function setEvents()
@@ -246,7 +312,14 @@ function setEvents()
 					gameSelectorTempCurrentGame.classList.remove("is-selected");
 					gameSelectorTempCurrentGame = null;
 				}
-				gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
+				if (gameSelectorCurrentGame)
+				{
+					gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
+				}
+				else
+				{
+					gameSelectorButton.innerText = "Choose a game..."
+				}
 				toggleGameSelector();
 			}
 		}
@@ -353,15 +426,36 @@ function toggleGameSelector()
 {
 	gameSelectorMenu.classList.toggle("is-active");
 	
-	if (gameSelectorMenu.classList.contains("is-active"))
+	if (gameSelectorCurrentGame)
 	{
-		gameSelectorCurrentGame.classList.add("is-selected");
-		scrollIfNeeded(gameSelectorCurrentGame, pcGamesContainer);
+		if (gameSelectorMenu.classList.contains("is-active"))
+		{
+			gameSelectorCurrentGame.classList.add("is-selected");
+			scrollIfNeeded(gameSelectorCurrentGame, pcGamesContainer);
+		}
+		else
+		{
+			gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
+			gameSelectorText = '';
+		}
 	}
 	else
 	{
-		gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
-		gameSelectorText = '';
+		if (gameSelectorMenu.classList.contains("is-active"))
+		{
+			gameSelectorTempCurrentGame = pcGamesContainer.firstChild;
+			gameSelectorTempCurrentGame.classList.add("is-selected");
+			gameSelectorButton.innerText = gameSelectorTempCurrentGame.firstChild.nodeValue;
+		}
+		else
+		{
+			if (gameSelectorTempCurrentGame)
+			{
+				gameSelectorTempCurrentGame.classList.remove("is-selected");
+				gameSelectorTempCurrentGame = null;
+			}
+			gameSelectorButton.innerText = "Choose a game...";
+		}
 	}
 }
 function gameSelectorTypeDelay(time)
@@ -377,6 +471,14 @@ function gameSelectorTypeDelay(time)
 }
 function onGameChange(id, frompcselect = false)
 {
+	if (!currentGame)
+	{
+		window.open("/" + id ,"_self")
+		return;
+	}
+
+	if (currentGame.id == id) return;
+
 	if (frompcselect)
 	{
 		if (gameSelectorTempCurrentGame)
@@ -493,6 +595,23 @@ function loadGame(id, loadOrState = false, force = false)
 		} 
 	}
 
+	var favGames = [];
+	if (getCookie("fav_games") != "")
+		favGames = JSON.parse(getCookie("fav_games"));
+	
+	if (favGames.includes(currentGame.abbreviation))
+	{
+		gameInfoFav.firstChild.classList.add("fas");
+		gameInfoFav.firstChild.classList.remove("far");
+		gameInfoFavTippy.setContent("Remove from favorites");
+	}
+	else
+	{
+		gameInfoFav.firstChild.classList.add("far");
+		gameInfoFav.firstChild.classList.remove("fas");
+		gameInfoFavTippy.setContent("Add to favorites");
+	}
+
 	setCookie('last_game', id, 10080); //7 days
 
 	document.title = `${currentGame.name} - VRSR`;
@@ -506,6 +625,7 @@ function loadGame(id, loadOrState = false, force = false)
 	document.documentElement.style.setProperty('--primary-color', currentGame.color)
 	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
 
+	gameInfoName.innerText = currentGame.name;
 	gameInfoImage.src = '';
 	gameInfoPlatforms.innerText = '...';
 	gameInfoLinkLeaderboard.href = `https://www.speedrun.com/${gameId}/full_game`;
@@ -1077,9 +1197,11 @@ function loadRuns(id, variables, loadOrState = false)
 			}
 
 			var allTimes = [];
+			var mobileTime = null;
 			if (run.times[currentGamePrimaryTiming])
 			{
 				allTimes.push(`<td>${runTimeFormat(run.times[currentGamePrimaryTiming])}</td>`);
+				mobileTime = `<td>${runTimeFormat(run.times[currentGamePrimaryTiming])}</td>`;
 			}
 			else
 			{
@@ -1089,6 +1211,7 @@ function loadRuns(id, variables, loadOrState = false)
 			if (currentGameTimings.length > 0 && run.times[currentGameTimings[0]])
 			{
 				allTimes.push(`<td>${runTimeFormat(run.times[currentGameTimings[0]])}</td>`);
+				if (!mobileTime) mobileTime = `<td>${runTimeFormat(run.times[currentGameTimings[0]])}</td>`;
 			}
 			else
 			{
@@ -1099,6 +1222,7 @@ function loadRuns(id, variables, loadOrState = false)
 			if (currentGameTimings.length > 1 && run.times[currentGameTimings[1]])
 			{
 				allTimes.push(`<td>${runTimeFormat(run.times[currentGameTimings[1]])}</td>`);
+				if (!mobileTime) mobileTime = `<td>${runTimeFormat(run.times[currentGameTimings[1]])}</td>`;
 			}
 			else
 			{
@@ -1107,7 +1231,7 @@ function loadRuns(id, variables, loadOrState = false)
 			
 			if (isMobile && allTimes.length > 1)
 			{
-				allTimes = [ allTimes[0] ];
+				allTimes = [ mobileTime ];
 				runsTimePrimary.innerText = "Time";
 			}
 
@@ -1339,6 +1463,33 @@ function loadRuns(id, variables, loadOrState = false)
 		}
 	});
 }
+
+function gameFavToggle()
+{
+	var favGames = [];
+	if (getCookie("fav_games") != "")
+		favGames = JSON.parse(getCookie("fav_games"));
+
+	if (favGames.includes(currentGame.abbreviation))
+	{
+		favGames = favGames.filter(g => g !== currentGame.abbreviation);
+		gameInfoFav.firstChild.classList.add("far");
+		gameInfoFav.firstChild.classList.remove("fas");
+		gameInfoFavTippy.setContent("Add to favorites");
+	}
+	else
+	{
+		favGames.push(currentGame.abbreviation);
+		gameInfoFav.firstChild.classList.add("fas");
+		gameInfoFav.firstChild.classList.remove("far");
+		gameInfoFavTippy.setContent("Remove from favorites");
+	}
+
+	setCookie("fav_games", JSON.stringify(favGames), 5256000);
+	loadAllGames();
+	gameSelectorCurrentGame = document.getElementById(`game-${currentGame.abbreviation}`);
+}
+
 
 function nth(d) {
 	if (d > 3 && d < 21) return d + 'th'; 

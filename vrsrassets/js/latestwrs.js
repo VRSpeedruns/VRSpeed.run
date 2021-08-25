@@ -132,7 +132,7 @@ function loadWR(id)
                 category += ` (${subcats.join(", ")})`;
             }
 
-            var html = `<a class="wr-link" href="${link}"><div class="wr-wrapper" style="background-image: linear-gradient(var(--background-color-transparent), var(--background-color-transparent)), url('${run.game.data.assets["cover-large"].uri.replace("http://", "https://")}');">
+            var html = `<a class="wr-link" href="${link}"><div class="wr-wrapper" style="background-image: linear-gradient(var(--background-color-transparent), var(--background-color-transparent)), url('${run.game.data.assets["cover-large"].uri.replace("http://", "https://")}'); background-color: ${color}">
                     <div class="wr-game">${game}</div>
                     <div class="wr-category">${category}</div>
                     <div class="wr-time">${time}</div>

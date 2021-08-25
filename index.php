@@ -30,11 +30,32 @@
 						<img src="/vrsrassets/images/navbrand.png">
 					</a>
 
-					<a role="button" class="navbar-burger" onclick="">
+					
+
+					<a role="button" class="navbar-burger" onclick="navbarMobileToggle()">
 						<span aria-hidden="true"></span>
 						<span aria-hidden="true"></span>
 						<span aria-hidden="true"></span>
 					</a>
+				</div>
+
+				<div class="navbar-menu" id="navbar-menu">
+					<div class="navbar-start">
+						<a id="view-lb" class="navbar-item">View Leaderboard</a>
+					</div>
+					<div class="navbar-end">
+						<div class="navbar-item is-game-sel-item">
+							<div class="select is-hidden-tablet">
+								<select id="games" onchange="onGameChange(this.value)"></select>
+							</div>
+							<div class="game-selector is-hidden-mobile">
+								<div id="game-selector-button" onclick="toggleGameSelector()" title="">Choose a game...</div>
+								<div id="game-selector-menu">
+									<div id="pc-games"></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</nav>
@@ -47,7 +68,6 @@
 						<figure class="image site-header">
 							<img src="/vrsrassets/images/header.png">
 						</figure>
-						<a id="view-lb" href="">View the Leaderboards</a>
 					</div>
 				</div>
 				<div class="columns is-centered is-multiline">
@@ -75,16 +95,9 @@
 				<div class="columns">
 					<div class="column is-3 reverse-columns-mobile">
 						<div class="box">
-							<div class="select is-hidden-tablet">
-								<select id="games" onchange="onGameChange(this.value)"></select>
-							</div>
-							<div class="game-selector is-hidden-mobile">
-								<div id="game-selector-button" onclick="toggleGameSelector()" title=""></div>
-								<div id="game-selector-menu">
-									<div id="pc-games"></div>
-								</div>
-							</div>
 							<div class="game-info-container">
+								<span id="game-info-fav" onclick="gameFavToggle();"><i class="far fa-star"></i></span>
+								<div id="game-name"></div>
 								<div class="game-image-container is-hidden-mobile"><img id="game-image" src=""></div>
 								<div id="game-platforms">...</div>
 								<div id="game-moderators">...</div>
@@ -261,9 +274,6 @@
 				</div>
 				<div class="column is-4 has-text-left-tablet">
 					<div class="links">
-						<p>
-							<a href="/"><i class="fas fa-home" aria-hidden="true" style="margin-left: -1px;"></i>Home</a>
-						</p>
 						<p>
 							<a href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a>
 						</p>

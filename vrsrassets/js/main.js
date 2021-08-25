@@ -7,6 +7,8 @@ var srcErrorResponse;
 
 var errorContainer;
 
+var navbarMenu;
+
 var defaultGame = 'hla';
 
 function onLoad()
@@ -20,6 +22,8 @@ function onLoad()
 
     errorContainer = document.getElementById("error-container");
 
+    navbarMenu = document.getElementById("navbar-menu");
+
     if (window.location.href.includes("?"))
     {
         var url = window.location.href.substring(window.location.origin.length + 1);
@@ -30,7 +34,12 @@ function onLoad()
     if (window.location.pathname == "/")
     {
         replaceState(null);
-        latestWRsLoad()
+        latestWRsLoad();
+        document.getElementsByTagName("nav")[0].classList.add("is-home-page");
+    }
+    else
+    {
+        document.getElementById("view-lb").style.display = "none";
     }
 
     if (getCookie('last_game') != '')
@@ -166,6 +175,18 @@ function backFixUrl()
     if (getRun())
     {
         pushState(getGame());
+    }
+}
+
+function navbarMobileToggle()
+{
+    if (navbarMenu.classList.contains("is-active"))
+    {
+        navbarMenu.classList.remove("is-active");
+    }
+    else
+    {
+        navbarMenu.classList.add("is-active");
     }
 }
 

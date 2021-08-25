@@ -79,29 +79,8 @@ function onSingleRunLoad()
     }
 }
 
-function openRun(id, loadOrState = false, isRetry = false)
+function openRun(id, loadOrState = false)
 {
-    if (runLoadLastAttempt != id)
-    {
-        runLoadLastAttempt = id;
-        runLoadAttempts = 0;
-    }
-    runLoadAttempts++;
-
-    var ignorePlace = false;
-    if (runLoadAttempts == 2)
-    {
-        ignorePlace = true;
-    }
-    else if (runLoadAttempts > 2)
-    {
-        sendErrorNotification(`There was an error when trying to load run with ID "${id}."`);
-
-        replaceState(getGame());
-        loadGame(getGame(), true);
-        return;
-    }
-
     if (!loadOrState && runLoadAttempts == 1)
 	{
         pushState(`${getGame()}/run/${id}`);
@@ -262,36 +241,19 @@ function openRun(id, loadOrState = false, isRetry = false)
         else
             player = `<b>${player}</b>`;
 
-        if (!ignorePlace && !document.getElementById(`run-${id}`))
-        {
-            loadRuns(categories[currentCatIndex].id, currentVariables);
-
-            if (isRetry)
-            {
-                loadGame(getGame());
-            }
-            else
-            {
-                return;
-            }
-        }
+        var placeObj = document.getElementById(`run-${id}`);
 
         var place = '';
-        if (!ignorePlace)
+        if (placeObj)
         {
-            place = document.getElementById(`run-${id}`).dataset.place;
-            place = nth(parseInt(place));
+            place = nth(parseInt(placeObj.dataset.place));
             if (place == "1st" || place == "2nd" || place == "3rd")
             {
-                place = `<b class="place-${place}">${place}</b>`;
+                place = `- <b class="place-${place}">${place}</b>`;
             }
             else if (place == "0th")
             {
                 place = "";
-            }
-            if (place != "")
-            {
-                place = " - " + place;
             }
         }
 
@@ -411,16 +373,6 @@ function openRun(id, loadOrState = false, isRetry = false)
         boxRuns.style.display = "none";
         boxSingleRun.style.display = "block";
         mainLoading.style.display = "none";
-
-        var backButton = document.getElementById("back-button");
-        if (ignorePlace)
-        {
-            backButton.style.display = "none";
-        }
-        else
-        {
-            backButton.style.display = "block";
-        }
 
         runSingleVerifier.innerText = '...';
 
