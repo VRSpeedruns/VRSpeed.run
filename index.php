@@ -270,6 +270,11 @@
 			</div>
 			<div class="container" id="streams-container" style="display: none;">
 				<div class="box">
+					<div>
+						<h1 class="is-box-heading">Streams</h1>
+						<div class="divider thin"></div>
+						<div id="streams-count"></div>
+					</div>
 					<div class="columns is-multiline" id="streams-inner-container">
 						<div class="loadingdiv column is-12" style="display: block;">
 							<div>
