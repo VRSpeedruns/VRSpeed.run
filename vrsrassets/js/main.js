@@ -2,9 +2,6 @@ var mainLoading;
 var aboutInfoToggle;
 var aboutInfoMore;
 
-var srcErrorContainer;
-var srcErrorResponse;
-
 var errorContainer;
 
 var navbarMenu;
@@ -16,9 +13,6 @@ function onLoad()
     mainLoading = document.getElementById("main-loading");
     aboutInfoToggle = document.getElementById("about-info-toggle");
     aboutInfoMore = document.getElementById("about-info-more");
-    
-    srcErrorContainer = document.getElementById("src-error-container");
-    srcErrorResponse = document.getElementById("src-error-response");
 
     errorContainer = document.getElementById("error-container");
 
@@ -37,7 +31,7 @@ function onLoad()
         latestWRsLoad();
         document.getElementsByTagName("nav")[0].classList.add("is-home-page");
     }
-    else
+    else if (getGame() != 'streams')
     {
         document.getElementById("view-lb").style.display = "none";
     }
@@ -51,6 +45,7 @@ function onLoad()
 
     infoTippy();
     //latestWRsLoad();
+    onStreamsLoad();
     onUserLoad();
     onGameDataLoad();
     onSingleRunLoad();
@@ -210,6 +205,14 @@ function navbarMobileToggle()
 function toggleNavDropdown(element)
 {
     element.classList.toggle('is-active');
+}
+
+function hideAllContainers()
+{
+    for (var i = 0; i < allContainers.length; i++)
+    {
+        allContainers[i].style.display = "none";
+    }
 }
 
 function infoTippy()

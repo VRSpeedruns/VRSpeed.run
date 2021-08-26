@@ -17,6 +17,7 @@ var userRunTippys = [];
 function onUserLoad()
 {
     userContainer = document.getElementById("user-container");
+    allContainers.push(userContainer);
     userRunsTable = document.getElementById("user-runs-table");
     
     userUsername = document.getElementById("user-username");
@@ -33,8 +34,7 @@ function onUserLoad()
 
 function loadUser(username)
 {
-    homeContainer.style.display = "none";
-    mainContainer.style.display = "none";
+    hideAllContainers();
     userContainer.style.display = "block";
 
     for (var i = 0; i < userRunTippys.length; i++)

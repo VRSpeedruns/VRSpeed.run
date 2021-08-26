@@ -110,6 +110,9 @@ function onGameDataLoad()
 	homeContainer = document.getElementById("home-container");
 	mainContainer = document.getElementById("main-container");
 
+	allContainers.push(homeContainer);
+	allContainers.push(mainContainer);
+
 	gamesContainer = document.getElementById("games");
 	categoriesContainer = document.getElementById("tabs")
 	variablesContainer = document.getElementById("variables");
@@ -184,6 +187,11 @@ function onGameDataLoad()
 			loadUser(getUser());
 			return;
 		}
+		else if (id == "streams")
+		{
+			loadStreams();
+			return;
+		}
 
 		var gameIndex = -1;
 		for (var i = 0; i < gamesArray.length; i++)
@@ -209,18 +217,17 @@ function onGameDataLoad()
 		{
 			replaceState(null);
 			
+			
+			hideAllContainers();
 			homeContainer.style.display = "block";
-			mainContainer.style.display = "none";
-			userContainer.style.display = "none";
 
 			latestWRsLoad();
 		}
 	}
 	else
 	{
+		hideAllContainers();
 		homeContainer.style.display = "block";
-		mainContainer.style.display = "none";
-		userContainer.style.display = "none";
 	}
 }
 
@@ -335,7 +342,7 @@ function setEvents()
 				}
 				else
 				{
-					gameSelectorButton.innerText = "Choose a game..."
+					gameSelectorButton.innerText = "Choose a game."
 				}
 				toggleGameSelector();
 			}
@@ -471,7 +478,7 @@ function toggleGameSelector()
 				gameSelectorTempCurrentGame.classList.remove("is-selected");
 				gameSelectorTempCurrentGame = null;
 			}
-			gameSelectorButton.innerText = "Choose a game...";
+			gameSelectorButton.innerText = "Choose a game.";
 		}
 	}
 }
@@ -516,9 +523,8 @@ function loadGame(id, loadOrState = false, force = false)
 		document.documentElement.style.setProperty('--primary-color', '#FF9C00')
 		document.documentElement.style.setProperty('--primary-color-hover', '#FFBB4D')
 
+		hideAllContainers();
 		homeContainer.style.display = "block";
-		mainContainer.style.display = "none";
-		userContainer.style.display = "none";
 
 		return;
 	}
@@ -528,9 +534,8 @@ function loadGame(id, loadOrState = false, force = false)
 		return;
 	}
 
-	homeContainer.style.display = "none";
+    hideAllContainers();
 	mainContainer.style.display = "block";
-    userContainer.style.display = "none";
 
 	if (getGame() !== id)
 	{

@@ -38,13 +38,15 @@
 				<div class="navbar-menu" id="navbar-menu">
 					<div class="navbar-start">
 						<a id="view-lb" class="navbar-item">View Leaderboard</a>
+						<a href="/streams" class="navbar-item">Streams</a>
 						<div class="navbar-item has-dropdown">
 							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">Community <i class="fas fa-sort-down"></i></a>
 							<div class="navbar-dropdown">
-								<a class="navbar-item in-dropdown" href="https://discord.gg/7PKWZuW" target="_blank">Discord</a>
+								<a class="navbar-item in-dropdown" href="https://www.speedrun.com/" target="_blank"><i class="far fa-clock"></i> Speedrun.com</a>
+								<a class="navbar-item in-dropdown" href="https://splits.io/" target="_blank"><i class="fas fa-stopwatch"></i> Splits.io</a>
 								<hr class="navbar-divider">
-								<a class="navbar-item in-dropdown" href="https://www.speedrun.com/" target="_blank">Speedrun.com</a>
-								<a class="navbar-item in-dropdown" href="https://splits.io/" target="_blank">Splits.io</a>
+								<a class="navbar-item in-dropdown" href="https://discord.gg/7PKWZuW" target="_blank"><i class="fab fa-discord"></i> VR Speedrunning Discord</a>
+								<a class="navbar-item in-dropdown" href="https://discord.gg/0h6sul1ZwHVpXJmK" target="_blank"><i class="fab fa-discord"></i> Speedrun.com Discord</a>
 							</div>
 						</div>
 					</div>
@@ -54,7 +56,7 @@
 								<select id="games" onchange="onGameChange(this.value)"></select>
 							</div>
 							<div class="game-selector is-hidden-mobile">
-								<div id="game-selector-button" onclick="toggleGameSelector()" title="">Choose a game...</div>
+								<div id="game-selector-button" onclick="toggleGameSelector()" title="">Choose a game.</div>
 								<div id="game-selector-menu">
 									<div id="pc-games"></div>
 								</div>
@@ -266,6 +268,18 @@
 					</div>
 				</div>
 			</div>
+			<div class="container" id="streams-container" style="display: none;">
+				<div class="box">
+					<div class="columns is-multiline" id="streams-inner-container">
+						<div class="loadingdiv column is-12" style="display: block;">
+							<div>
+								<div class="spinner"></div>
+								<div class="belowspinner">Loading...</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 		<section class="section is-footer">
 			<div class="columns is-centered is-vcentered">
@@ -294,10 +308,12 @@
 				var gamesArray = <?= json_encode($games); ?>;
 				var isMobile = window.getComputedStyle(document.getElementById("js-mobile-check")).getPropertyValue("display") == "none";
 				var runLoadedCategory = "<?= $categoryId; ?>";
+				var allContainers = [];
 			</script>
 			<script type="text/javascript" src="/assets/js/popper.min.js"></script>
 			<script type="text/javascript" src="/assets/js/tippy-bundle.umd.js"></script> 
 			<script type="text/javascript" src="/vrsrassets/js/colorinterpolation.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/viewstreams.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/viewuser.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/gamedata.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
