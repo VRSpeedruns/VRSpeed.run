@@ -32,7 +32,6 @@ function loadStreams()
             var gameImage = '';
 
             var game = gamesArray.filter(g => streams[i]["game_name"].toLowerCase().startsWith(g["twitch_name"].toLowerCase()));
-            console.log(game);
             
             if (game.length > 0)
             {

@@ -1097,12 +1097,16 @@ a.button:not(:last-child) {
 .stream-top {
 	position: relative;
 }
+.stream-top > .image > img {
+	border-radius: 6px;
+}
 .stream-top > .game-cover {
 	position: absolute;
-	right: 0;
-	bottom: 0;
+	right: 2px;
+	bottom: 2px;
 	width: 3.5em;
-	border: 1px solid var(--text-color);
+	border: 2px solid var(--text-color);
+	border-radius: 4px;
 }
 .stream-top > .game-cover > a > img {
 	display: block;
@@ -1118,6 +1122,13 @@ a.button:not(:last-child) {
 #streams-count {
 	text-align: center;
 	margin-bottom: 1.25em;
+	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 @media only screen and (max-width: 768px) {
