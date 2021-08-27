@@ -39,6 +39,7 @@ Variable Object
 
 var homeContainer;
 var mainContainer;
+var touContainer;
 
 var reorderedGamesArray;
 
@@ -109,9 +110,11 @@ function onGameDataLoad()
 {
 	homeContainer = document.getElementById("home-container");
 	mainContainer = document.getElementById("main-container");
+	touContainer = document.getElementById("tou-container");
 
 	allContainers.push(homeContainer);
 	allContainers.push(mainContainer);
+	allContainers.push(touContainer);
 
 	gamesContainer = document.getElementById("games");
 	categoriesContainer = document.getElementById("tabs")
@@ -182,14 +185,21 @@ function onGameDataLoad()
 	{
 		var id = getGame();
 
-		if (getUser())
-		{
-			loadUser(getUser());
-			return;
-		}
-		else if (id == "streams")
+		if (id == "streams")
 		{
 			loadStreams();
+			return;
+		}
+		else if (id == "terms-of-use" || id == "privacy-policy")
+		{
+			hideAllContainers();
+			document.getElementById(id).style.display = "block";
+			touContainer.style.display = "block";
+			return;
+		}
+		else if (getUser())
+		{
+			loadUser(getUser());
 			return;
 		}
 
@@ -262,6 +272,8 @@ function loadAllGames()
 
 		for (var i = 0; i < favGamesSorted.length; i++)
 		{
+			reorderedGamesArray.push(favGamesSorted[i]);
+
 			var game = favGamesSorted[i];
 			// mobile/old selector
 			gamesContainer.innerHTML += `<option value="${game.abbreviation}">${game.name}</option>`;
@@ -298,7 +310,7 @@ function loadAllGames()
 	{
 		if (favGames.includes(gamesArray[i].abbreviation)) continue;
 
-		reorderedGamesArray.push(game);
+		reorderedGamesArray.push(gamesArray[i]);
 
 		// mobile/old selector
 		gamesContainer.innerHTML += `<option value="${gamesArray[i].abbreviation}">${gamesArray[i].name}</option>`;
@@ -409,7 +421,7 @@ function setEvents()
 
 				gameSelectorText += e.key.toLowerCase();
 				gameSelectorTypeDelay(Date.now());
-				
+
 				for (var i = 0; i < reorderedGamesArray.length; i++)
 				{
 					if (reorderedGamesArray[i].name.substring(0, gameSelectorText.length).toLowerCase() == gameSelectorText)
@@ -758,9 +770,7 @@ function loadGame(id, loadOrState = false, force = false)
 			gameInfoModerators.innerHTML = 'Moderated by:<br>';
 			for (var i = 0; i < mods.length; i++)
 			{
-				var name = getGradientName(mods[i].names.international,
-					mods[i]["name-style"]["color-from"].dark,
-					mods[i]["name-style"]["color-to"].dark);   
+				var name = getGradientName(mods[i].names.international, mods[i]["name-style"]);
 
 				var modIcon = '';
 				var flag = '';
@@ -818,7 +828,7 @@ function loadGame(id, loadOrState = false, force = false)
 							
 				gameInfoModTippysInfo.push({
 					"id": `#gameinfo-mods-${mods[i].id}-card`,
-					"text": getCardHTML(mods[i].names.international, mods[i].assets.image.uri, `${flag.replace(" small", "")}${userIcon.replace(" small", "")}${name}` , getAverageColor(mods[i]["name-style"]["color-from"].dark, mods[i]["name-style"]["color-to"].dark))
+					"text": getCardHTML(mods[i].names.international, mods[i].assets.image.uri, `${flag.replace(" small", "")}${userIcon.replace(" small", "")}${name}` , getAverageColor(mods[i]["name-style"]))
 				});
 			}
 
@@ -1263,11 +1273,8 @@ function loadRuns(id, variables, loadOrState = false)
 			var rawPlayer = "";
 			if (playerObj)
 			{
-				var start = playerObj["name-style"]["color-from"].dark;
-				var end = playerObj["name-style"]["color-to"].dark;
-				
 				rawPlayer = playerObj.names.international;
-				player = getGradientName(rawPlayer, start, end);
+				player = getGradientName(rawPlayer, playerObj["name-style"]);
 			}
 			else
 			{
@@ -1386,8 +1393,7 @@ function loadRuns(id, variables, loadOrState = false)
 			{
 				flagAndModTippysInfo.push({
 					"id": `#runs-${run.id}-usercard`,
-					"text": getCardHTML(rawPlayer, playerObj.assets.image.uri, `${flag}${userIcon}${player}`,
-						getAverageColor(playerObj["name-style"]["color-from"].dark, playerObj["name-style"]["color-to"].dark))
+					"text": getCardHTML(rawPlayer, playerObj.assets.image.uri, `${flag}${userIcon}${player}`, getAverageColor(playerObj["name-style"]))
 				});
 			}
 		}

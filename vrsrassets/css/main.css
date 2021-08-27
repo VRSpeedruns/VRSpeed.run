@@ -1020,6 +1020,7 @@ a.button:not(:last-child) {
 }
 
 .navbar-item:hover:not(.is-game-sel-item),
+.navbar-item:focus:not(.is-game-sel-item),
 .navbar-item.has-dropdown.is-active .navbar-link,
 .navbar-item.has-dropdown:focus .navbar-link,
 .navbar-item.has-dropdown:hover .navbar-link,
@@ -1047,6 +1048,13 @@ a.button:not(:last-child) {
 
 .is-game-sel-item {
 	padding-right: 0;
+}
+
+.navbar-item .navbar-dropdown {
+	display: none;
+}
+.navbar-item.is-active .navbar-dropdown {
+	display: block;
 }
 
 
@@ -1094,13 +1102,17 @@ a.button:not(:last-child) {
 
 /* ---------- Streams ---------- */
 
-.stream-top {
+.stream-top, .stream-top > div {
 	position: relative;
 }
-.stream-top > .image > img {
-	border-radius: 6px;
+.stream-top > div {
+	display: block;
+    transform: translate(0, 0);
+    transition: all .15s ease;
+    z-index: 10;
 }
-.stream-top > .game-cover {
+
+.stream-top > div > .game-cover {
 	position: absolute;
 	right: 2px;
 	bottom: 2px;
@@ -1108,9 +1120,45 @@ a.button:not(:last-child) {
 	border: 2px solid var(--text-color);
 	border-radius: 4px;
 }
-.stream-top > .game-cover > a > img {
+.stream-top > div > .game-cover > a > img {
 	display: block;
 }
+
+.stream-top:before, .stream-top:after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    transition: all .15s ease;
+}
+
+.stream-top:before {
+	top: 0;
+	left: 0;
+	transform-origin: top left;
+	transform: rotate(-45deg) scale(0);
+}
+.stream-top:after {
+	right: 0;
+	bottom: 0;
+	transform-origin: bottom right;
+	transform: rotate(45deg) scale(0);
+}
+.stream-top:hover div {
+	transform: translate(6px, -6px);
+}
+.stream-top:hover div .game-cover {
+	transform: translate(0, 0);
+}
+.stream-top:hover:before {
+	transform: rotate(-45deg) scale(1);
+}
+.stream-top:hover:after {
+	transform: rotate(45deg) scale(1);
+}
+/* hover effect: https://codepen.io/Axiol/pen/QWLRMVr */
+
 
 .stream-bottom {
 	text-align: center;
@@ -1118,7 +1166,10 @@ a.button:not(:last-child) {
 	overflow: hidden;
 	white-space: nowrap;
 }
-
+.stream-bottom > p > i {
+	font-size: 0.85em;
+	color: #e74e4c;
+}
 #streams-count {
 	text-align: center;
 	margin-bottom: 1.25em;
@@ -1138,6 +1189,10 @@ a.button:not(:last-child) {
 }
 
 /* ---------- Misc ---------- */
+
+#terms-of-use {
+	margin-bottom: 0;
+}
 
 #runs-loading, #runs-none {
 	padding-bottom: 1.25rem;

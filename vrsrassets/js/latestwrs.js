@@ -71,9 +71,7 @@ function loadWR(id)
             
             player = temp.names.international;
 
-            player = `<b>${getGradientName(player,
-                temp["name-style"]["color-from"].dark, 
-                temp["name-style"]["color-to"].dark)}</b>`;
+            player = `<b>${getGradientName(player, temp["name-style"])}</b>`;
         }
         else
         {
@@ -143,7 +141,7 @@ function loadWR(id)
             document.getElementById(`wr-${id}`).style.backgroundColor = color;
             document.getElementById(`wr-${id}`).innerHTML = html;
 
-            document.getElementById("instance-style").innerHTML += `#wr-${id}:before, #wr-${id}:after { background-color: ${color}; }`;
+            document.getElementById("wr-instance-style").innerHTML += `#wr-${id}:before, #wr-${id}:after { background-color: ${color}; }`;
         });
     });
 }

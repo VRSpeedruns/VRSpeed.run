@@ -184,9 +184,7 @@ function openRun(id, loadOrState = false)
             
             rawPlayer = temp.names.international;
 
-            player = getGradientName(rawPlayer,
-                temp["name-style"]["color-from"].dark, 
-                temp["name-style"]["color-to"].dark);
+            player = getGradientName(rawPlayer, temp["name-style"]);
         }
         else
         {
@@ -254,7 +252,7 @@ function openRun(id, loadOrState = false)
         {
             singleFlagAndModTippysInfo.push({
                 "id": `#singleruns-${run.players.data[0].id}-card`,
-                "text": getCardHTML(rawPlayer, run.players.data[0].assets.image.uri, `${flag}${userIcon}${player}`, getAverageColor(temp["name-style"]["color-from"].dark, temp["name-style"]["color-to"].dark))
+                "text": getCardHTML(rawPlayer, run.players.data[0].assets.image.uri, `${flag}${userIcon}${player}`, getAverageColor(temp["name-style"]))
             });
             
             player = `<a class="player-link" id="singleruns-${run.players.data[0].id}-card" href="/user/${rawPlayer}">${modIcon}${flag}${userIcon}${player}</a>`;
@@ -415,9 +413,7 @@ function openRun(id, loadOrState = false)
 			if (!getErrorCheck(__data)) return;
             
             var _data = (JSON.parse(__data)).data;
-            var verifier = getGradientName(_data.names.international,
-                _data["name-style"]["color-from"].dark,
-                _data["name-style"]["color-to"].dark);
+            var verifier = getGradientName(_data.names.international, _data["name-style"]);
 
             var verifierModIcon = '';
             var verifierFlag = '';
@@ -474,7 +470,7 @@ function openRun(id, loadOrState = false)
 
             singleFlagAndModTippysInfo.push({
                 "id": `#run-single-verifier`,
-                "text": getCardHTML(_data.names.international, _data.assets.image.uri, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]["color-from"].dark, _data["name-style"]["color-to"].dark))
+                "text": getCardHTML(_data.names.international, _data.assets.image.uri, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]))
             });
 
             if (!isMobile)

@@ -1,10 +1,17 @@
-function getGradientName(name, start, end)
+function getGradientName(name, style)
 {
   var player = "";
-
   var chars = name.split('');
+  var colors = [];
 
-  var colors = interpolate(start, end, chars.length)
+  if (style.style == "gradient")
+  {
+    colors = interpolate(style["color-from"].dark, style["color-to"].dark, chars.length)
+  }
+  else
+  {
+    colors = interpolate(style.color.dark, style.color.dark, chars.length)
+  }
 
   for (var k = 0; k < chars.length; k++)
   {
@@ -14,10 +21,17 @@ function getGradientName(name, start, end)
   return player;
 }
 
-function getAverageColor(start, end)
+function getAverageColor(style)
 {
-  var colors = interpolate(start, end, 3)
-  return colors[1];
+  if (style.style == "gradient")
+  {
+    var colors = interpolate(style["color-from"].dark, style["color-to"].dark, 3)
+    return colors[1];
+  }
+  else
+  {
+    return style.color.dark;
+  }
 }
 
 function interpolate(start, end, length)

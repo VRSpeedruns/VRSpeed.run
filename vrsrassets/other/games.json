@@ -584,5 +584,19 @@
         "hoverColor": "#5c8aff",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "i_expect_you_to_die_2",
+        "abbreviation": "ieytd2",
+        "api_id": "76r39vq6",
+        "name": "I Expect You To Die 2",
+        "twitch_name": "I Expect You to Die 2",
+        "hardware": "",
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e",
+        "ignoredVariables": [],
+        "verifiers": [
+            "j5vpyzq8"
+        ]
     }
 ]

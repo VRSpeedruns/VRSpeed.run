@@ -42,11 +42,21 @@
 						<div class="navbar-item has-dropdown">
 							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">Community <i class="fas fa-sort-down"></i></a>
 							<div class="navbar-dropdown">
-								<a class="navbar-item in-dropdown" href="https://www.speedrun.com/" target="_blank"><i class="far fa-clock"></i> Speedrun.com</a>
+								<a class="navbar-item in-dropdown" href="https://www.speedrun.com/" target="_blank"><i class="fas fa-trophy"></i> Speedrun.com</a>
 								<a class="navbar-item in-dropdown" href="https://splits.io/" target="_blank"><i class="fas fa-stopwatch"></i> Splits.io</a>
 								<hr class="navbar-divider">
 								<a class="navbar-item in-dropdown" href="https://discord.gg/7PKWZuW" target="_blank"><i class="fab fa-discord"></i> VR Speedrunning Discord</a>
 								<a class="navbar-item in-dropdown" href="https://discord.gg/0h6sul1ZwHVpXJmK" target="_blank"><i class="fab fa-discord"></i> Speedrun.com Discord</a>
+							</div>
+						</div>
+						<div class="navbar-item has-dropdown">
+							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">More... <i class="fas fa-sort-down"></i></a>
+							<div class="navbar-dropdown">
+								<a class="navbar-item in-dropdown" href="/terms-of-use"><i class="fas fa-info-circle"></i> Terms of Use</a>
+								<a class="navbar-item in-dropdown" href="/privacy-policy"><i class="fas fa-info-circle"></i> Privacy Policy</a>
+								<hr class="navbar-divider">
+								<a class="navbar-item in-dropdown" href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+								<a class="navbar-item in-dropdown" href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
 							</div>
 						</div>
 					</div>
@@ -285,6 +295,16 @@
 					</div>
 				</div>
 			</div>
+			<div class="container" id="tou-container" style="display: none;">
+				<div class="box" id="terms-of-use" style="display: none">
+					<h1 class="is-box-heading">Terms of Use</h1>
+					<div class="divider thin"></div>
+				</div>
+				<div class="box" id="privacy-policy" style="display: none">
+					<h1 class="is-box-heading">Privacy Policy</h1>
+					<div class="divider thin"></div>
+				</div>
+			</div>
 		</section>
 		<section class="section is-footer">
 			<div class="columns is-centered is-vcentered">
@@ -324,7 +344,8 @@
 			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/latestwrs.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/main.js"></script>
-			<style id="instance-style"></style>
+			<style id="wr-instance-style"></style>
+			<style id="streams-instance-style"></style>
 		</section>
 	</body>
 </html>

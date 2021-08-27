@@ -74,11 +74,9 @@ function loadUser(username)
             userPfp.style.display = "none";
         }
 
-        var player = getGradientName(user.names.international,
-            user["name-style"]["color-from"].dark, 
-            user["name-style"]["color-to"].dark);
+        var player = getGradientName(user.names.international, user["name-style"]);
         
-        var color = getAverageColor(user["name-style"]["color-from"].dark, user["name-style"]["color-to"].dark);
+        var color = getAverageColor(user["name-style"]);
         document.documentElement.style.setProperty('--primary-color', color);
 		document.documentElement.style.setProperty('--primary-color-hover', color);
 
