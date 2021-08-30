@@ -98,7 +98,7 @@ function loadWR(id)
             {
                 game = gamesArray[i].name;
                 abbr = gamesArray[i].abbreviation;
-                color = gamesArray[i].color;
+                color = gamesArray[i].darkColor;
                 break;
             }
         }

@@ -79,6 +79,7 @@ function loadUser(username)
         var color = getAverageColor(user["name-style"]);
         document.documentElement.style.setProperty('--primary-color', color);
 		document.documentElement.style.setProperty('--primary-color-hover', color);
+		document.documentElement.style.setProperty('--primary-color-dark', color);
 
         var flag = '';
         if (user.location !== null)

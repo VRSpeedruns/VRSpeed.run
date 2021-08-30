@@ -26,8 +26,11 @@
 		<nav class="navbar is-fixed-top">
 			<div>
 				<div class="navbar-brand">
-					<a class="navbar-item in-brand" href="/">
-						<img src="/vrsrassets/images/navbrand.png">
+					<a class="navbar-item" href="/">
+						<img src="/vrsrassets/images/icon.png">
+						<span class="brand-text">
+							VRSPEED.RUN
+						</span>
 					</a>
 					<a role="button" class="navbar-burger" onclick="navbarMobileToggle()">
 						<span aria-hidden="true"></span>
@@ -37,7 +40,6 @@
 				</div>
 				<div class="navbar-menu" id="navbar-menu">
 					<div class="navbar-start">
-						<a id="view-lb" class="navbar-item">View Leaderboard</a>
 						<a href="/streams" class="navbar-item">Streams</a>
 						<div class="navbar-item has-dropdown">
 							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">Community <i class="fas fa-sort-down"></i></a>
@@ -52,11 +54,10 @@
 						<div class="navbar-item has-dropdown">
 							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">More... <i class="fas fa-sort-down"></i></a>
 							<div class="navbar-dropdown">
-								<a class="navbar-item in-dropdown" href="/terms-of-use"><i class="fas fa-info-circle"></i> Terms of Use</a>
-								<a class="navbar-item in-dropdown" href="/privacy-policy"><i class="fas fa-info-circle"></i> Privacy Policy</a>
-								<hr class="navbar-divider">
 								<a class="navbar-item in-dropdown" href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github"></i> GitHub</a>
 								<a class="navbar-item in-dropdown" href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+								<hr class="navbar-divider">
+								<a class="navbar-item in-dropdown" href="https://ko-fi.com/bigfoott" target="_blank"><i class="fas fa-heart"></i> Support Me</a>
 							</div>
 						</div>
 					</div>
@@ -96,13 +97,13 @@
 						</div>
 					</div>
 					<div class="column is-5">
-						<div class="box" id="about-info">
+						<div class="box about">
 							<h1 class="is-box-heading">About</h1>
 							<div class="divider thin"></div>
-							<p>VRSR is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
+							<p>VRSpeed.run is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
 							<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/7PKWZuW">VR Speedrunning Discord server</a>!</p>
 							<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping <span id="tippy-me" class="is-tooltip-text">me</span> in the above Discord server.</p>
-							<p>For the latest VR world records, check out the <a href="https://twitter.com/VRSpeedruns">VRSR Twitter bot</a>!</p>
+							<p>For the latest VR world records and any updates regarding this site, check out the <a href="https://twitter.com/VRSpeedruns">VR Speedruns Twitter account</a>!</p>
 							<p>I maintain this site in my spare time. If you'd like to support me, consider checking out <a href="https://ko-fi.com/bigfoott" target="_blank">my Ko-fi page</a>! 😊</p>
 						</div>
 					</div>
@@ -293,16 +294,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="container" id="tou-container" style="display: none;">
-				<div class="box" id="terms-of-use" style="display: none">
-					<h1 class="is-box-heading">Terms of Use</h1>
-					<div class="divider thin"></div>
-				</div>
-				<div class="box" id="privacy-policy" style="display: none">
-					<h1 class="is-box-heading">Privacy Policy</h1>
-					<div class="divider thin"></div>
 				</div>
 			</div>
 		</section>

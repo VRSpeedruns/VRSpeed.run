@@ -6,8 +6,6 @@ var errorContainer;
 
 var navbarMenu;
 
-var defaultGame = 'hla';
-
 function onLoad()
 {
     mainLoading = document.getElementById("main-loading");
@@ -31,17 +29,6 @@ function onLoad()
         latestWRsLoad();
         document.getElementsByTagName("nav")[0].classList.add("is-home-page");
     }
-    else if (getGame() != 'streams')
-    {
-        document.getElementById("view-lb").style.display = "none";
-    }
-
-    if (getCookie('last_game') != '')
-    {
-        defaultGame = getCookie('last_game');
-    }
-
-    document.getElementById("view-lb").href = `/${defaultGame}`;
 
     infoTippy();
     //latestWRsLoad();

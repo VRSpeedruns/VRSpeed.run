@@ -8,6 +8,7 @@
         "hardware": "",
         "color": "#a134d6",
         "hoverColor": "#b64bea",
+        "darkColor": "#7825a1",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -20,6 +21,7 @@
         "hardware": "",
         "color": "#a134d6",
         "hoverColor": "#b64bea",
+        "darkColor": "#7b27a3",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -32,6 +34,7 @@
         "hardware": "",
         "color": "#FDED52",
         "hoverColor": "#fff382",
+        "darkColor": "#c5a81a",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -44,6 +47,7 @@
         "hardware": "",
         "color": "#FBC539",
         "hoverColor": "#ffd463",
+        "darkColor": "#c99c26",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -56,6 +60,7 @@
         "hardware": "",
         "color": "#5E91B9",
         "hoverColor": "#85bbe6",
+        "darkColor": "#436f91",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -68,6 +73,7 @@
         "hardware": "r8romd08",
         "color": "#E6B400",
         "hoverColor": "#facc28",
+        "darkColor": "#c49a00",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -80,6 +86,7 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -92,6 +99,7 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -104,6 +112,7 @@
         "hardware": "",
         "color": "#ED821A",
         "hoverColor": "#f29941",
+        "darkColor": "#c2650c",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -116,6 +125,7 @@
         "hardware": "",
         "color": "#F454FF",
         "hoverColor": "#F99EFF",
+        "darkColor": "#d536e0",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -128,6 +138,7 @@
         "hardware": "",
         "color": "#FF862C",
         "hoverColor": "#ffa058",
+        "darkColor": "#d66918",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -140,6 +151,7 @@
         "hardware": "",
         "color": "#515bd0",
         "hoverColor": "#6f79ed",
+        "darkColor": "#3640b5",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -152,6 +164,7 @@
         "hardware": "",
         "color": "#e22c43",
         "hoverColor": "#f1475c",
+        "darkColor": "#b31025",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -164,6 +177,7 @@
         "hardware": "",
         "color": "#F01B6A",
         "hoverColor": "#f74084",
+        "darkColor": "#c2172d",
         "ignoredVariables": [
             {
                 "id": "wl33ryvl",
@@ -181,6 +195,7 @@
         "hardware": "",
         "color": "#6CA1CD",
         "hoverColor": "#85B7E1",
+        "darkColor": "#457fb0",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -193,6 +208,7 @@
         "hardware": "",
         "color": "#70BD6A",
         "hoverColor": "#9be695",
+        "darkColor": "#458a3f",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -205,6 +221,7 @@
         "hardware": "",
         "color": "#DB1646",
         "hoverColor": "#F13E6A",
+        "darkColor": "#b5143b",
         "ignoredVariables": [
             {
                 "id": "j84676yl",
@@ -226,6 +243,7 @@
         "hardware": "",
         "color": "#c73862",
         "hoverColor": "#e34b78",
+        "darkColor": "#ab264d",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -238,6 +256,7 @@
         "hardware": "",
         "color": "#FF862C",
         "hoverColor": "#ffa058",
+        "darkColor": "#d96b1a",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -250,6 +269,7 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b",
         "ignoredVariables": [],
         "verifiers": [
             "qjonq4n8",
@@ -265,6 +285,7 @@
         "hardware": "",
         "color": "#ad4c50",
         "hoverColor": "#d1696d",
+        "darkColor": "#8a373a",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -277,6 +298,7 @@
         "hardware": "",
         "color": "#ceef79",
         "hoverColor": "#e1ff95",
+        "darkColor": "#799c1f",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -289,6 +311,7 @@
         "hardware": "",
         "color": "#ceef79",
         "hoverColor": "#e1ff95",
+        "darkColor": "#9bbd44",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -301,6 +324,7 @@
         "hardware": "",
         "color": "#278f96",
         "hoverColor": "#40bac2",
+        "darkColor": "#166b70",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -313,6 +337,7 @@
         "hardware": "",
         "color": "#009DEC",
         "hoverColor": "#2fb6fa",
+        "darkColor": "#007ebd",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -325,6 +350,7 @@
         "hardware": "",
         "color": "#FDCB1C",
         "hoverColor": "#ffda57",
+        "darkColor": "#bd9711",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -337,6 +363,7 @@
         "hardware": "",
         "color": "#E65F03",
         "hoverColor": "#ff8736",
+        "darkColor": "",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -349,6 +376,7 @@
         "hardware": "",
         "color": "#0088FF",
         "hoverColor": "#38a2ff",
+        "darkColor": "#0063ba",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -361,6 +389,7 @@
         "hardware": "",
         "color": "#39C428",
         "hoverColor": "#5ef04d",
+        "darkColor": "#1b8c0d",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -373,6 +402,7 @@
         "hardware": "",
         "color": "#92AAD5",
         "hoverColor": "#b3caf5",
+        "darkColor": "#647fb0",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -385,6 +415,7 @@
         "hardware": "",
         "color": "#F79F41",
         "hoverColor": "#ffb96e",
+        "darkColor": "#c7751e",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -397,6 +428,7 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -409,6 +441,7 @@
         "hardware": "",
         "color": "#C2252C",
         "hoverColor": "#e6434a",
+        "darkColor": "#9e1319",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -421,6 +454,7 @@
         "hardware": "",
         "color": "#00B3FF",
         "hoverColor": "#4fcbff",
+        "darkColor": "#007cb0",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -433,6 +467,7 @@
         "hardware": "",
         "color": "#00E2FF",
         "hoverColor": "#4fcbff",
+        "darkColor": "#007cb0",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -445,6 +480,7 @@
         "hardware": "",
         "color": "#7DBDFD",
         "hoverColor": "#a3d1ff",
+        "darkColor": "#3a84cf",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -457,6 +493,7 @@
         "hardware": "kn0zqxz8",
         "color": "#26BCC6",
         "hoverColor": "#4fe6f0",
+        "darkColor": "#10939c",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -469,6 +506,7 @@
         "hardware": "",
         "color": "#3C8FA8",
         "hoverColor": "#56AEC9",
+        "darkColor": "#20738c",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -481,6 +519,7 @@
         "hardware": "ylqk1v3l",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -493,6 +532,7 @@
         "hardware": "",
         "color": "#00A40C",
         "hoverColor": "#1ed62b",
+        "darkColor": "#007308",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -505,6 +545,7 @@
         "hardware": "e8mmk2v8",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -517,6 +558,7 @@
         "hardware": "",
         "color": "#a134d6",
         "hoverColor": "#b64bea",
+        "darkColor": "#7a15ab",
         "ignoredVariables": [
             {
                 "id": "ylpmx96l",
@@ -534,6 +576,7 @@
         "hardware": "",
         "color": "#FDEA8E",
         "hoverColor": "#fff3b8",
+        "darkColor": "#ca9d3a",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -546,6 +589,7 @@
         "hardware": "",
         "color": "#7B63B8",
         "hoverColor": "#a18ade",
+        "darkColor": "#4c2f94",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -558,6 +602,7 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -570,6 +615,7 @@
         "hardware": "",
         "color": "#a134d6",
         "hoverColor": "#b64bea",
+        "darkColor": "#70119e",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -582,6 +628,7 @@
         "hardware": "",
         "color": "#2A65FC",
         "hoverColor": "#5c8aff",
+        "darkColor": "#0c3bb3",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -594,9 +641,11 @@
         "hardware": "",
         "color": "#ff2f2f",
         "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b",
         "ignoredVariables": [],
         "verifiers": [
-            "j5vpyzq8"
+            "j5vpyzq8",
+            "8wkw0lq8"
         ]
     }
 ]

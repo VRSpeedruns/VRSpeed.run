@@ -39,7 +39,6 @@ Variable Object
 
 var homeContainer;
 var mainContainer;
-var touContainer;
 
 var reorderedGamesArray;
 
@@ -110,11 +109,9 @@ function onGameDataLoad()
 {
 	homeContainer = document.getElementById("home-container");
 	mainContainer = document.getElementById("main-container");
-	touContainer = document.getElementById("tou-container");
 
 	allContainers.push(homeContainer);
 	allContainers.push(mainContainer);
-	allContainers.push(touContainer);
 
 	gamesContainer = document.getElementById("games");
 	categoriesContainer = document.getElementById("tabs")
@@ -172,9 +169,9 @@ function onGameDataLoad()
 	loadAllGames();
 
 	defaultIndex = -1;
-	for (var i = 0; i < gamesArray.length; i++)
+	for (var i = 0; i < reorderedGamesArray.length; i++)
 	{
-		if (gamesArray[i].id == 'hla')
+		if (reorderedGamesArray[i].id == 'hla')
 		{
 			defaultIndex = i;
 			break;
@@ -190,13 +187,6 @@ function onGameDataLoad()
 			loadStreams();
 			return;
 		}
-		else if (id == "terms-of-use" || id == "privacy-policy")
-		{
-			hideAllContainers();
-			document.getElementById(id).style.display = "block";
-			touContainer.style.display = "block";
-			return;
-		}
 		else if (getUser())
 		{
 			loadUser(getUser());
@@ -204,9 +194,9 @@ function onGameDataLoad()
 		}
 
 		var gameIndex = -1;
-		for (var i = 0; i < gamesArray.length; i++)
+		for (var i = 0; i < reorderedGamesArray.length; i++)
 		{
-			if (gamesArray[i].abbreviation == id)
+			if (reorderedGamesArray[i].abbreviation == id)
 			{
 				gameIndex = i;
 				break;
@@ -534,6 +524,7 @@ function loadGame(id, loadOrState = false, force = false)
 	{
 		document.documentElement.style.setProperty('--primary-color', '#FF9C00')
 		document.documentElement.style.setProperty('--primary-color-hover', '#FFBB4D')
+		document.documentElement.style.setProperty('--primary-color-hover', '#D18100')
 
 		hideAllContainers();
 		homeContainer.style.display = "block";
@@ -604,11 +595,11 @@ function loadGame(id, loadOrState = false, force = false)
 	
 	ready = false;
 
-	for (var i = 0; i < gamesArray.length; i++)
+	for (var i = 0; i < reorderedGamesArray.length; i++)
 	{
-		if (gamesArray[i].abbreviation == id)
+		if (reorderedGamesArray[i].abbreviation == id)
 		{
-			currentGame = gamesArray[i];
+			currentGame = reorderedGamesArray[i];
 			gameId = currentGame.id;
 
 			if (gamesContainer.selectedIndex !== i)
@@ -620,7 +611,7 @@ function loadGame(id, loadOrState = false, force = false)
 			{
 				gameSelectorCurrentGame.classList.remove("is-selected");
 			}
-			gameSelectorCurrentGame = document.getElementById(`game-${gamesArray[i].abbreviation}`);
+			gameSelectorCurrentGame = document.getElementById(`game-${reorderedGamesArray[i].abbreviation}`);
 			gameSelectorCurrentGame.classList.add("is-selected");
 			gameSelectorButton.innerText = gameSelectorCurrentGame.firstChild.nodeValue;
 			gameSelectorButton.title = gameSelectorButton.innerText;
@@ -658,6 +649,7 @@ function loadGame(id, loadOrState = false, force = false)
 	
 	document.documentElement.style.setProperty('--primary-color', currentGame.color)
 	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
+	document.documentElement.style.setProperty('--primary-color-dark', currentGame.darkColor)
 
 	gameInfoName.innerText = currentGame.name;
 	gameInfoImage.src = '';

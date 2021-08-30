@@ -2,6 +2,7 @@
 :root {
 	--primary-color: #FF9C00;
 	--primary-color-hover: #FFBB4D;
+	--primary-color-dark: #D18100;
 	--text-color: #eee;
 	--text-color-dark: #111;
 	--text-color-light: #bbb;
@@ -143,6 +144,9 @@ a.button:not(:last-child) {
 }
 #tabs::-webkit-scrollbar-thumb:hover {
 	background-color: var(--primary-color-hover);
+}
+#tabs > li {
+	margin-bottom: -1px;
 }
 
 .tabs.is-boxed a, .tabs.is-boxed a:hover, .tabs.is-boxed a:focus {
@@ -303,7 +307,7 @@ a.button:not(:last-child) {
 	margin-bottom: 1.2rem;
 }
 #game-name {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	font-weight: bold;
 	margin-bottom: 1.1rem;
 }
@@ -999,6 +1003,24 @@ a.button:not(:last-child) {
 	width: 100%;
 	margin: 0 auto;
 }
+
+.brand-text, .brand-text:hover, .brand-text-top {
+	margin-left: 0. 5rem;
+	
+	font-family: 'Squada One';
+	color: var(--text-color);
+	font-size: 2.5rem;
+	line-height: 0.8em;
+	/*text-shadow: -2px 2px hsla(0, 0%, 0%, 0.5), -2px 2px var(--primary-color);*/
+	-webkit-text-stroke: 1px var(--primary-color-dark);
+}
+.brand-text {
+	position: relative;
+}
+.brand-text:hover {
+	text-decoration: none;
+}
+
 .navbar-item:not(.is-game-sel-item):not(.in-dropdown):not(.in-brand) {
 	color: var(--primary-color) !important;
 	border-bottom: 2px solid var(--background-color);
@@ -1007,11 +1029,14 @@ a.button:not(:last-child) {
 	color: var(--primary-color-hover) !important;
 	border-bottom: 2px solid var(--primary-color-hover);
 }
-
-@media only screen and (min-width: 1024px) {
-	.navbar-brand {
-		transform: scale(1.2, 1.2);
-		margin-right: 0.5em;
+@media only screen and (max-width: 1024px) {
+	.navbar-item:not(.is-game-sel-item):not(.in-dropdown):not(.in-brand) {
+		color: var(--primary-color) !important;
+		border-bottom: 0;
+	}
+	.navbar-item:hover:not(.is-game-sel-item):not(.in-dropdown):not(.in-brand) {
+		color: var(--primary-color-hover) !important;
+		border-bottom: 0;
 	}
 }
 
@@ -1019,8 +1044,8 @@ a.button:not(:last-child) {
 	margin-right: 0.4em;
 }
 
-.navbar-item:hover:not(.is-game-sel-item),
-.navbar-item:focus:not(.is-game-sel-item),
+.navbar-item:hover:not(.is-game-sel-item):not(.brand-text),
+.navbar-item:focus:not(.is-game-sel-item):not(.brand-text),
 .navbar-item.has-dropdown.is-active .navbar-link,
 .navbar-item.has-dropdown:focus .navbar-link,
 .navbar-item.has-dropdown:hover .navbar-link,
@@ -1044,6 +1069,7 @@ a.button:not(:last-child) {
 }
 .navbar-divider {
 	background-color: var(--button-background-color);
+	display: block;
 }
 
 .is-game-sel-item {
@@ -1254,7 +1280,8 @@ a.button:not(:last-child) {
 .is-box-heading {
 	font-size: 1.3em;
 	letter-spacing: 2px;
-	font-family: 'Bebas Neue';
+	font-family: 'Squada One';
+	text-transform: uppercase;
 
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -1263,25 +1290,11 @@ a.button:not(:last-child) {
 	-ms-user-select: none;
 	user-select: none;
 }
-#about-info {
+.box.about {
 	height: 100%;
 }
-#about-info-toggle {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-#about-info-toggle:hover {
-	text-decoration: none;
-}
-#about-info-more {
-	margin-top: 1em;
-}
-#about-info > p:not(:last-child), #about-info > div > p:not(:last-child) {
-	margin-bottom: 1.25rem;
+.box.about > p:not(:last-child) {
+	margin-bottom: 0.9rem;
 }
 
 .divider {
