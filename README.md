@@ -1,12 +1,17 @@
 ## About
 
-VRSR is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.
+VRSpeed.run is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.
 
-## Logic
+## Documentation
 
-A semi-comprehensive writeup explaining the order and usage of each function. Mostly made for me when I need to bugfix this project in 3 months and don't remember how it works. :)
+A writeup that describes the structure behind the JS that makes the site run. Mostly made for me when I need to bugfix this project in 3 months and don't remember how part of it works :)
 
-[Read here.](https://github.com/VRSpeedruns/VRSR/tree/master/docs/LOGIC.md)
+* [main.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/main.js.md) - Holds core functions.
+* [gamedata.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/gamedata.js.md) - Handles game data and run loading.
+* [viewrun.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/viewrun.js.md) - Handles loading of individual runs.
+* [latestwrs.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/latestwrs.js.md) - Handles displaying of latest world records.
+* [viewuser.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/viewuser.js.md) - Handles loading of individual users.
+* [viewstreams.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/viewstreams.js.md) - Handles loading of streams.
 
 ## External Tools/Libraries
 
