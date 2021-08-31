@@ -1,5 +1,7 @@
 # main.js
 
+## [View the file](https://github.com/VRSpeedruns/VRSR/blob/master/vrsrassets/js/main.js)
+
 ### `onLoad()`
 
 This is the first function called when the page loads. It instantiates a few page element variables, then removes any query strings from the path.
@@ -42,7 +44,7 @@ Functions that toggle the "is-active" class for use on the navbar.
 
 ### `hideAllContainers()`
 
-This function hides the main containers of the size (`home-container`, `main-container`, `user-container`, `streams-container`)
+This function hides the main containers of the site (`home-container`, `main-container`, `user-container`, `streams-container`)
 
 ### `infoTippy()`
 
