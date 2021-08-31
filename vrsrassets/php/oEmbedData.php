@@ -30,7 +30,7 @@ if (strlen($substr) > 0)
 }
 
 $game = null;
-$title = 'VR Speedrunning Leaderboards';
+$title = 'VR Speedrunning Leaderboards - VRSpeed.run';
 $image = '/vrsrassets/images/logo.png';
 $color = '#0165fe';
 $description = 'A central hub to view the leaderboards for the largest virtual reality games in speedrunning.';
@@ -42,14 +42,14 @@ foreach ($games as $_game)
     $game = $_game;
     if ($game->abbreviation == $gameId)
     {
-        $title = $game->name . ' - VRSR';
+        $title = $game->name . ' - VRSpeed.run';
         $image = 'https://www.speedrun.com/gameasset/' . $game->api_id . '/cover';
         $color = $game->color;
 
         break;
     }
 }
-if ($title != 'VR Speedrunning Leaderboards' &&  $runId != '')
+if ($title != 'VR Speedrunning Leaderboards - VRSpeed.run' &&  $runId != '')
 {
     $run = json_decode(file_get_contents('https://www.speedrun.com/api/v1/runs/'.$runId.'?embed=players,category,game'))->data;
 
@@ -84,9 +84,9 @@ if ($title != 'VR Speedrunning Leaderboards' &&  $runId != '')
         $description = $run->category->data->name . ' completed in ' . $time . ' by ' . $player;
     }
 }
-else if ($title == 'VR Speedrunning Leaderboards' &&  $user != '')
+else if ($title == 'VR Speedrunning Leaderboards - VRSpeed.run' &&  $user != '')
 {
-    $title = $user . ' - VRSR';
+    $title = $user . ' - VRSpeed.run';
     $description = 'User page for ' . $user;
 
     $get = file_get_contents('https://www.speedrun.com/themes/user/' . $user . '/image.png');

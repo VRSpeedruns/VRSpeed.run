@@ -179,14 +179,7 @@ function backFixUrl()
 
 function navbarMobileToggle()
 {
-    if (navbarMenu.classList.contains("is-active"))
-    {
-        navbarMenu.classList.remove("is-active");
-    }
-    else
-    {
-        navbarMenu.classList.add("is-active");
-    }
+    navbarMenu.classList.toggle("is-active");
 }
 
 function toggleNavDropdown(element)

@@ -12,9 +12,18 @@
 		<meta property="og:site_name" content="VRSpeed.run">
 		<meta property="og:title" content="<?= $title; ?>">
 		<meta property="og:description" content="<?= $description; ?>">
-		<meta name="description" content="<?= $description; ?>">
 		<meta property="og:image" content="<?= $image; ?>">
+
+		<meta property="twitter:card" content="summary">
+		<meta property="twitter:title" content="<?= $title; ?>">
+		<meta property="twitter:description" content="<?= $description; ?>">
+		<meta property="twitter:image" content="<?= $image; ?>">
+		
+		<meta name="description" content="<?= $description; ?>">
 		<meta name="theme-color" content="<?= $color; ?>">
+
+
+
 		<meta name="keywords" content="VR Speedrun,VR,Speedrun,Speedrunning,VR Speedrunning,VR Running,Super Hot VR,Super Hot Speedrun, Super Hot VR Speedrun,Half Life, Half-Life, Half-Life: Alyx, Half-Life Alyx, Alyx,, HLA, HL: Alyx, HL:A">
 		
 		<link href="/assets/fa/css/all.css" rel="stylesheet">
@@ -47,7 +56,7 @@
 								<a class="navbar-item in-dropdown" href="https://www.speedrun.com/" target="_blank"><i class="fas fa-trophy"></i> Speedrun.com</a>
 								<a class="navbar-item in-dropdown" href="https://splits.io/" target="_blank"><i class="fas fa-stopwatch"></i> Splits.io</a>
 								<hr class="navbar-divider">
-								<a class="navbar-item in-dropdown" href="https://discord.gg/7PKWZuW" target="_blank"><i class="fab fa-discord"></i> VR Speedrunning Discord</a>
+								<a class="navbar-item in-dropdown" href="https://discord.gg/g36fNmU3nA" target="_blank"><i class="fab fa-discord"></i> VR Speedrunning Discord</a>
 								<a class="navbar-item in-dropdown" href="https://discord.gg/0h6sul1ZwHVpXJmK" target="_blank"><i class="fab fa-discord"></i> Speedrun.com Discord</a>
 							</div>
 						</div>
@@ -101,7 +110,7 @@
 							<h1 class="is-box-heading">About</h1>
 							<div class="divider thin"></div>
 							<p>VRSpeed.run is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
-							<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/7PKWZuW">VR Speedrunning Discord server</a>!</p>
+							<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/g36fNmU3nA">VR Speedrunning Discord server</a>!</p>
 							<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping <span id="tippy-me" class="is-tooltip-text">me</span> in the above Discord server.</p>
 							<p>For the latest VR world records and any updates regarding this site, check out the <a href="https://twitter.com/VRSpeedruns">VR Speedruns Twitter account</a>!</p>
 							<p>I maintain this site in my spare time. If you'd like to support me, consider checking out <a href="https://ko-fi.com/bigfoott" target="_blank">my Ko-fi page</a>! 😊</p>
@@ -298,7 +307,7 @@
 			</div>
 		</section>
 		<section class="section is-footer">
-			<div class="columns is-centered is-vcentered">
+			<div class="columns is-centered is-vcentered is-multiline">
 				<div class="column is-4 has-text-right-tablet">
 					<p>Currently providing data for <?= count($games); ?> games.</p>
 					<p>Made with <i class="fas fa-heart is-heart" aria-hidden="true"></i> by <a href="https://github.com/bigfoott" target="_blank">bigfoot</a>.</p>
@@ -317,6 +326,9 @@
 						</p>
 					</div> 
 				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>© 2019-<?= date("Y") ?> <a href="https://bigft.io" target="_blank">Bigft.io</a></p>
 			</div>
 
 			<div id="js-mobile-check" class="is-hidden-mobile"></div>

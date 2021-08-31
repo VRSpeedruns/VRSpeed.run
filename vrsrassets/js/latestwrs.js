@@ -50,7 +50,7 @@ function loadWRs(wrs)
 }
 function loadWR(id)
 {
-    get(`https://www.speedrun.com/api/v1/runs/${id}?embed=players,platform,game,category`)
+    get(`https://www.speedrun.com/api/v1/runs/${id}?embed=players,platform,game,category,category.variables`)
 	.then((data) =>
 	{
         if (!getErrorCheck(data)) return;
@@ -105,43 +105,36 @@ function loadWR(id)
 
         var link = `/${abbr}/run/${id}`;
 
-        get(`https://www.speedrun.com/api/v1/categories/${run.category.data.id}/variables`)
-        .then((data) =>
+        var variables = run.category.data.variables.data;
+        var subcats = [];
+
+        for (var i = 0; i < variables.length; i++)
         {
-			if (!getErrorCheck(data)) return;
-
-            var variables = (JSON.parse(data)).data;
-
-            var subcats = [];
-
-
-            for (var i = 0; i < variables.length; i++)
+            console.log(variables[i].id);
+            if (variables[i]["is-subcategory"])
             {
-                if (variables[i]["is-subcategory"])
+                if (run.values[variables[i].id])
                 {
-                    if (run.values[variables[i].id])
-                    {
-                        subcats.push(variables[i].values.values[run.values[variables[i].id]].label);
-                    }
+                    subcats.push(variables[i].values.values[run.values[variables[i].id]].label);
                 }
             }
-            if (subcats.length > 0)
-            {
-                category += ` (${subcats.join(", ")})`;
-            }
+        }
+        if (subcats.length > 0)
+        {
+            category += ` (${subcats.join(", ")})`;
+        }
 
-            var html = `<a class="wr-link" href="${link}"><div class="wr-wrapper" style="background-image: linear-gradient(var(--background-color-transparent), var(--background-color-transparent)), url('${run.game.data.assets["cover-large"].uri.replace("http://", "https://")}'); background-color: ${color}">
-                    <div class="wr-game">${game}</div>
-                    <div class="wr-category">${category}</div>
-                    <div class="wr-time">${time}</div>
-                    <div class="wr-runner">${flag}${userIcon}${player}</div>
-                    <div class="wr-date">${date}</div>
-                   </div></a>`;
+        var html = `<a class="wr-link" href="${link}"><div class="wr-wrapper" style="background-image: linear-gradient(var(--background-color-transparent), var(--background-color-transparent)), url('${run.game.data.assets["cover-large"].uri.replace("http://", "https://")}'); background-color: ${color}">
+                <div class="wr-game">${game}</div>
+                <div class="wr-category">${category}</div>
+                <div class="wr-time">${time}</div>
+                <div class="wr-runner">${flag}${userIcon}${player}</div>
+                <div class="wr-date">${date}</div>
+                </div></a>`;
 
-            document.getElementById(`wr-${id}`).style.backgroundColor = color;
-            document.getElementById(`wr-${id}`).innerHTML = html;
+        document.getElementById(`wr-${id}`).style.backgroundColor = color;
+        document.getElementById(`wr-${id}`).innerHTML = html;
 
-            document.getElementById("wr-instance-style").innerHTML += `#wr-${id}:before, #wr-${id}:after { background-color: ${color}; }`;
-        });
+        document.getElementById("wr-instance-style").innerHTML += `#wr-${id}:before, #wr-${id}:after { background-color: ${color}; }`;
     });
 }

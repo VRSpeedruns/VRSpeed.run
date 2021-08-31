@@ -637,8 +637,6 @@ function loadGame(id, loadOrState = false, force = false)
 		gameInfoFavTippy.setContent("Add to Favorites");
 	}
 
-	setCookie('last_game', id, 10080); //7 days
-
 	document.title = `${currentGame.name} - VRSR`;
 
 	if (boxRuns)

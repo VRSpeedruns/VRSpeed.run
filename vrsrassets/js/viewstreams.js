@@ -28,11 +28,16 @@ function loadStreams()
         streamsInnerContainer.innerHTML = '';
         document.getElementById("streams-instance-style").innerHTML = '';
         var streams = (JSON.parse(data)).data;
-        
-        streamsCount.innerText = `${streams.length} streams currently live.`;
+        var count = streams.length;
 
         for (var i = 0; i < streams.length; i++)
         {
+            if (document.getElementById(`stream-${streams[i].id}`))
+            {
+                count--;
+                continue;
+            }
+
             var streamUrl = "https://twitch.tv/" + streams[i].user_login;
 
             var gameImage = '';
@@ -57,5 +62,7 @@ function loadStreams()
 
                 document.getElementById("streams-instance-style").innerHTML += `#stream-${streams[i].id}, #stream-${streams[i].id}:before, #stream-${streams[i].id}:after { background-color: ${game[0].darkColor}; }`
         }
+        
+        streamsCount.innerText = `${count} streams currently live.`;
     });
 }
