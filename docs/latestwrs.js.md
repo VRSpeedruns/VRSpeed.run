@@ -4,7 +4,7 @@
 
 ### `latestWRsLoad()`
 
-This instantiates the WR container page element variable, then calls `getLatest()`.
+This function is called on page load (from `onLoad()`) if currently on the homepage. This instantiates the WR container page element variable, then calls `getLatest()`.
 
 ### `getLatest()`
 
