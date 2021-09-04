@@ -29,9 +29,17 @@ function onLoad()
         latestWRsLoad();
         document.getElementsByTagName("nav")[0].classList.add("is-home-page");
     }
+    else if (getGame() == 'streams')
+    {
+        //document.getElementById("nav-leaderboard").style.display = "none";
+        document.getElementById("nav-streams").classList.add("current-page");
+    }
+    else
+    {
+        document.getElementById("nav-leaderboard").classList.add("current-page");
+    }
 
     infoTippy();
-    //latestWRsLoad();
     onStreamsLoad();
     onUserLoad();
     onGameDataLoad();
@@ -91,14 +99,23 @@ function setMainEvents()
         }
 	});
 
+    //disable nav dropdown stuff + close navbar menu on mobile
     document.addEventListener('click', (e) => {
         var dropdowns = document.getElementsByClassName('navbar-item has-dropdown is-active');
-
 		for (var i = 0; i < dropdowns.length; i++)
         {
             if (!dropdowns[i].contains(e.target))
             {
                 dropdowns[i].classList.remove("is-active");
+            }
+        }
+
+        if (navbarMenu.classList.contains("is-active"))
+        {
+            var fullNav = document.getElementsByTagName("nav")[0];
+            if (!fullNav.contains(e.target))
+            {
+                navbarMenu.classList.remove("is-active");
             }
         }
 	});
@@ -205,8 +222,9 @@ function infoTippy()
 
     tippy('#tippy-me', {
         offset: [0,7.5],
-        content: 'bigfoot#0001',
-        placement: 'top'
+        content: '<i class="fab fa-discord"></i> bigfoot#0001',
+        placement: 'top',
+        allowHTML: true
     });
 
     if (isMobile) return;

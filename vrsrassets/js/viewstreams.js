@@ -46,12 +46,12 @@ function loadStreams()
             
             if (game.length > 0)
             {
-                gameImage = `<div class="game-cover" title="${game[0].name}" style="background-color: ${game[0].color}; border-color: ${game[0].color};"><a href="${"/" + game[0].abbreviation}" target="_blank"><img src="https://www.speedrun.com/gameasset/${game[0]["api_id"]}/cover"></a></div>`;
+                gameImage = `<div class="game-cover" title="${game[0].name}" style="background-color: ${game[0].color}; border-color: ${game[0].color};"><a href="${"/" + game[0].abbreviation}"><img src="https://www.speedrun.com/gameasset/${game[0]["api_id"]}/cover"></a></div>`;
             }
 
             streamsInnerContainer.innerHTML += `<div class="column is-3 is-stream-col"><div id="stream-${streams[i].id}" class="stream-top">
                     <div>
-                        <a class="image is-16by9" href="${streamUrl}"><img src="https://static-cdn.jtvnw.net/previews-ttv/live_user_${streams[i].user_login}-320x180.jpg"></a>
+                        <a class="image is-16by9" href="${streamUrl}" target="_blank"><img src="https://static-cdn.jtvnw.net/previews-ttv/live_user_${streams[i].user_login}-320x180.jpg"></a>
                         ${gameImage}
                     </div>
                 </div>

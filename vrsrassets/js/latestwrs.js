@@ -110,7 +110,6 @@ function loadWR(id)
 
         for (var i = 0; i < variables.length; i++)
         {
-            console.log(variables[i].id);
             if (variables[i]["is-subcategory"])
             {
                 if (run.values[variables[i].id])

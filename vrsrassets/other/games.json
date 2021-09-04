@@ -647,5 +647,75 @@
             "j5vpyzq8",
             "8wkw0lq8"
         ]
+    },
+    {
+        "id": "aft",
+        "abbreviation": "aft",
+        "api_id": "268e49k6",
+        "name": "A Fisherman's Tale",
+        "twitch_name": "A Fisherman's Tale",
+        "hardware": "",
+        "color": "#6798DF",
+        "hoverColor": "#9cc4ff",
+        "darkColor": "#3874c9",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "cosmodread",
+        "abbreviation": "cd",
+        "api_id": "9d38w701",
+        "name": "Cosmodread",
+        "twitch_name": "Cosmodread",
+        "hardware": "",
+        "color": "#b1354f",
+        "hoverColor": "#CF495A",
+        "darkColor": "#71131F",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "myst_2020",
+        "abbreviation": "myst",
+        "api_id": "9d3rmggd",
+        "name": "Myst",
+        "twitch_name": "Myst (2020)",
+        "hardware": "",
+        "color": "#DAA129",
+        "hoverColor": "#EABE5F",
+        "darkColor": "#8C580D",
+        "ignoredVariables": [
+            {
+                "id": "kn0m6v3l",
+                "value": "jq6w9jjl"
+            }
+        ],
+        "verifiers": []
+    },
+    {
+        "id": "the_under_presents",
+        "abbreviation": "tup",
+        "api_id": "o1yj9vk1",
+        "name": "The Under Presents",
+        "twitch_name": "The Under Presents",
+        "hardware": "",
+        "color": "#DE6B34",
+        "hoverColor": "#F28C5B",
+        "darkColor": "#B8450E",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "bl2_vr",
+        "abbreviation": "bl2",
+        "api_id": "w6j79n76",
+        "name": "Borderlands 2 VR",
+        "twitch_name": "Borderlands 2 VR",
+        "hardware": "",
+        "color": "#FADC22",
+        "hoverColor": "#FBE871",
+        "darkColor": "#A37A0C",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]

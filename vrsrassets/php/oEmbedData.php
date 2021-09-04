@@ -8,7 +8,7 @@ $substr = substr($_SERVER['REQUEST_URI'], 1);
 if (strlen($substr) > 0)
 {
     $expl = explode('/', $substr);
-    $gameId = $expl[0];
+    $gameId = explode('?', $expl[0])[0];
     if (strpos($substr, '/run/') !== false)
     {
         $runId = $expl[2];
@@ -30,7 +30,7 @@ if (strlen($substr) > 0)
 }
 
 $game = null;
-$title = 'VR Speedrunning Leaderboards - VRSpeed.run';
+$title = 'VR Speedrunning Leaderboards';
 $image = '/vrsrassets/images/logo.png';
 $color = '#0165fe';
 $description = 'A central hub to view the leaderboards for the largest virtual reality games in speedrunning.';
@@ -39,17 +39,31 @@ $categoryId = '';
 
 foreach ($games as $_game)
 {
-    $game = $_game;
-    if ($game->abbreviation == $gameId)
+    if ($_game->abbreviation == $gameId)
     {
-        $title = $game->name . ' - VRSpeed.run';
+        $game = $_game;
+        
+        $title = $game->name . ' - VRSR';
+        $description = "Check out the leaderboard for " . $game->name . "!";
         $image = 'https://www.speedrun.com/gameasset/' . $game->api_id . '/cover';
         $color = $game->color;
 
         break;
     }
 }
-if ($title != 'VR Speedrunning Leaderboards - VRSpeed.run' &&  $runId != '')
+
+if ($game == null)
+{
+    if ($gameId == "streams")
+    {
+        $description = "Find and watch Twitch streams for all tracked VR speedgames.";
+    }
+    else if ($gameId == "leaderboard")
+    {
+        $description = "Browse the leaderboards of the top VR speedgames.";
+    }
+}
+else if ($runId != '')
 {
     $run = json_decode(file_get_contents('https://www.speedrun.com/api/v1/runs/'.$runId.'?embed=players,category,game'))->data;
 
@@ -84,9 +98,9 @@ if ($title != 'VR Speedrunning Leaderboards - VRSpeed.run' &&  $runId != '')
         $description = $run->category->data->name . ' completed in ' . $time . ' by ' . $player;
     }
 }
-else if ($title == 'VR Speedrunning Leaderboards - VRSpeed.run' &&  $user != '')
+else if ($user != '')
 {
-    $title = $user . ' - VRSpeed.run';
+    $title = $user . ' - VRSR';
     $description = 'User page for ' . $user;
 
     $get = file_get_contents('https://www.speedrun.com/themes/user/' . $user . '/image.png');

@@ -97,13 +97,13 @@ var gameInfoFavTippy;
 var platformsList;
 var timingMethodNames;
 
-var defaultIndex;
-
 var catNameRegex = /[^a-zA-Z0-9-_]+/ig;
 
 var lastIconsTippys = [];
 var flagAndModTippys = [];
 var gameInfoModTippys = [];
+
+var gameDataLeaderboardSecondLoad = false;
 
 function onGameDataLoad()
 {
@@ -155,6 +155,7 @@ function onGameDataLoad()
 	platformsList["4p9zq09r"] = "Oculus";
 	platformsList["83exvv9l"] = "Index";
 	platformsList["w89r4d6l"] = "WMR";
+	platformsList["o064o193"] = "Quest";
 	platformsList["8gej2n93"] = "PC";
 	platformsList["nzelkr6q"] = "PS4";
 	platformsList["wxeo2d6r"] = "PSN";
@@ -169,14 +170,6 @@ function onGameDataLoad()
 	loadAllGames();
 
 	defaultIndex = -1;
-	for (var i = 0; i < reorderedGamesArray.length; i++)
-	{
-		if (reorderedGamesArray[i].id == 'hla')
-		{
-			defaultIndex = i;
-			break;
-		}
-	}
 
 	if (getGame() != null)
 	{
@@ -191,6 +184,30 @@ function onGameDataLoad()
 		{
 			loadUser(getUser());
 			return;
+		}
+		else if (id == "leaderboard")
+		{
+
+			id = getCookie("last_game");
+			if (id == "")
+			{
+				if (!gameDataLeaderboardSecondLoad)
+				{
+					document.getElementById("fullpage-loading").style.display = "block";
+
+					gameDataLeaderboardSecondLoad = true;
+					setTimeout(function(){ onGameDataLoad() }, 1000); // delay to show the correct page on google :)
+					return;
+				}
+				else
+				{
+					document.getElementById("fullpage-loading").style.display = "none";
+				}
+
+				id = 'hla';
+			}
+			
+			replaceState(id);
 		}
 
 		var gameIndex = -1;
@@ -540,6 +557,8 @@ function loadGame(id, loadOrState = false, force = false)
     hideAllContainers();
 	mainContainer.style.display = "block";
 
+	setCookie('last_game', id, 10080); //7 days
+
 	if (getGame() !== id)
 	{
 		pushState(id);
@@ -552,10 +571,7 @@ function loadGame(id, loadOrState = false, force = false)
 		}
 		else
 		{	
-			if (!getRun())
-			{
-				setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
-			}
+			setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
 			loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState);
 		}
 

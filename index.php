@@ -13,6 +13,7 @@
 		<meta property="og:title" content="<?= $title; ?>">
 		<meta property="og:description" content="<?= $description; ?>">
 		<meta property="og:image" content="<?= $image; ?>">
+		<meta name="theme-color" content="<?= $color; ?>">
 
 		<meta property="twitter:card" content="summary">
 		<meta property="twitter:title" content="<?= $title; ?>">
@@ -20,11 +21,9 @@
 		<meta property="twitter:image" content="<?= $image; ?>">
 		
 		<meta name="description" content="<?= $description; ?>">
-		<meta name="theme-color" content="<?= $color; ?>">
+		<meta name="robots" content="index,follow">
 
-
-
-		<meta name="keywords" content="VR Speedrun,VR,Speedrun,Speedrunning,VR Speedrunning,VR Running,Super Hot VR,Super Hot Speedrun, Super Hot VR Speedrun,Half Life, Half-Life, Half-Life: Alyx, Half-Life Alyx, Alyx,, HLA, HL: Alyx, HL:A">
+		<meta name="keywords" content="VR Speedrun,VR,Speedrun,Speedrunning,VR Speedrunning,VR Running,Super Hot VR,Super Hot Speedrun,Super Hot VR Speedrun,SHVR Speedrun,SHVR,Half Life,Half-Life,Half-Life: Alyx,Half-Life Alyx,Alyx,HLA,HL: Alyx,HL:A,VRSpeed.run,VRS.R,VRSR,VRSpeed run">
 		
 		<link href="/assets/fa/css/all.css" rel="stylesheet">
 		<link rel="stylesheet" href="/assets/css/bulma.min.css">
@@ -35,11 +34,9 @@
 		<nav class="navbar is-fixed-top">
 			<div>
 				<div class="navbar-brand">
-					<a class="navbar-item" href="/">
+					<a class="navbar-item in-brand" href="/">
 						<img src="/vrsrassets/images/icon.png">
-						<span class="brand-text">
-							VRSPEED.RUN
-						</span>
+						<span class="brand-text">VRSPEED.RUN</span>
 					</a>
 					<a role="button" class="navbar-burger" onclick="navbarMobileToggle()">
 						<span aria-hidden="true"></span>
@@ -49,7 +46,8 @@
 				</div>
 				<div class="navbar-menu" id="navbar-menu">
 					<div class="navbar-start">
-						<a href="/streams" class="navbar-item">Streams</a>
+						<a href="/leaderboard" class="navbar-item" id="nav-leaderboard">Leaderboard</a>
+						<a href="/streams" class="navbar-item" id="nav-streams">Streams</a>
 						<div class="navbar-item has-dropdown">
 							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">Community <i class="fas fa-sort-down"></i></a>
 							<div class="navbar-dropdown">
@@ -88,10 +86,16 @@
 		</nav>
 		<section class="section">
 			<div id="error-container"></div>
+			<div id="fullpage-loading" class="loadingdiv" style="display: none;">
+				<div>
+					<div class="spinner"></div>
+					<div class="belowspinner">Loading...</div>
+				</div>
+			</div>
 			<div class="container" id="home-container" style="display: none;">
 				<div class="columns is-centered">
 					
-					<div class="column is-6 has-text-centered" style="margin-bottom: 1em;">
+					<div class="column is-6 has-text-centered">
 						<figure class="image site-header">
 							<img src="/vrsrassets/images/header.png">
 						</figure>
