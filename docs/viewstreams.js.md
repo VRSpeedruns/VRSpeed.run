@@ -1,5 +1,8 @@
 # viewstreams.js
 
+* [`onStreamsLoad()`](#onStreamsLoad)
+* [`loadStreams()`](#loadStreams)
+
 ## [View the file](https://github.com/VRSpeedruns/VRSR/blob/master/vrsrassets/js/viewstreams.js)
 
 ### `onStreamsLoad()`

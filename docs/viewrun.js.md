@@ -1,5 +1,13 @@
 # viewrun.js
 
+* [`onSingleRunLoad()`](#onSingleRunLoad)
+* [`openRun()`](#openRun)
+* [`closeRun()`](#closeRun)
+* [`loadSplits()`](#loadSplits)
+* [`msToTime()`](#msToTime)
+* [`msToTimeAll()`](#msToTimeAll)
+* [`msToTimeSingle()`](#msToTimeSingle)
+
 ## [View the file](https://github.com/VRSpeedruns/VRSR/blob/master/vrsrassets/js/viewrun.js)
 
 ### `onSingleRunLoad()`

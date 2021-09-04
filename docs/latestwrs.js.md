@@ -1,5 +1,10 @@
 # latestwrs.js
 
+* [`lastWRsLoad()`](#lastWRsLoad)
+* [`getLatest()`](#getLatest)
+* [`loadWRs()`](#loadWRs)
+* [`loadWR()`](#loadWR)
+
 ## [View the file](https://github.com/VRSpeedruns/VRSR/blob/master/vrsrassets/js/latestwrs.js)
 
 ### `latestWRsLoad()`

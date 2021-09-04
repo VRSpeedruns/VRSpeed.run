@@ -1,5 +1,25 @@
 # gamedata.js
 
+* [`onGameDataLoad()`](#onGameDataLoad)
+* [`loadAllGames()`](#loadAllGames)
+* [`setEvents()`](#setEvents)
+* [`toggleGameSelector()`](#toggleGameSelector)
+* [`gameSelectorTypeDelay()`](#gameSelectorTypeDelay)
+* [`onGameChange()`](#onGameChange)
+* [`loadGame()`](#loadGame)
+* [`loadVariables()`](#loadVariables)
+* [`displayCategoryTabs()`](#displayCategoryTabs)
+* [`miscTabToggle()`](#miscTabToggle)
+* [`displayCategory()`](#displayCategory)
+* [`displayCategoryVariables()`](#displayCategoryVariables)
+* [`setVariable()`](#setVariable)
+* [`loadRuns()`](#loadRuns)
+* [`gameFavToggle()`](#gameFavToggle)
+* [`nth()`](#nth)
+* [`timeAgo()`](#timeAgo)
+* [`runTimeFormat()`](#runTimeFormat)
+* [`scrollIfNeeded()`](#scrollIfNeeded)
+
 ## [View the file](https://github.com/VRSpeedruns/VRSR/blob/master/vrsrassets/js/gamedata.js)
 
 ### `onGameDataLoad()`

@@ -1,5 +1,23 @@
 # main.js
 
+* [`onLoad()`](#onLoad)
+* [`setMainEvents()`](#setMainEvents)
+* [`pushState()`, `replaceState()`](#pushState-replaceState)
+* [`setHash()`, `getHash()`](#setHash-getHash)
+* [`getGame()`](#getGame)
+* [`getRun()`](#getRun)
+* [`getUser()`](#getUser)
+* [`backFixUrl()`](#backFixUrl)
+* [`navbarMobileToggle()`, `toggleNavDropdown()`](#navbarMobileToggle-toggleNavDropdown)
+* [`hideAllContainers()`](#hideAllContainers)
+* [`infoTippy()`](#infoTippy)
+* [`getCardHTML()`](#getCardHTML)
+* [`makeUnique()`](#makeUnique)
+* [`get()`](#get)
+* [`getErrorCheck()`](#getErrorCheck)
+* [`sendErrorNotification()`, `closeErrorNotification()`](#sendErrorNotification-closeErrorNotification)
+* [`setCookie()`, `getCookie()`](#setCookie-getCookie)
+
 ## [View the file](https://github.com/VRSpeedruns/VRSR/blob/master/vrsrassets/js/main.js)
 
 ### `onLoad()`

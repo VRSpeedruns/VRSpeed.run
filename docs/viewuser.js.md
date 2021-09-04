@@ -1,5 +1,13 @@
 # viewuser.js
 
+* [`onUserLoad()`](#onUserLoad)
+* [`loadUser()`](#loadUser)
+* [`loadUserRuns()`](#loadUserRuns)
+* [`loadUserModeratorOf()`](#loadUserModeratorOf)
+* [`loadUserRounCount()`](#loadUserRounCount)
+* [`setUserRunContainerSize()`](#setUserRunContainerSize)
+* [`openUserRun()`](#openUserRun)
+
 ## [View the file](https://github.com/VRSpeedruns/VRSR/blob/master/vrsrassets/js/viewuser.js)
 
 ### `onUserLoad()`
