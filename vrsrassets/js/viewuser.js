@@ -229,6 +229,19 @@ function loadUserRuns(id)
             {
                 var run = games[i].runs[k];
 
+                //check to see if variable/value combo is ignored
+                var ignored = false;
+                for (var m = 0; m < thisGame.ignoredVariables.length; m++)
+                {
+                    if (run.values[thisGame.ignoredVariables[m].id] == thisGame.ignoredVariables[m].value)
+                    {
+                        //ignored run
+                        ignored = true;
+                        break;
+                    }
+                }
+                if (ignored) continue;
+
                 var place = nth(run.place);
                 if (place == "1st" || place == "2nd" || place == "3rd")
                 {
