@@ -31,9 +31,9 @@ if (strlen($substr) > 0)
 
 $game = null;
 $title = 'VR Speedrunning Leaderboards';
-$image = '/vrsrassets/images/logo.png';
-$color = '#0165fe';
-$description = 'A central hub to view the leaderboards for the largest virtual reality games in speedrunning.';
+$image = '/vrsrassets/images/icon.png';
+$color = '#FF9C00';
+$description = 'VRSpeed.run is central hub to view the leaderboards for the largest virtual reality games in speedrunning. Currently providing data for ' . count($games) . ' games!';
 
 $categoryId = '';
 
