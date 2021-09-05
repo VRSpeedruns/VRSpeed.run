@@ -717,5 +717,18 @@
         "darkColor": "#A37A0C",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "windlands_2",
+        "abbreviation": "wl2",
+        "api_id": "268e7pk6",
+        "name": "Windlands 2",
+        "twitch_name": "Windlands 2",
+        "hardware": "",
+        "color": "#0be3da",
+        "hoverColor": "#27FBF2",
+        "darkColor": "#03a19a",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
