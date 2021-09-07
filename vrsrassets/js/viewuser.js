@@ -385,8 +385,24 @@ function loadUserRunCount(link = "", count = 0)
 
         for (var i = 0; i < runs.length; i++)
         {
-            if (gamesArray.filter(e => e.id == runs[i].game.data.abbreviation).length > 0)
+            if (runs[i].status.status != "verified") continue;
+
+            var gameFilter = gamesArray.filter(e => e.id == runs[i].game.data.abbreviation);
+            if (gameFilter.length > 0)
             {
+                var game = gameFilter[0];
+                
+                var ignored = false;
+                for (var k = 0; k < game.ignoredVariables.length; k++)
+                {
+                    if (runs[i].values[game.ignoredVariables[k].id] == game.ignoredVariables[k].value)
+                    {
+                        ignored = true;
+                        break;
+                    }
+                }
+                if (ignored) continue;
+
                 count++;
             }
         }
