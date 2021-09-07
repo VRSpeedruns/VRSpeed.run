@@ -116,7 +116,7 @@
 							<p>VRSpeed.run is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
 							<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/g36fNmU3nA">VR Speedrunning Discord server</a>!</p>
 							<p>If there's a game that you believe belongs on here (or you see a bug/error), please ping <span id="tippy-me" class="is-tooltip-text">me</span> in the above Discord server.</p>
-							<p>For the latest VR world records and any updates regarding this site, check out the <a href="https://twitter.com/VRSpeedruns">VR Speedruns Twitter account</a>!</p>
+							<p>For the latest VR world records and any updates regarding this site, check out the <a href="https://twitter.com/VRSpeedruns">@VRSpeedruns Twitter account</a>!</p>
 							<p>I maintain this site in my spare time. If you'd like to support me, consider checking out <a href="https://ko-fi.com/bigfoott" target="_blank">my Ko-fi page</a>! 😊</p>
 						</div>
 					</div>

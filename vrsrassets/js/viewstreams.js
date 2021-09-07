@@ -60,7 +60,7 @@ function loadStreams()
                     <p><i class="fas fa-users"></i> <span class="has-text-weight-bold">${streams[i]["viewer_count"]}</span> watching <span class="has-text-weight-bold">${streams[i]["user_name"]}</span></p>
                 </div></div>`;
 
-                document.getElementById("streams-instance-style").innerHTML += `#stream-${streams[i].id}, #stream-${streams[i].id}:before, #stream-${streams[i].id}:after { background-color: ${game[0].darkColor}; }`
+                document.getElementById("streams-instance-style").innerHTML += `#stream-${streams[i].id}, #stream-${streams[i].id}:before, #stream-${streams[i].id}:after { background-color: ${game[0].color}; } #stream-${streams[i].id} > div { border: 2px solid ${game[0].color}; }`
         }
         
         streamsCount.innerText = `${count} streams currently live.`;
