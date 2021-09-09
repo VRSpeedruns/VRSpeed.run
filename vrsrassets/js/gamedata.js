@@ -42,7 +42,6 @@ var mainContainer;
 
 var reorderedGamesArray;
 
-var ready;
 var gameId;
 var currentCatIndex;
 var currentVariables;
@@ -608,8 +607,6 @@ function loadGame(id, loadOrState = false, force = false)
 		});
 		return;
 	}
-	
-	ready = false;
 
 	for (var i = 0; i < reorderedGamesArray.length; i++)
 	{
@@ -681,7 +678,7 @@ function loadGame(id, loadOrState = false, force = false)
 	}
 	gameInfoModTippys = [];
 
-	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories`)
+	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,categories.variables`)
 	.then((data) =>
 	{
 		if (!getErrorCheck(data)) return;
@@ -751,18 +748,10 @@ function loadGame(id, loadOrState = false, force = false)
 					"variables": []
 				};
 				catIndex[cats[i].id] = catCount++;
-
-				for (var j = 0; j < cats[i].links.length; j++)
-				{
-					if (cats[i].links[j].rel == "variables")
-					{
-						loadVariables(cats[i].links[j].uri, cats[i].id, loadOrState);
-
-						break;
-					}
-				}
+				loadVariables(cats[i].variables.data, cats[i].id, loadOrState, i + 1 == cats.length);
 			}
 		}
+		displayCategoryTabs(loadOrState);
 
 		get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=moderators`)
 		.then((data) =>
@@ -868,82 +857,67 @@ function loadGame(id, loadOrState = false, force = false)
 	});
 }
 
-function loadVariables(uri, category, loadOrState = false)
+function loadVariables(_vars, category, loadOrState = false)
 {
-	get(uri)
-	.then((data) =>
+	if (_vars.length > 0)
 	{
-		if (!getErrorCheck(data)) return;
+		var vars = [];
 
-		var _vars = (JSON.parse(data)).data;
-		
-		if (_vars.length > 0)
+		for (var i = 0; i < _vars.length; i++)
 		{
-			var vars = [];
-
-			for (var i = 0; i < _vars.length; i++)
+			if (_vars[i]["is-subcategory"] == true)
 			{
-				if (_vars[i]["is-subcategory"] == true)
-				{
-					vars.push(_vars[i]);
-				}
+				vars.push(_vars[i]);
 			}
+		}
 
-			if (vars.length > 0)
+		if (vars.length > 0)
+		{
+			var variables = [];
+			
+			var tempIndex = 0;
+			for (var i = 0; i < vars.length; i++)
 			{
-				var variables = [];
+				variables[i] = {
+					"id": vars[i].id,
+					"name": vars[i].name,
+					"default": vars[i].values.default,
+					"values": []
+				};
 				
 				var tempIndex = 0;
-				for (var i = 0; i < vars.length; i++)
+				for (var id in vars[i].values.values)
 				{
-					variables[i] = {
-						"id": vars[i].id,
-						"name": vars[i].name,
-						"default": vars[i].values.default,
-						"values": []
-					};
-					
-					var tempIndex = 0;
-					for (var id in vars[i].values.values)
+					var skip = false;
+					for (var k = 0; k < currentGame.ignoredVariables.length; k++)
 					{
-						var skip = false;
-						for (var k = 0; k < currentGame.ignoredVariables.length; k++)
-						{
-							if (currentGame.ignoredVariables[k].id != vars[i].id)
-							{
-								continue;
-							}
-							if (currentGame.ignoredVariables[k].value == id)
-							{
-								skip = true;
-								break;
-							}
-						}
-						if (skip)
+						if (currentGame.ignoredVariables[k].id != vars[i].id)
 						{
 							continue;
 						}
-
-						variables[i].values[tempIndex] = {
-							"id": id,
-							"name": vars[i].values.values[id].label
-						};
-
-						tempIndex++;
+						if (currentGame.ignoredVariables[k].value == id)
+						{
+							skip = true;
+							break;
+						}
 					}
+					if (skip)
+					{
+						continue;
+					}
+
+					variables[i].values[tempIndex] = {
+						"id": id,
+						"name": vars[i].values.values[id].label
+					};
+
+					tempIndex++;
 				}
-				
-				categories[catIndex[category]].variables = variables;
 			}
+			
+			categories[catIndex[category]].variables = variables;
 		}
-		progress++;
-		
-		if (progress == catCount && !ready)
-		{
-			ready = true;
-			displayCategoryTabs(loadOrState);
-		}
-	});
+	}
 }
 
 function displayCategoryTabs(loadOrState = false)
@@ -1152,11 +1126,6 @@ function setVariable(id, value, loadAfter = true)
 
 function loadRuns(id, variables, loadOrState = false)
 {
-	if (!ready){
-		console.error("Category tried to load before ready.")
-		return;
-	}
-
 	runsTable.style.display = 'none';
 	runsNone.style.display = 'none';
 	runsLoading.style.display = 'block';

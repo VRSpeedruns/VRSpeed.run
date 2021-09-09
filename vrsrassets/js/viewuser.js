@@ -118,7 +118,7 @@ function loadUser(username)
 
         userPronouns.innerHTML = user.pronouns;
         userAccounts.innerHTML = accounts;
-        userRunCount.innerHTML = '';
+        userRunCount.innerHTML = 'Total VR Runs: <b>...</b>';
 
         var accountTippy = [];
         if (user.twitch)
