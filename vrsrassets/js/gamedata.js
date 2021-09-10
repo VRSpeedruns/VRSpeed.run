@@ -1092,7 +1092,9 @@ function setVariable(id, value, loadAfter = true)
 		for (var i = 0; i < currentVariables.length; i++)
 		{
 			if (currentVariables[i].id == id)
-			{
+			{	
+				if (currentVariables[i].value == value) return;
+
 				document.getElementById(`${id}-${currentVariables[i].value}`).classList.remove("is-active");
 				document.getElementById(`${id}-${value}`).classList.add("is-active");
 
