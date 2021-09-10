@@ -570,6 +570,7 @@ function loadGame(id, loadOrState = false, force = false)
 		}
 		else
 		{	
+			document.title = `${currentGame.name} - VRSR`;
 			setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
 			loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState);
 		}
