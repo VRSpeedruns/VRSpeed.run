@@ -87,7 +87,7 @@ function loadWR(id)
         if (temp.assets.icon.uri)
 		    userIcon = `<img class="runs-usericon" src="${temp.assets.icon.uri}">`;
 
-        var date = timeAgo(new Date(run.submitted));
+        var date = `${timeAgo(new Date(run.submitted))} • <span style="font-size: 0.7em;">Verified ${timeAgo(new Date(run.status["verify-date"]))}</span>`
 
         var game = '';
         var abbr = '';

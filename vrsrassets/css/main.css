@@ -653,6 +653,14 @@ a.button:not(:last-child) {
 	
 	width: 100%;
 }
+.wr-date {
+	display: inline-flex;
+	align-items: center;
+}
+.wr-date > span {
+	padding-top: 2px;
+	padding-left: 4px;
+}
 
 @media only screen and (max-width: 1216px) {
 	.wr-game {
