@@ -88,12 +88,7 @@ function openRun(id, loadOrState = false)
     }
     runLoadAttempts++;
 
-    var ignorePlace = false;
-    if (runLoadAttempts == 2)
-    {
-        ignorePlace = true;
-    }
-    else if (runLoadAttempts > 2)
+    if (runLoadAttempts > 2)
     {
         sendErrorNotification(`There was an error when trying to load run with ID "${id}."`);
 
@@ -278,19 +273,6 @@ function openRun(id, loadOrState = false)
                 place = " - " + place;
             }
         }
-        else if (!ignorePlace)
-        {
-            loadRuns(categories[currentCatIndex].id, currentVariables);
-
-            if (isRetry)
-            {
-                loadGame(getGame());
-            }
-            else
-            {
-                return;
-            }
-        }
 
         var srcLink = run.weblink;
         var vidLink = '';
@@ -347,14 +329,12 @@ function openRun(id, loadOrState = false)
         runSingleDate.innerText = date;
         runSingleVerifyDate.innerText = verifyDate;
 
+        document.title = `${categories[currentCatIndex].name} in ${time} by ${rawPlayer} - ${game} - VRSR`;
+
         runSingleSrc.href = srcLink;
         runSingleVid.href = vidLink;
 
-        runSingleVidIcon.classList.remove('fab');
-        runSingleVidIcon.classList.remove('fas');
-        runSingleVidIcon.classList.remove('fa-youtube');
-        runSingleVidIcon.classList.remove('fa-twitch');
-        runSingleVidIcon.classList.remove('fa-video');
+        runSingleVidIcon.classList.remove('fab', 'fas', 'fa-youtube', 'fa-twitch', 'fa-video');
 
         runLoadLastAttempt = "";
 
@@ -365,8 +345,7 @@ function openRun(id, loadOrState = false)
 
         if (vidLink.includes("youtube.com") || vidLink.includes("youtu.be"))
         {
-            runSingleVidIcon.classList.add('fab');
-            runSingleVidIcon.classList.add('fa-youtube');
+            runSingleVidIcon.classList.add('fab', 'fa-youtube');
 
             if (!isMobile)
             {
@@ -379,8 +358,7 @@ function openRun(id, loadOrState = false)
         }
         else if (vidLink.includes("twitch.tv"))
         {
-            runSingleVidIcon.classList.add('fab');
-            runSingleVidIcon.classList.add('fa-twitch');
+            runSingleVidIcon.classList.add('fab', 'fa-twitch');
             
             if (!isMobile)
             {
@@ -393,8 +371,7 @@ function openRun(id, loadOrState = false)
         }
         else
         {
-            runSingleVidIcon.classList.add('fas');
-            runSingleVidIcon.classList.add('fa-video');
+            runSingleVidIcon.classList.add('fas', 'fa-video');
             if (!isMobile)
             {
                 tippy('#run-single-vid', {
