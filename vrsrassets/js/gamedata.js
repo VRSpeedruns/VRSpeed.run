@@ -678,7 +678,7 @@ function loadGame(id, loadOrState = false, force = false)
 	}
 	gameInfoModTippys = [];
 
-	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,categories.variables`)
+	get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=platforms,categories,categories.variables,categories.game,moderators`)
 	.then((data) =>
 	{
 		if (!getErrorCheck(data)) return;
@@ -730,11 +730,11 @@ function loadGame(id, loadOrState = false, force = false)
 		categories = [];
 		progress = 0;
 		catCount = 0;
-		
+
 		currentMods = [];
-		for (var id in game.moderators)
+		for (var id in game.categories.data[0].game.data.moderators)
 		{
-			currentMods[id] = game.moderators[id];
+			currentMods[id] = game.categories.data[0].game.data.moderators[id];
 		}
 
 		for (var i = 0; i < cats.length; i++)
@@ -753,107 +753,102 @@ function loadGame(id, loadOrState = false, force = false)
 		}
 		displayCategoryTabs(loadOrState);
 
-		get(`https://www.speedrun.com/api/v1/games/${gameId}?embed=moderators`)
-		.then((data) =>
+		
+		var mods = game.moderators.data;
+		
+		var gameInfoModTippysInfo = [];
+
+		gameInfoModerators.innerHTML = 'Moderated by:<br>';
+		for (var i = 0; i < mods.length; i++)
 		{
-			if (!getErrorCheck(data)) return;
+			var name = getGradientName(mods[i].names.international, mods[i]["name-style"]);
 
-			var mods = (JSON.parse(data)).data.moderators.data;
+			var modIcon = '';
+			var flag = '';
 
-			var gameInfoModTippysInfo = [];
-
-			gameInfoModerators.innerHTML = 'Moderated by:<br>';
-			for (var i = 0; i < mods.length; i++)
+			if (currentMods[mods[i].id] == "super-moderator")
 			{
-				var name = getGradientName(mods[i].names.international, mods[i]["name-style"]);
-
-				var modIcon = '';
-				var flag = '';
-
-				if (currentMods[mods[i].id] == "super-moderator")
+				if (currentGame.verifiers.includes(mods[i].id))
 				{
-					if (currentGame.verifiers.includes(mods[i].id))
-					{
-						modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/verifier.png">`;
-
-						gameInfoModTippysInfo.push({
-							"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
-							"text": "Verifier"
-						});
-					}
-					else
-					{
-						modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/super-mod.png">`;
-
-						gameInfoModTippysInfo.push({
-							"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
-							"text": "Super Mod"
-						});
-					}
-				}
-				else //"moderator"
-				{
-					modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/mod.png">`;
+					modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/verifier.png">`;
 
 					gameInfoModTippysInfo.push({
 						"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
-						"text": "Mod"
+						"text": "Verifier"
 					});
 				}
-
-				if (mods[i].location !== null)
+				else
 				{
-					flag = `<img id="gameinfo-mods-${mods[i].id}-userFlag" class="runs-flag small" src="https://www.speedrun.com/images/flags/${mods[i].location.country.code}.png">`;
+					modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/super-mod.png">`;
 
 					gameInfoModTippysInfo.push({
-						"id": `#gameinfo-mods-${mods[i].id}-userFlag`,
-						"text": mods[i].location.country.names.international
+						"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
+						"text": "Super Mod"
 					});
 				}
+			}
+			else //"moderator"
+			{
+				modIcon = `<img id="gameinfo-mods-${mods[i].id}-modIcon" class="runs-usericon small" src="https://www.speedrun.com/images/icons/mod.png">`;
 
-				var userIcon = '';
-				if (mods[i].assets.icon.uri)
-					userIcon = `<img class="runs-usericon small" src="${mods[i].assets.icon.uri}">`;
-
-				var _comma = '';
-				if (i + 1 < mods.length)
-					_comma = ',&nbsp;'
-
-				gameInfoModerators.innerHTML += `<span><a class="player-link thin" id="gameinfo-mods-${mods[i].id}-card" href="/user/${mods[i].names.international}">${modIcon}${flag}${userIcon}${name}</a>${_comma}</span>`;
-							
 				gameInfoModTippysInfo.push({
-					"id": `#gameinfo-mods-${mods[i].id}-card`,
-					"text": getCardHTML(mods[i].names.international, mods[i].assets.image.uri, `${flag.replace(" small", "")}${userIcon.replace(" small", "")}${name}` , getAverageColor(mods[i]["name-style"]))
+					"id": `#gameinfo-mods-${mods[i].id}-modIcon`,
+					"text": "Mod"
 				});
 			}
 
-			if (!isMobile)
+			if (mods[i].location !== null)
 			{
-				for (var i = 0; i < gameInfoModTippysInfo.length; i++)
+				flag = `<img id="gameinfo-mods-${mods[i].id}-userFlag" class="runs-flag small" src="https://www.speedrun.com/images/flags/${mods[i].location.country.code}.png">`;
+
+				gameInfoModTippysInfo.push({
+					"id": `#gameinfo-mods-${mods[i].id}-userFlag`,
+					"text": mods[i].location.country.names.international
+				});
+			}
+
+			var userIcon = '';
+			if (mods[i].assets.icon.uri)
+				userIcon = `<img class="runs-usericon small" src="${mods[i].assets.icon.uri}">`;
+
+			var _comma = '';
+			if (i + 1 < mods.length)
+				_comma = ',&nbsp;'
+
+			gameInfoModerators.innerHTML += `<span><a class="player-link thin" id="gameinfo-mods-${mods[i].id}-card" href="/user/${mods[i].names.international}">${modIcon}${flag}${userIcon}${name}</a>${_comma}</span>`;
+						
+			gameInfoModTippysInfo.push({
+				"id": `#gameinfo-mods-${mods[i].id}-card`,
+				"text": getCardHTML(mods[i].names.international, mods[i].assets.image.uri, `${flag.replace(" small", "")}${userIcon.replace(" small", "")}${name}` , getAverageColor(mods[i]["name-style"]))
+			});
+		}
+
+		if (!isMobile)
+		{
+			for (var i = 0; i < gameInfoModTippysInfo.length; i++)
+			{
+				if (gameInfoModTippysInfo[i].id.endsWith("-card"))
 				{
-					if (gameInfoModTippysInfo[i].id.endsWith("-card"))
-					{
-						gameInfoModTippys[i] = tippy(gameInfoModTippysInfo[i].id, {
-							content: gameInfoModTippysInfo[i].text,
-							placement: 'bottom',
-							delay: [700, 0],
-							offset: [0, 0],
-							theme: 'clear',
-							allowHTML: true,
-							interactive: true,
-							appendTo: document.body
-						});
-					}
-					else
-					{
-						gameInfoModTippys[i] = tippy(gameInfoModTippysInfo[i].id, {
-							content: gameInfoModTippysInfo[i].text,
-							placement: 'top'
-						});
-					}
+					gameInfoModTippys[i] = tippy(gameInfoModTippysInfo[i].id, {
+						content: gameInfoModTippysInfo[i].text,
+						placement: 'bottom',
+						delay: [700, 0],
+						offset: [0, 0],
+						theme: 'clear',
+						allowHTML: true,
+						interactive: true,
+						appendTo: document.body
+					});
+				}
+				else
+				{
+					gameInfoModTippys[i] = tippy(gameInfoModTippysInfo[i].id, {
+						content: gameInfoModTippysInfo[i].text,
+						placement: 'top'
+					});
 				}
 			}
-		});
+		}
 	});
 }
 
