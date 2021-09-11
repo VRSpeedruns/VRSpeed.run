@@ -27,12 +27,16 @@ function onLoad()
     {
         replaceState(null);
         latestWRsLoad();
-        document.getElementsByTagName("nav")[0].classList.add("is-home-page");
+        document.getElementsByTagName("nav")[0].classList.add("smaller");
     }
     else if (getGame() == 'streams')
     {
         //document.getElementById("nav-leaderboard").style.display = "none";
         document.getElementById("nav-streams").classList.add("current-page");
+    }
+    else if (getGame() == 'about')
+    {
+        document.getElementsByTagName("nav")[0].classList.add("smaller");
     }
     else
     {

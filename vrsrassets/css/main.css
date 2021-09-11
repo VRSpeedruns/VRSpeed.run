@@ -64,6 +64,12 @@ a.thick-underline:hover {
 	text-decoration: underline solid 2px;
 }
 
+code {
+	background-color: var(--button-background-hover-color);
+	border-radius: 4px;
+	color: var(--text-color);
+}
+
 /* ---------- Button ---------- */
 
 .button.is-dark {
@@ -1108,7 +1114,7 @@ a.button:not(:last-child) {
 		max-width: 960px;
 		display: flex;
 	}
-	.navbar.is-home-page > div {
+	.navbar.smaller > div {
 		max-width: 800px;
 	}
 }
@@ -1116,7 +1122,7 @@ a.button:not(:last-child) {
 	.navbar > div {
 		max-width: 1152px;
 	}
-	.navbar.is-home-page > div {
+	.navbar.smaller > div {
 		max-width: 960px;
 	}
 }
@@ -1124,7 +1130,7 @@ a.button:not(:last-child) {
 	.navbar > div {
 		max-width: 1344px;
 	}
-	.navbar.is-home-page > div {
+	.navbar.smaller > div {
 		max-width: 1120px;
 	}
 }
@@ -1306,7 +1312,7 @@ a.button:not(:last-child) {
 	height: 100%;
 }
 .box.about > p:not(:last-child) {
-	margin-bottom: 0.9rem;
+	margin-bottom: 0.7rem;
 }
 
 .divider {

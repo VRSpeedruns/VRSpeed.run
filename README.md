@@ -1,3 +1,5 @@
+[![VRSpeed.run](https://vrspeed.run/vrsrassets/images/header.png)](https://vrspeed.run)
+
 ## About
 
 VRSpeed.run is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.
