@@ -30,6 +30,7 @@ It then determines what page the user is currently on.
 
 * It gets the current game with `getGame()` (if it exists).
 * If it's `/streams`, it loads the streams page with `loadStreams()`.
+* If it's `/about`, it hides all containers and displays the about container.
 * If it's a user page, load the user page with `loadUser(getUser())`.
 * If it's `/leaderboard`, load the last game (if it exists).
 
