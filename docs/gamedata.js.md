@@ -90,7 +90,8 @@ else if ((!loadOrState || (currentGame !== undefined && currentGame.abbreviation
     }
     else
     {	
-        //Set the page ID/anchor in the URL to the current category, then load the runs for that category.
+        //Set the page name, set the ID/anchor in the URL to the current category, then load the runs for that category.
+		document.title = `${currentGame.name} - VRSR`;
         setHash(categories[currentCatIndex].name.replace(/ /g, '_').replace(catNameRegex, ''));
         loadRuns(categories[currentCatIndex].id, currentVariables, loadOrState);
     }
@@ -107,17 +108,23 @@ Then we determine if this game is in a user's favorites, and change the style of
 
 Then we set the title of the page to the name of the game, set the proper CSS variables to the game's colors, and various page elements like game name and links to the correct values. Then we remove old Tippys (if any).
 
-Now, it hits the Speedrun.com API's `games` endpoint to get important game data. We then set the game's image and determine the game's timing methods (and adjust the run table accordingly). We then display the game's platforms, and store the IDs of the game's moderators.
+Now, it hits the Speedrun.com API's `games` endpoint to get important game data. We then set the game's image and determine the game's timing methods (and adjust the run table accordingly).
 
-We then loop through all the game's categories, store them in the `categories[]` array, and if the category has variables, call `loadVariables()` using that category's variables URL.
+This API call embeds several things (`platforms,categories,categories.variables,categories.game,moderators`), which allows us to get all relevant game information in a single call:
 
-We then hit the Speedrun.com API's `games` endpoint again, but embed moderators, allowing us to get full user data for each moderator. We then load that user data and display it on the game info panel, and add relevant Tippys.
+* Platforms
+* Categories + Category Variables
+* Moderators + Full user information about each
+
+By embedding the game within the categories, it allows us to get the unembedded moderator IDs and their respective roles (mod/super mod). It goes into the first category and store the id/role pair in an array.
+
+We then loop through all the game's categories, store them in the `categories[]` array, and if the category has variables, call `loadVariables()` using that category's variables object. After the loop, it calls `displayCategoryTabs()`.
+
+We then loop through all moderator objects in the embedded user list and load them into the game info sidebar with their correct name color/icon/flag/etc).
 
 ### `loadVariables()`
 
-We hit the Speedrun.com API using the URL provided from `loadGame()`. We then loop through all the variables, and if they're a subcategory we add it to the `variables` property of the relevant category object.
-
-This function also tracks the amount of category variables loaded, and if we've loaded them all, we call `displayCategoryTabs()`.
+We hit the Speedrun.com API using the variables object provided from `loadGame()`. We then loop through all the variables, and if they're a subcategory we add it to the `variables` property of the relevant category object.
 
 ### `displayCategoryTabs()`
 
