@@ -1017,7 +1017,7 @@ a.button:not(:last-child) {
 	margin-top: 2px;
 }
 .brand-text, .brand-text:hover, .brand-text-top {
-	margin-left: 0.5rem;
+	margin-left: 0.35rem;
 	
 	font-family: 'Squada One';
 	color: var(--text-color);

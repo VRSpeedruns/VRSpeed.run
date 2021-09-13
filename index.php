@@ -234,7 +234,7 @@
 								<div class="run-single-info-other">
 									<div id="run-single-comment-outer"><span id="run-single-comment"></span></div>
 									<p>Played <span id="run-single-platform"></span> on <span id="run-single-date"></span></p>
-									<p>Run verified by <span id="run-single-verifier"></span> on <span id="run-single-verifydate"></span></p>
+									<p id="run-single-verifyreject"></p>
 								</div>
 							</div>
 							<div id="run-single-splits-container">
@@ -351,7 +351,7 @@
 				</div>
 			</div>
 			<div class="footer-bottom">
-				<p>© 2019-<?= date("Y") ?> <a href="https://bigft.io" target="_blank">Bigft.io</a></p>
+				<p>© 2019-<?= date("Y") ?> <a href="https://bigft.io" target="_blank">bigft.io</a></p>
 			</div>
 
 			<div id="js-mobile-check" class="is-hidden-mobile"></div>

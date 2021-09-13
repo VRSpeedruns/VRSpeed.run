@@ -8,9 +8,8 @@ var runSingleRunner;
 var runSinglePlace;
 var runSingleComment;
 var runSinglePlatform;
-var runSingleVerifier;
 var runSingleDate;
-var runSingleVerifyDate;
+var runSingleVerifyReject;
 
 var runSingleSrc;
 var runSingleVid;
@@ -48,9 +47,8 @@ function onSingleRunLoad()
     runSinglePlace = document.getElementById("run-single-place");
     runSingleComment = document.getElementById("run-single-comment");
     runSinglePlatform = document.getElementById("run-single-platform");
-    runSingleVerifier = document.getElementById("run-single-verifier");
+    runSingleVerifyReject = document.getElementById("run-single-verifyreject");
     runSingleDate = document.getElementById("run-single-date");
-    runSingleVerifyDate = document.getElementById("run-single-verifydate");
 
     runSingleSrc = document.getElementById("run-single-src");
     runSingleVid = document.getElementById("run-single-vid");
@@ -327,7 +325,6 @@ function openRun(id, loadOrState = false)
         runSingleComment.innerText = comment;
         runSinglePlatform.innerHTML = platform;
         runSingleDate.innerText = date;
-        runSingleVerifyDate.innerText = verifyDate;
 
         document.title = `${categories[currentCatIndex].name} in ${time} by ${rawPlayer} - ${game} - VRSR`;
 
@@ -385,8 +382,6 @@ function openRun(id, loadOrState = false)
         boxRuns.style.display = "none";
         boxSingleRun.style.display = "block";
         mainLoading.style.display = "none";
-
-        runSingleVerifier.innerText = '...';
 
         get(`https://www.speedrun.com/api/v1/users/${run.status.examiner}`)
         .then((__data) =>
@@ -447,7 +442,17 @@ function openRun(id, loadOrState = false)
             if (_data.assets.icon.uri)
                 verifierIcon = `<img class="runs-usericon" src="${_data.assets.icon.uri}"">`;
                 
-            runSingleVerifier.innerHTML = `<a class="player-link" href="/user/${_data.names.international}">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
+            var verifier = `<a class="player-link" href="/user/${_data.names.international}">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
+
+            if (run.status.status == "verified")
+            {
+                runSingleVerifyReject.innerHTML = `Run verified by <span id="run-single-verifier">${verifier}</span> on ${verifyDate}.`;
+            }
+            else if (run.status.status == "rejected")
+            {
+                runSingleVerifyReject.innerHTML = `<i class="fas fa-exclamation-circle" style="color: #F14668"></i> Run rejected by <span id="run-single-verifier">${verifier}</span>.`;
+                runSinglePlace.innerHTML = ' - Rejected'
+            }
 
             singleFlagAndModTippysInfo.push({
                 "id": `#run-single-verifier`,

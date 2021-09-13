@@ -87,7 +87,15 @@ function loadWR(id)
         if (temp.assets.icon.uri)
 		    userIcon = `<img class="runs-usericon" src="${temp.assets.icon.uri}">`;
 
-        var date = `${timeAgo(new Date(run.submitted))} • <span style="font-size: 0.7em;">Verified ${timeAgo(new Date(run.status["verify-date"]))}</span>`
+        var date = timeAgo(new Date(run.submitted));
+        if (run.status["verify-date"])
+        {
+            date += ` • <span style="font-size: 0.7em;">Verified ${timeAgo(new Date(run.status["verify-date"]))}</span>`;
+        }
+        else
+        {
+            date += ` • <span style="font-size: 0.7em;"><i class="fas fa-exclamation-circle" style="color: #F14668;"></i> Run was rejected.</span>`;
+        }
 
         var game = '';
         var abbr = '';
