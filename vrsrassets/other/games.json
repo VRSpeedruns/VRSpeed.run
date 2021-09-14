@@ -730,5 +730,83 @@
         "darkColor": "#03a19a",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "thrill_of_the_fight_vr_boxing",
+        "abbreviation": "totf",
+        "api_id": "pdvzy946",
+        "name": "Thrill Of the Fight: VR Boxing",
+        "twitch_name": "Thrill Of the Fight: VR Boxing",
+        "hardware": "",
+        "color": "#FDED52",
+        "hoverColor": "#fff382",
+        "darkColor": "#c5a81a",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "arcaxer",
+        "abbreviation": "arc",
+        "api_id": "9d38o091",
+        "name": "Arcaxer",
+        "twitch_name": "Arcaxer",
+        "hardware": "",
+        "color": "#26BCC6",
+        "hoverColor": "#4fe6f0",
+        "darkColor": "#10939c",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "creed_rise_to_glory",
+        "abbreviation": "creed",
+        "api_id": "3dx24wv1",
+        "name": "Creed Rise To Glory",
+        "twitch_name": "Creed Rise To Glory",
+        "hardware": "",
+        "color": "#E6B400",
+        "hoverColor": "#facc28",
+        "darkColor": "#c49a00",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "dead_man_dlc",
+        "abbreviation": "asdm",
+        "api_id": "3dxorydy",
+        "name": "Arizona Sunshine: Dead Man DLC",
+        "twitch_name": "Arizona Sunshine",
+        "hardware": "",
+        "color": "#ED821A",
+        "hoverColor": "#f29941",
+        "darkColor": "#c2650c",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "drunkn_bar_fight",
+        "abbreviation": "dbf",
+        "api_id": "yd4kmgw6",
+        "name": "Drunkn Bar Fight",
+        "twitch_name": "Drunkn Bar Fight",
+        "hardware": "",
+        "color": "#0088FF",
+        "hoverColor": "#38a2ff",
+        "darkColor": "#0063ba",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "gorilla_tag",
+        "abbreviation": "gt",
+        "api_id": "ldejjmj1",
+        "name": "Gorilla Tag",
+        "twitch_name": "Gorilla Tag",
+        "hardware": "",
+        "color": "#00A40C",
+        "hoverColor": "#1ed62b",
+        "darkColor": "#007308",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
