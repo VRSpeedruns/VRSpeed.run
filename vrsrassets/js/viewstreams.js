@@ -46,7 +46,7 @@ function loadStreams()
             
             if (game.length > 0)
             {
-                gameImage = `<div class="game-cover" title="${game[0].name}" style="background-color: ${game[0].color}; border-color: ${game[0].color};"><a href="${"/" + game[0].abbreviation}"><img src="https://www.speedrun.com/gameasset/${game[0]["api_id"]}/cover"></a></div>`;
+                gameImage = `<div class="game-cover" title="${game[0].name}" style="background-color: ${gameColors[game[0].color].color}; border-color: ${gameColors[game[0].color].color};"><a href="${"/" + game[0].abbreviation}"><img src="https://www.speedrun.com/gameasset/${game[0]["api_id"]}/cover"></a></div>`;
             }
 
             streamsInnerContainer.innerHTML += `<div class="column is-3 is-stream-col"><div id="stream-${streams[i].id}" class="stream-top">
@@ -60,7 +60,7 @@ function loadStreams()
                     <p><i class="fas fa-users"></i> <span class="has-text-weight-bold">${streams[i]["viewer_count"]}</span> watching <span class="has-text-weight-bold">${streams[i]["user_name"]}</span></p>
                 </div></div>`;
 
-                document.getElementById("streams-instance-style").innerHTML += `#stream-${streams[i].id}, #stream-${streams[i].id}:before, #stream-${streams[i].id}:after { background-color: ${game[0].color}; } #stream-${streams[i].id} > div { border: 2px solid ${game[0].color}; }`
+                document.getElementById("streams-instance-style").innerHTML += `#stream-${streams[i].id}, #stream-${streams[i].id}:before, #stream-${streams[i].id}:after { background-color: ${gameColors[game[0].color].color}; } #stream-${streams[i].id} > div { border: 2px solid ${gameColors[game[0].color].color}; }`
         }
         
         streamsCount.innerText = `${count} streams currently live.`;
