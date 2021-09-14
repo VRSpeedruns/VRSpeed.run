@@ -1,5 +1,6 @@
 <?php
 $games = json_decode(file_get_contents('vrsrassets/other/games.json'));
+$gameColors = json_decode(file_get_contents('vrsrassets/other/colors.json'));
 	
 $gameId = '';
 $runId = '';
@@ -46,7 +47,8 @@ foreach ($games as $_game)
         $title = $game->name . ' - VRSR';
         $description = "Check out the leaderboard for " . $game->name . "!";
         $image = 'https://www.speedrun.com/gameasset/' . $game->api_id . '/cover';
-        $color = $game->color;
+        $_color = $game->color;
+        $color = $gameColors->$_color->color;
 
         break;
     }

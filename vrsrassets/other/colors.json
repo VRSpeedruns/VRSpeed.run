@@ -1,0 +1,117 @@
+{
+    "default": {
+        "color": "#FF9C00",
+        "hoverColor": "#FFBB4D",
+        "darkColor": "#D18100"
+    },
+    "red": {
+        "color": "#ff2f2f",
+        "hoverColor": "#ff4e4e",
+        "darkColor": "#cc1b1b"
+    },
+    "maroon_red": {
+        "color": "#c73862",
+        "hoverColor": "#e34b78",
+        "darkColor": "#ab264d"
+    },
+    "maroon": {
+        "color": "#ad4c50",
+        "hoverColor": "#d1696d",
+        "darkColor": "#8a373a"
+    },
+    "light_orange": {
+        "color": "#F79F41",
+        "hoverColor": "#ffb96e",
+        "darkColor": "#c7751e"
+    },
+    "orange": {
+        "color": "#FF862C",
+        "hoverColor": "#ffa058",
+        "darkColor": "#d96b1a"
+    },
+    "beige": {
+        "color": "#FDEA8E",
+        "hoverColor": "#fff3b8",
+        "darkColor": "#ca9d3a"
+    },
+    "light_yellow": {
+        "color": "#FDED52",
+        "hoverColor": "#fff382",
+        "darkColor": "#c5a81a"
+    },
+    "yellow": {
+        "color": "#FDCB1C",
+        "hoverColor": "#ffda57",
+        "darkColor": "#bd9711"
+    },
+    "dark_yellow": {
+        "color": "#E6B400",
+        "hoverColor": "#facc28",
+        "darkColor": "#c49a00"
+    },
+    "yellow_green": {
+        "color": "#ceef79",
+        "hoverColor": "#e1ff95",
+        "darkColor": "#799c1f"
+    },
+    "light_green": {
+        "color": "#70BD6A",
+        "hoverColor": "#9be695",
+        "darkColor": "#458a3f"
+    },
+    "green": {
+        "color": "#00A40C",
+        "hoverColor": "#1ed62b",
+        "darkColor": "#007308"
+    },
+    "teal": {
+        "color": "#26BCC6",
+        "hoverColor": "#4fe6f0",
+        "darkColor": "#10939c"
+    },
+    "dark_teal": {
+        "color": "#3C8FA8",
+        "hoverColor": "#56AEC9",
+        "darkColor": "#20738c"
+    },
+    "light_blue": {
+        "color": "#6798DF",
+        "hoverColor": "#9cc4ff",
+        "darkColor": "#3874c9"
+    },
+    "gray_blue": {
+        "color": "#5E91B9",
+        "hoverColor": "#85bbe6",
+        "darkColor": "#436f91"
+    },
+    "blue": {
+        "color": "#0088FF",
+        "hoverColor": "#38a2ff",
+        "darkColor": "#0063ba"
+    },
+    "blue_purple": {
+        "color": "#8a6cd6",
+        "hoverColor": "#a18ade",
+        "darkColor": "#4c2f94"
+    },
+    "dark_blue_purple": {
+        "color": "#515bd0",
+        "hoverColor": "#6f79ed",
+        "darkColor": "#3640b5"
+    },
+    "purple": {
+        "color": "#b142e6",
+        "hoverColor": "#b35ddc",
+        "darkColor": "#70119e"
+    },
+    "pink": {
+        "color": "#F454FF",
+        "hoverColor": "#F99EFF",
+        "darkColor": "#d536e0"
+    },
+    "dark_pink": {
+        "color": "#F01B6A",
+        "hoverColor": "#f74084",
+        "darkColor": "#c2172d"
+    }
+}

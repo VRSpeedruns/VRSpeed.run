@@ -357,6 +357,7 @@
 			<div id="js-mobile-check" class="is-hidden-mobile"></div>
 			<script type="text/javascript">
 				var gamesArray = <?= json_encode($games); ?>;
+				var gameColors = <?= json_encode($gameColors); ?>;
 				var isMobile = window.getComputedStyle(document.getElementById("js-mobile-check")).getPropertyValue("display") == "none";
 				var runLoadedCategory = "<?= $categoryId; ?>";
 				var allContainers = [];

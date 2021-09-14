@@ -314,8 +314,7 @@ function loadAllGames()
 			{
 				selected = ' is-selected';
 			}
-
-			var circleHTML = `<div class="circle" style="background-color: ${game.color}"></div>`;
+			var circleHTML = `<div class="circle" style="background-color: ${gameColors[game.color].color}"></div>`;
 
 			pcGamesContainer.innerHTML += `<div class="game${selected}" id="game-${game.abbreviation}" onclick="onGameChange('${game.abbreviation}', true); toggleGameSelector();" ${bottomGap}title="${game.name}">${game.name}${fav}${circleHTML}</div>`;
 		}
@@ -347,7 +346,7 @@ function loadAllGames()
 			selected = ' is-selected';
 		}
 
-		var circleHTML = `<div class="circle" style="background-color: ${gamesArray[i].color}"></div>`;
+		var circleHTML = `<div class="circle" style="background-color: ${gameColors[gamesArray[i].color].color}"></div>`;
 
 		pcGamesContainer.innerHTML += `<div class="game${selected}" id="game-${gamesArray[i].abbreviation}" onclick="onGameChange('${gamesArray[i].abbreviation}', true); toggleGameSelector();" title="${gamesArray[i].name}">${gamesArray[i].name}${letterHTML}${circleHTML}</div>`;
 	}
@@ -549,9 +548,9 @@ function loadGame(id, loadOrState = false, force = false)
 {
 	if (!id)
 	{
-		document.documentElement.style.setProperty('--primary-color', '#FF9C00')
-		document.documentElement.style.setProperty('--primary-color-hover', '#FFBB4D')
-		document.documentElement.style.setProperty('--primary-color-hover', '#D18100')
+		document.documentElement.style.setProperty('--primary-color', gameColors.default.color)
+		document.documentElement.style.setProperty('--primary-color-hover', gameColors.default.hoverColor)
+		document.documentElement.style.setProperty('--primary-color-dark', gameColors.default.darkColor)
 
 		hideAllContainers();
 		homeContainer.style.display = "block";
@@ -670,9 +669,9 @@ function loadGame(id, loadOrState = false, force = false)
 		mainLoading.style.display = "block";
 	}
 	
-	document.documentElement.style.setProperty('--primary-color', currentGame.color)
-	document.documentElement.style.setProperty('--primary-color-hover', currentGame.hoverColor)
-	document.documentElement.style.setProperty('--primary-color-dark', currentGame.darkColor)
+	document.documentElement.style.setProperty('--primary-color', gameColors[currentGame.color].color)
+	document.documentElement.style.setProperty('--primary-color-hover', gameColors[currentGame.color].hoverColor)
+	document.documentElement.style.setProperty('--primary-color-dark', gameColors[currentGame.color].darkColor)
 
 	gameInfoName.innerText = currentGame.name;
 	gameInfoImage.src = '';
