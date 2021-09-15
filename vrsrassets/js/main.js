@@ -34,7 +34,7 @@ function onLoad()
         //document.getElementById("nav-leaderboard").style.display = "none";
         document.getElementById("nav-streams").classList.add("current-page");
     }
-    else if (getGame() == 'about')
+    else if (getGame() == 'about' || getGame() == 'status')
     {
         document.getElementsByTagName("nav")[0].classList.add("smaller");
     }
@@ -44,10 +44,13 @@ function onLoad()
     }
 
     infoTippy();
+    
     onStreamsLoad();
+    onStatusLoad();
     onUserLoad();
     onGameDataLoad();
     onSingleRunLoad();
+
     setMainEvents();
 }
 
@@ -304,11 +307,11 @@ function makeUnique(url)
 
     if (url.includes("?"))
     {
-        return `${url}&${Math.trunc(Date.now() / 300)}`;
+        return `${url}&${Math.trunc(Date.now() / 300000)}`;
     }
     else
     {
-        return `${url}?${Math.trunc(Date.now() / 300)}`;
+        return `${url}?${Math.trunc(Date.now() / 300000)}`;
     }
 }
 

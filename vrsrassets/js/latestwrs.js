@@ -12,7 +12,7 @@ function getLatest()
     latestWRContainer.innerHTML = `<div id="latest-wr-loading" class="loadingdiv column is-12" style="display: block; margin-top: -2.5em;"><div><div class="spinner"></div><div class="belowspinner">Loading...</div></div></div>`;
     if (getCookie('latest_wrs') == "")
     {
-        get('https://api.github.com/repos/VRSRBot/test/releases?per_page=4')
+        get('https://api.github.com/repos/VRSRBot/LatestWorldRecords/releases?per_page=4')
         .then((data) =>
         {
 			if (!getErrorCheck(data)) return;

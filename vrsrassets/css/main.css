@@ -1229,6 +1229,27 @@ a.button:not(:last-child) {
 	}
 }
 
+/* ---------- Status ---------- */
+
+.is-status > .icon {
+	font-size: 3em;
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+}
+.is-status > .name {
+	font-size: 1.15em;
+	font-weight: bold;
+}
+.is-status > .name > .status.offline {
+	color: #F14668;
+}
+.is-status > .name > .status.possibly-offline {
+	color: #FFE08A;
+}
+.is-status > .name > .status.online {
+	color: #48C78E;
+}
+
 /* ---------- Misc ---------- */
 
 #terms-of-use {

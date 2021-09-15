@@ -62,6 +62,7 @@
 							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">More... <i class="fas fa-sort-down"></i></a>
 							<div class="navbar-dropdown">
 								<a class="navbar-item in-dropdown" href="about"><i class="fas fa-info-circle"></i> About</a>
+								<a class="navbar-item in-dropdown" href="status"><i class="fas fa-signal"></i> Status</a>
 								<hr class="navbar-divider">
 								<a class="navbar-item in-dropdown" href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github"></i> GitHub</a>
 								<a class="navbar-item in-dropdown" href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
@@ -137,6 +138,17 @@
 							<p>Both the Twitter and Discord bots get the latest WRs from a separate program that detects new world records and posts them as GitHub releases. The repository for this project is available at <a href="https://github.com/VRSpeedruns/WorldRecords" target="_blank">VRSpeedruns/WorldRecords</a>.</p>
 							<p>The new logo is a commission from the amazing <a href="https://twitter.com/Sixelona" target="_blank">@Sixelona</a>!</p>
 							<p>I maintain this site in my spare time. If you'd like to support me, consider checking out <a href="https://ko-fi.com/bigfoott" target="_blank">my Ko-fi page</a>! 😊</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container" id="status-container" style="display: none;">
+				<div class="columns is-centered">
+					<div class="column is-10">
+						<div class="box about">
+							<h1 class="is-box-heading">Status</h1>
+							<div class="divider thin"></div>
+							<div class="columns has-text-centered" id="status-inner"></div>
 						</div>
 					</div>
 				</div>
@@ -370,6 +382,7 @@
 			<script type="text/javascript" src="/vrsrassets/js/gamedata.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/latestwrs.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/status.js"></script>
 			<script type="text/javascript" src="/vrsrassets/js/main.js"></script>
 			<style id="wr-instance-style"></style>
 			<style id="streams-instance-style"></style>

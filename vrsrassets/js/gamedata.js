@@ -40,6 +40,7 @@ Variable Object
 var homeContainer;
 var mainContainer;
 var aboutContainer;
+var statusContainer;
 
 var reorderedGamesArray;
 
@@ -110,10 +111,12 @@ function onGameDataLoad()
 	homeContainer = document.getElementById("home-container");
 	mainContainer = document.getElementById("main-container");
 	aboutContainer = document.getElementById("about-container");
+	statusContainer = document.getElementById("status-container");
 
 	allContainers.push(homeContainer);
 	allContainers.push(mainContainer);
 	allContainers.push(aboutContainer);
+	allContainers.push(statusContainer);
 
 	gamesContainer = document.getElementById("games");
 	categoriesContainer = document.getElementById("tabs")
@@ -188,6 +191,14 @@ function onGameDataLoad()
 			document.title = "About - VRSR";
 			hideAllContainers();
 			aboutContainer.style.display = "block";
+			return;
+		}
+		else if (id == "status")
+		{
+			document.title = "Status - VRSR";
+			hideAllContainers();
+			statusContainer.style.display = "block";
+			statusStart();
 			return;
 		}
 		else if (getUser())
