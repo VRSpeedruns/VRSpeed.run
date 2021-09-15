@@ -1233,7 +1233,7 @@ a.button:not(:last-child) {
 
 .is-status > .icon {
 	font-size: 3em;
-	margin-top: 0.25em;
+	margin-top: 0.5em;
 	margin-bottom: 0.25em;
 }
 .is-status > .name {
@@ -1248,6 +1248,11 @@ a.button:not(:last-child) {
 }
 .is-status > .name > .status.online {
 	color: #48C78E;
+}
+
+.status-bottom {
+	color: var(--text-color-light);
+	font-size: 0.9em;
 }
 
 /* ---------- Misc ---------- */

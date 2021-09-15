@@ -148,7 +148,7 @@
 						<div class="box about">
 							<h1 class="is-box-heading">Status</h1>
 							<div class="divider thin"></div>
-							<div class="columns has-text-centered" id="status-inner"></div>
+							<div class="columns is-multiline has-text-centered" id="status-inner"></div>
 						</div>
 					</div>
 				</div>
