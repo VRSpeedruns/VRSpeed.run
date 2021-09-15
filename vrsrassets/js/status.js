@@ -61,7 +61,7 @@ function loadStatus(objs, mainDate)
     {
         var diff = Math.trunc((Date.now() / 1000) - parseInt(objs[i].e));
         var date = new Date(parseInt(objs[i].e + "000"));
-        var icon = "", status = "";
+        var icon = "", status = "", smallIcon = "";
 
         if (objs[i].n == "WorldRecords")
         {
@@ -77,14 +77,22 @@ function loadStatus(objs, mainDate)
         if (diff >= 600) // 10 minutes; it's down
         {
             status = `<span class="status offline">Offline</span>`;
+            smallIcon = `<span class="fa-stack fa-1x small-status">
+                            <i class="fas fa-circle fa-stack-1x offline"></i>
+                            <i class="fas fa-exclamation fa-stack-1x"></i></i>
+                        </span>`;
         }
         else // less than 10 min, it's not down
         {
             status = `<span class="status online">Online</span>`;
+            smallIcon = `<span class="fa-stack fa-1x small-status">
+                            <i class="fas fa-circle fa-stack-1x online"></i>
+                            <i class="fas fa-check fa-stack-1x"></i></i>
+                        </span>`;
         }
 
         newHTML += `<div class="column is-4 is-status">
-                        <div class="icon">${icon}</div>
+                        <div class="icon">${icon}${smallIcon}</div>
                         <div class="name">${objs[i].n} is ${status}</div>
                         <div class="heartbeat">Last heartbeat was ${timeAgo(date).toLowerCase()}.</div>
                         <div><a href="https://github.com/VRSpeedruns/${objs[i].n}" target="_blank">View project repository</a></div>
