@@ -17,15 +17,15 @@ function statusStart()
     }, 10000); //10 seconds
 }
 
-function runStatus(interval)
+function runStatus(interval, forceGet = false)
 {
-    if (getGame() != 'status')
+    if (interval != null && getGame() != 'status')
     {
         clearInterval(interval);
         return;
     }
 
-    if (getCookie('last_status') == "")
+    if (getCookie('last_status') == "" || forceGet)
     {
         get('https://api.github.com/repos/VRSRBot/Heartbeats/releases')
         .then((data) =>
@@ -41,7 +41,6 @@ function runStatus(interval)
                 objs.push({ "n": _data[i].name, "e": _data[i].body });
             }
 
-            console.log(Date.now());
             setCookie('last_status', JSON.stringify(objs) + "|" + Date.now(), 3);
 
             loadStatus(objs);
@@ -50,7 +49,28 @@ function runStatus(interval)
     else
     {
         var split = getCookie('last_status').split('|');
-        loadStatus(JSON.parse(split[0]), new Date(parseInt(split[1])));
+        var objs = JSON.parse(split[0]);
+
+        if (interval == null)
+        {
+            var allDown = true;
+            for (var i = 0; i < objs.length; i++)
+            {
+                var diff = Math.trunc((Date.now() / 1000) - parseInt(objs[i].e));
+                if (diff < 600)
+                {
+                    allDown = false;
+                    break;
+                }
+            }
+            if (allDown)
+            {
+                runStatus(null, true);
+                return;
+            }
+        }
+
+        loadStatus(objs, new Date(parseInt(split[1])));
     }
 }
 
@@ -95,7 +115,7 @@ function loadStatus(objs, mainDate)
                         <div class="icon">${icon}${smallIcon}</div>
                         <div class="name">${objs[i].n} is ${status}</div>
                         <div class="heartbeat">Last heartbeat was ${timeAgo(date).toLowerCase()}.</div>
-                        <div><a href="https://github.com/VRSpeedruns/${objs[i].n}" target="_blank">View project repository</a></div>
+                        <div><a href="https://github.com/VRSpeedruns/${objs[i].n}" target="_blank">View repository</a></div>
                     </div>`;
     }
     statusInner.innerHTML = newHTML + `<div class="column is-12 status-bottom">Last updated ${timeAgo(mainDate).toLowerCase()}.</div>`

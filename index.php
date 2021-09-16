@@ -61,8 +61,8 @@
 						<div class="navbar-item has-dropdown">
 							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">More... <i class="fas fa-sort-down"></i></a>
 							<div class="navbar-dropdown">
-								<a class="navbar-item in-dropdown" href="about"><i class="fas fa-info-circle"></i> About</a>
-								<a class="navbar-item in-dropdown" href="status"><i class="fas fa-signal"></i> Status</a>
+								<a class="navbar-item in-dropdown" href="/about"><i class="fas fa-info-circle"></i> About</a>
+								<a class="navbar-item in-dropdown" href="/status"><i class="fas fa-signal"></i> Status</a>
 								<hr class="navbar-divider">
 								<a class="navbar-item in-dropdown" href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github"></i> GitHub</a>
 								<a class="navbar-item in-dropdown" href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
@@ -223,11 +223,11 @@
 								<a onclick="closeRun(); backFixUrl(); loadGame(getGame(), true);"><i class="fas fa-arrow-left"></i> Back to Game</a>
 							</div>
 							<div class="buttons is-right" id="single-run-buttons">
-								<a id="run-single-src" class="button-outer" href="" target="_blank">
-									<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
-								</a>
 								<a id="run-single-vid" class="button-outer" href="" target="_blank">
 									<div class="button is-dark"><span class="icon"><i id="run-single-vid-icon" class=""></i></span></div>
+								</a>
+								<a id="run-single-src" class="button-outer" href="" target="_blank">
+									<div class="button is-dark"><span class="icon"><i class="fas fa-trophy"></i></span></div>
 								</a>
 							</div>
 							<div class="container">
@@ -245,7 +245,7 @@
 								</div>
 								<div class="run-single-info-other">
 									<div id="run-single-comment-outer"><span id="run-single-comment"></span></div>
-									<p>Played <span id="run-single-platform"></span> on <span id="run-single-date"></span></p>
+									<p>Played <span id="run-single-platform"></span> on <span id="run-single-date"></span>.</p>
 									<p id="run-single-verifyreject"></p>
 								</div>
 							</div>

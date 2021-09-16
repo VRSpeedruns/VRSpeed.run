@@ -223,7 +223,7 @@ function loadUserRuns(id)
             }
 
             var html = `<div class="user-runs-container"><div class="user-runs-image"><a href="/${thisGame.abbreviation}"><img src="${games[i].game.assets["cover-large"].uri}" onload="setUserRunContainerSize(this);"></a></div>
-            <div class="user-runs-heading"><a href="/${thisGame.abbreviation}" class="thick-underline" style="color: ${thisGame.color};">${thisGame.name}</a></div><table class="table is-narrow is-fullwidth"><tbody class="user-runs-tbody">`;
+            <div class="user-runs-heading"><a href="/${thisGame.abbreviation}" class="thick-underline" style="color: ${gameColors[thisGame.color].color};">${thisGame.name}</a></div><table class="table is-narrow is-fullwidth"><tbody class="user-runs-tbody">`;
 
             for (var k = 0; k < games[i].runs.length; k++)
             {
@@ -356,7 +356,7 @@ function loadUserModeratorOf(id)
                     if (modGames[i].abbreviation == gamesArray[k].id)
                     {
                         var comma = first ? '' : ', ';
-                        userModeratorOf.innerHTML += `${comma}<a href="/${gamesArray[k].abbreviation}" style="color: ${gamesArray[k].color}">${gamesArray[k].name}</a>`;
+                        userModeratorOf.innerHTML += `${comma}<a href="/${gamesArray[k].abbreviation}" style="color: ${gameColors[gamesArray[k].color].color}">${gamesArray[k].name}</a>`;
                         first = false;
                         break;
                     }

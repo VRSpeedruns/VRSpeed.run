@@ -1238,11 +1238,18 @@ a.button:not(:last-child) {
 
 	position: relative;
 }
+.is-status > .heartbeat {
+	font-size: 0.85em;
+}
 .small-status {
 	position: absolute;
 	top: -1.3em;
 	left: -1.7em;
 	font-size: 0.5em;
+}
+.small-status > .fa-check {
+	margin-left: -1px;
+	margin-top: 1px;
 }
 .is-status > .name {
 	font-size: 1.15em;

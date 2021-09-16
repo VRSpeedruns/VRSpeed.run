@@ -63,6 +63,6 @@ function loadStreams()
                 document.getElementById("streams-instance-style").innerHTML += `#stream-${streams[i].id}, #stream-${streams[i].id}:before, #stream-${streams[i].id}:after { background-color: ${gameColors[game[0].color].color}; } #stream-${streams[i].id} > div { border: 2px solid ${gameColors[game[0].color].color}; }`
         }
         
-        streamsCount.innerText = `${count} streams currently live.`;
+        streamsCount.innerText = `${count} stream${count == 1 ? '' : 's'} currently live.`;
     });
 }

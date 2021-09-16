@@ -101,14 +101,6 @@ function openRun(id, loadOrState = false)
 	}
     
     runSingleSplitsContainer.style.display = "none";
-
-    var _c = h2r(currentGame.color);
-    var _base = `rgba(${_c[0]}, ${_c[1]}, ${_c[2]}, `;
-    splitsBarColors = [];
-    for (var i = 1; i < 4; i++)
-    {
-        splitsBarColors.push(`${_base}${0.25 * i})`);
-    }
     
     for (var i = 0; i < singleFlagAndModTippys.length; i++)
     {
@@ -518,6 +510,14 @@ function closeRun()
 
 function loadSplits(id, timing = "default")
 {
+    var _c = h2r(gameColors[currentGame.color].color);
+    var _base = `rgba(${_c[0]}, ${_c[1]}, ${_c[2]}, `;
+    splitsBarColors = [];
+    for (var i = 1; i < 4; i++)
+    {
+        splitsBarColors.push(`${_base}${0.25 * i})`);
+    }
+
     runSingleSplitsInner.style.display = "none";
     runSingleSplitsLoading.style.display = "block";
     runSingleSplitsContainer.style.display = "block";

@@ -210,23 +210,7 @@ function onGameDataLoad()
 		{
 
 			id = getCookie("last_game");
-			if (id == "")
-			{
-				if (!gameDataLeaderboardSecondLoad)
-				{
-					document.getElementById("fullpage-loading").style.display = "block";
-
-					gameDataLeaderboardSecondLoad = true;
-					setTimeout(function(){ onGameDataLoad() }, 1000); // delay to show the correct page on google :)
-					return;
-				}
-				else
-				{
-					document.getElementById("fullpage-loading").style.display = "none";
-				}
-
-				id = 'hla';
-			}
+			if (id == "") id = 'hla';
 			
 			replaceState(id);
 		}
