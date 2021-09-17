@@ -259,8 +259,8 @@
 								<div class="divider"></div>
 								<div id="variables">
 									<div class="buttons has-addons" id="run-single-splits-timing">
-										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Real<span class="is-hidden-mobile">time</span></button>
-										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Game<span class="is-hidden-mobile">time</span></button>
+										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Real<span class="is-hidden-mobile">-time</span></button>
+										<button id="run-single-splits-gt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-gamepad"></i> Game<span class="is-hidden-mobile">-time</span></button>
 									</div>
 									<div id="run-single-splits-middleinfo"></div>
 									<div class="buttons has-addons variable-right">

@@ -6,6 +6,7 @@
 	--text-color: #eee;
 	--text-color-dark: #111;
 	--text-color-light: #bbb;
+	--text-color-transparent: rgba(238, 238, 238, 0.6);
 	
 	--background-color: #2E3136;
 	--background-mid-accent-color: #282b30;
@@ -513,10 +514,11 @@ a.button:not(:last-child) {
 #run-single-splits-bar > div > i {
 	position: absolute;
 }
-#run-single-splits-bar > div > .fa-medal {
-	font-size: 10px;
-	top: 0;
+#run-single-splits-bar > div > .new-pb-icon {
+	font-size: 8px;
+	top: 2px;
 	right: 2px;
+	color: var(--text-color-transparent);
 }
 #run-single-splits-bar > div > div {
 	cursor: default;
@@ -524,12 +526,12 @@ a.button:not(:last-child) {
 	padding-right: 0;
 }
 .sp-name-num {
-	color: rgba(238, 238, 238, 0.8);
+	color: var(--text-color-transparent);
 	font-weight: normal;
 }
 .sp-time {
 	font-family: Inconsolata;
-	color: rgba(238, 238, 238, 0.6);
+	color: var(--text-color-transparent);
 }
 .sp-timesave {
 	color: #a3e6a6;

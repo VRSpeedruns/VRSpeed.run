@@ -629,7 +629,7 @@ function loadSplits(id, timing = "default")
             var newpb = '';
             if ((seg[timing + "_duration_ms"] - seg[timing + "_shortest_duration_ms"]) <= 0)
             {
-                newpb = `<i class="fas fa-medal" style="color: var(--text-color)"></i>`;
+                newpb = `<i class="fas fa-star new-pb-icon"></i>`;
             }
             
             runSingleSplitsBar.innerHTML += `<div id="bar-${i}" style="width: ${percent}%; background-color: ${color}">${newpb}<div><div>${seg["display_name"].replace("<", "&lt;").replace(">", "&gt;")}</div><div class="sp-time">${msToTime(seg[`${timing}_duration_ms`])}</div></div></div>`;
