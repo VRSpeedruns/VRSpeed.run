@@ -13,7 +13,7 @@
 	--button-background-color: #393C42;
 	--button-background-hover-color: #41434b;
 	--tippy-background-color: hsla(228, 8%, 12%, 0.975);
-	--background-color-transparent: hsla(218, 8%, 20%, 0.85);
+	--background-color-transparent: hsla(213, 11%, 16%, 0.95);
 	--background-card: hsl(220, 7%, 12%);
 
 	--background-table-odd: hsl(217, 8%, 16%);
@@ -1355,7 +1355,11 @@ a.button:not(:last-child) {
 .box.about {
 	height: 100%;
 }
-.box.about > p:not(:last-child) {
+.box.about > h2 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.box.about > p:not(:last-child), .box.about > h2 {
 	margin-bottom: 0.7rem;
 }
 
