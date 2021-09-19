@@ -337,7 +337,8 @@ function getErrorCheck(data)
     var temp = (JSON.parse(data));
     if (temp.status == 420)
     {
-        sendErrorNotification(`There was an error when trying to access the Speedrun.com API.<br>"${temp.message}" (Error code ${temp.status})`);
+        sendErrorNotification(`<b>There was an error when trying to access the Speedrun.com API.</b><br>If you've been loading games, runs, or users quickly within the last few minutes, please wait a few minutes and try again.`);
+        console.error(`Error when trying to access the Speedrun.com API:\n"${temp.message}" (Error code ${temp.status})`)
         return false;
     }
     return true;
