@@ -63,6 +63,6 @@ function loadStreams()
                 document.getElementById("streams-instance-style").innerHTML += `#stream-${streams[i].id}, #stream-${streams[i].id}:before, #stream-${streams[i].id}:after { background-color: ${gameColors[game[0].color].color}; } #stream-${streams[i].id} > div { border: 2px solid ${gameColors[game[0].color].color}; }`
         }
         
-        streamsCount.innerText = `${count} stream${count == 1 ? '' : 's'} currently live.`;
+        streamsCount.innerHTML = `${count} stream${count == 1 ? '' : 's'} currently live.<br><span style="color: var(--text-color-light); font-size: 0.8em">Note: Some/all streams on this page may be unrelated to speedrunning.</span>`;
     });
 }

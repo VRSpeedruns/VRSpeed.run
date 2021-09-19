@@ -1,4 +1,7 @@
-<?php include 'vrsrassets/php/oEmbedData.php'; ?>
+<?php
+include 'vrsrassets/php/oEmbedData.php';
+$version = '1_0_1'; //way to force cache reset for css/js files if necessary
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +30,7 @@
 		
 		<link href="/assets/fa/css/all.css" rel="stylesheet">
 		<link rel="stylesheet" href="/assets/css/bulma.min.css">
-		<link rel="stylesheet" href="/vrsrassets/css/main.css">
+		<link rel="stylesheet" href="/vrsrassets/css/main.css<?= '?'.$version; ?>">
 		<link rel="stylesheet" href="/assets/css/googlefonts.css">
 	</head>
 	<body onload="onLoad();" class="has-navbar-fixed-top">
@@ -375,14 +378,14 @@
 			</script>
 			<script type="text/javascript" src="/assets/js/popper.min.js"></script>
 			<script type="text/javascript" src="/assets/js/tippy-bundle.umd.js"></script> 
-			<script type="text/javascript" src="/vrsrassets/js/colorinterpolation.js"></script>
-			<script type="text/javascript" src="/vrsrassets/js/viewstreams.js"></script>
-			<script type="text/javascript" src="/vrsrassets/js/viewuser.js"></script>
-			<script type="text/javascript" src="/vrsrassets/js/gamedata.js"></script>
-			<script type="text/javascript" src="/vrsrassets/js/viewrun.js"></script>
-			<script type="text/javascript" src="/vrsrassets/js/latestwrs.js"></script>
-			<script type="text/javascript" src="/vrsrassets/js/status.js"></script>
-			<script type="text/javascript" src="/vrsrassets/js/main.js"></script>
+			<script type="text/javascript" src="/vrsrassets/js/colorinterpolation.js<?= '?'.$version; ?>"></script>
+			<script type="text/javascript" src="/vrsrassets/js/viewstreams.js<?= '?'.$version; ?>"></script>
+			<script type="text/javascript" src="/vrsrassets/js/viewuser.js<?= '?'.$version; ?>"></script>
+			<script type="text/javascript" src="/vrsrassets/js/gamedata.js<?= '?'.$version; ?>"></script>
+			<script type="text/javascript" src="/vrsrassets/js/viewrun.js<?= '?'.$version; ?>"></script>
+			<script type="text/javascript" src="/vrsrassets/js/latestwrs.js<?= '?'.$version; ?>"></script>
+			<script type="text/javascript" src="/vrsrassets/js/status.js<?= '?'.$version; ?>"></script>
+			<script type="text/javascript" src="/vrsrassets/js/main.js<?= '?'.$version; ?>"></script>
 			<style id="wr-instance-style"></style>
 			<style id="streams-instance-style"></style>
 		</section>
