@@ -10,6 +10,6 @@ assignees: bigfoott
 
 **Speedrun.com URL**:
 
-**Color scheme** (Optional):
+**Primary Color** (Optional):
 
 **Other** (Optional):
