@@ -1363,7 +1363,7 @@ a.button:not(:last-child) {
 	font-weight: bold;
 }
 .box.about > p:not(:last-child), .box.about > h2 {
-	margin-bottom: 0.7rem;
+	margin-bottom: 0.75rem;
 }
 
 .divider {

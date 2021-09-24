@@ -15,10 +15,14 @@ function getLatest()
         get('https://api.github.com/repos/VRSRBot/LatestWorldRecords/releases?per_page=4')
         .then((data) =>
         {
-			if (!getErrorCheck(data)) return;
+            var _data = (JSON.parse(data));
+            if (_data.message && _data.message.startsWith("API rate limit exceeded"))
+            {
+                sendErrorNotification(`<b>The GitHub API rate limit was exceeded. The "Latest World Records" widget and the "Status" page may not load correctly.</b>`);
+                return;
+            }
 
             var wrs = [];
-            var _data = (JSON.parse(data));
 
             for (var i = 0; i < _data.length; i++)
             {

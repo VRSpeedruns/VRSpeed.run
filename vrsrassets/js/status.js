@@ -41,7 +41,7 @@ function runStatus(interval, forceGet = false)
                 objs.push({ "n": _data[i].name, "e": _data[i].body });
             }
 
-            setCookie('last_status', JSON.stringify(objs) + "|" + Date.now(), 3);
+            setCookie('last_status', JSON.stringify(objs) + "|" + Date.now(), 5);
 
             loadStatus(objs);
         });
@@ -92,9 +92,9 @@ function loadStatus(objs, mainDate)
             icon = `<i class="fab fa-${objs[i].n.toLowerCase()}"></i>`;
         }
 
-        // heartbeat is once every 5 minutes; cookie resets every 3 minutes
+        // heartbeat is once every 5 minutes; cookie resets every 5 minutes
 
-        if (diff >= 600) // 10 minutes; it's down
+        if (diff > 600) // more than 10 minutes; it's down
         {
             status = `<span class="status offline">Offline</span>`;
             smallIcon = `<span class="fa-stack fa-1x small-status">

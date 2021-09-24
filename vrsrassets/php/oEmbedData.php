@@ -58,11 +58,17 @@ if ($game == null)
 {
     if ($gameId == "streams")
     {
+        $title = 'Streams - VRSR';
         $description = "Find and watch Twitch streams for all tracked VR speedgames.";
     }
     else if ($gameId == "leaderboard")
     {
-        $description = "Browse the leaderboards of the top VR speedgames.";
+        $title = 'Leaderboards - VRSR';
+        $description = "Browse the leaderboards of the top VR speedgames. Currently providing data for " . count($games) . " games!";
+    }
+    else if ($gameId == "about")
+    {
+        $title = 'About - VRSR';
     }
 }
 else if ($runId != '')
