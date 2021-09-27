@@ -49,6 +49,7 @@ html {
 }
 body {
 	background-color: var(--background-accent-color);
+	color: var(--text-color);
 	
 	font-family: 'Open Sans';
 	font-size: 0.95em;
@@ -1364,6 +1365,9 @@ a.button:not(:last-child) {
 }
 .box.about > p:not(:last-child), .box.about > h2 {
 	margin-bottom: 0.75rem;
+}
+.box.about.home > p:not(:last-child) {
+	margin-bottom: 0.65rem;
 }
 
 .divider {

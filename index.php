@@ -115,13 +115,13 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 						</div>
 					</div>
 					<div class="column is-5">
-						<div class="box about">
+						<div class="box about home">
 							<h1 class="is-box-heading">About</h1>
 							<div class="divider thin"></div>
 							<p>VRSpeed.run is a central hub to view the leaderboards for the largest virtual reality games in speedrunning.</p>
 							<p>If you'd like to hang out and discuss VR speedrunning, consider joining the <a href="https://discord.gg/g36fNmU3nA" target="_blank">VR Speedrunning Discord server</a>!</p>
 							<p>For the latest VR world records and any updates regarding this site, check out the <a href="https://twitter.com/VRSpeedruns" target="_blank">@VRSpeedruns Twitter account</a>!</p>
-							<p>If there's a game that you believe belongs here (or you see a bug/error), please ping <span id="tippy-me" class="is-tooltip-text">me</span> in the Discord server above.</p>
+							<p>If there's a game that you believe belongs here (or you see a bug/error), please submit an issue on <a href="https://github.com/VRSpeedruns/VRSpeed.run/issues/new/choose" target="_blank">GitHub</a>.</p>
 							<p>The site is open source! Check out the various repositories on <a href="https://github.com/VRSpeedruns" target="_blank">GitHub</a>.</p>
 							<p>Read more about the site on the <a href="about">About</a> page!</p>
 						</div>
@@ -136,7 +136,8 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 							<div class="divider thin"></div>
 								<h2>The Site</h1>
 								<p>This site was built as a place to view the leaderboards for the top VR games in speedrunning in the most convenient way possible. Rather than save bookmarks for all the games you're interested in, you can simply pull up this site and all the games are here to view, and switching between them is as easy as clicking on one in the game selector.</p>
-								<p>If you'd like to hang out and discuss virtual reality speedrunning, consider joining the <a href="https://discord.gg/g36fNmU3nA" target="_blank">VR Speedrunning Discord server</a>! Also, if there's a game that you believe belongs here (or you see a bug/error), please ping <span id="tippy-me" class="is-tooltip-text">me</span> in the server.</p>
+								<p>If you'd like to hang out and discuss virtual reality speedrunning, consider joining the <a href="https://discord.gg/g36fNmU3nA" target="_blank">VR Speedrunning Discord server</a>!</p>
+								<p>Also, if there's a game that you believe belongs here (or you see a bug/error), please submit an issue on <a href="https://github.com/VRSpeedruns/VRSpeed.run/issues/new/choose" target="_blank">GitHub</a>.</p>
 								<h2>Core Projects</h1>
 								<p>The main repository for this site is available at <a href="https://github.com/VRSpeedruns/VRSpeed.run" target="_blank">VRSpeedruns/VRSpeed.run</a>.</p>
 								<p>For the latest VR world records and any updates regarding this site, check out the <a href="https://twitter.com/VRSpeedruns" target="_blank">@VRSpeedruns Twitter account</a>! The repository for the Twitter bot is available at <a href="https://github.com/VRSpeedruns/Twitter" target="_blank">VRSpeedruns/Twitter</a>.</p>

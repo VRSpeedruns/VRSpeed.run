@@ -43,13 +43,14 @@ function loadUser(username)
 	}
 	userRunTippys = [];
 
-    get(`https://www.speedrun.com/api/v1/users/${username}`)
+    get(`https://www.speedrun.com/api/v1/users?lookup=${username}`)
     .then((data) =>
     {
         if (!getErrorCheck(data)) return;
 
-        var temp = (JSON.parse(data));
-        if (temp.status == 404)
+        var user = (JSON.parse(data)).data;
+
+        if (user.length == 0)
         {
             replaceState(null);
             loadGame(null);
@@ -58,7 +59,7 @@ function loadUser(username)
             return;
         }
 
-        var user = (JSON.parse(data)).data;
+        user = user[0];
         
         document.title = `${user.names.international} - VRSR`;
         userLinksSrc.href = user.weblink;
