@@ -25,6 +25,15 @@
 	--place-bronze: #CD7F32;
 }
 
+::selection {
+    color: var(--text-color-dark);
+    background: var(--primary-color);
+}
+::-moz-selection {
+    color: var(--text-color-dark);
+    background: var(--primary-color);
+}
+
 ::-webkit-scrollbar {
 	width: 14px;
 }
@@ -1471,6 +1480,13 @@ a.button:not(:last-child) {
 	padding-top: 1px;
 	margin-bottom: 3px;
 	border-radius: 2px;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 .runs-flag.small {
 	max-height: 12px;
@@ -1481,6 +1497,13 @@ a.button:not(:last-child) {
 	vertical-align: middle;
 	margin-right: 0.25em;
 	margin-bottom: 3px;
+	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 .runs-usericon.small {
 	max-height: 12px;
