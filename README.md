@@ -13,7 +13,6 @@ A writeup that describes the structure behind the JS that makes the site run. Mo
 * [viewrun.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/viewrun.js.md) - Handles loading of individual runs.
 * [latestwrs.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/latestwrs.js.md) - Handles displaying of latest world records.
 * [viewuser.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/viewuser.js.md) - Handles loading of individual users.
-* [viewstreams.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/viewstreams.js.md) - Handles loading of streams.
 * [status.js](https://github.com/VRSpeedruns/VRSR/tree/master/docs/status.js.md) - Handles the status page.
 
 ## External Tools/Libraries

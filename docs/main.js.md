@@ -42,7 +42,7 @@ These functions are shorthand for the `history.pushState()` and `history.replace
 
 ### `getGame()`
 
-This function parses the current url to get the current game abbreviation , which sometimes isn't actually a game (on the "stream" page, `getGame()` returns "stream")
+This function parses the current url to get the current game abbreviation , which sometimes isn't actually a game (on the "about" page, `getGame()` returns "about")
 
 ### `getRun()`
 
@@ -62,7 +62,7 @@ Functions that toggle the "is-active" class for use on the navbar.
 
 ### `hideAllContainers()`
 
-This function hides the main containers of the site (`home-container`, `main-container`, `user-container`, `streams-container`)
+This function hides the main containers of the site (`home-container`, `main-container`, `user-container`, `status-container`, `about-container`)
 
 ### `infoTippy()`
 
