@@ -180,13 +180,7 @@ function onGameDataLoad()
 	{
 		var id = getGame();
 
-		if (id == "streams")
-		{
-			document.title = "Streams - VRSR";
-			loadStreams();
-			return;
-		}
-		else if (id == "about")
+		if (id == "about")
 		{
 			document.title = "About - VRSR";
 			hideAllContainers();

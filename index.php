@@ -50,7 +50,6 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 				<div class="navbar-menu" id="navbar-menu">
 					<div class="navbar-start">
 						<a href="/leaderboard" class="navbar-item" id="nav-leaderboard">Leaderboard</a>
-						<a href="/streams" class="navbar-item" id="nav-streams">Streams</a>
 						<div class="navbar-item has-dropdown">
 							<a class="navbar-link is-arrowless" onclick="toggleNavDropdown(this.parentElement);">Community <i class="fas fa-sort-down"></i></a>
 							<div class="navbar-dropdown">
@@ -333,23 +332,6 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 					</div>
 				</div>
 			</div>
-			<div class="container" id="streams-container" style="display: none;">
-				<div class="box">
-					<div>
-						<h1 class="is-box-heading">Streams</h1>
-						<div class="divider thin"></div>
-						<div id="streams-count"></div>
-					</div>
-					<div class="columns is-multiline" id="streams-inner-container">
-						<div class="loadingdiv column is-12" style="display: block;">
-							<div>
-								<div class="spinner"></div>
-								<div class="belowspinner">Loading...</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</section>
 		<section class="section is-footer">
 			<div class="columns is-centered is-vcentered is-multiline">
@@ -380,7 +362,6 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 			<script type="text/javascript" src="/assets/js/popper.min.js"></script>
 			<script type="text/javascript" src="/assets/js/tippy-bundle.umd.js"></script> 
 			<script type="text/javascript" src="/vrsrassets/js/colorinterpolation.js<?= '?'.$version; ?>"></script>
-			<script type="text/javascript" src="/vrsrassets/js/viewstreams.js<?= '?'.$version; ?>"></script>
 			<script type="text/javascript" src="/vrsrassets/js/viewuser.js<?= '?'.$version; ?>"></script>
 			<script type="text/javascript" src="/vrsrassets/js/gamedata.js<?= '?'.$version; ?>"></script>
 			<script type="text/javascript" src="/vrsrassets/js/viewrun.js<?= '?'.$version; ?>"></script>
@@ -388,7 +369,6 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 			<script type="text/javascript" src="/vrsrassets/js/status.js<?= '?'.$version; ?>"></script>
 			<script type="text/javascript" src="/vrsrassets/js/main.js<?= '?'.$version; ?>"></script>
 			<style id="wr-instance-style"></style>
-			<style id="streams-instance-style"></style>
 		</section>
 	</body>
 </html>
