@@ -638,5 +638,25 @@
         "color": "red",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "pro_putt_by_topgolf",
+        "abbreviation": "pp",
+        "api_id": "k6q450od",
+        "name": "Pro Putt by Topgolf",
+        "hardware": "",
+        "color": "light_green",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "just_in_time_incorporated",
+        "abbreviation": "jiti",
+        "api_id": "9d3g3g6l",
+        "name": "Just In Time Incorporated",
+        "hardware": "",
+        "color": "blue",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
