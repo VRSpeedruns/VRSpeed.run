@@ -9,6 +9,7 @@ var runSinglePlace;
 var runSingleComment;
 var runSinglePlatform;
 var runSingleDate;
+var runSingleSubmittedDate;
 var runSingleVerifyReject;
 
 var runSingleSrc;
@@ -49,6 +50,7 @@ function onSingleRunLoad()
     runSinglePlatform = document.getElementById("run-single-platform");
     runSingleVerifyReject = document.getElementById("run-single-verifyreject");
     runSingleDate = document.getElementById("run-single-date");
+    runSingleSubmittedDate = document.getElementById("run-single-submitted-date");
 
     runSingleSrc = document.getElementById("run-single-src");
     runSingleVid = document.getElementById("run-single-vid");
@@ -305,9 +307,15 @@ function openRun(id, loadOrState = false)
 
         var _date = new Date(run.date);
         var date = _date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+        var dateTitle = _date.toString();
         
         _date = new Date(run.status["verify-date"]);
         var verifyDate = _date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+        var verifyDateTitle = _date.toString();
+        
+        _date = new Date(run.submitted);
+        var submittedDate = _date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+        var submittedDateTitle = _date.toString();
 
         runSingleGame.innerText = game;
         runSingleCategory.innerText = category;
@@ -317,6 +325,9 @@ function openRun(id, loadOrState = false)
         runSingleComment.innerText = comment;
         runSinglePlatform.innerHTML = platform;
         runSingleDate.innerText = date;
+        runSingleDate.title = dateTitle;
+        runSingleSubmittedDate.innerText = submittedDate;
+        runSingleSubmittedDate.title = submittedDateTitle;
 
         document.title = `${categories[currentCatIndex].name} in ${time} by ${rawPlayer} - ${game} - VRSR`;
 
@@ -438,7 +449,7 @@ function openRun(id, loadOrState = false)
 
             if (run.status.status == "verified")
             {
-                runSingleVerifyReject.innerHTML = `Run verified by <span id="run-single-verifier">${verifier}</span> on ${verifyDate}.`;
+                runSingleVerifyReject.innerHTML = `Run verified by <span id="run-single-verifier">${verifier}</span> on <span title="${verifyDateTitle}">${verifyDate}</span>.`;
             }
             else if (run.status.status == "rejected")
             {

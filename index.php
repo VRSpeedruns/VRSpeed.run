@@ -255,6 +255,7 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 								<div class="run-single-info-other">
 									<div id="run-single-comment-outer"><span id="run-single-comment"></span></div>
 									<p>Played <span id="run-single-platform"></span> on <span id="run-single-date"></span>.</p>
+									<p>Run submitted on <span id="run-single-submitted-date"></span>.</p>
 									<p id="run-single-verifyreject"></p>
 								</div>
 							</div>
