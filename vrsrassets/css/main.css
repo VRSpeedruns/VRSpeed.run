@@ -131,53 +131,46 @@ a.button:not(:last-child) {
 
 /* ---------- Tabs ---------- */
 
-.tabs > ul {
-	border-bottom: 2px solid var(--primary-color) !important;
-}
-
 #tabs {
-	border-radius: 4px 4px 0 0;
-	overflow-x: auto;
-	overflow-y: hidden;
-	width: 100%;
+	padding-bottom: 2px;
+	background-color: var(--button-background-color);
+	border-bottom: none;
+	
+	border-radius: 4px;
+	
+	flex-shrink: 1;
+    flex-wrap: wrap;
+	overflow: hidden;
 }
-.tabs.is-boxed {
+.tabs {
 	color: var(--text-color);
 	text-decoration: none;
-	margin-bottom: calc(1.25rem - 2px);
+	margin-bottom: 1.25em !important;
 	position: relative;
 	overflow: visible;
+
+	justify-content: center
 }
-#tabs::-webkit-scrollbar {
-	height: 8px;
-}
-#tabs::-webkit-scrollbar-track {
-	background-color: var(--background-mid-accent-color);
-}
-#tabs::-webkit-scrollbar-thumb {
-	background-color: var(--primary-color);
-	border: 0;
-	border-radius: 0;
-}
-#tabs::-webkit-scrollbar-thumb:hover {
-	background-color: var(--primary-color-hover);
-}
-#tabs > li {
-	margin-bottom: -1px;
+.divider.tabdiv {
+	padding-bottom: 0;
+	margin-bottom: 1.25rem;
 }
 
-.tabs.is-boxed a, .tabs.is-boxed a:hover, .tabs.is-boxed a:focus {
+.tabs a, .tabs a:hover, .tabs a:focus {
 	border-left: 0px !important;
 	border-right: 0px !important;
 	border-top: 0px !important;
-	border-bottom: 0px;
+	border-bottom: 0px !important;
 }
 .tabs li a {
 	text-decoration: none;
 	font-weight: bold;
 
+	border-radius: 0 !important;
 	background-color: var(--button-background-color) !important;
 	font-size: 0.91em;
+
+	padding: 0.6em 1.1em;
 }
 .tabs li a:hover, .tabs li a:focus {
 	color: var(--text-color);
@@ -195,7 +188,6 @@ a.button:not(:last-child) {
 #misc-cats-container {
 	position: absolute;
 	background-color: var(--button-background-color);
-	/*transform: translate(calc(-100% + 4em + 2px), 2px);*/
 	transform: translate(calc(-100%), 2px);
 	border-radius: 0 0 4px 4px;
 	overflow: hidden;
@@ -1200,8 +1192,20 @@ a.button:not(:last-child) {
 
 /* ---------- Misc ---------- */
 
-#terms-of-use {
-	margin-bottom: 0;
+.box.latest-runs table {
+	font-size: 0.75em;
+}
+#box-latest-runs {
+	padding-bottom: 0;
+	overflow: hidden;
+}
+
+#latest-runs-table td:not(:first-child) {
+	vertical-align: middle;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #runs-loading, #runs-none {

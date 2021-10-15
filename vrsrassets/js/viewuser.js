@@ -1,5 +1,6 @@
 var userContainer;
 var userRunsTable;
+var latestUserRunsContainer;
 
 var userUsername;
 var userPfp;
@@ -19,6 +20,7 @@ function onUserLoad()
     userContainer = document.getElementById("user-container");
     allContainers.push(userContainer);
     userRunsTable = document.getElementById("user-runs-table");
+    latestUserRunsContainer = document.getElementById("latest-user-runs-table");
     
     userUsername = document.getElementById("user-username");
     userPfp = document.getElementById("user-pfp");
@@ -147,6 +149,7 @@ function loadUser(username)
 
         loadUserRuns(user.id);
         loadUserModeratorOf(user.id);
+        loadLatestUserRuns(user.id);
     });    
 }
 
@@ -422,6 +425,46 @@ function loadUserRunCount(link = "", count = 0)
 
         userRunCount.innerHTML = `Total VR Runs: <b>${count}</b>`;
     });
+}
+
+function loadLatestUserRuns(id)
+{
+	get(`https://www.speedrun.com/api/v1/runs?user=${id}&orderby=verify-date&direction=desc&max=4&embed=players,platform,game,category,category.variables`)
+	.then((_data) =>
+	{
+		var data = JSON.parse(_data).data;
+
+		for (var _i = 0; _i < data.length; _i++)
+		{
+			var run = data[_i];
+
+			var category = run.category.data.name;
+
+			var variables = run.category.data.variables.data;
+			var subcats = [];
+
+			for (var i = 0; i < variables.length; i++)
+			{
+				if (variables[i]["is-subcategory"])
+				{
+					if (run.values[variables[i].id])
+					{
+						subcats.push(variables[i].values.values[run.values[variables[i].id]].label);
+					}
+				}
+			}
+			if (subcats.length > 0)
+			{
+				category += ` (${subcats.join(", ")})`;
+			}
+
+			var time = runTimeFormat(run.times.primary);
+
+			var date = timeAgo(new Date(run.submitted));
+
+			latestUserRunsContainer.innerHTML += `<tr><td>${time}</td><td>${category}</td><td>${date}</td></tr>`;
+		}
+	});
 }
 
 function setUserRunContainerSize(_this)

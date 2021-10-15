@@ -1,6 +1,6 @@
 <?php
 include 'vrsrassets/php/oEmbedData.php';
-$version = '1_0_1'; //way to force cache reset for css/js files if necessary
+$version = '1_1_0'; //way to force cache reset for css/js files if necessary
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,8 +164,8 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 			</div>
 			<div class="container" id="main-container" style="display: none;">
 				<div class="columns">
-					<div class="column is-3 reverse-columns-mobile">
-						<div class="box">
+					<div class="column is-3">
+					<div class="box">
 							<div class="game-info-container">
 								<span id="game-info-fav" onclick="gameFavToggle();"><i class="far fa-star"></i></span>
 								<div id="game-name"></div>
@@ -191,6 +191,14 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 								</div>
 							</div>
 						</div>
+						<div class="box latest-runs">
+							<h1 class="is-box-heading">Latest Runs</h1>
+							<div class="divider thin"></div>
+							<table class="table is-narrow is-fullwidth">
+								<thead><tr><th>Player</th><th>Time</th><th>Category</th></tr></thead>
+								<tbody id="latest-runs-table"></tbody>
+							</table>
+						</div>
 					</div>
 					<div class="column is-9">
 						<div id="main-loading" class="loadingdiv" style="display: block;">
@@ -200,7 +208,8 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 							</div>
 						</div>
 						<div class="box" id="box-runs" style="display: none;">
-                            <div class="tabs is-boxed"><ul id="tabs"></ul><div id="misc-cats-container"></div></div>
+                            <div class="tabs"><ul id="tabs"></ul><div id="misc-cats-container"></div></div>
+							<div class="divider tabdiv"></div>
 							<div id="variables"></div>
 							<div id="runs-loading" class="loadingdiv" style="display: block;">
 								<div>
@@ -318,6 +327,14 @@ $version = '1_0_1'; //way to force cache reset for css/js files if necessary
 									</a>
 								</div>
 							</div>
+						</div>
+						<div class="box latest-runs">
+							<h1 class="is-box-heading">Latest Runs</h1>
+							<div class="divider thin"></div>
+							<table class="table is-narrow is-fullwidth">
+								<thead><tr><th>Time</th><th>Category</th><th>Date</th></tr></thead>
+								<tbody id="latest-user-runs-table"></tbody>
+							</table>
 						</div>
 					</div>
 					<div class="column is-9">

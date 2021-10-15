@@ -61,6 +61,7 @@ var gamesContainer;
 var categoriesContainer;
 var variablesContainer;
 var runsContainer;
+var latestRunsContainer;
 var miscCatsContainer;
 var miscTab;
 var miscCategories;
@@ -122,6 +123,7 @@ function onGameDataLoad()
 	categoriesContainer = document.getElementById("tabs")
 	variablesContainer = document.getElementById("variables");
 	runsContainer = document.getElementById("runs");
+	latestRunsContainer = document.getElementById("latest-runs-table")
 	miscCatsContainer = document.getElementById("misc-cats-container")
 	
 	pcGamesContainer = document.getElementById("pc-games");
@@ -454,14 +456,6 @@ function setEvents()
 			}
 		}
 	});
-
-	//close misc tab if user scrolls category tabs row
-	categoriesContainer.addEventListener('scroll', () => {
-		if (miscCatsContainer.classList.contains("is-active"))
-		{
-			miscCatsContainer.classList.remove("is-active");
-		}
-	});
 }
 function toggleGameSelector()
 {
@@ -671,6 +665,7 @@ function loadGame(id, loadOrState = false, force = false)
 	gameInfoLinkForums.href = `https://www.speedrun.com/${gameId}/forum`;
 	gameInfoLinkStatistics.href = `https://www.speedrun.com/${gameId}/gamestats`;
 	gameInfoModerators.innerHTML = 'Moderated by:<br>';
+	latestRunsContainer.innerHTML = '';
 
 	for (var i = 0; i < gameInfoModTippys.length; i++)
 	{
@@ -752,7 +747,7 @@ function loadGame(id, loadOrState = false, force = false)
 			}
 		}
 		displayCategoryTabs(loadOrState);
-
+		loadLatestRuns();
 		
 		var mods = game.moderators.data;
 		
@@ -1490,6 +1485,81 @@ function gameFavToggle()
 	gameSelectorCurrentGame = document.getElementById(`game-${currentGame.abbreviation}`);
 }
 
+function loadLatestRuns()
+{
+	get(`https://www.speedrun.com/api/v1/runs?game=${currentGame.api_id}&orderby=verify-date&direction=desc&max=4&embed=players,platform,game,category,category.variables`)
+	.then((_data) =>
+	{
+		var data = JSON.parse(_data).data;
+
+		for (var _i = 0; _i < data.length; _i++)
+		{
+			var run = data[_i];
+
+			var category = run.category.data.name;
+
+			var variables = run.category.data.variables.data;
+			var subcats = [];
+
+			for (var i = 0; i < variables.length; i++)
+			{
+				if (variables[i]["is-subcategory"])
+				{
+					if (run.values[variables[i].id])
+					{
+						subcats.push(variables[i].values.values[run.values[variables[i].id]].label);
+					}
+				}
+			}
+			if (subcats.length > 0)
+			{
+				category += ` (${subcats.join(", ")})`;
+			}
+			var catTitle = "";
+			if (category.length > 14)
+			{
+				catTitle = ` title="${category}""`;
+				category = category.substr(0, 10) + "…";
+			}
+
+			var time = runTimeFormat(run.times.primary);
+			var timeTitle = "";
+			if (time.length > 14)
+			{
+				timeTitle = ` title="${time}""`;
+				time = time.substr(0, 10) + "…";
+			}
+			
+			var player = "";
+			var flag = "";
+			if (run.players.data[0].rel == "user")
+			{
+				var temp = run.players.data[0];
+				
+				player = temp.names.international;
+
+				player = `<b>${getGradientName(player, temp["name-style"])}</b>`;
+			}
+			else
+			{
+				player = `<b>${run.players.data[0].name}/b>`;
+			}
+
+			if (temp.location !== null)
+			{
+				flag = `<img class="runs-flag small" src="https://www.speedrun.com/images/flags/${temp.location.country.code}.png">`;
+			}
+
+			var userIcon = '';
+			if (temp.assets.icon.uri)
+				userIcon = `<img class="runs-usericon" src="${temp.assets.icon.uri}">`;
+
+			var date = timeAgo(new Date(run.submitted));
+
+			latestRunsContainer.innerHTML += `<tr><td>${flag}${userIcon}${player}<p>${date}</p></td><td${timeTitle}>${time}</td><td${catTitle}>${category}</td></tr>`;
+		}
+	});
+}
 
 function nth(d) {
 	if (d > 3 && d < 21) return d + 'th'; 
