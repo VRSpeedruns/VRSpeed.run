@@ -195,7 +195,7 @@ $version = '1_1_0'; //way to force cache reset for css/js files if necessary
 							<h1 class="is-box-heading">Latest Runs</h1>
 							<div class="divider thin"></div>
 							<table class="table is-narrow is-fullwidth">
-								<thead><tr><th>Player</th><th>Time</th><th>Category</th></tr></thead>
+								<thead><tr><th>Player/Date</th><th>Category/Time</th></tr></thead>
 								<tbody id="latest-runs-table"></tbody>
 							</table>
 						</div>
@@ -332,7 +332,7 @@ $version = '1_1_0'; //way to force cache reset for css/js files if necessary
 							<h1 class="is-box-heading">Latest Runs</h1>
 							<div class="divider thin"></div>
 							<table class="table is-narrow is-fullwidth">
-								<thead><tr><th>Time</th><th>Category</th><th>Date</th></tr></thead>
+								<thead><tr><th>Game/Date</th><th>Category/Time</th></tr></thead>
 								<tbody id="latest-user-runs-table"></tbody>
 							</table>
 						</div>

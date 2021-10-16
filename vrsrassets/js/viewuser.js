@@ -429,14 +429,29 @@ function loadUserRunCount(link = "", count = 0)
 
 function loadLatestUserRuns(id)
 {
-	get(`https://www.speedrun.com/api/v1/runs?user=${id}&orderby=verify-date&direction=desc&max=4&embed=players,platform,game,category,category.variables`)
+	get(`https://www.speedrun.com/api/v1/runs?user=${id}&orderby=verify-date&direction=desc&max=200&embed=players,platform,game,category,category.variables`)
 	.then((_data) =>
 	{
 		var data = JSON.parse(_data).data;
 
+        var total = 0;
 		for (var _i = 0; _i < data.length; _i++)
 		{
+            if (total >= 4) break;
+
 			var run = data[_i];
+
+            var game;
+            for (var i = 0; i < gamesArray.length; i++)
+            {
+                if (gamesArray[i].api_id == run.game.data.id)
+                {
+                    game = gamesArray[i];
+                }
+            }
+            if (game == null) continue;
+
+            total++;
 
 			var category = run.category.data.name;
 
@@ -462,7 +477,7 @@ function loadLatestUserRuns(id)
 
 			var date = timeAgo(new Date(run.submitted));
 
-			latestUserRunsContainer.innerHTML += `<tr><td>${time}</td><td>${category}</td><td>${date}</td></tr>`;
+			latestUserRunsContainer.innerHTML += `<tr><td><span style="color: ${gameColors[game.color].color}; font-weight: bold;">${game.name}</span><p>${date}</p></td><td>${category}<p>${time}</p></td</tr>`;
 		}
 	});
 }

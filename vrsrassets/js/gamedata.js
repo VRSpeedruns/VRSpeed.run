@@ -1516,19 +1516,19 @@ function loadLatestRuns()
 				category += ` (${subcats.join(", ")})`;
 			}
 			var catTitle = "";
-			if (category.length > 14)
+			/*if (category.length > 14)
 			{
 				catTitle = ` title="${category}""`;
 				category = category.substr(0, 10) + "…";
-			}
+			}*/
 
 			var time = runTimeFormat(run.times.primary);
 			var timeTitle = "";
-			if (time.length > 14)
+			/*if (time.length > 14)
 			{
 				timeTitle = ` title="${time}""`;
 				time = time.substr(0, 10) + "…";
-			}
+			}*/
 			
 			var player = "";
 			var flag = "";
@@ -1556,7 +1556,7 @@ function loadLatestRuns()
 
 			var date = timeAgo(new Date(run.submitted));
 
-			latestRunsContainer.innerHTML += `<tr><td>${flag}${userIcon}${player}<p>${date}</p></td><td${timeTitle}>${time}</td><td${catTitle}>${category}</td></tr>`;
+			latestRunsContainer.innerHTML += `<tr onclick="window.open('https://vrspeed.run/${currentGame.abbreviation}/run/${run.id}', '_self')" data-runtarget="${currentGame.abbreviation}/run/${run.id}"><td>${flag}${userIcon}${player}<p>${date}</p></td><td><span${catTitle}>${category}</span><p${timeTitle}>${time}</p></td></tr>`;
 		}
 	});
 }

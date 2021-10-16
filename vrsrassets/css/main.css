@@ -1192,15 +1192,22 @@ a.button:not(:last-child) {
 
 /* ---------- Misc ---------- */
 
+.box.latest-runs {
+	overflow: hidden;
+	padding-bottom: 0;
+}
 .box.latest-runs table {
 	font-size: 0.75em;
+}
+.box.latest-runs table th  {
+	padding-bottom: 1em;
 }
 #box-latest-runs {
 	padding-bottom: 0;
 	overflow: hidden;
 }
 
-#latest-runs-table td:not(:first-child) {
+#latest-runs-table td:not(:first-child), #latest-user-runs-table td:not(:first-child) {
 	vertical-align: middle;
 
 	overflow: hidden;
