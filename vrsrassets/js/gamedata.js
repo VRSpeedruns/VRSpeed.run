@@ -1487,14 +1487,18 @@ function gameFavToggle()
 
 function loadLatestRuns()
 {
-	get(`https://www.speedrun.com/api/v1/runs?game=${currentGame.api_id}&orderby=verify-date&direction=desc&max=4&embed=players,platform,game,category,category.variables`)
+	get(`https://www.speedrun.com/api/v1/runs?game=${currentGame.api_id}&orderby=verify-date&direction=desc&max=200&embed=players,platform,game,category,category.variables`)
 	.then((_data) =>
 	{
 		var data = JSON.parse(_data).data;
 
+		var total = 0;
 		for (var _i = 0; _i < data.length; _i++)
 		{
 			var run = data[_i];
+
+			if (run.status.status != "verified") continue;
+			if (++total > 4) break;
 
 			var category = run.category.data.name;
 
@@ -1558,6 +1562,11 @@ function loadLatestRuns()
 
 			latestRunsContainer.innerHTML += `<tr onclick="window.open('https://vrspeed.run/${currentGame.abbreviation}/run/${run.id}', '_self')" data-runtarget="${currentGame.abbreviation}/run/${run.id}"><td>${flag}${userIcon}${player}<p>${date}</p></td><td><span${catTitle}>${category}</span><p${timeTitle}>${time}</p></td></tr>`;
 		}
+
+        if (total == 0)
+        {
+            latestUserRunsContainer.innerHTML = `<tr class="noruns"><td colspan=2>This game has no runs.</td></tr>`
+        }
 	});
 }
 

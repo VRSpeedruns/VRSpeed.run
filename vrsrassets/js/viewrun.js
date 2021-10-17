@@ -254,7 +254,7 @@ function openRun(id, loadOrState = false)
             place = nth(parseInt(placeObj.dataset.place));
             if (place == "1st" || place == "2nd" || place == "3rd")
             {
-                place = ` - <b class="place-${place}">${place}</b>`;
+                place = ` - <b class="place-${place}">${place}</b> place`;
             }
             else if (place == "0th")
             {
@@ -262,7 +262,7 @@ function openRun(id, loadOrState = false)
             }
             else
             {
-                place = " - " + place;
+                place = ` - ${place} place`;
             }
         }
 
@@ -449,17 +449,17 @@ function openRun(id, loadOrState = false)
 
             if (run.status.status == "verified")
             {
-                runSingleVerifyReject.innerHTML = `Run verified by <span id="run-single-verifier">${verifier}</span> on <span title="${verifyDateTitle}">${verifyDate}</span>.`;
+                runSingleVerifyReject.innerHTML = `<p class="head">Verified</p><p>by <span id="run-single-verifier">${verifier}</span> on <span title="${verifyDateTitle}">${verifyDate}</span>.</p>`;
             }
             else if (run.status.status == "rejected")
             {
-                runSingleVerifyReject.innerHTML = `<i class="fas fa-exclamation-circle" style="color: #F14668"></i> Run rejected by <span id="run-single-verifier">${verifier}</span>.`;
+                runSingleVerifyReject.innerHTML = `<p class="head"><i class="fas fa-exclamation-circle" style="color: #F14668"></i> Rejected</p><p>by <span id="run-single-verifier">${verifier}</span>.</p>`;
                 runSinglePlace.innerHTML = ' - Rejected'
             }
 
             singleFlagAndModTippysInfo.push({
                 "id": `#run-single-verifier`,
-                "text": getCardHTML(_data.names.international, _data.assets.image.uri, `${verifierFlag}${verifierIcon}${verifier}`, getAverageColor(_data["name-style"]))
+                "text": getCardHTML(_data.names.international, _data.assets.image.uri, verifier, getAverageColor(_data["name-style"]))
             });
 
             if (!isMobile)

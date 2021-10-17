@@ -437,8 +437,6 @@ function loadLatestUserRuns(id)
         var total = 0;
 		for (var _i = 0; _i < data.length; _i++)
 		{
-            if (total >= 4) break;
-
 			var run = data[_i];
 
             var game;
@@ -450,8 +448,8 @@ function loadLatestUserRuns(id)
                 }
             }
             if (game == null) continue;
-
-            total++;
+            if (run.status.status != "verified") continue;
+			if (++total > 4) break;
 
 			var category = run.category.data.name;
 
@@ -479,6 +477,11 @@ function loadLatestUserRuns(id)
 
 			latestUserRunsContainer.innerHTML += `<tr><td><span style="color: ${gameColors[game.color].color}; font-weight: bold;">${game.name}</span><p>${date}</p></td><td>${category}<p>${time}</p></td</tr>`;
 		}
+
+        if (total == 0)
+        {
+            latestUserRunsContainer.innerHTML = `<tr class="noruns"><td colspan=2>This user has no runs.</td></tr>`
+        }
 	});
 }
 

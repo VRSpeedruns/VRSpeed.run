@@ -1,6 +1,6 @@
 <?php
 include 'vrsrassets/php/oEmbedData.php';
-$version = '1_1_0'; //way to force cache reset for css/js files if necessary
+$version = '1_1_1'; //way to force cache reset for css/js files if necessary
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -165,7 +165,7 @@ $version = '1_1_0'; //way to force cache reset for css/js files if necessary
 			<div class="container" id="main-container" style="display: none;">
 				<div class="columns">
 					<div class="column is-3">
-					<div class="box">
+						<div class="box">
 							<div class="game-info-container">
 								<span id="game-info-fav" onclick="gameFavToggle();"><i class="far fa-star"></i></span>
 								<div id="game-name"></div>
@@ -261,15 +261,15 @@ $version = '1_1_0'; //way to force cache reset for css/js files if necessary
 										<span id="run-single-runner"></span><span id="run-single-place"></span>
 									</h2>
 								</div>
-								<div class="run-single-info-other">
-									<div id="run-single-comment-outer"><span id="run-single-comment"></span></div>
-									<p>Played <span id="run-single-platform"></span> on <span id="run-single-date"></span>.</p>
-									<p>Run submitted on <span id="run-single-submitted-date"></span>.</p>
-									<p id="run-single-verifyreject"></p>
+								<div id="run-single-comment-outer"><span id="run-single-comment"></span></div>
+								<div class="columns run-single-info-other">
+									<div class="column is-4"><p class="head">Submitted</p><p>on <span id="run-single-submitted-date"></span>.</p></div>
+									<div class="column is-4"><p class="head">Played</p><p><span id="run-single-platform"></span> on <span id="run-single-date"></span>.</p></div>
+									<div class="column is-4"><span id="run-single-verifyreject"></span></div>
 								</div>
 							</div>
 							<div id="run-single-splits-container">
-								<div class="divider"></div>
+								<div class="divider mid-thin"></div>
 								<div id="variables">
 									<div class="buttons has-addons" id="run-single-splits-timing">
 										<button id="run-single-splits-rt" class="button is-small is-dark is-variable" onclick=""><i class="fas fa-globe-americas"></i> Real<span class="is-hidden-mobile">-time</span></button>

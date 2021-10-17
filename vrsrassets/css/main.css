@@ -283,7 +283,7 @@ a.button:not(:last-child) {
 	margin-right: 0.45em;
 }
 
-.table tbody tr {
+.table tbody tr:not(.noruns) {
 	cursor: pointer;
 }
 .table tbody tr:nth-child(odd) {
@@ -292,7 +292,7 @@ a.button:not(:last-child) {
 .table tbody tr:nth-child(even) {
 	background-color: var(--background-table-even);
 }
-.table tbody:not(#run-single-segments) tr:hover {
+.table tbody:not(#run-single-segments) tr:hover:not(.noruns) {
 	background-color: var(--button-background-color);
 }
 
@@ -442,9 +442,21 @@ a.button:not(:last-child) {
 #run-single-comment:empty {
 	margin-bottom: 0;
 }
-.run-single-info-other > p, #run-single-comment:not(:empty) {
+#run-single-comment:not(:empty) {
 	margin-top: 0.5em;
 	text-align: center;
+}
+.run-single-info-other:last-child {
+	margin-bottom: auto;
+}
+.run-single-info-other {
+	margin: 1rem .1rem 0 .1rem;
+	font-size: 0.85em;
+	background-color: var(--background-table-odd);
+	border-radius: 4px;
+}
+.run-single-info-other p.head {
+	font-size: 1.25em;
 }
 
 .buttons.is-right-mobile > a {
@@ -546,8 +558,11 @@ a.button:not(:last-child) {
 }
 
 .table tbody#run-single-segments tr {
-	cursor: default;
+	cursor: auto;
 	font-size: 0.95em;
+}
+#run-single-segments tr:hover {
+	background-color: var(--button-background-color);
 }
 .sp-heading {
 	font-weight: bold;
@@ -1312,6 +1327,10 @@ a.button:not(:last-child) {
 .divider.thin {
 	padding-bottom: 1em;
 	margin-bottom: 1.25em;
+}
+.divider.mid-thin {
+	padding-bottom: calc(1.5em + 2px);
+	margin-bottom: 1.5em;
 }
 @media only screen and (max-width: 768px) {
 	.divider {
