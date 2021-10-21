@@ -665,7 +665,7 @@ function loadGame(id, loadOrState = false, force = false)
 	gameInfoLinkForums.href = `https://www.speedrun.com/${gameId}/forum`;
 	gameInfoLinkStatistics.href = `https://www.speedrun.com/${gameId}/gamestats`;
 	gameInfoModerators.innerHTML = 'Moderated by:<br>';
-	latestRunsContainer.innerHTML = '';
+	latestRunsContainer.innerHTML = '<tr class="noruns"><td colspan=2>Loading...</td></tr>';
 
 	for (var i = 0; i < gameInfoModTippys.length; i++)
 	{
@@ -992,7 +992,8 @@ function miscTabToggle()
 	{
 		var left = miscTab.getBoundingClientRect().left - miscTab.parentElement.getBoundingClientRect().left;
 		left += miscTab.getBoundingClientRect().right - miscTab.getBoundingClientRect().left;
-		var top = miscTab.getBoundingClientRect().bottom - miscTab.getBoundingClientRect().top;
+		
+		var top = miscTab.getBoundingClientRect().bottom - miscTab.parentElement.getBoundingClientRect().top;
 
 		miscCatsContainer.style.left = `${left}px`;
 		miscCatsContainer.style.top = `${top}px`;
@@ -1487,11 +1488,14 @@ function gameFavToggle()
 
 function loadLatestRuns()
 {
+    if (isMobile) return;
+
 	get(`https://www.speedrun.com/api/v1/runs?game=${currentGame.api_id}&orderby=verify-date&direction=desc&max=200&embed=players,platform,game,category,category.variables`)
 	.then((_data) =>
 	{
 		var data = JSON.parse(_data).data;
 
+		latestRunsContainer.innerHTML = '';
 		var total = 0;
 		for (var _i = 0; _i < data.length; _i++)
 		{
@@ -1520,19 +1524,19 @@ function loadLatestRuns()
 				category += ` (${subcats.join(", ")})`;
 			}
 			var catTitle = "";
-			/*if (category.length > 14)
+			if (category.length > 25)
 			{
 				catTitle = ` title="${category}""`;
-				category = category.substr(0, 10) + "…";
-			}*/
+				category = category.substr(0, 25) + "…";
+			}
 
 			var time = runTimeFormat(run.times.primary);
 			var timeTitle = "";
-			/*if (time.length > 14)
+			if (time.length > 25)
 			{
 				timeTitle = ` title="${time}""`;
-				time = time.substr(0, 10) + "…";
-			}*/
+				time = time.substr(0, 25) + "…";
+			}
 			
 			var player = "";
 			var flag = "";

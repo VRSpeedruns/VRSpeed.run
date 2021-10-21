@@ -191,7 +191,7 @@ $version = '1_1_1'; //way to force cache reset for css/js files if necessary
 								</div>
 							</div>
 						</div>
-						<div class="box latest-runs">
+						<div class="box latest-runs is-hidden-mobile">
 							<h1 class="is-box-heading">Latest Runs</h1>
 							<div class="divider thin"></div>
 							<table class="table is-narrow is-fullwidth">
@@ -328,7 +328,7 @@ $version = '1_1_1'; //way to force cache reset for css/js files if necessary
 								</div>
 							</div>
 						</div>
-						<div class="box latest-runs">
+						<div class="box latest-runs is-hidden-mobile">
 							<h1 class="is-box-heading">Latest Runs</h1>
 							<div class="divider thin"></div>
 							<table class="table is-narrow is-fullwidth">

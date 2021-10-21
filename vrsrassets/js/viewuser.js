@@ -429,11 +429,15 @@ function loadUserRunCount(link = "", count = 0)
 
 function loadLatestUserRuns(id)
 {
+    if (isMobile) return;
+
+    latestUserRunsContainer.innerHTML = '<tr class="noruns"><td colspan=2>Loading...</td></tr>';
 	get(`https://www.speedrun.com/api/v1/runs?user=${id}&orderby=verify-date&direction=desc&max=200&embed=players,platform,game,category,category.variables`)
 	.then((_data) =>
 	{
 		var data = JSON.parse(_data).data;
 
+        latestUserRunsContainer.innerHTML = '';
         var total = 0;
 		for (var _i = 0; _i < data.length; _i++)
 		{
@@ -470,12 +474,24 @@ function loadLatestUserRuns(id)
 			{
 				category += ` (${subcats.join(", ")})`;
 			}
+			var catTitle = "";
+			if (category.length > 25)
+			{
+				catTitle = ` title="${category}""`;
+				category = category.substr(0, 25) + "…";
+			}
 
 			var time = runTimeFormat(run.times.primary);
+			var timeTitle = "";
+			if (time.length > 25)
+			{
+				timeTitle = ` title="${time}""`;
+				time = time.substr(0, 25) + "…";
+			}
 
 			var date = timeAgo(new Date(run.submitted));
 
-			latestUserRunsContainer.innerHTML += `<tr><td><span style="color: ${gameColors[game.color].color}; font-weight: bold;">${game.name}</span><p>${date}</p></td><td>${category}<p>${time}</p></td</tr>`;
+			latestUserRunsContainer.innerHTML += `<tr><td><span style="color: ${gameColors[game.color].color}; font-weight: bold;">${game.name}</span><p>${date}</p></td><td><span${catTitle}>${category}</span><p${timeTitle}>${time}</p></td</tr>`;
 		}
 
         if (total == 0)
