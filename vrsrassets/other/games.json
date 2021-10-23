@@ -605,7 +605,7 @@
         "api_id": "9do8k331",
         "name": "Arizona Sunshine: Dead Man DLC",
         "hardware": "",
-        "color": "orange",
+        "color": "yellow",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -657,6 +657,31 @@
         "hardware": "",
         "color": "blue",
         "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "the_damned_dlc",
+        "abbreviation": "astd",
+        "api_id": "m1mn7zjd",
+        "name": "Arizona Sunshine: The Damned DLC",
+        "hardware": "",
+        "color": "yellow",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "mars_odyssey",
+        "abbreviation": "mo",
+        "api_id": "9d383gy1",
+        "name": "Mars Odyssey",
+        "hardware": "",
+        "color": "light_orange",
+        "ignoredVariables": [
+            {
+                "id": "2lg5zge8",
+                "value": "jqzw2ykq"
+            }
+        ],
         "verifiers": []
     }
 ]
