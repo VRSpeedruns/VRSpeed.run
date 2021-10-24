@@ -683,5 +683,15 @@
             }
         ],
         "verifiers": []
+    },
+    {
+        "id": "lone_echo_II",
+        "abbreviation": "le2",
+        "api_id": "3dxk3wg1",
+        "name": "Lone Echo II",
+        "hardware": "",
+        "color": "teal",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
