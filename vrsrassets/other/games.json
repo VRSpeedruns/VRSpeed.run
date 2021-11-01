@@ -54,7 +54,7 @@
         "abbreviation": "bw",
         "api_id": "j1llkl41",
         "name": "BONEWORKS",
-        "hardware": "r8romd08",
+        "hardware": "",
         "color": "dark_yellow",
         "ignoredVariables": [],
         "verifiers": []
@@ -685,12 +685,32 @@
         "verifiers": []
     },
     {
-        "id": "lone_echo_II",
+        "id": "lone_echo_ii",
         "abbreviation": "le2",
         "api_id": "3dxk3wg1",
         "name": "Lone Echo II",
         "hardware": "",
         "color": "teal",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "yupitergrad",
+        "abbreviation": "yg",
+        "api_id": "lde3lr56",
+        "name": "Yupitergrad",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "walkabout_mini_golf_vr",
+        "abbreviation": "wmgvr",
+        "api_id": "m1mxy346",
+        "name": "Walkabout Mini Golf VR",
+        "hardware": "",
+        "color": "yellow",
         "ignoredVariables": [],
         "verifiers": []
     }

@@ -171,7 +171,7 @@ function loadUserRuns(id)
             var isVR = false;
             for (var k = 0; k < gamesArray.length; k++)
             {
-                if (runs[i].game.data.abbreviation == gamesArray[k].id)
+                if (runs[i].game.data.id == gamesArray[k].api_id)
                 {
                     isVR = true;
                     break;
