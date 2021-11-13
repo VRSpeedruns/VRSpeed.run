@@ -1,6 +1,6 @@
 <?php
 include 'vrsrassets/php/oEmbedData.php';
-$version = '1_1_1'; //way to force cache reset for css/js files if necessary
+$version = '1_2_0'; //way to force cache reset for css/js files if necessary
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +89,7 @@ $version = '1_1_1'; //way to force cache reset for css/js files if necessary
 				</div>
 			</div>
 		</nav>
-		<section class="section">
+		<section class="section" id="main-section">
 			<div id="error-container"></div>
 			<div id="fullpage-loading" class="loadingdiv" style="display: none;">
 				<div>

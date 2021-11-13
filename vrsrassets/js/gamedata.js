@@ -37,6 +37,8 @@ Variable Object
 	]
 }*/
 
+var bodyElement;
+
 var homeContainer;
 var mainContainer;
 var aboutContainer;
@@ -109,6 +111,8 @@ var gameDataLeaderboardSecondLoad = false;
 
 function onGameDataLoad()
 {
+	bodyElement = document.getElementsByTagName("body")[0];
+
 	homeContainer = document.getElementById("home-container");
 	mainContainer = document.getElementById("main-container");
 	aboutContainer = document.getElementById("about-container");
@@ -680,6 +684,10 @@ function loadGame(id, loadOrState = false, force = false)
 
 		var game = (JSON.parse(data)).data;
 		gameInfoImage.src = game.assets["cover-large"].uri;
+		if (game.assets.background.uri != null)
+			bodyElement.style.cssText = `background-image: linear-gradient(var(--background-color-transparent), var(--background-color-transparent)), url('${game.assets.background.uri}'); background-color: var(--background-color-transparent);`;
+		else
+		bodyElement.style.cssText = '';
 
 		currentGamePrimaryTiming = game.ruleset["default-time"];
 		currentGameTimings = game.ruleset["run-times"];
