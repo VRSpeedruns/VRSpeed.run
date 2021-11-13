@@ -54,7 +54,7 @@ html {
 	background-color: var(--background-mid-accent-color);
 	color: var(--text-color);
 	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-y: scroll;
 }
 body {
 	background-color: var(--background-accent-color);

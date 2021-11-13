@@ -401,7 +401,7 @@
         "abbreviation": "twdss",
         "api_id": "pd0wmvv1",
         "name": "The Walking Dead: S & S",
-        "hardware": "ylqk1v3l",
+        "hardware": "",
         "color": "red",
         "ignoredVariables": [],
         "verifiers": []
@@ -711,6 +711,36 @@
         "name": "Walkabout Mini Golf VR",
         "hardware": "",
         "color": "yellow",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "doom3vr",
+        "abbreviation": "doom3",
+        "api_id": "w6j7eo56",
+        "name": "DOOM 3: VR Edition",
+        "hardware": "",
+        "color": "orange",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "wolfenstein_cyberpilot",
+        "abbreviation": "wolf",
+        "api_id": "4d7nzeg6",
+        "name": "Wolfenstein: Cyberpilot",
+        "hardware": "",
+        "color": "blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "the_persistence",
+        "abbreviation": "pers",
+        "api_id": "j1n8gry1",
+        "name": "The Persistence",
+        "hardware": "",
+        "color": "blue",
         "ignoredVariables": [],
         "verifiers": []
     }
