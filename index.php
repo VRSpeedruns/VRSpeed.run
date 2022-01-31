@@ -68,8 +68,8 @@ $version = '1_2_0'; //way to force cache reset for css/js files if necessary
 								<hr class="navbar-divider">
 								<a class="navbar-item in-dropdown" href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github"></i> GitHub</a>
 								<a class="navbar-item in-dropdown" href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-								<hr class="navbar-divider">
-								<a class="navbar-item in-dropdown" href="https://ko-fi.com/bigfoott" target="_blank"><i class="fas fa-heart"></i> Support Me</a>
+								<!--<hr class="navbar-divider">
+								<a class="navbar-item in-dropdown" href="https://ko-fi.com/bigfoott" target="_blank"><i class="fas fa-heart"></i> Support Me</a>-->
 							</div>
 						</div>
 					</div>
@@ -145,7 +145,7 @@ $version = '1_2_0'; //way to force cache reset for css/js files if necessary
 								<h2>Data & Credits</h1>
 								<p>All relevant data (game information, run information, game and user images, etc.) is retrieved from the <a href="https://github.com/speedruncomorg/api" target="_blank">Speedrun.com REST API</a>. For runs with included splits, split data is retrieved from the <a href="https://github.com/glacials/splits-io/blob/main/docs/api.md" target="_blank">Splits.io API</a>.</p>
 								<p>The new logo is a commission from the amazing <a href="https://twitter.com/Sixelona" target="_blank">@Sixelona</a>!</p>
-								<p>I maintain this site completely for fun. If you'd like to support me, consider checking out <a href="https://ko-fi.com/bigfoott" target="_blank">my Ko-fi page</a>! 😊</p>
+								<!--<p>I maintain this site completely for fun. If you'd like to support me, consider checking out <a href="https://ko-fi.com/bigfoott" target="_blank">my Ko-fi page</a>! 😊</p>-->
 							</div>				
 						</div>
 					</div>

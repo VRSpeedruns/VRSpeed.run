@@ -743,5 +743,15 @@
         "color": "blue",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "garden_of_the_sea",
+        "abbreviation": "gots",
+        "api_id": "76r37lv6",
+        "name": "Garden of the Sea",
+        "hardware": "",
+        "color": "teal",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
