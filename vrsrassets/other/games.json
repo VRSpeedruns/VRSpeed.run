@@ -753,5 +753,45 @@
         "color": "teal",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "after_the_fall",
+        "abbreviation": "atf",
+        "api_id": "nd28nxed",
+        "name": "After the Fall",
+        "hardware": "",
+        "color": "gray_blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "project_terminus_vr",
+        "abbreviation": "ptvr",
+        "api_id": "k6qwrvo6",
+        "name": "Project Terminus VR",
+        "hardware": "",
+        "color": "gray_blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "re4vr",
+        "abbreviation": "re4vr",
+        "api_id": "nd28gnqd",
+        "name": "Resident Evil 4 (VR)",
+        "hardware": "",
+        "color": "maroon",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "stride",
+        "abbreviation": "stride",
+        "api_id": "w6j79y76",
+        "name": "STRIDE",
+        "hardware": "",
+        "color": "blue",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
