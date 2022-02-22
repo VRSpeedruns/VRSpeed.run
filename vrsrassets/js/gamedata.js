@@ -1509,7 +1509,7 @@ function loadLatestRuns()
 		{
 			var run = data[_i];
 
-			if (run.status.status != "verified") continue;
+			if (run.status.status != "verified" || run.category.data.type != "per-game") continue;
 			if (++total > 4) break;
 
 			var category = run.category.data.name;

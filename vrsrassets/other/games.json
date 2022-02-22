@@ -793,5 +793,15 @@
         "color": "blue",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "eye_of_the_temple",
+        "abbreviation": "eott",
+        "api_id": "j1n8yr91",
+        "name": "Eye of the Temple",
+        "hardware": "",
+        "color": "light_orange",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
