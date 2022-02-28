@@ -1502,6 +1502,7 @@ function loadLatestRuns()
 	.then((_data) =>
 	{
 		var data = JSON.parse(_data).data;
+		if (data[0].game.data.id != currentGame.api_id) return;
 
 		latestRunsContainer.innerHTML = '';
 		var total = 0;

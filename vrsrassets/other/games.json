@@ -803,5 +803,15 @@
         "color": "light_orange",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "the_walking_dead_onslaught",
+        "abbreviation": "twdo",
+        "api_id": "v1pxyk46",
+        "name": "The Walking Dead Onslaught",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
