@@ -813,5 +813,15 @@
         "color": "red",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "statik",
+        "abbreviation": "statik",
+        "api_id": "4d794yz1",
+        "name": "Statik",
+        "hardware": "",
+        "color": "light_orange",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
