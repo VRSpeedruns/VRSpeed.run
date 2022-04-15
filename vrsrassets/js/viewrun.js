@@ -232,7 +232,13 @@ function openRun(id, loadOrState = false)
 			}
 
             if (run.players.data[0].assets.icon.uri)
-                userIcon = `<img class="runs-usericon" src="${run.players.data[0].assets.icon.uri}">`;
+            {
+                userIcon += `<img class="runs-usericon" src="${run.players.data[0].assets.icon.uri}">`;
+            }
+            if (run.players.data[0].assets.supporterIcon && run.players.data[0].assets.supporterIcon.uri)
+            {
+                userIcon += `<img class="runs-usericon" src="${run.players.data[0].assets.supporterIcon.uri}">`;
+            }
         }
 
         if (player != rawPlayer)
@@ -443,7 +449,13 @@ function openRun(id, loadOrState = false)
 
             verifierIcon = '';
             if (_data.assets.icon.uri)
+            {
                 verifierIcon = `<img class="runs-usericon" src="${_data.assets.icon.uri}"">`;
+            }
+            if (_data.assets.supporterIcon && _data.assets.supporterIcon.uri)
+            {
+                verifierIcon = `<img class="runs-usericon" src="${_data.assets.supporterIcon.uri}"">`;
+            }
                 
             var verifier = `<a class="player-link" href="/user/${_data.names.international}">${verifierModIcon}${verifierFlag}${verifierIcon}${verifier}</a>`;
 

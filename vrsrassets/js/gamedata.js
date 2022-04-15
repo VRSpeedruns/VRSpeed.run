@@ -812,7 +812,13 @@ function loadGame(id, loadOrState = false, force = false)
 
 			var userIcon = '';
 			if (mods[i].assets.icon.uri)
-				userIcon = `<img class="runs-usericon small" src="${mods[i].assets.icon.uri}">`;
+			{
+				userIcon += `<img class="runs-usericon small" src="${mods[i].assets.icon.uri}">`;
+			}
+			if (mods[i].assets.supporterIcon && mods[i].assets.supporterIcon.uri)
+			{
+				userIcon += `<img class="runs-usericon small" src="${mods[i].assets.supporterIcon.uri}">`;
+			}
 
 			var _comma = '';
 			if (i + 1 < mods.length)
@@ -1333,7 +1339,11 @@ function loadRuns(id, variables, loadOrState = false)
 
 				if (playerObj.assets.icon.uri)
 				{
-					userIcon = `<img class="runs-usericon" src="${playerObj.assets.icon.uri}">`;
+					userIcon += `<img class="runs-usericon" src="${playerObj.assets.icon.uri}">`;
+				}
+				if (playerObj.assets.supporterIcon && playerObj.assets.supporterIcon.uri)
+				{
+					userIcon += `<img class="runs-usericon" src="${playerObj.assets.supporterIcon.uri}">`;
 				}
 				
 				if (playerObj.location)
@@ -1569,7 +1579,13 @@ function loadLatestRuns()
 
 			var userIcon = '';
 			if (temp.assets.icon.uri)
-				userIcon = `<img class="runs-usericon" src="${temp.assets.icon.uri}">`;
+			{
+				userIcon += `<img class="runs-usericon" src="${temp.assets.icon.uri}">`;
+			}
+			if (temp.assets.supporterIcon && temp.assets.supporterIcon.uri)
+			{
+				userIcon += `<img class="runs-usericon" src="${temp.assets.supporterIcon.uri}">`;
+			}
 
 			var date = timeAgo(new Date(run.submitted));
 

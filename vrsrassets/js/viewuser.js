@@ -93,7 +93,13 @@ function loadUser(username)
         var userIcon = '';
 
         if (user.assets.icon.uri)
-            userIcon = `<img class="runs-usericon" src="${user.assets.icon.uri}">`;
+        {
+            userIcon += `<img class="runs-usericon" src="${user.assets.icon.uri}">`;
+        }
+        if (user.assets.supporterIcon && user.assets.supporterIcon.uri)
+        {
+            userIcon += `<img class="runs-usericon" src="${user.assets.supporterIcon.uri}">`;
+        }
 
         userUsername.innerHTML = `<b>${flag}${userIcon}${player}</b>`;
 

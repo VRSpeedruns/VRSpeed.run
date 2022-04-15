@@ -89,7 +89,13 @@ function loadWR(id)
 
         var userIcon = '';
         if (temp.assets.icon.uri)
-		    userIcon = `<img class="runs-usericon" src="${temp.assets.icon.uri}">`;
+		{
+            userIcon += `<img class="runs-usericon" src="${temp.assets.icon.uri}">`;
+        }
+        if (temp.assets.supporterIcon && temp.assets.supporterIcon.uri)
+		{
+            userIcon += `<img class="runs-usericon" src="${temp.assets.supporterIcon.uri}">`;
+        }
 
         var date = timeAgo(new Date(run.submitted));
         if (run.status["verify-date"])
