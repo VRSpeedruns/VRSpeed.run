@@ -65,11 +65,10 @@ $version = '1_2_0'; //way to force cache reset for css/js files if necessary
 							<div class="navbar-dropdown">
 								<a class="navbar-item in-dropdown" href="/about"><i class="fas fa-info-circle"></i> About</a>
 								<a class="navbar-item in-dropdown" href="/status"><i class="fas fa-signal"></i> Status</a>
+								<a class="navbar-item in-dropdown" href="https://github.com/VRSpeedruns/VRSpeed.run/issues/new/choose"><i class="fa-solid fa-ticket"></i> Submit a Ticket</a>
 								<hr class="navbar-divider">
 								<a class="navbar-item in-dropdown" href="https://github.com/VRSpeedruns" target="_blank"><i class="fab fa-github"></i> GitHub</a>
 								<a class="navbar-item in-dropdown" href="https://twitter.com/VRSpeedruns" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-								<!--<hr class="navbar-divider">
-								<a class="navbar-item in-dropdown" href="https://ko-fi.com/bigfoott" target="_blank"><i class="fas fa-heart"></i> Support Me</a>-->
 							</div>
 						</div>
 					</div>

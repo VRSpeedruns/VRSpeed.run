@@ -620,16 +620,6 @@
         "verifiers": []
     },
     {
-        "id": "gorilla_tag",
-        "abbreviation": "gt",
-        "api_id": "ldejjmj1",
-        "name": "Gorilla Tag",
-        "hardware": "",
-        "color": "green",
-        "ignoredVariables": [],
-        "verifiers": []
-    },
-    {
         "id": "redmatter",
         "abbreviation": "rm",
         "api_id": "46w29rl6",
@@ -822,6 +812,21 @@
         "hardware": "",
         "color": "light_orange",
         "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "falcon_age",
+        "abbreviation": "fa",
+        "api_id": "kdkzkwed",
+        "name": "Falcon Age",
+        "hardware": "",
+        "color": "light_orange",
+        "ignoredVariables": [
+            {
+                "id": "9l71547l",
+                "value": "81p02evq"
+            }
+        ],
         "verifiers": []
     }
 ]
