@@ -828,5 +828,24 @@
             }
         ],
         "verifiers": []
+    },
+    {
+        "id": "immortal_legacy_the_jade_cipher",
+        "abbreviation": "iltjc",
+        "api_id": "o1yj44v1",
+        "name": "Immortal Legacy: The Jade Cipher",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [
+            {
+                "id": "6nj5md6l",
+                "value": "4qykjv21"
+            },
+            {
+                "id": "6nj5md6l",
+                "value": "mlngz4j1"
+            }
+        ],
+        "verifiers": []
     }
 ]
