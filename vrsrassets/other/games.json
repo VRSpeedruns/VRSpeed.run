@@ -847,5 +847,35 @@
             }
         ],
         "verifiers": []
+    },
+    {
+        "id": "wanderer",
+        "abbreviation": "wanderer",
+        "api_id": "j1lqj776",
+        "name": "Wanderer",
+        "hardware": "",
+        "color": "light_orange",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "blair_witch_vr",
+        "abbreviation": "bwvr",
+        "api_id": "pdv28wo6",
+        "name": "Blair Witch VR",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "astrobot",
+        "abbreviation": "ab",
+        "api_id": "9dow30e1",
+        "name": "ASTRO BOT Rescue Mission",
+        "hardware": "",
+        "color": "blue",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
