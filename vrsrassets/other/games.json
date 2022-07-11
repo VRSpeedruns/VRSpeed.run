@@ -877,5 +877,45 @@
         "color": "blue",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "real_vr_fishing",
+        "abbreviation": "rvrf",
+        "api_id": "76r3ree6",
+        "name": "Real VR Fishing",
+        "hardware": "",
+        "color": "blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "pavlov_vr",
+        "abbreviation": "pavlov",
+        "api_id": "m1mnj54d",
+        "name": "Pavlov VR",
+        "hardware": "",
+        "color": "gray_blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "into_the_radius_vr",
+        "abbreviation": "itrvr",
+        "api_id": "76r32ne6",
+        "name": "Into the Radius VR",
+        "hardware": "",
+        "color": "gray_blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "ascend",
+        "abbreviation": "ascend",
+        "api_id": "ldejr5x1",
+        "name": "Ascend",
+        "hardware": "",
+        "color": "blue",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
