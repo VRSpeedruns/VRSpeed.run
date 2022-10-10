@@ -917,5 +917,15 @@
         "color": "blue",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "bonelab",
+        "abbreviation": "bonelab",
+        "api_id": "76r3m746",
+        "name": "BONELAB",
+        "hardware": "",
+        "color": "white",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]

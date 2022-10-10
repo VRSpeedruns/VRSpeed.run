@@ -113,5 +113,10 @@
         "color": "#F01B6A",
         "hoverColor": "#f74084",
         "darkColor": "#c2172d"
+    },
+    "white": {
+        "color": "#FFFFFF",
+        "hoverColor": "#eeeeee",
+        "darkColor": "#eeeeee"
     }
 }
