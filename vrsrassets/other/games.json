@@ -927,5 +927,15 @@
         "color": "white",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "moss_ii",
+        "abbreviation": "moss2",
+        "api_id": "yd4kw956",
+        "name": "MOSS: BOOK II",
+        "hardware": "",
+        "color": "yellow",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
