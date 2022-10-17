@@ -315,7 +315,7 @@ function loadAllGames()
 		}
 	}
 
-	gamesArray.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+	gamesArray.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
 	var lastLetter = '';
 	for (var i = 0; i < gamesArray.length; i++)
 	{
