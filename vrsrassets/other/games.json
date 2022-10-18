@@ -937,5 +937,25 @@
         "color": "yellow",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "pr1995",
+        "abbreviation": "pr1995",
+        "api_id": "m1zj0006",
+        "name": "Pixel Ripped 1995",
+        "hardware": "",
+        "color": "pink",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "pr1989",
+        "abbreviation": "pr1989",
+        "api_id": "268e5296",
+        "name": "Pixel Ripped 1989",
+        "hardware": "",
+        "color": "pink",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
