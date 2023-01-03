@@ -957,5 +957,15 @@
         "color": "pink",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "affected_the_manor",
+        "abbreviation": "atm",
+        "api_id": "pdvzen96",
+        "name": "AFFECTED: The Manor",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
