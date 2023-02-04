@@ -967,5 +967,35 @@
         "color": "red",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "mothergunship_forge",
+        "abbreviation": "mgsf",
+        "api_id": "o1yjx441",
+        "name": "MOTHERGUNSHIP: FORGE",
+        "hardware": "",
+        "color": "blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "frenzy_vr",
+        "abbreviation": "fvr",
+        "api_id": "j1n8joe1",
+        "name": "Frenzy VR",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "floor_plan_2",
+        "abbreviation": "fp2",
+        "api_id": "9do8gym1",
+        "name": "Floor Plan 2",
+        "hardware": "",
+        "color": "purple",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
