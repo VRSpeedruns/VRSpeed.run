@@ -453,7 +453,7 @@
     },
     {
         "id": "vertigo_remastered",
-        "abbreviation": "vert",
+        "abbreviation": "vertrem",
         "api_id": "369pxj01",
         "name": "Vertigo Remastered",
         "hardware": "",
@@ -989,12 +989,82 @@
         "verifiers": []
     },
     {
+        "id": "floorplan",
+        "abbreviation": "fp",
+        "api_id": "yd4o7rg1",
+        "name": "Floor Plan",
+        "hardware": "",
+        "color": "blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
         "id": "floor_plan_2",
         "abbreviation": "fp2",
         "api_id": "9do8gym1",
         "name": "Floor Plan 2",
         "hardware": "",
         "color": "purple",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "ieytdhomesweethome",
+        "abbreviation": "ieytdhsh",
+        "api_id": "3dxkey41",
+        "name": "I Expect You to Die: Home Sweet Home",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "twdss2",
+        "abbreviation": "twdss2",
+        "api_id": "pd0wmvv1",
+        "name": "The Walking Dead: S & S 2",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "medal_of_honor_above_and_beyond",
+        "abbreviation": "mohab",
+        "api_id": "76r3pnl6",
+        "name": "Medal of Honor: Above and Beyond",
+        "hardware": "",
+        "color": "yellow",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "jetbounce",
+        "abbreviation": "jb",
+        "api_id": "v1px9p86",
+        "name": "JETBOUNCE",
+        "hardware": "",
+        "color": "teal",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "vertigo_2_vr",
+        "abbreviation": "vert2",
+        "api_id": "9do80pm1",
+        "name": "Vertigo 2",
+        "hardware": "",
+        "color": "blue_purple",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "bait",
+        "abbreviation": "bait",
+        "api_id": "yd4o2ek1",
+        "name": "Bait!",
+        "hardware": "",
+        "color": "orange",
         "ignoredVariables": [],
         "verifiers": []
     }
