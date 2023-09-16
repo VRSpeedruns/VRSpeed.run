@@ -191,7 +191,7 @@ function openRun(id, loadOrState = false)
             {
                 if (currentMods[run.players.data[0].id] == "moderator")
                 {
-                    modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
+                    modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/_next/static/media/mod-normal.f93510a6.png">`;
 
                     singleFlagAndModTippysInfo.push({
                         "id": `#singleruns-${run.players.data[0].id}-modIcon`,
@@ -202,7 +202,7 @@ function openRun(id, loadOrState = false)
                 {
                     if (currentGame.verifiers.includes(run.players.data[0].id))
                     {
-                        modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/verifier.png">`;
+                        modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/_next/static/media/mod-verifier.af83bac1.png">`;
 
                         singleFlagAndModTippysInfo.push({
                             "id": `#singleruns-${run.players.data[0].id}-modIcon`,
@@ -211,7 +211,7 @@ function openRun(id, loadOrState = false)
                     }
                     else
                     {
-                        modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+                        modIcon = `<img id="singleruns-${run.players.data[0].id}-modIcon" class="runs-usericon" src="https://www.speedrun.com/_next/static/media/mod-super.85e082ff.png">`;
 
                         singleFlagAndModTippysInfo.push({
                             "id": `#singleruns-${run.players.data[0].id}-modIcon`,
@@ -407,7 +407,7 @@ function openRun(id, loadOrState = false)
             {
                 if (currentMods[_data.id] == "moderator")
                 {
-                    verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/mod.png">`;
+                    verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/_next/static/media/mod-normal.f93510a6.png">`;
 
                     singleFlagAndModTippysInfo.push({
                         "id": `#singleruns-${_data.id}-verModIcon`,
@@ -418,7 +418,7 @@ function openRun(id, loadOrState = false)
                 {
                     if (currentGame.verifiers.includes(_data.id))
                     {
-                        verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/verifier.png">`;
+                        verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/_next/static/media/mod-verifier.af83bac1.png">`;
 
                         singleFlagAndModTippysInfo.push({
                             "id": `#singleruns-${_data.id}-verModIcon`,
@@ -427,7 +427,7 @@ function openRun(id, loadOrState = false)
                     }
                     else
                     {
-                        verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/images/icons/super-mod.png">`;
+                        verifierModIcon = `<img id="singleruns-${_data.id}-verModIcon" class="runs-usericon" src="https://www.speedrun.com/_next/static/media/mod-super.85e082ff.png">`;
 
                         singleFlagAndModTippysInfo.push({
                             "id": `#singleruns-${_data.id}-verModIcon`,
