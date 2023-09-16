@@ -211,10 +211,7 @@
         "hardware": "",
         "color": "red",
         "ignoredVariables": [],
-        "verifiers": [
-            "qjonq4n8",
-            "x720pev8"
-        ]
+        "verifiers": []
     },
     {
         "id": "jet_island",
@@ -500,8 +497,7 @@
         "color": "red",
         "ignoredVariables": [],
         "verifiers": [
-            "j5vpyzq8",
-            "8wkw0lq8"
+            "8r2kkk3x"
         ]
     },
     {
