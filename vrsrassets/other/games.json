@@ -211,7 +211,10 @@
         "hardware": "",
         "color": "red",
         "ignoredVariables": [],
-        "verifiers": []
+        "verifiers": [
+            "qjonq4n8",
+            "x720pev8"
+        ]
     },
     {
         "id": "jet_island",
@@ -497,7 +500,8 @@
         "color": "red",
         "ignoredVariables": [],
         "verifiers": [
-            "8r2kkk3x"
+            "j5vpyzq8",
+            "8wkw0lq8"
         ]
     },
     {
@@ -626,10 +630,10 @@
         "verifiers": []
     },
     {
-        "id": "pro_putt_by_topgolf",
-        "abbreviation": "pp",
+        "id": "golf_plus",
+        "abbreviation": "golfplus",
         "api_id": "k6q450od",
-        "name": "Pro Putt by Topgolf",
+        "name": "Golf+",
         "hardware": "",
         "color": "light_green",
         "ignoredVariables": [],
