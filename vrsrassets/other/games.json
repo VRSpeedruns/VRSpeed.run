@@ -1077,5 +1077,25 @@
         "color": "red",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "t7gvr",
+        "abbreviation": "t7gvr",
+        "api_id": "9d3wwmy1",
+        "name": "The 7th Guest VR",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "The_Red_Stare",
+        "abbreviation": "trs",
+        "api_id": "369w838d",
+        "name": "The Red Stare",
+        "hardware": "",
+        "color": "red",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
