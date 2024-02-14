@@ -1061,5 +1061,15 @@
         "color": "red",
         "ignoredVariables": [],
         "verifiers": []
+    },
+    {
+        "id": "angry_birds_vr_isle_of_pigs_",
+        "abbreviation": "abvr",
+        "api_id": "o6gljr5d",
+        "name": "Angry Birds VR: Isle of Pigs",
+        "hardware": "",
+        "color": "green",
+        "ignoredVariables": [],
+        "verifiers": []
     }
 ]
