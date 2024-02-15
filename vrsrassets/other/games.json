@@ -30,12 +30,32 @@
         "verifiers": []
     },
     {
+        "id": "arizona_sunshine",
+        "abbreviation": "as",
+        "api_id": "3dxorydy",
+        "name": "Arizona Sunshine",
+        "hardware": "",
+        "color": "yellow",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
         "id": "batman_arkham_vr",
         "abbreviation": "bavr",
         "api_id": "j1ne8ww1",
         "name": "Batman: Arkham VR",
         "hardware": "",
         "color": "gray_blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "boneworks",
+        "abbreviation": "bw",
+        "api_id": "j1llkl41",
+        "name": "BONEWORKS",
+        "hardware": "",
+        "color": "dark_yellow",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -207,6 +227,16 @@
         "name": "Jet Island",
         "hardware": "",
         "color": "maroon",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "job_simulator",
+        "abbreviation": "js",
+        "api_id": "m1mp8312",
+        "name": "Job Simulator",
+        "hardware": "",
+        "color": "yellow_green",
         "ignoredVariables": [],
         "verifiers": []
     },
@@ -735,6 +765,16 @@
         "name": "Project Terminus VR",
         "hardware": "",
         "color": "gray_blue",
+        "ignoredVariables": [],
+        "verifiers": []
+    },
+    {
+        "id": "re4vr",
+        "abbreviation": "re4vr",
+        "api_id": "nd28gnqd",
+        "name": "Resident Evil 4 (VR)",
+        "hardware": "",
+        "color": "maroon",
         "ignoredVariables": [],
         "verifiers": []
     },
